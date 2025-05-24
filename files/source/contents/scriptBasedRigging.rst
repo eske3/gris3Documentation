@@ -191,5 +191,5 @@ grisのスクリプトベースのビルドには２つの柱がある事を紹�
 が存在するディレクトリが、プロジェクトディレクトリという扱いになります。
 
 FactorySettingsについての詳細は
-:doc:`factorySettings`
+:doc:`../dev/factorySettings`
 をご覧下さい。
