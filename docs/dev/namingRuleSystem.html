@@ -302,7 +302,7 @@ grisではジョイントやリグ、コントローラを作成する際の命�
 </div>
 <div class="section" id="func-name">
 <span id="nrs-funcname"></span><h3>func.Nameの正体<a class="headerlink" href="#func-name" title="このヘッドラインへのパーマリンク">¶</a></h3>
-<p>func.Nameは実はラッパー関数であり、
+<p>func.Nameはラッパー関数であり、
 実際にNameRuleオブジェクトの生成は別のシステムが担っています。</p>
 <p>func.Nameの内部は以下のようになっています。</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">Name</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s1">&#39;&#39;</span><span class="p">):</span>
@@ -310,7 +310,7 @@ grisではジョイントやリグ、コントローラを作成する際の命�
     <span class="k">return</span> <span class="n">GlobalSys</span><span class="p">()</span><span class="o">.</span><span class="n">nameRule</span><span class="p">()(</span><span class="n">name</span><span class="p">)</span>
 </pre></div>
 </div>
-<p>Name関数の内部ではsystemモジュールのGlobalSysクラスが呼びだれており、
+<p>Name関数の内部ではsystemモジュールのGlobalSysクラスが呼びだされており、
 このクラスがNameRuleオブジェクトを生成して返すようになっています。</p>
 <p>GlobalSysクラスはgrisの全体管理を行うシステムクラスです。
 このクラスが現在有効となっているNameRuleオブジェクトを返す事により、

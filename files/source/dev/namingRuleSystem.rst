@@ -98,7 +98,7 @@ NameRuleオブジェクトは()を付けて呼び出す事により、
 
 func.Nameの正体
 -----------------------------
-func.Nameは実はラッパー関数であり、
+func.Nameはラッパー関数であり、
 実際にNameRuleオブジェクトの生成は別のシステムが担っています。
 
 func.Nameの内部は以下のようになっています。
@@ -109,7 +109,7 @@ func.Nameの内部は以下のようになっています。
         from .system import GlobalSys
         return GlobalSys().nameRule()(name)
 
-Name関数の内部ではsystemモジュールのGlobalSysクラスが呼びだれており、
+Name関数の内部ではsystemモジュールのGlobalSysクラスが呼びだされており、
 このクラスがNameRuleオブジェクトを生成して返すようになっています。
 
 GlobalSysクラスはgrisの全体管理を行うシステムクラスです。
