@@ -1,0 +1,324 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="ja" >
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>fkCtrlHelper &mdash; gris3 1.0.0 ドキュメント</title>
+  
+
+  
+  <link rel="stylesheet" href="../../_static/css/customTheme.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+
+  
+  
+  
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
+        <script src="../../_static/jquery.js"></script>
+        <script src="../../_static/underscore.js"></script>
+        <script src="../../_static/doctools.js"></script>
+        <script src="../../_static/language_data.js"></script>
+        <script src="../../_static/translations.js"></script>
+    
+    <script type="text/javascript" src="../../_static/js/theme.js"></script>
+
+    
+    <link rel="author" title="このドキュメントについて" href="../../about.html" />
+    <link rel="index" title="索引" href="../../genindex.html" />
+    <link rel="search" title="検索" href="../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../../index.html" class="icon icon-home" alt="Documentation Home"> gris3
+          
+
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">スタートアップ</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../install.html">インストールと起動</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../updateLog.html">更新履歴</a></li>
+</ul>
+<p class="caption"><span class="caption-text">マニュアル</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../scriptBasedRigging.html">ScriptBasedRigging-概要</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../scriptingForFactory.html">ファクトリーのスクリプティングガイド</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../namingRule.html">命名規則</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../rigUnits.html">Rig Units</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../includedExtraConstructors.html">組み込み済みExtraConstructor</a></li>
+</ul>
+<p class="caption"><span class="caption-text">ガジェット</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../gadgets/jointEditor.html">Joint Editor</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../gadgets/modelSetup.html">Model Setup</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../gadgets/renamer.html">Renamer</a></li>
+</ul>
+<p class="caption"><span class="caption-text">スクリプトツール</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../tools/jointEditor.html">jointEditor</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../tools/extraJoint.html">extraJoint</a></li>
+</ul>
+<p class="caption"><span class="caption-text">開発者向けドキュメント</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../dev/factorySettings.html">ファクトリーセッティング</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../dev/makingRigUnits.html">リグユニットの開発</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../dev/constructor.html">コンストラクタ</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../dev/extraConstructor.html">エクストラコンストラクタ</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../dev/namingRuleSystem.html">命名規則管理システム</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../dev/operateByScript.html">スクリプトによって操作する</a></li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">gris3</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../index.html" class="icon icon-home"></a> &raquo;</li>
+        
+      <li>fkCtrlHelper</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../../_sources/contents/extraConstructors/fkCtrlHelper.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="fkctrlhelper">
+<h1>fkCtrlHelper<a class="headerlink" href="#fkctrlhelper" title="このヘッドラインへのパーマリンク">¶</a></h1>
+<p>FKコントローラの作成を補助する機能を提供するExtraConstructorです。
+親子付けやFKコントローラの作成などの一連の流れ作業を簡単なコマンドで行います。</p>
+<div class="section" id="id1">
+<h2>使用方法<a class="headerlink" href="#id1" title="このヘッドラインへのパーマリンク">¶</a></h2>
+<p>このExtraConstructorをインストールすると、メインのConstructorに</p>
+<p><strong>setJointAsFkController</strong></p>
+<p>メソッドが追加されます。
+ユーザーはこのメソッドを使用して任意のジョイントの親子付と
+FKコントローラの作成を行うことができます。</p>
+<table class="docutils align-default" id="id3">
+<caption><span class="caption-text">引数の説明</span><a class="headerlink" href="#id3" title="このテーブルへのパーマリンク">¶</a></caption>
+<colgroup>
+<col style="width: 33%" />
+<col style="width: 33%" />
+<col style="width: 33%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p><strong>引数名</strong></p></td>
+<td><p><strong>型</strong></p></td>
+<td><p><strong>説明</strong></p></td>
+</tr>
+<tr class="row-even"><td><p>joints</p></td>
+<td><p>str or list</p></td>
+<td><p>FKコントローラにするジョイント名のリストを指定します。
+渡す値はジョイント名のリストまたは単体の名前になります。</p></td>
+</tr>
+<tr class="row-odd"><td><p>parent</p></td>
+<td><p>str</p></td>
+<td><p>FKコントローラにするジョイントの親ジョイント名を指定します。</p></td>
+</tr>
+<tr class="row-even"><td><p>setName</p></td>
+<td><p>str</p></td>
+<td><p>作成されるFKコントローラが帰属するAnimSet名を指定します。</p></td>
+</tr>
+<tr class="row-odd"><td><p>side=None</p></td>
+<td><p>str</p></td>
+<td><p>FKコントローラの位置を表す文字（'L'や'R'、'None'など）</p></td>
+</tr>
+<tr class="row-even"><td><p>shapeCreator=None</p></td>
+<td><p>gris3.tools.curvePrimitives.PrimitiveCreator</p></td>
+<td><p>作成されるFKコントローラの形状を指定します。</p></td>
+</tr>
+<tr class="row-odd"><td><p>ctrlArgs=None</p></td>
+<td><p>dict</p></td>
+<td><p>内部で呼ばれるtoControllerメソッドに渡すオプションを辞書形式で指定します。</p></td>
+</tr>
+<tr class="row-even"><td><p>connectArgs=None</p></td>
+<td><p>dict</p></td>
+<td><p>内部で呼ばれるconnectControllerメソッドに渡すオプションを辞書形式で指定します。</p></td>
+</tr>
+<tr class="row-odd"><td><p>expandChildren=False</p></td>
+<td><p>bool</p></td>
+<td><p>このオプションをTrueにすると、第一引数jointsに渡したノードの子が操作対象になります。
+目的のジョイントをグループ分けしている場合などに便利です。</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="id2">
+<h2>使用例<a class="headerlink" href="#id2" title="このヘッドラインへのパーマリンク">¶</a></h2>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># __init__.py</span>
+<span class="kn">from</span> <span class="nn">gris3</span> <span class="kn">import</span> <span class="n">constructors</span><span class="p">,</span> <span class="n">func</span><span class="p">,</span> <span class="n">node</span>
+<span class="n">cmds</span> <span class="o">=</span> <span class="n">func</span><span class="o">.</span><span class="n">cmds</span>
+
+<span class="n">LOD_LIST</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;high&#39;</span><span class="p">,</span> <span class="s1">&#39;low&#39;</span><span class="p">]</span>
+
+<span class="k">class</span> <span class="nc">Constructor</span><span class="p">(</span><span class="n">constructors</span><span class="o">.</span><span class="n">currentConstructor</span><span class="p">()):</span>
+    <span class="k">def</span> <span class="nf">init</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">installExtraConstructor</span><span class="p">(</span><span class="s1">&#39;fkCtrlHelper&#39;</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">createController</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="c1"># FKコントローラの親ジョイント名</span>
+        <span class="n">parent_joint</span> <span class="o">=</span> <span class="s1">&#39;spineA_jnt_C&#39;</span>
+
+        <span class="c1"># コントローラ形状の設定。</span>
+        <span class="n">sc</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">shapeCreator</span><span class="p">()</span>
+        <span class="n">sc</span><span class="o">.</span><span class="n">setCurveType</span><span class="p">(</span><span class="s1">&#39;circleArrow&#39;</span><span class="p">)</span>
+        <span class="n">sc</span><span class="o">.</span><span class="n">setRotation</span><span class="p">((</span><span class="mf">180.0</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">,</span> <span class="mf">90.0</span><span class="p">))</span>
+        <span class="n">sc</span><span class="o">.</span><span class="n">setSize</span><span class="p">(</span><span class="mf">8.0</span><span class="p">)</span>
+
+        <span class="c1"># コントローラの作成オプション。</span>
+        <span class="n">opt</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;option&#39;</span><span class="p">:</span><span class="bp">self</span><span class="o">.</span><span class="n">ChainCtrl</span><span class="o">|</span><span class="bp">self</span><span class="o">.</span><span class="n">IgnoreEndCtrl</span><span class="p">}</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">setJointAsFkController</span><span class="p">(</span>
+            <span class="s1">&#39;skirtJoint_grp&#39;</span><span class="p">,</span> <span class="n">parent_joint</span><span class="p">,</span> <span class="s1">&#39;skirt&#39;</span><span class="p">,</span>
+            <span class="n">shapeCreator</span><span class="o">=</span><span class="n">sc</span><span class="p">,</span> <span class="n">ctrlArgs</span><span class="o">=</span><span class="n">opt</span><span class="p">,</span> <span class="n">connectArgs</span><span class="o">=</span><span class="n">opt</span><span class="p">,</span>
+            <span class="n">expandChildren</span><span class="o">=</span><span class="kc">True</span>
+        <span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        
+        &copy; 著作権 2020, EskeYoshinob
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

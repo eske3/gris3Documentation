@@ -1,0 +1,946 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="ja" >
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>リグユニットの開発 &mdash; gris3 1.0.0 ドキュメント</title>
+  
+
+  
+  <link rel="stylesheet" href="../_static/css/customTheme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+
+  
+  
+  
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/doctools.js"></script>
+        <script src="../_static/language_data.js"></script>
+        <script src="../_static/translations.js"></script>
+    
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+    
+    <link rel="author" title="このドキュメントについて" href="../about.html" />
+    <link rel="index" title="索引" href="../genindex.html" />
+    <link rel="search" title="検索" href="../search.html" />
+    <link rel="next" title="コンストラクタ" href="constructor.html" />
+    <link rel="prev" title="ファクトリーセッティング" href="factorySettings.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../index.html" class="icon icon-home" alt="Documentation Home"> gris3
+          
+
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">スタートアップ</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../contents/install.html">インストールと起動</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../contents/updateLog.html">更新履歴</a></li>
+</ul>
+<p class="caption"><span class="caption-text">マニュアル</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../contents/scriptBasedRigging.html">ScriptBasedRigging-概要</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../contents/scriptingForFactory.html">ファクトリーのスクリプティングガイド</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../contents/namingRule.html">命名規則</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../contents/rigUnits.html">Rig Units</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../contents/includedExtraConstructors.html">組み込み済みExtraConstructor</a></li>
+</ul>
+<p class="caption"><span class="caption-text">ガジェット</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../gadgets/jointEditor.html">Joint Editor</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../gadgets/modelSetup.html">Model Setup</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../gadgets/renamer.html">Renamer</a></li>
+</ul>
+<p class="caption"><span class="caption-text">スクリプトツール</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../tools/jointEditor.html">jointEditor</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../tools/extraJoint.html">extraJoint</a></li>
+</ul>
+<p class="caption"><span class="caption-text">開発者向けドキュメント</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="factorySettings.html">ファクトリーセッティング</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">リグユニットの開発</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#id2">仕様</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#unit">Unit</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#id3">重要なメソッド</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#jointcreatorrigcreator">JointCreatorとRigCreator</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#id4">共通の重要メソッド</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#jointcreator">JointCreator</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#id5">JointCreatorが呼ばれるタイミング</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#process">process</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#finalize">finalize</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#unitaddmember">UnitのaddMemberメソッド</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#id6">JointCreator固有の重要メソッド</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#rigcreator">RigCreator</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#id9">JointCreatorが作成したノードを取得する</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id10">RigCreator固有の重要メソッド</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#id11">プリセット</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#id12">プリセットファイルの仕様</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#id13">クラスの定義</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id14">メソッドをオーバーライドする</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#presetelement">PresetElement</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#mru-presetsamplecode">プリセットのサンプル</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#id16">サンプル</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#id17">新規で作成する</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="constructor.html">コンストラクタ</a></li>
+<li class="toctree-l1"><a class="reference internal" href="extraConstructor.html">エクストラコンストラクタ</a></li>
+<li class="toctree-l1"><a class="reference internal" href="namingRuleSystem.html">命名規則管理システム</a></li>
+<li class="toctree-l1"><a class="reference internal" href="operateByScript.html">スクリプトによって操作する</a></li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">gris3</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
+        
+      <li>リグユニットの開発</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../_sources/dev/makingRigUnits.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="id1">
+<h1>リグユニットの開発<a class="headerlink" href="#id1" title="このヘッドラインへのパーマリンク">¶</a></h1>
+<p>grisはモジュラーリギングシステムを採用しています。
+モジュラーリギングは目的に応じたリグをユニット単位で作成する事によって、
+組み合わせによる汎用性を目指しています。</p>
+<p>ここではリグユニットの仕様と新たに作成する方法について解説します。</p>
+<div class="section" id="id2">
+<h2>仕様<a class="headerlink" href="#id2" title="このヘッドラインへのパーマリンク">¶</a></h2>
+<div class="section" id="unit">
+<span id="mru-unit"></span><h3>Unit<a class="headerlink" href="#unit" title="このヘッドラインへのパーマリンク">¶</a></h3>
+<p>リグのモジュールはUnitと呼ばれるオブジェクトが全体管理を行います。
+ユニットには以下のような情報が格納されています。</p>
+<table class="docutils align-default">
+<colgroup>
+<col style="width: 50%" />
+<col style="width: 50%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p>ユニット名</p></td>
+<td><p>ユニットの名前</p></td>
+</tr>
+<tr class="row-even"><td><p>位置情報</p></td>
+<td><p>このユニットが扱う位置情報(左、右など)</p></td>
+</tr>
+<tr class="row-odd"><td><p>サフィックス</p></td>
+<td><p>同じユニットを復数使用する場合につける識別用サフィックス</p></td>
+</tr>
+</tbody>
+</table>
+<p>また、ユニットにはリグを構築する上で必用な情報も保持しています。</p>
+<ul class="simple">
+<li><p>リグ作成に必用なジョイントの情報</p></li>
+<li><p>リグ作成時に必用なオプション情報</p></li>
+</ul>
+<p>ユニットはこれらの情報を保持し、
+必用に応じて後述するJointCreatorやRigCreatorに提供されます。</p>
+<div><svg height="200" viewBox="0 0 448 200" width="448" xmlns="http://www.w3.org/2000/svg" xmlns:inkspace="http://www.inkscape.org/namespaces/inkscape" xmlns:xlink="http://www.w3.org/1999/xlink">
+  <defs id="defs_block">
+    <filter height="1.504" id="filter_blur" inkspace:collect="always" width="1.1575" x="-0.07875" y="-0.252">
+      <feGaussianBlur id="feGaussianBlur3780" inkspace:collect="always" stdDeviation="4.2" />
+    </filter>
+  </defs>
+  <title>blockdiag</title>
+  <desc />
+  <ellipse cx="131" cy="66" fill="rgb(0,0,0)" rx="24.0" ry="24.0" stroke="rgb(0,0,0)" style="filter:url(#filter_blur);opacity:0.7;fill-opacity:1" />
+  <rect fill="rgb(0,0,0)" height="40" stroke="rgb(0,0,0)" style="filter:url(#filter_blur);opacity:0.7;fill-opacity:1" width="128" x="259" y="46" />
+  <rect fill="rgb(0,0,0)" height="40" stroke="rgb(0,0,0)" style="filter:url(#filter_blur);opacity:0.7;fill-opacity:1" width="128" x="259" y="126" />
+  <ellipse cx="128" cy="60" fill="rgb(255,255,255)" rx="24.0" ry="24.0" stroke="rgb(0,0,0)" />
+  <text fill="rgb(0,0,0)" font-family="sans-serif" font-size="11" font-style="normal" font-weight="normal" text-anchor="middle" textLength="24" x="128.0" y="66">unit</text>
+  <rect fill="rgb(255,255,255)" height="40" stroke="rgb(0,0,0)" width="128" x="256" y="40" />
+  <text fill="rgb(0,0,0)" font-family="sans-serif" font-size="11" font-style="normal" font-weight="normal" text-anchor="middle" textLength="72" x="320.0" y="66">JointCreator</text>
+  <rect fill="rgb(255,255,255)" height="40" stroke="rgb(0,0,0)" width="128" x="256" y="120" />
+  <text fill="rgb(0,0,0)" font-family="sans-serif" font-size="11" font-style="normal" font-weight="normal" text-anchor="middle" textLength="60" x="320.0" y="146">RigCreator</text>
+  <path d="M 152 60 L 248 60" fill="none" stroke="rgb(0,0,0)" />
+  <polygon fill="rgb(0,0,0)" points="255,60 248,56 248,64 255,60" stroke="rgb(0,0,0)" />
+  <path d="M 152 60 L 224 60" fill="none" stroke="rgb(0,0,0)" />
+  <path d="M 224 60 L 224 140" fill="none" stroke="rgb(0,0,0)" />
+  <path d="M 224 140 L 248 140" fill="none" stroke="rgb(0,0,0)" />
+  <polygon fill="rgb(0,0,0)" points="255,140 248,136 248,144 255,140" stroke="rgb(0,0,0)" />
+  <rect fill="white" height="15" stroke="rgb(0,0,0)" width="40" x="204" y="38" />
+  <text fill="rgb(0,0,0)" font-family="sans-serif" font-size="11" font-style="normal" font-weight="normal" text-anchor="middle" textLength="24" x="224.0" y="51">info</text>
+  <rect fill="white" height="15" stroke="rgb(0,0,0)" width="40" x="204" y="118" />
+  <text fill="rgb(0,0,0)" font-family="sans-serif" font-size="11" font-style="normal" font-weight="normal" text-anchor="middle" textLength="24" x="224.0" y="131">info</text>
+</svg>
+</div>
+<div class="section" id="id3">
+<h4>重要なメソッド<a class="headerlink" href="#id3" title="このヘッドラインへのパーマリンク">¶</a></h4>
+<table class="docutils align-default">
+<colgroup>
+<col style="width: 50%" />
+<col style="width: 50%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p>unitName()</p></td>
+<td><p>ユニットの名前を返します。</p></td>
+</tr>
+<tr class="row-even"><td><p>position()</p></td>
+<td><p>このユニットが扱う位置情報(左、右など)を返します。</p></td>
+</tr>
+<tr class="row-odd"><td><p>suffix()</p></td>
+<td><p>識別用サフィックスを返します。</p></td>
+</tr>
+<tr class="row-even"><td><p>addMember(label=str, nodes=list)</p></td>
+<td><p>ジョイントをユニットに紐付ける場合に使用します。
+紐付けられたジョイントは、
+後にgetMember(label)で取得する事が出来るようになります。</p></td>
+</tr>
+<tr class="row-odd"><td><p>getMember(keyword=str)</p></td>
+<td><p>addMemberで紐付けられたジョイントを取得します。</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div class="section" id="jointcreatorrigcreator">
+<h3>JointCreatorとRigCreator<a class="headerlink" href="#jointcreatorrigcreator" title="このヘッドラインへのパーマリンク">¶</a></h3>
+<p>リグのモジュールを作成するにあたって、
+girsではベースとなるジョイント作成を担うJointCreatorクラスと、
+リグ作成を担うRigCreatorクラスの2つが重要な要素を担っています。</p>
+<p>これらモジュールはgris本体が管理しており、
+必用なタイミングでJointCreatorやRigCreatorが呼ばれるようになっています。</p>
+<p>開発者は各クラスのprocessメソッドを上書きする事により、
+目的のジョイントやリグを作成します。</p>
+<p>Constructorクラス含め、
+これらクラスは全てrigScript.BaseCreatorクラスのサブクラスとなっています。
+そのため、Constructorと共通のメソッドを多数持っています。</p>
+<div><svg height="280" viewBox="0 0 640 280" width="640" xmlns="http://www.w3.org/2000/svg" xmlns:inkspace="http://www.inkscape.org/namespaces/inkscape" xmlns:xlink="http://www.w3.org/1999/xlink">
+  <defs id="defs_block">
+    <filter height="1.504" id="filter_blur" inkspace:collect="always" width="1.1575" x="-0.07875" y="-0.252">
+      <feGaussianBlur id="feGaussianBlur3780" inkspace:collect="always" stdDeviation="4.2" />
+    </filter>
+  </defs>
+  <title>blockdiag</title>
+  <desc />
+  <rect fill="rgb(0,0,0)" height="40" stroke="rgb(0,0,0)" style="filter:url(#filter_blur);opacity:0.7;fill-opacity:1" width="128" x="67" y="46" />
+  <rect fill="rgb(0,0,0)" height="40" stroke="rgb(0,0,0)" style="filter:url(#filter_blur);opacity:0.7;fill-opacity:1" width="128" x="67" y="126" />
+  <rect fill="rgb(0,0,0)" height="40" stroke="rgb(0,0,0)" style="filter:url(#filter_blur);opacity:0.7;fill-opacity:1" width="128" x="67" y="206" />
+  <rect fill="rgb(0,0,0)" height="40" stroke="rgb(0,0,0)" style="filter:url(#filter_blur);opacity:0.7;fill-opacity:1" width="128" x="259" y="206" />
+  <rect fill="rgb(0,0,0)" height="40" stroke="rgb(0,0,0)" style="filter:url(#filter_blur);opacity:0.7;fill-opacity:1" width="128" x="451" y="46" />
+  <rect fill="rgb(255,255,255)" height="40" stroke="rgb(0,0,0)" width="128" x="64" y="40" />
+  <text fill="rgb(0,0,0)" font-family="sans-serif" font-size="11" font-style="normal" font-weight="normal" text-anchor="middle" textLength="66" x="128.0" y="66">BaseCreator</text>
+  <rect fill="rgb(255,255,255)" height="40" stroke="rgb(0,0,0)" width="128" x="64" y="120" />
+  <text fill="rgb(0,0,0)" font-family="sans-serif" font-size="11" font-style="normal" font-weight="normal" text-anchor="middle" textLength="90" x="128.0" y="146">StandardCreator</text>
+  <rect fill="rgb(255,255,255)" height="40" stroke="rgb(0,0,0)" width="128" x="64" y="200" />
+  <text fill="rgb(0,0,0)" font-family="sans-serif" font-size="11" font-style="normal" font-weight="normal" text-anchor="middle" textLength="72" x="128.0" y="226">JointCreator</text>
+  <rect fill="rgb(255,255,255)" height="40" stroke="rgb(0,0,0)" width="128" x="256" y="200" />
+  <text fill="rgb(0,0,0)" font-family="sans-serif" font-size="11" font-style="normal" font-weight="normal" text-anchor="middle" textLength="60" x="320.0" y="226">RigCreator</text>
+  <rect fill="rgb(255,255,255)" height="40" stroke="rgb(0,0,0)" width="128" x="448" y="40" />
+  <text fill="rgb(0,0,0)" font-family="sans-serif" font-size="11" font-style="normal" font-weight="normal" text-anchor="middle" textLength="96" x="512.0" y="66">BasicConstructor</text>
+  <path d="M 128 80 L 128 112" fill="none" stroke="rgb(0,0,0)" />
+  <polygon fill="rgb(0,0,0)" points="128,119 124,112 132,112 128,119" stroke="rgb(0,0,0)" />
+  <path d="M 192 60 L 440 60" fill="none" stroke="rgb(0,0,0)" />
+  <polygon fill="rgb(0,0,0)" points="447,60 440,56 440,64 447,60" stroke="rgb(0,0,0)" />
+  <path d="M 128 160 L 128 192" fill="none" stroke="rgb(0,0,0)" />
+  <polygon fill="rgb(0,0,0)" points="128,199 124,192 132,192 128,199" stroke="rgb(0,0,0)" />
+  <path d="M 128 160 L 128 180" fill="none" stroke="rgb(0,0,0)" />
+  <path d="M 128 180 L 320 180" fill="none" stroke="rgb(0,0,0)" />
+  <path d="M 320 180 L 320 192" fill="none" stroke="rgb(0,0,0)" />
+  <polygon fill="rgb(0,0,0)" points="320,199 316,192 324,192 320,199" stroke="rgb(0,0,0)" />
+  <rect fill="none" height="220" stroke="rgb(36,133,216)" stroke-width="3" width="336" x="56" y="30" />
+  <rect fill="none" height="60" stroke="rgb(206,66,96)" stroke-width="3" width="144" x="440" y="30" />
+  <text fill="rgb(0,0,0)" font-family="sans-serif" font-size="16" font-style="normal" font-weight="normal" text-anchor="middle" textLength="87" x="224.5" y="38">rigScripts</text>
+  <text fill="rgb(0,0,0)" font-family="sans-serif" font-size="16" font-style="normal" font-weight="normal" text-anchor="middle" textLength="96" x="512.0" y="38">constructor</text>
+</svg>
+</div>
+<div class="section" id="id4">
+<h4>共通の重要メソッド<a class="headerlink" href="#id4" title="このヘッドラインへのパーマリンク">¶</a></h4>
+<table class="docutils align-default">
+<colgroup>
+<col style="width: 33%" />
+<col style="width: 33%" />
+<col style="width: 33%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p><strong>メソッド名</strong></p></td>
+<td><p><strong>戻り値</strong></p></td>
+<td><p><strong>説明</strong></p></td>
+</tr>
+<tr class="row-even"><td><p>unit()</p></td>
+<td><p>grisNode.Unit:</p></td>
+<td><p>このモジュールが管理するユニットノードを返します。
+ユニットノードにはリグを作成する際に使用するメタ情報を残すのに使用します。</p>
+<div class="admonition seealso">
+<p class="admonition-title">参考</p>
+<p>ユニットについては
+<a class="reference internal" href="#mru-unit"><span class="std std-ref">Unit</span></a>
+をご覧下さい。</p>
+</div>
+</td>
+</tr>
+<tr class="row-odd"><td><p>addLockedList(nodelist=list)</p></td>
+<td><p>None</p></td>
+<td><p>引数にはTransformノードの名前か、そのリストを渡します。
+このリストに登録されたノードはリグ作成完了時にtransformアトリビュートがロックされます。</p></td>
+</tr>
+<tr class="row-even"><td><p>removeLockedList(self, nodelist=list)</p></td>
+<td><p>None</p></td>
+<td><p>addLockedListに登録したノードの登録を解除したい場合はこのメソッドを使用します。</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+<div class="section" id="jointcreator">
+<h2>JointCreator<a class="headerlink" href="#jointcreator" title="このヘッドラインへのパーマリンク">¶</a></h2>
+<p>このクラスはジョイントの作成と、ファイナライズの管理を行うクラスです。
+基本的なジョイントの作成は
+<strong>process</strong>
+メソッド内に記述し、ファイナライズの処理は
+<strong>finalize</strong>
+メソッド内に記述します。</p>
+<div class="section" id="id5">
+<h3>JointCreatorが呼ばれるタイミング<a class="headerlink" href="#id5" title="このヘッドラインへのパーマリンク">¶</a></h3>
+<p>JointCreatorには前述の通り2つの機能があります。
+この2つの機能はそれぞれ違うタイミングで呼ばれます。</p>
+<div class="section" id="process">
+<span id="mru-jcprocess"></span><h4>process<a class="headerlink" href="#process" title="このヘッドラインへのパーマリンク">¶</a></h4>
+<p>これはユニットの作成時にに呼ばれ、
+ユニットの情報を持つmetaノードと一緒にジョイントを作成する目的で使用されます。
+簡易的に作成する場合は以下のコマンドで作成することで実行すうることができます。</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">gris3</span> <span class="kn">import</span> <span class="n">core</span>
+<span class="n">core</span><span class="o">.</span><span class="n">createJoint</span><span class="p">(</span><span class="n">unitType</span><span class="p">,</span> <span class="n">baseName</span><span class="p">,</span> <span class="n">position</span><span class="p">,</span> <span class="n">suffix</span><span class="p">,</span> <span class="n">parent</span><span class="p">,</span> <span class="n">options</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>引数は以下の通りです。</p>
+<table class="docutils align-default">
+<colgroup>
+<col style="width: 33%" />
+<col style="width: 33%" />
+<col style="width: 33%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p><strong>引数</strong></p></td>
+<td><p><strong>型</strong></p></td>
+<td><p><strong>説明</strong></p></td>
+</tr>
+<tr class="row-even"><td><p>unitType</p></td>
+<td><p>str</p></td>
+<td><p>作成するユニットの名前を指定します。</p></td>
+</tr>
+<tr class="row-odd"><td><p>baseName</p></td>
+<td><p>str</p></td>
+<td><p>作成するユニットと、その関連オブジェクトにつける名前のベースとなる文字列を指定します。</p></td>
+</tr>
+<tr class="row-even"><td><p>position</p></td>
+<td><p>str or int</p></td>
+<td><p>0～9の整数、またはL、Rなど位置を表す文字列を指定します。</p></td>
+</tr>
+<tr class="row-odd"><td><p>suffix</p></td>
+<td><p>str</p></td>
+<td><p>ベースネームに追加するサフィックスを指定します。</p>
+<p>同じユニットが複数ある場合、このサフィックスを変えて指定して、名前の重複を防ぎます。</p>
+</td>
+</tr>
+<tr class="row-even"><td><p>parent</p></td>
+<td><p>str</p></td>
+<td><p>ユニットの関連オブジェクトの親となるノード名を指定します。</p></td>
+</tr>
+<tr class="row-odd"><td><p>options</p></td>
+<td><p>dict</p></td>
+<td><p>ユニット固有のオプションが指定できる場合、辞書型で指定することができます。</p></td>
+</tr>
+</tbody>
+</table>
+<p>戻り値としてはJointCreatorオブジェクトが返されます。</p>
+</div>
+<div class="section" id="finalize">
+<h4>finalize<a class="headerlink" href="#finalize" title="このヘッドラインへのパーマリンク">¶</a></h4>
+<p>gris用finalize関数が呼ばれた際に一緒に呼ばれます。
+finalize関数は以下の方法で呼ぶ事ができます。</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">gris3</span> <span class="kn">import</span> <span class="n">core</span>
+<span class="n">core</span><span class="o">.</span><span class="n">finalizeBaseSkeleton</span><span class="p">()</span>
+</pre></div>
+</div>
+<p>この関数は通常コンストラクタ内で呼ばれるため開発者は意識する必要はありませんが、
+モジュール開発中にデバッグとして使用したい場合に便利です。</p>
+<p>上記関数はGUIからもアクセスできます。
+FactoryWidgetのMiscタブのFinalizeBaseSkeletonをクリックする事により実行可能です。</p>
+<a class="reference internal image-reference" href="../_images/0021.png"><img alt="../_images/0021.png" src="../_images/0021.png" style="height: 300px;" /></a>
+<p>現在のgrisでは、
+この機能はスクリプトベースのリギング内で使用する事が想定されているため不可逆機能であり、
+戻るためにはUndoを使用する以外の方法はサポートしていません。
+従って開発者は現在のところfinalize前の状態に戻るための関数を実装する必要はありません。</p>
+</div>
+<div class="section" id="unitaddmember">
+<span id="mru-unitaddmembermethod"></span><h4>UnitのaddMemberメソッド<a class="headerlink" href="#unitaddmember" title="このヘッドラインへのパーマリンク">¶</a></h4>
+<p>JointCreatorによって作成されるジョイントなどのノードは、
+後に呼ばれるRigCreatorクラスが必要に応じてアクセス出来るようになっている必要があります。</p>
+<p>JointCreatorが作成したノードを、後々RigCreatorが呼べるようにするためには、
+Unitに必要な情報を残しておく必要があります。</p>
+<p>そこでJointCreator内で作成したノードのうちRigCreatorが必要となるノードは、
+UnitオブジェクトのaddMemberメソッドを使用してUnitに登録しておきましょう。</p>
+<p>addMemberの第1引数は、後でRigCreatorがノードにアクセスする際のキーワードとなります。</p>
+<div class="highlight-python notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="n">name</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">basenameObject</span><span class="p">()</span>    <span class="c1">#ベースとなる名前オブジェクトを取得。</span>
+<span class="n">parent</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">parent</span><span class="p">()</span>          <span class="c1">#親ノードを取得。</span>
+<span class="n">unit</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">unit</span><span class="p">()</span>              <span class="c1">#Unitオブジェクトを取得。</span>
+
+<span class="n">name</span><span class="o">.</span><span class="n">setName</span><span class="p">(</span><span class="s1">&#39;sampleRoot&#39;</span><span class="p">)</span>
+<span class="n">jnt</span> <span class="o">=</span> <span class="n">node</span><span class="o">.</span><span class="n">createNode</span><span class="p">(</span><span class="s1">&#39;joint&#39;</span><span class="p">,</span> <span class="n">n</span><span class="o">=</span><span class="n">name</span><span class="p">(),</span> <span class="n">p</span><span class="o">=</span><span class="n">parent</span><span class="p">)</span>
+<span class="c1"># 作成したジョイントをrootJointとして登録。</span>
+<span class="n">unit</span><span class="o">.</span><span class="n">addMember</span><span class="p">(</span><span class="s1">&#39;rootJoint&#39;</span><span class="p">,</span> <span class="n">jnt</span><span class="p">)</span>
+
+<span class="c1"># 登録したジョイントの取得。(基本的に使用するのはfinalize内かrigCreator内)</span>
+<span class="n">root_jnt</span> <span class="o">=</span> <span class="n">unit</span><span class="o">.</span><span class="n">getMember</span><span class="p">(</span><span class="s1">&#39;rootJoint&#39;</span><span class="p">)</span>
+</pre></div>
+</td></tr></table></div>
+</div>
+</div>
+<div class="section" id="id6">
+<h3>JointCreator固有の重要メソッド<a class="headerlink" href="#id6" title="このヘッドラインへのパーマリンク">¶</a></h3>
+<table class="docutils align-default">
+<colgroup>
+<col style="width: 33%" />
+<col style="width: 33%" />
+<col style="width: 33%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p><strong>メソッド名</strong></p></td>
+<td><p><strong>戻り値</strong></p></td>
+<td><p><strong>説明</strong></p></td>
+</tr>
+<tr class="row-even"><td><p>basenameObject()</p></td>
+<td><p>system.AbstractNameRule:</p></td>
+<td><p>予め設定された情報を元に作成された名前ルールオブジェクトを返します。</p>
+<p>作成するジョイントの名前をつける際にこのオブジェクトを使用すると、
+開発者はユニットがどの位置のものなのかや、
+オプションとして指定されたサフィックスを意識することなく名前付けを行う事ができます。</p>
+<p>基本的に名前をつける際にはこのオブジェクトを使用する事を推奨しています。</p>
+</td>
+</tr>
+<tr class="row-odd"><td><p>asRoot(<a href="#id7"><span class="problematic" id="id8">*</span></a>joints)</p></td>
+<td><p>None</p></td>
+<td><p>引数に作成した任意のジョイントやトランスフォームノードを渡します。
+渡されたノードはルートノードとして設定され、
+ユニットのルートであることを示すロケータが追加されます。</p>
+<p>この機能は視認性以外には特に効果はありません。</p>
+</td>
+</tr>
+<tr class="row-even"><td><p>parent()</p></td>
+<td><p>node.Transform</p></td>
+<td><p>このユニットの親となるノード名を返します。
+原則、ジョイントを作成する場合はこのノードの下階層に作成して下さい。</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div class="section" id="rigcreator">
+<h2>RigCreator<a class="headerlink" href="#rigcreator" title="このヘッドラインへのパーマリンク">¶</a></h2>
+<p>このクラスはJointCreatorによって作成されたジョイントに対し、
+リグを追加する事を目的として設計されたクラスです。</p>
+<p>このクラスのprocessメソッド内にコントローラ作成用のスクリプトを記述します。
+processメソッドは必ずJointCreatorで任意のジョイントが作成され、
+Finalizeを経た後に呼ばれる事が前提になっています。</p>
+<div class="section" id="id9">
+<h3>JointCreatorが作成したノードを取得する<a class="headerlink" href="#id9" title="このヘッドラインへのパーマリンク">¶</a></h3>
+<p>コントローラやリグを作成する場合、
+当然予め作成されたノードをベースに作成していきます。</p>
+<p>この予め作成されたノードを取得するにはUnitオブジェクトの
+<strong>getMember</strong>
+メソッドを使用します。</p>
+<p>getMemberの第1引数には、取得したいノードを登録した際に使用したキーワードを渡します。
+キーワードはJointCreator内でaddMemberを使用した際に用いられた第1引数になります。</p>
+<div class="admonition seealso">
+<p class="admonition-title">参考</p>
+<p><a class="reference internal" href="#mru-unitaddmembermethod"><span class="std std-ref">UnitのaddMemberメソッド</span></a></p>
+</div>
+</div>
+<div class="section" id="id10">
+<h3>RigCreator固有の重要メソッド<a class="headerlink" href="#id10" title="このヘッドラインへのパーマリンク">¶</a></h3>
+<table class="docutils align-default">
+<colgroup>
+<col style="width: 33%" />
+<col style="width: 33%" />
+<col style="width: 33%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p><strong>メソッド名</strong></p></td>
+<td><p><strong>戻り値</strong></p></td>
+<td><p><strong>説明</strong></p></td>
+</tr>
+<tr class="row-even"><td><p>axisX()</p></td>
+<td><p>str:</p></td>
+<td><p>ユニットのposition設定にもとづいて、X軸が正方向か負方向かを返します。</p>
+<p>ユニットのposition情報が「R」の場合-Xを、それ以外の場合は+Xを返します。</p>
+</td>
+</tr>
+<tr class="row-odd"><td><p>vectorX()</p></td>
+<td><p>list</p></td>
+<td><p>ユニットのposition設定にもとづいて、X軸が正方向か負方向かを返します。</p>
+<p>ユニットのposition情報が「R」の場合[-1, 0, 0]を、
+それ以外の場合は[1, 0, 0]を返します。</p>
+</td>
+</tr>
+<tr class="row-even"><td><p>animSet()</p></td>
+<td><p>grisNode.AnimSet</p></td>
+<td><p>このユニットが使用するAnimSetを返します。
+モジュール内で作成したコントローラは必ずこのAnimSetに登録して下さい。</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div class="section" id="id11">
+<h2>プリセット<a class="headerlink" href="#id11" title="このヘッドラインへのパーマリンク">¶</a></h2>
+<p>任意のリグユニットを組み合わせたものを、プリセットとして提供する事が出来ます。
+プリセットはpyファイルによって定義されます。
+プリセットのpyファイルはリグユニットと同じ階層に作成する事で機能するようになります。</p>
+<div class="section" id="id12">
+<h3>プリセットファイルの仕様<a class="headerlink" href="#id12" title="このヘッドラインへのパーマリンク">¶</a></h3>
+<div class="section" id="id13">
+<h4>クラスの定義<a class="headerlink" href="#id13" title="このヘッドラインへのパーマリンク">¶</a></h4>
+<p>プリセットファイルをプリセットと認識させるには、ファイル内に
+<strong>Preset</strong>
+クラスを定義します。</p>
+<p>grisはクラス名でプリセットかどうかを判断しているため、必ずクラス名は
+<strong>Preset</strong>
+にして下さい。</p>
+<p><strong>Preset</strong>
+クラスはgris3.rigScriptsモジュールのPresetクラスを継承させます。</p>
+<div class="highlight-python notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3
+4</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">gris3</span> <span class="kn">import</span> <span class="n">rigScripts</span><span class="p">,</span> <span class="n">node</span>
+
+<span class="k">class</span> <span class="nc">Preset</span><span class="p">(</span><span class="n">rigScripts</span><span class="o">.</span><span class="n">Preset</span><span class="p">):</span>
+    <span class="k">pass</span>
+</pre></div>
+</td></tr></table></div>
+</div>
+<div class="section" id="id14">
+<h4>メソッドをオーバーライドする<a class="headerlink" href="#id14" title="このヘッドラインへのパーマリンク">¶</a></h4>
+<p>Presetクラスを定義したら、次は任意のメソッドをオーバーライドします。
+オーバーライドするメソッド名は以下をご参照下さい。</p>
+<table class="docutils align-default">
+<colgroup>
+<col style="width: 33%" />
+<col style="width: 33%" />
+<col style="width: 33%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p><strong>メソッド名</strong></p></td>
+<td><p><strong>戻り値</strong></p></td>
+<td><p><strong>説明</strong></p></td>
+</tr>
+<tr class="row-even"><td><p>name()</p></td>
+<td><p>str:</p></td>
+<td><p>ユーザーに提示するプリセット名を返します。</p></td>
+</tr>
+<tr class="row-odd"><td><p>description()</p></td>
+<td><p>str</p></td>
+<td><p>ユーザーにプリセットの内容を説明するためのテキストを返します。</p></td>
+</tr>
+<tr class="row-even"><td><p>includes()</p></td>
+<td><p>list</p></td>
+<td><p>このプリセットが使用するユニット名をリストとして返します。
+リストにはrigScripts.PresetElementクラスのインスタンスを任意の数だけ
+入れておきます。</p>
+<p>詳細については
+<a class="reference internal" href="#mru-presetelement"><span class="std std-ref">PresetElement</span></a>
+をご確認下さい。</p>
+</td>
+</tr>
+<tr class="row-odd"><td><p>create(creators)</p></td>
+<td><p>None</p></td>
+<td><p>引き数creatorsにはincludesで登録されているリグユニットが辞書形式で渡されます。
+デフォルトではincludesメソッドで登録されているリグユニットを
+すべて使用してbaseJointを作成します。
+挙動を変える場合はこのメソッドをオーバーライドします。
+詳細は
+<a class="reference internal" href="#mru-presetsamplecode"><span class="std std-ref">プリセットのサンプル</span></a>
+をご覧下さい。</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="presetelement">
+<span id="mru-presetelement"></span><h4>PresetElement<a class="headerlink" href="#presetelement" title="このヘッドラインへのパーマリンク">¶</a></h4>
+<p>プリセットで使用するリグユニットを登録する際に、このクラスを使用します。
+まずは登録する場合のサンプルコードをご覧下さい。</p>
+<div class="highlight-python notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3
+4
+5
+6
+7
+8
+9</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">includes</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="k">return</span> <span class="p">[</span>
+        <span class="n">rigScripts</span><span class="o">.</span><span class="n">PresetElement</span><span class="p">(</span><span class="s1">&#39;humanSpineRig&#39;</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span>
+        <span class="n">rigScripts</span><span class="o">.</span><span class="n">PresetElement</span><span class="p">(</span><span class="s1">&#39;humanClavicleRig&#39;</span><span class="p">,</span> <span class="mi">2</span><span class="p">),</span>
+        <span class="n">rigScripts</span><span class="o">.</span><span class="n">PresetElement</span><span class="p">(</span><span class="s1">&#39;humanArmRig&#39;</span><span class="p">,</span> <span class="mi">2</span><span class="p">),</span>
+        <span class="n">rigScripts</span><span class="o">.</span><span class="n">PresetElement</span><span class="p">(</span><span class="s1">&#39;humanClavicleRig&#39;</span><span class="p">,</span> <span class="mi">3</span><span class="p">),</span>
+        <span class="n">rigScripts</span><span class="o">.</span><span class="n">PresetElement</span><span class="p">(</span><span class="s1">&#39;humanArmRig&#39;</span><span class="p">,</span> <span class="mi">3</span><span class="p">),</span>
+        <span class="n">rigScripts</span><span class="o">.</span><span class="n">PresetElement</span><span class="p">(</span><span class="s1">&#39;humanHandRig&#39;</span><span class="p">,</span> <span class="mi">3</span><span class="p">),</span>
+    <span class="p">]</span>
+</pre></div>
+</td></tr></table></div>
+<p>includesメソッドはリストを返す必要があります。
+リスト内には
+<strong>rigScripts.PresetElement</strong>
+のインスタンスを任意のリグユニットの数だけ入れておきます。</p>
+<p>PresetElementクラスはインスタンス生成時に引き数を渡す以外には特に操作する必要はありません。</p>
+<table class="docutils align-default">
+<colgroup>
+<col style="width: 33%" />
+<col style="width: 33%" />
+<col style="width: 33%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p><strong>引き数</strong></p></td>
+<td><p><strong>型</strong></p></td>
+<td><p><strong>説明</strong></p></td>
+</tr>
+<tr class="row-even"><td><p>unitName</p></td>
+<td><p>str</p></td>
+<td><p>使用するユニット名を指定します。</p></td>
+</tr>
+<tr class="row-odd"><td><p>position</p></td>
+<td><p>int</p></td>
+<td><p>位置を表す整数です。
+使用できる整数の範囲は0～8です。
+代表的な数字は
+1：センター
+2：左
+3：右
+になります。</p></td>
+</tr>
+<tr class="row-even"><td><p>suffix</p></td>
+<td><p>str</p></td>
+<td><p>同じユニットを複数使用する場合、識別用につけるサフィックスです。</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="mru-presetsamplecode">
+<span id="id15"></span><h4>プリセットのサンプル<a class="headerlink" href="#mru-presetsamplecode" title="このヘッドラインへのパーマリンク">¶</a></h4>
+<div class="highlight-python notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+38
+39
+40
+41
+42
+43
+44
+45
+46
+47
+48
+49
+50</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="c1"># -*- coding:utf-8 -*-</span>
+<span class="kn">from</span> <span class="nn">gris3</span> <span class="kn">import</span> <span class="n">rigScripts</span><span class="p">,</span> <span class="n">node</span>
+
+<span class="k">class</span> <span class="nc">Preset</span><span class="p">(</span><span class="n">rigScripts</span><span class="o">.</span><span class="n">Preset</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">name</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="s1">&#39;Basic Human&#39;</span>
+
+    <span class="k">def</span> <span class="nf">description</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="sa">u</span><span class="s1">&#39;ベーシックな人型のリグプリセット。&#39;</span>
+
+    <span class="k">def</span> <span class="nf">includes</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="p">[</span>
+            <span class="n">rigScripts</span><span class="o">.</span><span class="n">PresetElement</span><span class="p">(</span><span class="s1">&#39;humanSpineRig&#39;</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span>
+            <span class="n">rigScripts</span><span class="o">.</span><span class="n">PresetElement</span><span class="p">(</span><span class="s1">&#39;humanHeadRig&#39;</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span>
+            <span class="n">rigScripts</span><span class="o">.</span><span class="n">PresetElement</span><span class="p">(</span><span class="s1">&#39;humanClavicleRig&#39;</span><span class="p">,</span> <span class="mi">2</span><span class="p">),</span>
+            <span class="n">rigScripts</span><span class="o">.</span><span class="n">PresetElement</span><span class="p">(</span><span class="s1">&#39;humanArmRig&#39;</span><span class="p">,</span> <span class="mi">2</span><span class="p">),</span>
+            <span class="n">rigScripts</span><span class="o">.</span><span class="n">PresetElement</span><span class="p">(</span><span class="s1">&#39;humanHandRig&#39;</span><span class="p">,</span> <span class="mi">2</span><span class="p">),</span>
+            <span class="n">rigScripts</span><span class="o">.</span><span class="n">PresetElement</span><span class="p">(</span><span class="s1">&#39;humanLegRig&#39;</span><span class="p">,</span> <span class="mi">2</span><span class="p">),</span>
+            <span class="n">rigScripts</span><span class="o">.</span><span class="n">PresetElement</span><span class="p">(</span><span class="s1">&#39;humanClavicleRig&#39;</span><span class="p">,</span> <span class="mi">3</span><span class="p">),</span>
+            <span class="n">rigScripts</span><span class="o">.</span><span class="n">PresetElement</span><span class="p">(</span><span class="s1">&#39;humanArmRig&#39;</span><span class="p">,</span> <span class="mi">3</span><span class="p">),</span>
+            <span class="n">rigScripts</span><span class="o">.</span><span class="n">PresetElement</span><span class="p">(</span><span class="s1">&#39;humanHandRig&#39;</span><span class="p">,</span> <span class="mi">3</span><span class="p">),</span>
+            <span class="n">rigScripts</span><span class="o">.</span><span class="n">PresetElement</span><span class="p">(</span><span class="s1">&#39;humanLegRig&#39;</span><span class="p">,</span> <span class="mi">3</span><span class="p">),</span>
+        <span class="p">]</span>
+    <span class="k">def</span> <span class="nf">create</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">creators</span><span class="p">):</span>
+        <span class="n">parent</span> <span class="o">=</span> <span class="n">node</span><span class="o">.</span><span class="n">selected</span><span class="p">()</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">parent</span><span class="p">:</span>
+            <span class="n">parent</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">jointRoot</span><span class="p">()</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">parent</span> <span class="o">=</span> <span class="n">parent</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+
+        <span class="c1"># 背骨の作成。</span>
+        <span class="n">spine</span> <span class="o">=</span> <span class="n">creators</span><span class="p">[</span><span class="s1">&#39;humanSpineRig-C&#39;</span><span class="p">]</span>
+        <span class="n">spine</span><span class="o">.</span><span class="n">createBaseJoint</span><span class="p">(</span><span class="n">parent</span><span class="p">)</span>
+
+        <span class="c1"># 頭部の作成。</span>
+        <span class="n">head</span> <span class="o">=</span> <span class="n">creators</span><span class="p">[</span><span class="s1">&#39;humanHeadRig-C&#39;</span><span class="p">]</span>
+        <span class="n">head</span><span class="o">.</span><span class="n">createBaseJoint</span><span class="p">(</span><span class="n">spine</span><span class="o">.</span><span class="n">unit</span><span class="p">()</span><span class="o">.</span><span class="n">getMember</span><span class="p">(</span><span class="s1">&#39;spineEnd&#39;</span><span class="p">))</span>
+
+        <span class="k">for</span> <span class="n">side</span> <span class="ow">in</span> <span class="p">(</span><span class="s1">&#39;LR&#39;</span><span class="p">):</span>
+            <span class="n">clv</span> <span class="o">=</span> <span class="n">creators</span><span class="p">[</span><span class="s1">&#39;humanClavicleRig-&#39;</span><span class="o">+</span><span class="n">side</span><span class="p">]</span>
+            <span class="n">clv</span><span class="o">.</span><span class="n">createBaseJoint</span><span class="p">(</span><span class="n">spine</span><span class="o">.</span><span class="n">unit</span><span class="p">()</span><span class="o">.</span><span class="n">getMember</span><span class="p">(</span><span class="s1">&#39;spineEnd&#39;</span><span class="p">))</span>
+            
+            <span class="n">arm</span> <span class="o">=</span> <span class="n">creators</span><span class="p">[</span><span class="s1">&#39;humanArmRig-&#39;</span><span class="o">+</span><span class="n">side</span><span class="p">]</span>
+            <span class="n">arm</span><span class="o">.</span><span class="n">createBaseJoint</span><span class="p">(</span><span class="n">clv</span><span class="o">.</span><span class="n">unit</span><span class="p">()</span><span class="o">.</span><span class="n">getMember</span><span class="p">(</span><span class="s1">&#39;clavicle&#39;</span><span class="p">))</span>
+
+            <span class="n">hand</span> <span class="o">=</span> <span class="n">creators</span><span class="p">[</span><span class="s1">&#39;humanHandRig-&#39;</span><span class="o">+</span><span class="n">side</span><span class="p">]</span>
+            <span class="n">hand</span><span class="o">.</span><span class="n">createBaseJoint</span><span class="p">(</span><span class="n">arm</span><span class="o">.</span><span class="n">unit</span><span class="p">()</span><span class="o">.</span><span class="n">getMember</span><span class="p">(</span><span class="s1">&#39;hand&#39;</span><span class="p">))</span>
+
+            <span class="n">leg</span> <span class="o">=</span> <span class="n">creators</span><span class="p">[</span><span class="s1">&#39;humanLegRig-&#39;</span><span class="o">+</span><span class="n">side</span><span class="p">]</span>
+            <span class="n">leg</span><span class="o">.</span><span class="n">createBaseJoint</span><span class="p">(</span><span class="n">spine</span><span class="o">.</span><span class="n">unit</span><span class="p">()</span><span class="o">.</span><span class="n">getMember</span><span class="p">(</span><span class="s1">&#39;hip&#39;</span><span class="p">))</span>
+</pre></div>
+</td></tr></table></div>
+</div>
+</div>
+</div>
+<div class="section" id="id16">
+<h2>サンプル<a class="headerlink" href="#id16" title="このヘッドラインへのパーマリンク">¶</a></h2>
+<div class="section" id="id17">
+<h3>新規で作成する<a class="headerlink" href="#id17" title="このヘッドラインへのパーマリンク">¶</a></h3>
+<p>リグのモジュールの雛形はコマンドで作成できるようになっています。
+以下のコマンドを実行することにより、リグモジュールを作成する事ができます。
+(ver.0.9.5.3から)</p>
+<div class="highlight-python notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3
+4
+5</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">gris3</span> <span class="kn">import</span> <span class="n">scriptTemplates</span>
+<span class="n">c</span> <span class="o">=</span> <span class="n">scriptTemplates</span><span class="o">.</span><span class="n">RigUnitCreator</span><span class="p">()</span>
+<span class="n">c</span><span class="o">.</span><span class="n">setCategory</span><span class="p">(</span><span class="s1">&#39;Sample&#39;</span><span class="p">)</span>
+<span class="n">c</span><span class="o">.</span><span class="n">setFileName</span><span class="p">(</span><span class="s1">&#39;sampleRig&#39;</span><span class="p">)</span>
+<span class="n">c</span><span class="o">.</span><span class="n">create</span><span class="p">()</span>
+</pre></div>
+</td></tr></table></div>
+<p><strong>setCategory</strong>
+メソッドは、リグユニット一覧の時にカテゴライズする名前を設定します。
+同じカテゴリになるとGUI上では一つにまとめられます。
+指定しなければどのカテゴリにも属さず、トップ階層にリストされます。</p>
+<a class="reference internal image-reference" href="../_images/0012.png"><img alt="../_images/0012.png" src="../_images/0012.png" style="height: 300px;" /></a>
+<p><strong>setFileName</strong>
+メソッドは作成するリグの名前を指定します。
+このメソッドは必ず指定する必要があり、
+既存のリグスクリプトと重複している場合は作成が無視されます。</p>
+</div>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="constructor.html" class="btn btn-neutral float-right" title="コンストラクタ" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="factorySettings.html" class="btn btn-neutral float-left" title="ファクトリーセッティング" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        
+        &copy; 著作権 2020, EskeYoshinob
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

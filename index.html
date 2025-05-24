@@ -1,0 +1,296 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="ja" >
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>gris3 Documentation &mdash; gris3 1.0.0 ドキュメント</title>
+  
+
+  
+  <link rel="stylesheet" href="_static/css/customTheme.css" type="text/css" />
+  <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+
+  
+  
+  
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+        <script src="_static/jquery.js"></script>
+        <script src="_static/underscore.js"></script>
+        <script src="_static/doctools.js"></script>
+        <script src="_static/language_data.js"></script>
+        <script src="_static/translations.js"></script>
+    
+    <script type="text/javascript" src="_static/js/theme.js"></script>
+
+    
+    <link rel="author" title="このドキュメントについて" href="about.html" />
+    <link rel="index" title="索引" href="genindex.html" />
+    <link rel="search" title="検索" href="search.html" />
+    <link rel="next" title="インストールと起動" href="contents/install.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="#" class="icon icon-home" alt="Documentation Home"> gris3
+          
+
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">スタートアップ</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="contents/install.html">インストールと起動</a></li>
+<li class="toctree-l1"><a class="reference internal" href="contents/updateLog.html">更新履歴</a></li>
+</ul>
+<p class="caption"><span class="caption-text">マニュアル</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="contents/scriptBasedRigging.html">ScriptBasedRigging-概要</a></li>
+<li class="toctree-l1"><a class="reference internal" href="contents/scriptingForFactory.html">ファクトリーのスクリプティングガイド</a></li>
+<li class="toctree-l1"><a class="reference internal" href="contents/namingRule.html">命名規則</a></li>
+<li class="toctree-l1"><a class="reference internal" href="contents/rigUnits.html">Rig Units</a></li>
+<li class="toctree-l1"><a class="reference internal" href="contents/includedExtraConstructors.html">組み込み済みExtraConstructor</a></li>
+</ul>
+<p class="caption"><span class="caption-text">ガジェット</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="gadgets/jointEditor.html">Joint Editor</a></li>
+<li class="toctree-l1"><a class="reference internal" href="gadgets/modelSetup.html">Model Setup</a></li>
+<li class="toctree-l1"><a class="reference internal" href="gadgets/renamer.html">Renamer</a></li>
+</ul>
+<p class="caption"><span class="caption-text">スクリプトツール</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="tools/jointEditor.html">jointEditor</a></li>
+<li class="toctree-l1"><a class="reference internal" href="tools/extraJoint.html">extraJoint</a></li>
+</ul>
+<p class="caption"><span class="caption-text">開発者向けドキュメント</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="dev/factorySettings.html">ファクトリーセッティング</a></li>
+<li class="toctree-l1"><a class="reference internal" href="dev/makingRigUnits.html">リグユニットの開発</a></li>
+<li class="toctree-l1"><a class="reference internal" href="dev/constructor.html">コンストラクタ</a></li>
+<li class="toctree-l1"><a class="reference internal" href="dev/extraConstructor.html">エクストラコンストラクタ</a></li>
+<li class="toctree-l1"><a class="reference internal" href="dev/namingRuleSystem.html">命名規則管理システム</a></li>
+<li class="toctree-l1"><a class="reference internal" href="dev/operateByScript.html">スクリプトによって操作する</a></li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="#">gris3</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="#" class="icon icon-home"></a> &raquo;</li>
+        
+      <li>gris3 Documentation</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="_sources/index.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="gris3-documentation">
+<h1>gris3 Documentation<a class="headerlink" href="#gris3-documentation" title="このヘッドラインへのパーマリンク">¶</a></h1>
+<div class="section" id="gris3">
+<h2>gris3とは<a class="headerlink" href="#gris3" title="このヘッドラインへのパーマリンク">¶</a></h2>
+<p>gris3はAutodesk maya向けに開発されたリギング用フレームワークです。
+モジュラーリギングとスクリプトベースによるリグのビルド機能をメインに
+構成されています。</p>
+</div>
+</div>
+<div class="section" id="id1">
+<h1>モジュラーリギング<a class="headerlink" href="#id1" title="このヘッドラインへのパーマリンク">¶</a></h1>
+<p>リギングを部位(ユニット)ごとに分けて管理し、それを組み合わせる事により様々な
+ケースのリグに対応するシステムです。</p>
+<p>またユニットを追加する事により、対応できるリグのケースを増やし、生産性を
+上げることも可能です。</p>
+</div>
+<div class="section" id="id2">
+<h1>スクリプトベースのビルド<a class="headerlink" href="#id2" title="このヘッドラインへのパーマリンク">¶</a></h1>
+<p>もうひとつのメイン機能がスクリプトによるビルドです。
+ビルドととはリギングに必用な要素
+（モデルやジョイント、ウェイトなど）を任意の場所に書き出し、それらの要素を
+スクリプトによって組み立てる事を指します。</p>
+<p>スクリプトベースのビルドは最初の作成に時間がかかりますが、修正や更新、
+他のアセットへの再利用が行いやすくなり、プロダクト全体の生産性向上を
+目的としています。</p>
+<div class="admonition note">
+<p class="admonition-title">注釈</p>
+<dl class="simple">
+<dt>スクリプトベースのビルドを行うには以下のスキルが必須になります。</dt><dd><ul class="simple">
+<li><p>Pythonをある程度書くことができる。</p></li>
+<li><p>Melの基本的な動作を知っている。</p></li>
+</ul>
+</dd>
+<dt>また以下のスキルがあると、より機能への理解が深まります。</dt><dd><ul class="simple">
+<li><p>クラスの理解。</p></li>
+</ul>
+</dd>
+</dl>
+</div>
+<div class="toctree-wrapper compound">
+</div>
+<div class="toctree-wrapper compound">
+</div>
+<div class="toctree-wrapper compound">
+</div>
+<div class="toctree-wrapper compound">
+</div>
+<div class="toctree-wrapper compound">
+</div>
+</div>
+<div class="section" id="indices-and-tables">
+<h1>Indices and Tables<a class="headerlink" href="#indices-and-tables" title="このヘッドラインへのパーマリンク">¶</a></h1>
+<ul class="simple">
+<li><p><a class="reference internal" href="genindex.html"><span class="std std-ref">索引</span></a></p></li>
+<li><p><a class="reference internal" href="py-modindex.html"><span class="std std-ref">モジュール索引</span></a></p></li>
+<li><p><a class="reference internal" href="search.html"><span class="std std-ref">検索ページ</span></a></p></li>
+</ul>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="contents/install.html" class="btn btn-neutral float-right" title="インストールと起動" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        
+        &copy; 著作権 2020, EskeYoshinob
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

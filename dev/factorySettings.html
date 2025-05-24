@@ -1,0 +1,1026 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="ja" >
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>ファクトリーセッティング &mdash; gris3 1.0.0 ドキュメント</title>
+  
+
+  
+  <link rel="stylesheet" href="../_static/css/customTheme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+
+  
+  
+  
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/doctools.js"></script>
+        <script src="../_static/language_data.js"></script>
+        <script src="../_static/translations.js"></script>
+    
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+    
+    <link rel="author" title="このドキュメントについて" href="../about.html" />
+    <link rel="index" title="索引" href="../genindex.html" />
+    <link rel="search" title="検索" href="../search.html" />
+    <link rel="next" title="リグユニットの開発" href="makingRigUnits.html" />
+    <link rel="prev" title="extraJoint" href="../tools/extraJoint.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../index.html" class="icon icon-home" alt="Documentation Home"> gris3
+          
+
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">スタートアップ</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../contents/install.html">インストールと起動</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../contents/updateLog.html">更新履歴</a></li>
+</ul>
+<p class="caption"><span class="caption-text">マニュアル</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../contents/scriptBasedRigging.html">ScriptBasedRigging-概要</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../contents/scriptingForFactory.html">ファクトリーのスクリプティングガイド</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../contents/namingRule.html">命名規則</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../contents/rigUnits.html">Rig Units</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../contents/includedExtraConstructors.html">組み込み済みExtraConstructor</a></li>
+</ul>
+<p class="caption"><span class="caption-text">ガジェット</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../gadgets/jointEditor.html">Joint Editor</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../gadgets/modelSetup.html">Model Setup</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../gadgets/renamer.html">Renamer</a></li>
+</ul>
+<p class="caption"><span class="caption-text">スクリプトツール</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../tools/jointEditor.html">jointEditor</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../tools/extraJoint.html">extraJoint</a></li>
+</ul>
+<p class="caption"><span class="caption-text">開発者向けドキュメント</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="current reference internal" href="#">ファクトリーセッティング</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#id2">運用に使用するクラス</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#factory-factorydata">factory.FactoryData</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#setrootpath-str">setRootPath(str)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id3">その他の編集・参照用メソッド</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id4">情報をプロジェクトディレクトリに保存する。</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id5">既存のプロジェクトディレクトリの情報を取得する。</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#constructors-constructormanager">constructors.ConstructorManager</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#fs-listconstructornames">使用可能コンストラクタの一覧を取得する</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id7">コンストラクタのインスタンスを取得する</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id8">デフォルトのファクトリーモジュール一覧を取得する</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#factorymodules-factorymodulemanager">factoryModules.FactoryModuleManager</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#id9">モジュールと書き出し先のデフォルトのペア情報を取得する</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#factorymodules-factorysettings">factoryModules.FactorySettings</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#factorydata">FactoryDataクラスとの違い</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#factorysettingsfactorydata">FactorySettingsを任意のFactoryDataに置き換える</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#fs-createprojdir">プロジェクトディレクトリをコマンドで作成する</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#fs-executebuildscript">プロジェクトディレクトリのビルドスクリプトを実行する</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="makingRigUnits.html">リグユニットの開発</a></li>
+<li class="toctree-l1"><a class="reference internal" href="constructor.html">コンストラクタ</a></li>
+<li class="toctree-l1"><a class="reference internal" href="extraConstructor.html">エクストラコンストラクタ</a></li>
+<li class="toctree-l1"><a class="reference internal" href="namingRuleSystem.html">命名規則管理システム</a></li>
+<li class="toctree-l1"><a class="reference internal" href="operateByScript.html">スクリプトによって操作する</a></li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">gris3</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
+        
+      <li>ファクトリーセッティング</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../_sources/dev/factorySettings.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="id1">
+<h1>ファクトリーセッティング<a class="headerlink" href="#id1" title="このヘッドラインへのパーマリンク">¶</a></h1>
+<p>このシステムは、コンストラクタとファクトリーモジュールを管理、
+運用するためのものです。
+この章ではコマンドによってファクトリーセッティングを操作し、
+どのような挙動を行うものなのかを解説していきます。</p>
+<div class="section" id="id2">
+<h2>運用に使用するクラス<a class="headerlink" href="#id2" title="このヘッドラインへのパーマリンク">¶</a></h2>
+<p>ファクトリーセッティングを運用するにあたって、主に以下のクラスを使用します。</p>
+<ul class="simple">
+<li><p><a class="reference internal" href="#fs-factorydataclass"><span class="std std-ref">factory.FactoryData</span></a></p></li>
+<li><p><a class="reference internal" href="#fs-factorymodulemanager"><span class="std std-ref">factoryModules.FactoryModuleManager</span></a></p></li>
+<li><p><a class="reference internal" href="#fs-constructormanager"><span class="std std-ref">constructors.ConstructorManager</span></a></p></li>
+</ul>
+</div>
+<div class="section" id="factory-factorydata">
+<span id="fs-factorydataclass"></span><h2>factory.FactoryData<a class="headerlink" href="#factory-factorydata" title="このヘッドラインへのパーマリンク">¶</a></h2>
+<p>このクラスはファクトリーセッティングそのものであり、
+このクラスでプロジェクトディレクトリ単位のファクトリーの設定を作成、
+編集する事ができます。</p>
+<p>FactoryDataクラスではスクリプトベースのリギングを行う上で必用な情報を設定します。</p>
+<div class="section" id="setrootpath-str">
+<h3>setRootPath(str)<a class="headerlink" href="#setrootpath-str" title="このヘッドラインへのパーマリンク">¶</a></h3>
+<p>このメソッドはファクトリーセッティングを行う上で最も重要なメソッドです。
+このメソッドの引数にはディレクトリパスを指定します。</p>
+<div class="highlight-python notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">gris3</span> <span class="kn">import</span> <span class="n">factory</span>
+<span class="n">settings</span> <span class="o">=</span> <span class="n">factory</span><span class="o">.</span><span class="n">FactoryData</span><span class="p">()</span>
+<span class="n">settings</span><span class="o">.</span><span class="n">setRootPath</span><span class="p">(</span><span class="s1">&#39;D:/assets/testRig&#39;</span><span class="p">)</span>
+</pre></div>
+</td></tr></table></div>
+<p>指定されたディレクトリパスは、ファクトリーセッティングの
+プロジェクトディレクトリとして認識されます。
+ファクトリーの操作は、
+全てこのプロジェクトディレクトリとして認識されたデータに対して行われます。</p>
+<div class="admonition seealso">
+<p class="admonition-title">参考</p>
+<p><a class="reference internal" href="../contents/scriptBasedRigging.html#sbr-projectdirectory"><span class="std std-ref">プロジェクトディレクトリ</span></a></p>
+</div>
+</div>
+<div class="section" id="id3">
+<h3>その他の編集・参照用メソッド<a class="headerlink" href="#id3" title="このヘッドラインへのパーマリンク">¶</a></h3>
+<p>ルートディレクトリを設定したら、以下のメソッドも使用する事ができます。
+この設定により、ファクトリーセッティングとして操作する対象のアセット情報を
+登録する事ができます。</p>
+<table class="docutils align-default" id="id12">
+<caption><span class="caption-text">メソッド一覧</span><a class="headerlink" href="#id12" title="このテーブルへのパーマリンク">¶</a></caption>
+<colgroup>
+<col style="width: 50%" />
+<col style="width: 50%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p>setAssetName(str)</p></td>
+<td><p>アセット名を設定する。</p></td>
+</tr>
+<tr class="row-even"><td><p>setAssetType(str)</p></td>
+<td><p>アセットの種類を設定する</p></td>
+</tr>
+<tr class="row-odd"><td><p>setProject(str)</p></td>
+<td><p>プロジェクト名を設定する。</p></td>
+</tr>
+<tr class="row-even"><td><p>setConstructorName(str)</p></td>
+<td><p>使用するコンストラクタ名を設定する。
+使用できるコンストラクタ名については
+<a class="reference internal" href="#fs-listconstructornames"><span class="std std-ref">使用可能コンストラクタの一覧を取得する</span></a>
+を参照。</p></td>
+</tr>
+</tbody>
+</table>
+<div class="highlight-python notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3
+4
+5
+6
+7</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">gris3</span> <span class="kn">import</span> <span class="n">factory</span>
+<span class="n">settings</span> <span class="o">=</span> <span class="n">factory</span><span class="o">.</span><span class="n">FactoryData</span><span class="p">()</span>
+<span class="n">settings</span><span class="o">.</span><span class="n">setRootPath</span><span class="p">(</span><span class="s1">&#39;D:/assets/testRig&#39;</span><span class="p">)</span>
+<span class="hll"><span class="n">settings</span><span class="o">.</span><span class="n">setAssetName</span><span class="p">(</span><span class="s1">&#39;grico&#39;</span><span class="p">)</span>
+</span><span class="hll"><span class="n">settings</span><span class="o">.</span><span class="n">setAssetType</span><span class="p">(</span><span class="s1">&#39;CH&#39;</span><span class="p">)</span>
+</span><span class="hll"><span class="n">settings</span><span class="o">.</span><span class="n">setProject</span><span class="p">(</span><span class="s1">&#39;RigTraining&#39;</span><span class="p">)</span>
+</span><span class="hll"><span class="n">settings</span><span class="o">.</span><span class="n">setConstructorName</span><span class="p">(</span><span class="s1">&#39;standardConstructor&#39;</span><span class="p">)</span>
+</span></pre></div>
+</td></tr></table></div>
+</div>
+<div class="section" id="id4">
+<h3>情報をプロジェクトディレクトリに保存する。<a class="headerlink" href="#id4" title="このヘッドラインへのパーマリンク">¶</a></h3>
+<p>これらの情報を設定した後に、
+<strong>saveFile</strong>
+メソッドを使用すると
+<strong>setRootPath</strong>
+で指定したディレクトリの直下に、設定された情報に基づいた
+<strong>grisFactoryWorkspace.xml</strong>
+が作成されます。</p>
+<div class="highlight-python notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3
+4
+5
+6
+7
+8
+9</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">gris3</span> <span class="kn">import</span> <span class="n">factory</span>
+<span class="n">settings</span> <span class="o">=</span> <span class="n">factory</span><span class="o">.</span><span class="n">FactoryData</span><span class="p">()</span>
+<span class="n">settings</span><span class="o">.</span><span class="n">setRootPath</span><span class="p">(</span><span class="s1">&#39;D:/assets/testRig&#39;</span><span class="p">)</span>
+<span class="n">settings</span><span class="o">.</span><span class="n">setAssetName</span><span class="p">(</span><span class="s1">&#39;grico&#39;</span><span class="p">)</span>
+<span class="n">settings</span><span class="o">.</span><span class="n">setAssetType</span><span class="p">(</span><span class="s1">&#39;CH&#39;</span><span class="p">)</span>
+<span class="n">settings</span><span class="o">.</span><span class="n">setProject</span><span class="p">(</span><span class="s1">&#39;RigTraining&#39;</span><span class="p">)</span>
+<span class="n">settings</span><span class="o">.</span><span class="n">setConstructorName</span><span class="p">(</span><span class="s1">&#39;standardConstructor&#39;</span><span class="p">)</span>
+
+<span class="hll"><span class="n">settings</span><span class="o">.</span><span class="n">saveFile</span><span class="p">()</span>
+</span></pre></div>
+</td></tr></table></div>
+</div>
+<div class="section" id="id5">
+<h3>既存のプロジェクトディレクトリの情報を取得する。<a class="headerlink" href="#id5" title="このヘッドラインへのパーマリンク">¶</a></h3>
+<p>すでに設定用xmlファイルが保存されているプロジェクトディレクトリに対して
+setRootPathを行った場合、設定ファイルが自動的に読み込まれ、アセット情報が
+設定されている状態になります。</p>
+<p>設定されている情報を取得するには以下のメソッドを使用することで可能です。</p>
+<table class="docutils align-default" id="id13">
+<caption><span class="caption-text">メソッド一覧</span><a class="headerlink" href="#id13" title="このテーブルへのパーマリンク">¶</a></caption>
+<colgroup>
+<col style="width: 50%" />
+<col style="width: 50%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p>assetName</p></td>
+<td><p>アセット名を取得する。</p></td>
+</tr>
+<tr class="row-even"><td><p>assetType</p></td>
+<td><p>アセットの種類を取得する。</p></td>
+</tr>
+<tr class="row-odd"><td><p>project</p></td>
+<td><p>プロジェクト名を取得する。</p></td>
+</tr>
+<tr class="row-even"><td><p>constructorName</p></td>
+<td><p>使用するコンストラクタ名を取得する。</p></td>
+</tr>
+</tbody>
+</table>
+<div class="highlight-python notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3
+4
+5</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">gris3</span> <span class="kn">import</span> <span class="n">factory</span>
+<span class="n">settings</span> <span class="o">=</span> <span class="n">factory</span><span class="o">.</span><span class="n">FactoryData</span><span class="p">()</span>
+<span class="n">settings</span><span class="o">.</span><span class="n">setRootPath</span><span class="p">(</span><span class="s1">&#39;D:/assets/testRig&#39;</span><span class="p">)</span>
+<span class="n">settings</span><span class="o">.</span><span class="n">assetName</span><span class="p">()</span>
+<span class="c1"># Result: grico #</span>
+</pre></div>
+</td></tr></table></div>
+</div>
+</div>
+<div class="section" id="constructors-constructormanager">
+<span id="fs-constructormanager"></span><h2>constructors.ConstructorManager<a class="headerlink" href="#constructors-constructormanager" title="このヘッドラインへのパーマリンク">¶</a></h2>
+<p>このクラスはコンストラクタを管理するためのクラスです。
+カレントのコンストラクタを設定したり、使用できるコンストラクタのリストの情報など
+を管理しています。</p>
+<p>また、コンストラクタにはデフォルトで取り扱うファクトリーモジュールの情報も
+持っています。
+ファクトリーセッティングを運用する上で、
+このファクトリーモジュールの情報が必用になるため、
+これらクラスを使用して必用な情報を集めてきます。</p>
+<p>コンストラクタ自体の詳細な説明については
+<a class="reference internal" href="constructor.html"><span class="doc">コンストラクタ</span></a>
+をご覧下さい。</p>
+<div class="section" id="fs-listconstructornames">
+<span id="id6"></span><h3>使用可能コンストラクタの一覧を取得する<a class="headerlink" href="#fs-listconstructornames" title="このヘッドラインへのパーマリンク">¶</a></h3>
+<p>ファクトリーセッティングに渡す、使用可能なコンストラクター名の一覧を取得するには
+以下の方法で行います。</p>
+<div class="highlight-python notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3
+4</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">gris3</span> <span class="kn">import</span> <span class="n">constructors</span>
+<span class="n">cst_mngr</span> <span class="o">=</span> <span class="n">constructors</span><span class="o">.</span><span class="n">ConstructorManager</span><span class="p">()</span>
+<span class="n">cst_mngr</span><span class="o">.</span><span class="n">names</span><span class="p">()</span>
+<span class="c1"># Result: [&#39;standardConstructor&#39;, &#39;unityConstructor&#39;] #</span>
+</pre></div>
+</td></tr></table></div>
+</div>
+<div class="section" id="id7">
+<h3>コンストラクタのインスタンスを取得する<a class="headerlink" href="#id7" title="このヘッドラインへのパーマリンク">¶</a></h3>
+<p>各コンストラクタは、pythonのモジュールとして記述されています。
+このモジュール自体を取得するには
+<strong>module</strong>
+メソッドを使用します。</p>
+<p>このメソッドの引数には
+<strong>names</strong>
+メソッドによって取得できるリストのいずれかの文字列になります。</p>
+<div class="highlight-python notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3
+4</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">gris3</span> <span class="kn">import</span> <span class="n">constructors</span>
+<span class="n">cst_mngr</span> <span class="o">=</span> <span class="n">constructors</span><span class="o">.</span><span class="n">ConstructorManager</span><span class="p">()</span>
+<span class="n">cst_mod</span> <span class="o">=</span> <span class="n">cst_mngr</span><span class="o">.</span><span class="n">module</span><span class="p">(</span><span class="s1">&#39;standardConstructor&#39;</span><span class="p">)</span>
+<span class="c1"># Result: &lt;module &#39;gris3.constructors.standardConstructor&#39; from ~&gt;</span>
+</pre></div>
+</td></tr></table></div>
+<p>コンストラクタ用モジュールには必ずConstructorクラスが存在します。
+コンストラクタークラスの引数には上記のFactoryDataのインスタンスを渡します。</p>
+<div class="highlight-python notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">gris3</span> <span class="kn">import</span> <span class="n">factory</span><span class="p">,</span> <span class="n">constructors</span>
+<span class="n">settings</span> <span class="o">=</span> <span class="n">factory</span><span class="o">.</span><span class="n">FactoryData</span><span class="p">()</span>
+<span class="n">settings</span><span class="o">.</span><span class="n">setRootPath</span><span class="p">(</span><span class="s1">&#39;D:/assets/testRig&#39;</span><span class="p">)</span>
+<span class="n">settings</span><span class="o">.</span><span class="n">setAssetName</span><span class="p">(</span><span class="s1">&#39;grico&#39;</span><span class="p">)</span>
+<span class="n">settings</span><span class="o">.</span><span class="n">setAssetType</span><span class="p">(</span><span class="s1">&#39;CH&#39;</span><span class="p">)</span>
+<span class="n">settings</span><span class="o">.</span><span class="n">setProject</span><span class="p">(</span><span class="s1">&#39;RigTraining&#39;</span><span class="p">)</span>
+<span class="n">settings</span><span class="o">.</span><span class="n">setConstructorName</span><span class="p">(</span><span class="s1">&#39;standardConstructor&#39;</span><span class="p">)</span>
+
+<span class="n">cst_mngr</span> <span class="o">=</span> <span class="n">constructors</span><span class="o">.</span><span class="n">ConstructorManager</span><span class="p">()</span>
+<span class="n">cst_mod</span> <span class="o">=</span> <span class="n">cst_mngr</span><span class="o">.</span><span class="n">module</span><span class="p">(</span><span class="s1">&#39;standardConstructor&#39;</span><span class="p">)</span>
+<span class="hll"><span class="n">cst</span> <span class="o">=</span> <span class="n">cst_mod</span><span class="o">.</span><span class="n">Constructor</span><span class="p">(</span><span class="n">settings</span><span class="p">)</span>
+</span><span class="hll"><span class="c1"># Result: &lt;gris3.constructors.standardConstructor.Constructor object at ~&gt; #</span>
+</span></pre></div>
+</td></tr></table></div>
+</div>
+<div class="section" id="id8">
+<h3>デフォルトのファクトリーモジュール一覧を取得する<a class="headerlink" href="#id8" title="このヘッドラインへのパーマリンク">¶</a></h3>
+<p>前述のように、コンストラクタには取り扱うファクトリーモジュールの
+デフォルトセットが登録されています。
+この一覧を取得し、FactoryDataに反映させます。</p>
+<p>デフォルトのファクトリーモジュールセットは
+<strong>FactoryModules</strong>
+変数内に格納されています。</p>
+<div class="highlight-python notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">gris3</span> <span class="kn">import</span> <span class="n">constructors</span>
+<span class="n">cst_mngr</span> <span class="o">=</span> <span class="n">constructors</span><span class="o">.</span><span class="n">ConstructorManager</span><span class="p">()</span>
+<span class="n">cst</span> <span class="o">=</span> <span class="n">cst_mngr</span><span class="o">.</span><span class="n">module</span><span class="p">(</span><span class="s1">&#39;standardConstructor&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">Constructor</span><span class="p">()</span>
+<span class="n">cst</span><span class="o">.</span><span class="n">FactoryModules</span>
+<span class="c1"># Result: (</span>
+<span class="c1">#  &lt;gris3.factory.ModuleInfo : &quot;jointBuilder&quot; / &quot;None&quot; / &quot;None&quot; / &quot;&quot;&gt;,</span>
+<span class="c1">#  &lt;gris3.factory.ModuleInfo : &quot;cageManager&quot; / &quot;None&quot; / &quot;None&quot; / &quot;&quot;&gt;,</span>
+<span class="c1">#  &lt;gris3.factory.ModuleInfo : &quot;drivenManager&quot; / &quot;None&quot; / &quot;None&quot; / &quot;&quot;&gt;,</span>
+<span class="c1">#  &lt;gris3.factory.ModuleInfo : &quot;weightManager&quot; / &quot;None&quot; / &quot;None&quot; / &quot;&quot;&gt;,</span>
+<span class="c1">#  &lt;gris3.factory.ModuleInfo : &quot;facial&quot; / &quot;None&quot; / &quot;None&quot; / &quot;&quot;&gt;,</span>
+<span class="c1">#  &lt;gris3.factory.ModuleInfo : &quot;extraJointManager&quot; / &quot;None&quot; / &quot;None&quot; / &quot;&quot;&gt;,</span>
+<span class="c1">#  &lt;gris3.factory.ModuleInfo : &quot;controllerExporter&quot; / &quot;None&quot; / &quot;None&quot; / &quot;&quot;&gt;</span>
+<span class="c1">#)</span>
+</pre></div>
+</td></tr></table></div>
+<p>この変数に格納されているのは
+<strong>ModuleInfo</strong>
+クラスを複数持つリストです。</p>
+<p>ModuleInfoは</p>
+<ul class="simple">
+<li><p>モジュール名</p></li>
+<li><p>このモジュールが操作対象とするディレクトリ名</p></li>
+<li><p>エイリアス名（別名）</p></li>
+<li><p>内部操作する際にキーワードとなるタグ</p></li>
+</ul>
+<p>の４つの情報を持つクラスで、
+ファクトリーセッティングやコンストラクタはこの情報を元にファクトリーモジュールの
+管理を行います。</p>
+<div class="admonition seealso">
+<p class="admonition-title">参考</p>
+<p>ModuleInfoの詳細については
+<a class="reference internal" href="constructor.html#cst-moduleinfo"><span class="std std-ref">ModuleInfoクラス</span></a>
+をご覧下さい。</p>
+</div>
+<p>ユーザーはアセットごとにこの情報をカスタマイズする事が出来ますが、
+基本的にコンストラクタが要求するデフォルトのファクトリーモジュールセットは
+必ず作るようにして下さい。</p>
+<p>このファクトリーモジュールセットをFactoryDataオブジェクトに追加します。</p>
+<div class="literal-block-wrapper docutils container" id="id14">
+<div class="code-block-caption"><span class="caption-text">FactoryDataにモジュールセットを登録し、保存する。</span><a class="headerlink" href="#id14" title="このコードへのパーマリンク">¶</a></div>
+<div class="highlight-python notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">gris3</span> <span class="kn">import</span> <span class="n">factory</span><span class="p">,</span> <span class="n">constructors</span>
+<span class="n">settings</span> <span class="o">=</span> <span class="n">factory</span><span class="o">.</span><span class="n">FactoryData</span><span class="p">()</span>
+<span class="n">settings</span><span class="o">.</span><span class="n">setRootPath</span><span class="p">(</span><span class="s1">&#39;D:/assets/testRig&#39;</span><span class="p">)</span>
+
+<span class="n">cst_mngr</span> <span class="o">=</span> <span class="n">constructors</span><span class="o">.</span><span class="n">ConstructorManager</span><span class="p">()</span>
+<span class="n">cst</span> <span class="o">=</span> <span class="n">cst_mngr</span><span class="o">.</span><span class="n">module</span><span class="p">(</span><span class="s1">&#39;standardConstructor&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">Constructor</span><span class="p">()</span>
+<span class="k">for</span> <span class="n">info</span> <span class="ow">in</span> <span class="n">cst</span><span class="o">.</span><span class="n">FactoryModules</span><span class="p">:</span>
+    <span class="n">settings</span><span class="o">.</span><span class="n">addModule</span><span class="p">(</span><span class="n">info</span><span class="o">.</span><span class="n">moduleName</span><span class="p">(),</span> <span class="n">info</span><span class="p">)</span>
+
+<span class="n">settings</span><span class="o">.</span><span class="n">saveFile</span><span class="p">()</span>
+</pre></div>
+</td></tr></table></div>
+</div>
+<p>この操作により、このアセットが取り扱うコンストラクタと、
+ファクトリーモジュールのセットに関する設定が完了しました。</p>
+<p>完了するとgrisFactoryWorkspace.xml内には各種情報とファクトリーモジュールセット
+に関する情報が追記されます。</p>
+</div>
+</div>
+<div class="section" id="factorymodules-factorymodulemanager">
+<span id="fs-factorymodulemanager"></span><h2>factoryModules.FactoryModuleManager<a class="headerlink" href="#factorymodules-factorymodulemanager" title="このヘッドラインへのパーマリンク">¶</a></h2>
+<p>このクラスはgrisが管理するファクトリーモジュールの管理や、
+情報取得機能を提供するクラスです。</p>
+<p>このクラスのインスタンスを作成すると、
+grisが管理するファクトリーモジュールを一度全てインポートします。
+この処理は時間がかかるため、
+このクラスはシングルトンになっており余計な処理を挟まないようになっています。</p>
+<p>ファクトリーモジュールは要素の書き出し機能と、
+書き出し先がペアとなる事で成立します。
+モジュールと書き出し先のペアリングは、
+ファクトリーセッティングによりプロジェクトディレクトリ単位で設定する事ができます。
+しかし、毎回ペアリングを設定しなくてもいいように、
+各ファクトリーモジュールはデフォルトの書き出し先名を持っています。</p>
+<p>FactoryModuleManagerクラスはこのペアリング情報を提供します。</p>
+<div class="section" id="id9">
+<h3>モジュールと書き出し先のデフォルトのペア情報を取得する<a class="headerlink" href="#id9" title="このヘッドラインへのパーマリンク">¶</a></h3>
+<p>FactoryModuleManagerのmoduleNameListメソッドを使用すると、
+現在使用可能なファクトリーモジュールの一覧が取得できます。
+この一覧は辞書型式になっており、
+モジュール名とそのモジュールを管理するクラスにアクセスできるようになります。</p>
+<div class="highlight-python notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">gris3</span> <span class="kn">import</span> <span class="n">factoryModules</span>
+<span class="n">fmm</span> <span class="o">=</span> <span class="n">factoryModules</span><span class="o">.</span><span class="n">FactoryModuleManager</span><span class="p">()</span>
+<span class="n">fmm</span><span class="o">.</span><span class="n">moduleNameList</span><span class="p">()</span>
+<span class="c1"># Result: {</span>
+<span class="c1">#    &#39;extraJointManager&#39;: &lt;class &#39;gris3.factoryModules.extraJointManager.Department&#39;&gt;,</span>
+<span class="c1">#    &#39;facial&#39;: &lt;class &#39;gris3.factoryModules.facial.Department&#39;&gt;,</span>
+<span class="c1">#    &#39;cageManager&#39;: &lt;class &#39;gris3.factoryModules.cageManager.Department&#39;&gt;,</span>
+<span class="c1">#    &#39;controllerExporter&#39;: &lt;class &#39;gris3.factoryModules.controllerExporter.Department&#39;&gt;,</span>
+<span class="c1">#    &#39;workspace&#39;: &lt;class &#39;gris3.factoryModules.workspace.Department&#39;&gt;,</span>
+<span class="c1">#    &#39;weightManager&#39;: &lt;class &#39;gris3.factoryModules.weightManager.Department&#39;&gt;,</span>
+<span class="c1">#    &#39;model&#39;: &lt;class &#39;gris3.factoryModules.model.Department&#39;&gt;,</span>
+<span class="c1">#    &#39;drivenManager&#39;: &lt;class &#39;gris3.factoryModules.drivenManager.Department&#39;&gt;,</span>
+<span class="c1">#    &#39;jointBuilder&#39;: &lt;class &#39;gris3.factoryModules.jointBuilder.Department&#39;&gt;</span>
+<span class="c1">#}</span>
+</pre></div>
+</td></tr></table></div>
+<p>各モジュールには必ずDepartmentクラスを持っており、
+このクラスが各モジュールの動作を定義しています。</p>
+<p>モジュールのデフォルトで設定されている
+書き出し先ディレクトリ名もこのクラスが管理しています。</p>
+<div class="literal-block-wrapper docutils container" id="id15">
+<div class="code-block-caption"><span class="caption-text">jointBuilderモジュールのデフォルト書き出し先名を取得する。</span><a class="headerlink" href="#id15" title="このコードへのパーマリンク">¶</a></div>
+<div class="highlight-python notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3
+4
+5</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">gris3</span> <span class="kn">import</span> <span class="n">factoryModules</span>
+<span class="n">fmm</span> <span class="o">=</span> <span class="n">factoryModules</span><span class="o">.</span><span class="n">FactoryModuleManager</span><span class="p">()</span>
+<span class="bp">cls</span> <span class="o">=</span> <span class="n">fmm</span><span class="o">.</span><span class="n">moduleNameList</span><span class="p">()</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;jointBuilder&#39;</span><span class="p">)</span>
+<span class="bp">cls</span><span class="p">()</span><span class="o">.</span><span class="n">directoryName</span><span class="p">()</span>
+<span class="c1"># Result: joints #</span>
+</pre></div>
+</td></tr></table></div>
+</div>
+</div>
+</div>
+<div class="section" id="factorymodules-factorysettings">
+<span id="fs-factorysettingsclass"></span><h2>factoryModules.FactorySettings<a class="headerlink" href="#factorymodules-factorysettings" title="このヘッドラインへのパーマリンク">¶</a></h2>
+<p>このクラスはファクトリーウィンドウと紐付けられた非常に重要なクラスですが、
+実態は
+<a class="reference internal" href="#fs-factorydataclass"><span class="std std-ref">factory.FactoryData</span></a>
+クラスを親クラスとしたサブクラスです。</p>
+<p>従って
+<a class="reference internal" href="#fs-createprojdir"><span class="std std-ref">プロジェクトディレクトリをコマンドで作成する</span></a>
+内で記述されている</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">settings</span> <span class="o">=</span> <span class="n">factory</span><span class="o">.</span><span class="n">FactoryData</span><span class="p">()</span>
+</pre></div>
+</div>
+<p>を</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">settings</span> <span class="o">=</span> <span class="n">factoryModules</span><span class="o">.</span><span class="n">FactorySettings</span><span class="p">()</span>
+</pre></div>
+</div>
+<p>に置き換えても動作するようになっています。</p>
+<div class="section" id="factorydata">
+<h3>FactoryDataクラスとの違い<a class="headerlink" href="#factorydata" title="このヘッドラインへのパーマリンク">¶</a></h3>
+<p>前述の説明だけ見るとほぼFactoryDataクラスと同じ内容ですが、
+こちらはQtCore.QObjectからも多重継承しており、
+設定変更を行う度にGUIへシグナルを送出するようになっています。</p>
+<div><svg height="200" viewBox="0 0 448 200" width="448" xmlns="http://www.w3.org/2000/svg" xmlns:inkspace="http://www.inkscape.org/namespaces/inkscape" xmlns:xlink="http://www.w3.org/1999/xlink">
+  <defs id="defs_block">
+    <filter height="1.504" id="filter_blur" inkspace:collect="always" width="1.1575" x="-0.07875" y="-0.252">
+      <feGaussianBlur id="feGaussianBlur3780" inkspace:collect="always" stdDeviation="4.2" />
+    </filter>
+  </defs>
+  <title>blockdiag</title>
+  <desc />
+  <rect fill="rgb(0,0,0)" height="40" stroke="rgb(0,0,0)" style="filter:url(#filter_blur);opacity:0.7;fill-opacity:1" width="128" x="67" y="46" />
+  <rect fill="rgb(0,0,0)" height="40" stroke="rgb(0,0,0)" style="filter:url(#filter_blur);opacity:0.7;fill-opacity:1" width="128" x="67" y="126" />
+  <rect fill="rgb(0,0,0)" height="40" stroke="rgb(0,0,0)" style="filter:url(#filter_blur);opacity:0.7;fill-opacity:1" width="128" x="259" y="46" />
+  <rect fill="rgb(255,255,255)" height="40" stroke="rgb(0,0,0)" width="128" x="64" y="40" />
+  <text fill="rgb(0,0,0)" font-family="sans-serif" font-size="11" font-style="normal" font-weight="normal" text-anchor="middle" textLength="84" x="128.0" y="66">QtCore.QObject</text>
+  <rect fill="rgb(255,255,255)" height="40" stroke="rgb(0,0,0)" width="128" x="64" y="120" />
+  <text fill="rgb(0,0,0)" font-family="sans-serif" font-size="11" font-style="normal" font-weight="normal" text-anchor="middle" textLength="114" x="128.0" y="146">factory.FactoryData</text>
+  <rect fill="rgb(255,255,255)" height="40" stroke="rgb(0,0,0)" width="128" x="256" y="40" />
+  <text fill="rgb(0,0,0)" font-family="sans-serif" font-size="11" font-style="normal" font-weight="normal" text-anchor="middle" textLength="126" x="320.0" y="59">factoryModules.Factor</text>
+  <text fill="rgb(0,0,0)" font-family="sans-serif" font-size="11" font-style="normal" font-weight="normal" text-anchor="middle" textLength="54" x="320.0" y="72">ySettings</text>
+  <path d="M 192 60 L 248 60" fill="none" stroke="rgb(0,0,0)" />
+  <polygon fill="rgb(0,0,0)" points="255,60 248,56 248,64 255,60" stroke="rgb(0,0,0)" />
+  <path d="M 192 140 L 240 140" fill="none" stroke="rgb(0,0,0)" />
+  <path d="M 240 140 L 240 60" fill="none" stroke="rgb(0,0,0)" />
+  <path d="M 240 60 L 248 60" fill="none" stroke="rgb(0,0,0)" />
+  <polygon fill="rgb(0,0,0)" points="255,60 248,56 248,64 255,60" stroke="rgb(0,0,0)" />
+</svg>
+</div>
+<p>そのため、このクラスはシングルトンで作られており、
+存在するファクトリーウィンドウや実行するConstructorなど、
+すべてに対して影響を与えます。</p>
+<div class="admonition warning">
+<p class="admonition-title">警告</p>
+<p>このクラスはGUIへの影響が大きいため取り扱いには注意が必用です。</p>
+</div>
+<p>ファクトリーセッティングというシステムにおいては、
+起動中のアプリ内で復数のアセットを同時進行で扱う事はないという前提があります。
+そのためファクトリーセッティングでは常に現在作業中のアセットの情報のみが提供され、
+Constructorに関する機能はこの一つのアセットの情報のみを取り扱うように設計されています。</p>
+<div><svg height="280" viewBox="0 0 448 280" width="448" xmlns="http://www.w3.org/2000/svg" xmlns:inkspace="http://www.inkscape.org/namespaces/inkscape" xmlns:xlink="http://www.w3.org/1999/xlink">
+  <defs id="defs_block">
+    <filter height="1.504" id="filter_blur" inkspace:collect="always" width="1.1575" x="-0.07875" y="-0.252">
+      <feGaussianBlur id="feGaussianBlur3780" inkspace:collect="always" stdDeviation="4.2" />
+    </filter>
+  </defs>
+  <title>blockdiag</title>
+  <desc />
+  <rect fill="rgb(0,0,0)" height="40" stroke="rgb(0,0,0)" style="filter:url(#filter_blur);opacity:0.7;fill-opacity:1" width="128" x="67" y="46" />
+  <rect fill="rgb(0,0,0)" height="40" stroke="rgb(0,0,0)" style="filter:url(#filter_blur);opacity:0.7;fill-opacity:1" width="128" x="259" y="46" />
+  <rect fill="rgb(0,0,0)" height="40" stroke="rgb(0,0,0)" style="filter:url(#filter_blur);opacity:0.7;fill-opacity:1" width="128" x="259" y="126" />
+  <rect fill="rgb(0,0,0)" height="40" stroke="rgb(0,0,0)" style="filter:url(#filter_blur);opacity:0.7;fill-opacity:1" width="128" x="259" y="206" />
+  <rect fill="rgb(255,255,255)" height="40" stroke="rgb(0,0,0)" width="128" x="64" y="40" />
+  <text fill="rgb(0,0,0)" font-family="sans-serif" font-size="11" font-style="normal" font-weight="normal" text-anchor="middle" textLength="90" x="128.0" y="66">FactorySettings</text>
+  <rect fill="rgb(255,255,255)" height="40" stroke="rgb(0,0,0)" width="128" x="256" y="40" />
+  <text fill="rgb(0,0,0)" font-family="sans-serif" font-size="11" font-style="normal" font-weight="normal" text-anchor="middle" textLength="108" x="320.0" y="66">ConstructorManager</text>
+  <rect fill="rgb(255,255,255)" height="40" stroke="rgb(0,0,0)" width="128" x="256" y="120" />
+  <text fill="rgb(0,0,0)" font-family="sans-serif" font-size="11" font-style="normal" font-weight="normal" text-anchor="middle" textLength="66" x="320.0" y="146">Constructor</text>
+  <rect fill="rgb(255,255,255)" height="40" stroke="rgb(0,0,0)" width="128" x="256" y="200" />
+  <text fill="rgb(0,0,0)" font-family="sans-serif" font-size="11" font-style="normal" font-weight="normal" text-anchor="middle" textLength="108" x="320.0" y="226">FactoryWindow(GUI)</text>
+  <path d="M 200 60 L 248 60" fill="none" stroke="rgb(0,0,0)" />
+  <polygon fill="rgb(0,0,0)" points="193,60 200,56 200,64 193,60" stroke="rgb(0,0,0)" />
+  <polygon fill="rgb(0,0,0)" points="255,60 248,56 248,64 255,60" stroke="rgb(0,0,0)" />
+  <path d="M 200 60 L 224 60" fill="none" stroke="rgb(0,0,0)" />
+  <path d="M 224 60 L 224 140" fill="none" stroke="rgb(0,0,0)" />
+  <path d="M 224 140 L 248 140" fill="none" stroke="rgb(0,0,0)" />
+  <polygon fill="rgb(0,0,0)" points="193,60 200,56 200,64 193,60" stroke="rgb(0,0,0)" />
+  <polygon fill="rgb(0,0,0)" points="255,140 248,136 248,144 255,140" stroke="rgb(0,0,0)" />
+  <path d="M 200 60 L 224 60" fill="none" stroke="rgb(0,0,0)" />
+  <path d="M 224 60 L 224 220" fill="none" stroke="rgb(0,0,0)" />
+  <path d="M 224 220 L 248 220" fill="none" stroke="rgb(0,0,0)" />
+  <polygon fill="rgb(0,0,0)" points="193,60 200,56 200,64 193,60" stroke="rgb(0,0,0)" />
+  <polygon fill="rgb(0,0,0)" points="255,220 248,216 248,224 255,220" stroke="rgb(0,0,0)" />
+  <rect fill="white" height="15" stroke="rgb(0,0,0)" width="40" x="204" y="38" />
+  <text fill="rgb(0,0,0)" font-family="sans-serif" font-size="11" font-style="normal" font-weight="normal" text-anchor="middle" textLength="24" x="224.0" y="51">data</text>
+  <rect fill="white" height="15" stroke="rgb(0,0,0)" width="40" x="204" y="118" />
+  <text fill="rgb(0,0,0)" font-family="sans-serif" font-size="11" font-style="normal" font-weight="normal" text-anchor="middle" textLength="24" x="224.0" y="131">data</text>
+  <rect fill="white" height="15" stroke="rgb(0,0,0)" width="40" x="204" y="198" />
+  <text fill="rgb(0,0,0)" font-family="sans-serif" font-size="11" font-style="normal" font-weight="normal" text-anchor="middle" textLength="24" x="224.0" y="211">data</text>
+</svg>
+</div>
+<p>代表的なのはconstructorモジュールのcurrentConstructorメソッドです。
+このメソッドは現在FactorySettingsクラスのsetRootPathされている
+プロジェクトディレクトリが設定されているコンストラクタを返すようになっています。</p>
+<p>これはcurrentConstructor内でFactorySettingsクラスを呼び出し、
+このクラスがセットしているプロジェクトディレクトリの設定を
+読み取るようになっているためです。</p>
+<div><svg height="120" viewBox="0 0 448 120" width="448" xmlns="http://www.w3.org/2000/svg" xmlns:inkspace="http://www.inkscape.org/namespaces/inkscape" xmlns:xlink="http://www.w3.org/1999/xlink">
+  <defs id="defs_block">
+    <filter height="1.504" id="filter_blur" inkspace:collect="always" width="1.1575" x="-0.07875" y="-0.252">
+      <feGaussianBlur id="feGaussianBlur3780" inkspace:collect="always" stdDeviation="4.2" />
+    </filter>
+  </defs>
+  <title>blockdiag</title>
+  <desc />
+  <rect fill="rgb(0,0,0)" height="40" stroke="rgb(0,0,0)" style="filter:url(#filter_blur);opacity:0.7;fill-opacity:1" width="128" x="67" y="46" />
+  <rect fill="rgb(0,0,0)" height="40" stroke="rgb(0,0,0)" style="filter:url(#filter_blur);opacity:0.7;fill-opacity:1" width="128" x="259" y="46" />
+  <rect fill="rgb(255,255,255)" height="40" stroke="rgb(0,0,0)" width="128" x="64" y="40" />
+  <text fill="rgb(0,0,0)" font-family="sans-serif" font-size="11" font-style="normal" font-weight="normal" text-anchor="middle" textLength="108" x="128.0" y="66">ConstructorManager</text>
+  <rect fill="rgb(255,255,255)" height="40" stroke="rgb(0,0,0)" width="128" x="256" y="40" />
+  <text fill="rgb(0,0,0)" font-family="sans-serif" font-size="11" font-style="normal" font-weight="normal" text-anchor="middle" textLength="90" x="320.0" y="66">FactorySettings</text>
+  <path d="M 192 60 L 248 60" fill="none" stroke="rgb(0,0,0)" />
+  <polygon fill="rgb(0,0,0)" points="255,60 248,56 248,64 255,60" stroke="rgb(0,0,0)" />
+  <path d="M 384 60 L 400 60" fill="none" stroke="rgb(0,0,0)" />
+  <path d="M 400 60 L 400 25" fill="none" stroke="rgb(0,0,0)" />
+  <path d="M 128 25 L 400 25" fill="none" stroke="rgb(0,0,0)" />
+  <path d="M 128 25 L 128 32" fill="none" stroke="rgb(0,0,0)" />
+  <polygon fill="rgb(0,0,0)" points="128,39 124,32 132,32 128,39" stroke="rgb(0,0,0)" />
+  <rect fill="white" height="15" stroke="rgb(0,0,0)" width="52" x="198" y="38" />
+  <text fill="rgb(0,0,0)" font-family="sans-serif" font-size="11" font-style="normal" font-weight="normal" text-anchor="middle" textLength="36" x="224.0" y="51">access</text>
+  <rect fill="white" height="15" stroke="rgb(0,0,0)" width="40" x="348" y="3" />
+  <text fill="rgb(0,0,0)" font-family="sans-serif" font-size="11" font-style="normal" font-weight="normal" text-anchor="middle" textLength="24" x="368.0" y="16">data</text>
+</svg>
+</div>
+</div>
+<div class="section" id="factorysettingsfactorydata">
+<h3>FactorySettingsを任意のFactoryDataに置き換える<a class="headerlink" href="#factorysettingsfactorydata" title="このヘッドラインへのパーマリンク">¶</a></h3>
+<p>通常はFactorySettingsを使用する事によって問題なく運用する事ができますが、
+このクラスはファクトリーウィンドウなどのGUIにも影響を及ぼすため、
+スクリプトを裏で実行したい場合などには向かないケースもあります。</p>
+<p>このようにGUI起動中に別の設定でConstructorを実行したいなどの場合は</p>
+<p><strong>factoryModulues.startManualy</strong></p>
+<p>を使用します。
+このクラスはインスタンス作成時にFactoryDataオブジェクトを渡して使用する、
+with文用のコンテキストです。</p>
+<p>このクラスをwith文で使用すると、
+with内で呼ばれるFactorySettingsは全てインスタンス時に渡した
+FactoryDataオブジェクトに置き換わります。</p>
+<div class="highlight-python notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">gris3</span> <span class="kn">import</span> <span class="n">factoryModules</span><span class="p">,</span> <span class="n">constructors</span><span class="p">,</span> <span class="n">factory</span>
+<span class="c1"># GUIに連動した設定オブジェクトを作成。</span>
+<span class="n">fs</span> <span class="o">=</span> <span class="n">factoryModules</span><span class="o">.</span><span class="n">FactorySettings</span><span class="p">()</span>
+<span class="n">fs</span><span class="o">.</span><span class="n">setRootPath</span><span class="p">(</span><span class="s1">&#39;D:/assets/testRig&#39;</span><span class="p">)</span>
+<span class="n">fs</span><span class="o">.</span><span class="n">setConstructorName</span><span class="p">(</span><span class="s1">&#39;standardConstructor&#39;</span><span class="p">)</span>
+
+<span class="c1"># currentConstructorメソッドは常にFactorySettingsの内容を反映する。========</span>
+<span class="n">constructors</span><span class="o">.</span><span class="n">currentConstructor</span><span class="p">()</span>
+<span class="c1"># Result: &lt;class &#39;gris3.constructors.standardConstructor.Constructor&#39;&gt; #</span>
+
+<span class="n">fs</span><span class="o">.</span><span class="n">setConstructorName</span><span class="p">(</span><span class="s1">&#39;unityConstructor&#39;</span><span class="p">)</span>
+<span class="n">constructors</span><span class="o">.</span><span class="n">currentConstructor</span><span class="p">()</span>
+<span class="c1"># Result: &lt;class &#39;gris3.constructors.unityConstructor.Constructor&#39;&gt; #</span>
+
+<span class="n">fd</span> <span class="o">=</span> <span class="n">factory</span><span class="o">.</span><span class="n">FactoryData</span><span class="p">()</span>
+<span class="n">fd</span><span class="o">.</span><span class="n">setRootPath</span><span class="p">(</span><span class="s1">&#39;D:/assets/testRig&#39;</span><span class="p">)</span>
+<span class="n">fd</span><span class="o">.</span><span class="n">setConstructorName</span><span class="p">(</span><span class="s1">&#39;standardConstructor&#39;</span><span class="p">)</span>
+<span class="n">constructors</span><span class="o">.</span><span class="n">currentConstructor</span><span class="p">()</span>
+<span class="c1"># Result: &lt;class &#39;gris3.constructors.unityConstructor.Constructor&#39;&gt; #</span>
+<span class="c1"># =========================================================================</span>
+
+<span class="c1"># startManualy内だけcurrentConstructorメソッドの挙動が変わる。=============</span>
+<span class="k">with</span> <span class="n">factoryModules</span><span class="o">.</span><span class="n">startManualy</span><span class="p">(</span><span class="n">fd</span><span class="p">):</span>
+    <span class="n">constructors</span><span class="o">.</span><span class="n">currentConstructor</span><span class="p">()</span>
+    <span class="c1"># Result: &lt;class &#39;gris3.constructors.standardConstructor.Constructor&#39;&gt; #</span>
+<span class="n">cm</span><span class="o">.</span><span class="n">currentConstructor</span><span class="p">()</span>
+<span class="c1"># Result: &lt;class &#39;gris3.constructors.unityConstructor.Constructor&#39;&gt; #</span>
+<span class="c1"># =========================================================================</span>
+</pre></div>
+</td></tr></table></div>
+<p>constructorモジュール内の機能にはFactorySettingsにアクセスしているものが多いため、
+このモジュールにまつわる何かを呼ぶ際にはstartManualyを使用すると良いでしょう。</p>
+</div>
+</div>
+<div class="section" id="fs-createprojdir">
+<span id="id10"></span><h2>プロジェクトディレクトリをコマンドで作成する<a class="headerlink" href="#fs-createprojdir" title="このヘッドラインへのパーマリンク">¶</a></h2>
+<p>このセクションでは前述した仕組みを使用して、
+スクリプトでファクトリーが取り扱うプロジェクトディレクトリを作成してみましょう。</p>
+<p>以下のコードでは任意のディレクトリにstandardConstructorのデフォルトセットを設定し、
+プロジェクトディレクトリを作成しています。</p>
+<p>尚、FactoryDataにセットするディレクトリパスは、
+予め作成しておく必用があります。</p>
+<div class="highlight-python notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+38
+39
+40
+41
+42
+43
+44
+45
+46
+47
+48
+49
+50
+51
+52
+53
+54
+55</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">gris3</span> <span class="kn">import</span> <span class="n">factory</span><span class="p">,</span> <span class="n">constructors</span><span class="p">,</span> <span class="n">factoryModules</span>
+<span class="c1"># 使用するコンストラクタ名を定義しておく。</span>
+<span class="n">constructor_name</span> <span class="o">=</span> <span class="s1">&#39;standardConstructor&#39;</span>
+
+<span class="c1"># アセットの設定を行う。</span>
+<span class="n">settings</span> <span class="o">=</span> <span class="n">factory</span><span class="o">.</span><span class="n">FactoryData</span><span class="p">()</span>
+<span class="n">settings</span><span class="o">.</span><span class="n">setRootPath</span><span class="p">(</span><span class="s1">&#39;D:/assets/testRig&#39;</span><span class="p">)</span>
+<span class="n">settings</span><span class="o">.</span><span class="n">setAssetName</span><span class="p">(</span><span class="s1">&#39;grico&#39;</span><span class="p">)</span>
+<span class="n">settings</span><span class="o">.</span><span class="n">setAssetType</span><span class="p">(</span><span class="s1">&#39;CH&#39;</span><span class="p">)</span>
+<span class="n">settings</span><span class="o">.</span><span class="n">setProject</span><span class="p">(</span><span class="s1">&#39;RigTraining&#39;</span><span class="p">)</span>
+<span class="n">settings</span><span class="o">.</span><span class="n">setConstructorName</span><span class="p">(</span><span class="n">constructor_name</span><span class="p">)</span>
+
+<span class="c1"># 各モジュールのデフォルトの書き出し先のテーブルを作成する。</span>
+<span class="n">fmm</span> <span class="o">=</span> <span class="n">factoryModules</span><span class="o">.</span><span class="n">FactoryModuleManager</span><span class="p">()</span>
+<span class="n">dir_table</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="n">name</span> <span class="p">:</span> <span class="n">f_cls</span><span class="p">()</span><span class="o">.</span><span class="n">directoryName</span><span class="p">()</span>
+    <span class="k">for</span> <span class="n">name</span><span class="p">,</span> <span class="n">f_cls</span> <span class="ow">in</span> <span class="n">fmm</span><span class="o">.</span><span class="n">moduleNameList</span><span class="p">()</span><span class="o">.</span><span class="n">items</span><span class="p">()</span>
+<span class="p">}</span>
+
+<span class="c1"># 使用するコンストラクタクラスのインスタンスを作成し、</span>
+<span class="c1"># 要求されるデフォルトのファクトリーモジュールセットのリストを取得。</span>
+<span class="n">cm</span> <span class="o">=</span> <span class="n">constructors</span><span class="o">.</span><span class="n">ConstructorManager</span><span class="p">()</span>
+<span class="n">m</span> <span class="o">=</span> <span class="n">cm</span><span class="o">.</span><span class="n">module</span><span class="p">(</span><span class="n">constructor_name</span><span class="p">)</span> <span class="c1">#コンストラクタを格納しているpyモジュール</span>
+<span class="n">c</span> <span class="o">=</span> <span class="n">m</span><span class="o">.</span><span class="n">Constructor</span><span class="p">(</span><span class="n">settings</span><span class="p">)</span>     <span class="c1">#コンストラクタのインスタンス</span>
+<span class="n">modulelist</span> <span class="o">=</span> <span class="n">c</span><span class="o">.</span><span class="n">FactoryModules</span>
+
+<span class="k">for</span> <span class="n">info</span> <span class="ow">in</span> <span class="n">modulelist</span><span class="p">:</span>
+    <span class="n">module_name</span> <span class="o">=</span> <span class="n">info</span><span class="o">.</span><span class="n">moduleName</span><span class="p">()</span>
+    <span class="n">dirname</span> <span class="o">=</span> <span class="n">dir_table</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">module_name</span><span class="p">)</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">dirname</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="ne">RuntimeError</span><span class="p">(</span>
+            <span class="s1">&#39;A module </span><span class="si">{}</span><span class="s1"> was not found in default factory modules.&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span>
+                <span class="n">module_name</span>
+            <span class="p">)</span>
+        <span class="p">)</span>
+    <span class="c1"># 新規でModuleInfoを作成し、その中にデフォルトの書き出し先の名前も格納しておく。</span>
+    <span class="n">new_mod</span> <span class="o">=</span> <span class="n">factory</span><span class="o">.</span><span class="n">ModuleInfo</span><span class="p">(</span><span class="n">module_name</span><span class="p">,</span> <span class="n">dirname</span><span class="p">,</span> <span class="n">info</span><span class="o">.</span><span class="n">alias</span><span class="p">(),</span> <span class="n">info</span><span class="o">.</span><span class="n">tag</span><span class="p">())</span>
+    <span class="c1"># FactoryDataにモジュール情報を追加する。</span>
+    <span class="n">settings</span><span class="o">.</span><span class="n">addModule</span><span class="p">(</span><span class="n">module_name</span><span class="p">,</span>  <span class="n">new_mod</span><span class="p">)</span>
+
+<span class="c1"># モデル保存用と作業データ保存用ディレクトリを追加する。</span>
+<span class="k">for</span> <span class="n">module_name</span><span class="p">,</span> <span class="n">dirname</span> <span class="ow">in</span> <span class="n">c</span><span class="o">.</span><span class="n">SpecialModules</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+    <span class="n">new_mod</span> <span class="o">=</span> <span class="n">factory</span><span class="o">.</span><span class="n">ModuleInfo</span><span class="p">(</span><span class="n">module_name</span><span class="p">,</span> <span class="n">dirname</span><span class="p">,</span> <span class="s1">&#39;&#39;</span><span class="p">,</span> <span class="s1">&#39;&#39;</span><span class="p">)</span>
+    <span class="n">settings</span><span class="o">.</span><span class="n">addModule</span><span class="p">(</span><span class="n">module_name</span><span class="p">,</span>  <span class="n">new_mod</span><span class="p">)</span>
+
+<span class="c1"># プロジェクト設定を書き出す。</span>
+<span class="n">settings</span><span class="o">.</span><span class="n">saveFile</span><span class="p">()</span>
+
+<span class="c1"># プロジェクト設定に基づいて、プロジェクトディレクトリ内にファクトリーモジュールが</span>
+<span class="c1"># 必用とする書き出し先ディレクトリを作成する。</span>
+<span class="n">factory</span><span class="o">.</span><span class="n">createFactoryDirectory</span><span class="p">(</span><span class="n">settings</span><span class="p">)</span>
+
+<span class="c1"># コンストラクタに用意されているスクリプトのテンプレートを作成する。</span>
+<span class="n">cmd</span><span class="p">,</span> <span class="n">module</span> <span class="o">=</span> <span class="n">cm</span><span class="o">.</span><span class="n">getConstructionScriptCmd</span><span class="p">(</span><span class="n">constructor_name</span><span class="p">,</span> <span class="kc">True</span><span class="p">)</span>
+<span class="n">cmd</span><span class="p">(</span><span class="n">settings</span><span class="p">,</span> <span class="n">module</span><span class="p">)</span>
+</pre></div>
+</td></tr></table></div>
+</div>
+<div class="section" id="fs-executebuildscript">
+<span id="id11"></span><h2>プロジェクトディレクトリのビルドスクリプトを実行する<a class="headerlink" href="#fs-executebuildscript" title="このヘッドラインへのパーマリンク">¶</a></h2>
+<p>このセクションではアセットのリギングが完了した
+プロジェクトディレクトリのスクリプトを、コマンドから実行してみましょう。</p>
+<p>まずは定番の、
+FactoryDataクラスを作成してプロジェクトディレクトリのパスを設定から初めます。</p>
+<div class="highlight-python notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">gris3</span> <span class="kn">import</span> <span class="n">factory</span>
+<span class="n">settings</span> <span class="o">=</span> <span class="n">factory</span><span class="o">.</span><span class="n">FactoryData</span><span class="p">()</span>
+<span class="n">settings</span><span class="o">.</span><span class="n">setRootPath</span><span class="p">(</span><span class="s1">&#39;D:/assets/testRig&#39;</span><span class="p">)</span>
+</pre></div>
+</td></tr></table></div>
+<p>続いて、実行可能なモジュールの一覧を取得してみましょう。</p>
+<div class="highlight-python notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3
+4
+5</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">gris3</span> <span class="kn">import</span> <span class="n">factory</span>
+<span class="n">settings</span> <span class="o">=</span> <span class="n">factory</span><span class="o">.</span><span class="n">FactoryData</span><span class="p">()</span>
+<span class="n">settings</span><span class="o">.</span><span class="n">setRootPath</span><span class="p">(</span><span class="s1">&#39;D:/assets/testRig&#39;</span><span class="p">)</span>
+<span class="hll"><span class="n">settings</span><span class="o">.</span><span class="n">listScripts</span><span class="p">()</span>
+</span><span class="hll"><span class="c1"># Result: [&#39;setup_high&#39;, &#39;setup_low&#39;, &#39;__init__&#39;] #</span>
+</span></pre></div>
+</td></tr></table></div>
+<p>FactoryData.listScriptsメソッドは、
+Constructorとして実行可能なPythonモジュールがリストとして返ってきます。</p>
+<p>Constructorとして実行可能とは、
+単純にモジュール内にConstructorという名前の機能が存在するかどうかで判定しています。
+また原則として__init__は実行しても無効です。（対応する読み込みモデルが存在しないため）</p>
+<p>最後にこのリストの中の一つを実行してみましょう。
+尚リストの中身がわかっているのであれば、listScriptsは行う必要はありません。</p>
+<div class="highlight-python notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3
+4</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">gris3</span> <span class="kn">import</span> <span class="n">factory</span>
+<span class="n">settings</span> <span class="o">=</span> <span class="n">factory</span><span class="o">.</span><span class="n">FactoryData</span><span class="p">()</span>
+<span class="n">settings</span><span class="o">.</span><span class="n">setRootPath</span><span class="p">(</span><span class="s1">&#39;D:/assets/testRig&#39;</span><span class="p">)</span>
+<span class="hll"><span class="n">settings</span><span class="o">.</span><span class="n">execScript</span><span class="p">(</span><span class="s1">&#39;setup_high&#39;</span><span class="p">)</span>
+</span></pre></div>
+</td></tr></table></div>
+<p>これで目的のアセットのビルドが開始されます。</p>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="makingRigUnits.html" class="btn btn-neutral float-right" title="リグユニットの開発" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="../tools/extraJoint.html" class="btn btn-neutral float-left" title="extraJoint" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        
+        &copy; 著作権 2020, EskeYoshinob
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

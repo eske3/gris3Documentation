@@ -1,0 +1,368 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="ja" >
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>インストールと起動 &mdash; gris3 1.0.0 ドキュメント</title>
+  
+
+  
+  <link rel="stylesheet" href="../_static/css/customTheme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+
+  
+  
+  
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/doctools.js"></script>
+        <script src="../_static/language_data.js"></script>
+        <script src="../_static/translations.js"></script>
+    
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+    
+    <link rel="author" title="このドキュメントについて" href="../about.html" />
+    <link rel="index" title="索引" href="../genindex.html" />
+    <link rel="search" title="検索" href="../search.html" />
+    <link rel="next" title="更新履歴" href="updateLog.html" />
+    <link rel="prev" title="gris3 Documentation" href="../index.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../index.html" class="icon icon-home" alt="Documentation Home"> gris3
+          
+
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">スタートアップ</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="current reference internal" href="#">インストールと起動</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#id2">インストール</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#id3">起動</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#id4">ファクトリーウィンドウ</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#gris">Grisツールバー</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#id5">その他ガジェットの起動</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#joint-editor">Joint Editor</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id6">モデリング用サポートウィンドウ</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id7">ポリゴンを半分消去するウィンドウ</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id8">ポリゴンをミラーリングするウィンドウ</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id9">ポリゴンをを任意の軸でカットするウィンドウ</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id10">リネーマーを起動する</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="updateLog.html">更新履歴</a></li>
+</ul>
+<p class="caption"><span class="caption-text">マニュアル</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="scriptBasedRigging.html">ScriptBasedRigging-概要</a></li>
+<li class="toctree-l1"><a class="reference internal" href="scriptingForFactory.html">ファクトリーのスクリプティングガイド</a></li>
+<li class="toctree-l1"><a class="reference internal" href="namingRule.html">命名規則</a></li>
+<li class="toctree-l1"><a class="reference internal" href="rigUnits.html">Rig Units</a></li>
+<li class="toctree-l1"><a class="reference internal" href="includedExtraConstructors.html">組み込み済みExtraConstructor</a></li>
+</ul>
+<p class="caption"><span class="caption-text">ガジェット</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../gadgets/jointEditor.html">Joint Editor</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../gadgets/modelSetup.html">Model Setup</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../gadgets/renamer.html">Renamer</a></li>
+</ul>
+<p class="caption"><span class="caption-text">スクリプトツール</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../tools/jointEditor.html">jointEditor</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../tools/extraJoint.html">extraJoint</a></li>
+</ul>
+<p class="caption"><span class="caption-text">開発者向けドキュメント</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../dev/factorySettings.html">ファクトリーセッティング</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../dev/makingRigUnits.html">リグユニットの開発</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../dev/constructor.html">コンストラクタ</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../dev/extraConstructor.html">エクストラコンストラクタ</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../dev/namingRuleSystem.html">命名規則管理システム</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../dev/operateByScript.html">スクリプトによって操作する</a></li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">gris3</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
+        
+      <li>インストールと起動</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../_sources/contents/install.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="id1">
+<h1>インストールと起動<a class="headerlink" href="#id1" title="このヘッドラインへのパーマリンク">¶</a></h1>
+<div class="section" id="id2">
+<h2>インストール<a class="headerlink" href="#id2" title="このヘッドラインへのパーマリンク">¶</a></h2>
+<p>インストールするにはMayaのスクリプトパスにgris3ディレクトリをコピーして下さい。</p>
+<table class="colwidths-given docutils align-default" id="id11">
+<caption><span class="caption-text">標準的なインストール先のディレクトリ</span><a class="headerlink" href="#id11" title="このテーブルへのパーマリンク">¶</a></caption>
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 90%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p>Windows</p></td>
+<td><p>OSドライブ：\Users\&lt;username&gt;\Documents\maya\scripts</p></td>
+</tr>
+<tr class="row-even"><td><p>Linux</p></td>
+<td><p>~/maya/scripts</p></td>
+</tr>
+<tr class="row-odd"><td><p>Mac OSX</p></td>
+<td><p>~/maya/scripts</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="id3">
+<h2>起動<a class="headerlink" href="#id3" title="このヘッドラインへのパーマリンク">¶</a></h2>
+<p>grisにはメインとなるファクトリーウィンドウの他、
+便利な機能を集めたツールバーなどがあります。
+起動するには以下のコマンドをスクリプトエディタのPythonタブにて実行して下さい。</p>
+<div class="section" id="id4">
+<h3>ファクトリーウィンドウ<a class="headerlink" href="#id4" title="このヘッドラインへのパーマリンク">¶</a></h3>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">gris3</span>
+<span class="n">gris3</span><span class="o">.</span><span class="n">showFactory</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="gris">
+<h3>Grisツールバー<a class="headerlink" href="#gris" title="このヘッドラインへのパーマリンク">¶</a></h3>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">gris3</span>
+<span class="n">gris3</span><span class="o">.</span><span class="n">showToolbar</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="id5">
+<h2>その他ガジェットの起動<a class="headerlink" href="#id5" title="このヘッドラインへのパーマリンク">¶</a></h2>
+<p>Grisツールバーは、名前の通りツールバースタイルのウィジェトですが、
+特定のツールを集中的に使うには不便な場合もあります。
+そのような場合は、特定のツールだけを切り出したガジェットを起動すると良いでしょう。</p>
+<div class="section" id="joint-editor">
+<h3>Joint Editor<a class="headerlink" href="#joint-editor" title="このヘッドラインへのパーマリンク">¶</a></h3>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">gris3</span> <span class="kn">import</span> <span class="n">gadgets</span>
+<span class="n">gadgets</span><span class="o">.</span><span class="n">openJointEditor</span><span class="p">()</span>
+</pre></div>
+</div>
+<a class="reference internal image-reference" href="../_images/jointEditor.png"><img alt="../_images/jointEditor.png" src="../_images/jointEditor.png" style="height: 300px;" /></a>
+<div class="admonition seealso">
+<p class="admonition-title">参考</p>
+<p><a class="reference internal" href="../gadgets/jointEditor.html"><span class="doc">Joint Editor</span></a></p>
+</div>
+</div>
+<div class="section" id="id6">
+<h3>モデリング用サポートウィンドウ<a class="headerlink" href="#id6" title="このヘッドラインへのパーマリンク">¶</a></h3>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">gris3</span> <span class="kn">import</span> <span class="n">gadgets</span>
+<span class="n">gadgets</span><span class="o">.</span><span class="n">openModelSetup</span><span class="p">()</span>
+</pre></div>
+</div>
+<a class="reference internal image-reference" href="../_images/modelSetup.png"><img alt="../_images/modelSetup.png" src="../_images/modelSetup.png" style="height: 300px;" /></a>
+<div class="admonition seealso">
+<p class="admonition-title">参考</p>
+<p><a class="reference internal" href="../gadgets/modelSetup.html"><span class="doc">Model Setup</span></a></p>
+</div>
+</div>
+<div class="section" id="id7">
+<h3>ポリゴンを半分消去するウィンドウ<a class="headerlink" href="#id7" title="このヘッドラインへのパーマリンク">¶</a></h3>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">gris3</span> <span class="kn">import</span> <span class="n">gadgets</span>
+<span class="n">gadgets</span><span class="o">.</span><span class="n">openPolyHalfRemover</span><span class="p">()</span>
+</pre></div>
+</div>
+<img alt="../_images/polyHalfRemover.png" src="../_images/polyHalfRemover.png" />
+</div>
+<div class="section" id="id8">
+<h3>ポリゴンをミラーリングするウィンドウ<a class="headerlink" href="#id8" title="このヘッドラインへのパーマリンク">¶</a></h3>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">gris3</span> <span class="kn">import</span> <span class="n">gadgets</span>
+<span class="n">gadgets</span><span class="o">.</span><span class="n">openPolyMirror</span><span class="p">()</span>
+</pre></div>
+</div>
+<img alt="../_images/polyMirror.png" src="../_images/polyMirror.png" />
+</div>
+<div class="section" id="id9">
+<h3>ポリゴンをを任意の軸でカットするウィンドウ<a class="headerlink" href="#id9" title="このヘッドラインへのパーマリンク">¶</a></h3>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">gris3</span> <span class="kn">import</span> <span class="n">gadgets</span>
+<span class="n">gadgets</span><span class="o">.</span><span class="n">openPolyCutter</span><span class="p">()</span>
+</pre></div>
+</div>
+<img alt="../_images/polyCutter.png" src="../_images/polyCutter.png" />
+</div>
+<div class="section" id="id10">
+<h3>リネーマーを起動する<a class="headerlink" href="#id10" title="このヘッドラインへのパーマリンク">¶</a></h3>
+<p>このコマンドは選択オブジェクトの数によってウィンドウが変化します。
+単体選択版と復数選択版が存在します。</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">gris3</span> <span class="kn">import</span> <span class="n">gadgets</span>
+<span class="n">gadgets</span><span class="o">.</span><span class="n">showRenamer</span><span class="p">()</span>
+</pre></div>
+</div>
+<a class="reference internal image-reference" href="../_images/multRenamer.png"><img alt="../_images/multRenamer.png" src="../_images/multRenamer.png" style="height: 300px;" /></a>
+<img alt="../_images/singleRenamer.png" src="../_images/singleRenamer.png" />
+</div>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="updateLog.html" class="btn btn-neutral float-right" title="更新履歴" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="../index.html" class="btn btn-neutral float-left" title="gris3 Documentation" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        
+        &copy; 著作権 2020, EskeYoshinob
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

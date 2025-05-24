@@ -1,0 +1,433 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="ja" >
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>ScriptBasedRigging-概要 &mdash; gris3 1.0.0 ドキュメント</title>
+  
+
+  
+  <link rel="stylesheet" href="../_static/css/customTheme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+
+  
+  
+  
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/doctools.js"></script>
+        <script src="../_static/language_data.js"></script>
+        <script src="../_static/translations.js"></script>
+    
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+    
+    <link rel="author" title="このドキュメントについて" href="../about.html" />
+    <link rel="index" title="索引" href="../genindex.html" />
+    <link rel="search" title="検索" href="../search.html" />
+    <link rel="next" title="ファクトリーのスクリプティングガイド" href="scriptingForFactory.html" />
+    <link rel="prev" title="更新履歴" href="updateLog.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../index.html" class="icon icon-home" alt="Documentation Home"> gris3
+          
+
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">スタートアップ</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="install.html">インストールと起動</a></li>
+<li class="toctree-l1"><a class="reference internal" href="updateLog.html">更新履歴</a></li>
+</ul>
+<p class="caption"><span class="caption-text">マニュアル</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="current reference internal" href="#">ScriptBasedRigging-概要</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#id1">メリット・デメリット</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#id2">コンストラクタとファクトリーモジュール</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#id3">ファクトリーウィンドウ</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#constructor">コンストラクタ(Constructor)</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#id4">概要</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#extraconstructor">エクストラコンストラクタ(ExtraConstructor)</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#factorymodule">ファクトリーモジュール(FactoryModule)</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#id5">概要</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id6">代表的なファクトリーモジュール</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#sbr-projectdirectory">プロジェクトディレクトリ</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#factorysettings">ファクトリーセッティング(FactorySettings)</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="scriptingForFactory.html">ファクトリーのスクリプティングガイド</a></li>
+<li class="toctree-l1"><a class="reference internal" href="namingRule.html">命名規則</a></li>
+<li class="toctree-l1"><a class="reference internal" href="rigUnits.html">Rig Units</a></li>
+<li class="toctree-l1"><a class="reference internal" href="includedExtraConstructors.html">組み込み済みExtraConstructor</a></li>
+</ul>
+<p class="caption"><span class="caption-text">ガジェット</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../gadgets/jointEditor.html">Joint Editor</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../gadgets/modelSetup.html">Model Setup</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../gadgets/renamer.html">Renamer</a></li>
+</ul>
+<p class="caption"><span class="caption-text">スクリプトツール</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../tools/jointEditor.html">jointEditor</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../tools/extraJoint.html">extraJoint</a></li>
+</ul>
+<p class="caption"><span class="caption-text">開発者向けドキュメント</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../dev/factorySettings.html">ファクトリーセッティング</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../dev/makingRigUnits.html">リグユニットの開発</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../dev/constructor.html">コンストラクタ</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../dev/extraConstructor.html">エクストラコンストラクタ</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../dev/namingRuleSystem.html">命名規則管理システム</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../dev/operateByScript.html">スクリプトによって操作する</a></li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">gris3</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
+        
+      <li>ScriptBasedRigging-概要</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../_sources/contents/scriptBasedRigging.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="scriptbasedrigging">
+<h1>ScriptBasedRigging-概要<a class="headerlink" href="#scriptbasedrigging" title="このヘッドラインへのパーマリンク">¶</a></h1>
+<p>スクリプトベースによるリギングとは、リグ作成に必用な要素を予め用意しておき、
+それらバラバラな要素をスクリプトによって組み立てていく（ビルド）手法です。</p>
+<p>必用な要素はリギングする対象によって色々変わる場合もありますが、基本的に
+以下のような要素が一般的です。</p>
+<ul class="simple">
+<li><p>モデル</p></li>
+<li><p>ボーン</p></li>
+<li><p>スキニングのウェイト</p></li>
+<li><p>ケージ</p></li>
+<li><p>ドリブンキー</p></li>
+</ul>
+<p>などなど</p>
+<p>このような要素を予め書き出しておき、その後ビルド用スクリプトを実行する
+事によってリグを作成します。</p>
+<p>ビルド用スクリプトにはファイルを読み込む順番や、ボーンにコントローラを追加する、
+ウェイトを適用する、など様々な手順が書かれており、その手順に従ってリグを
+組み立てていきます。</p>
+<div class="section" id="id1">
+<h2>メリット・デメリット<a class="headerlink" href="#id1" title="このヘッドラインへのパーマリンク">¶</a></h2>
+<p>スクリプトベースのビルドには以下のようなメリットがあります。</p>
+<ul class="simple">
+<li><p>ボーンの位置調整などが簡単に行える。</p></li>
+<li><p>モデルに微調整があった場合の更新が容易。</p></li>
+<li><p>規格が決まっているプロジェクトなどでは、複数のアセットへの移植が簡単にできる。</p></li>
+<li><p>各要素はシンプルなデータが多いため、データのクリーンナップが容易。</p></li>
+<li><p>バリエーション違いが作りやすく、メンテナンスも容易。</p></li>
+</ul>
+<p>逆に以下のようなデメリットもあります。</p>
+<ul class="simple">
+<li><p>最初の作成に時間がかかるりやすい。</p></li>
+<li><p>手作りのリグに比べてかなり高いスキルが要求される。
+特にスクリプトの知識が前提となるため、スクリプトを書けない場合は
+組織的なバックアップが必用になる。</p></li>
+</ul>
+<p>grisは基本的にスクリプトベースによるリギングを前提にシステムが作られています。
+以下の章ではgrisにおけるビルドシステムについて説明します。</p>
+</div>
+<div class="section" id="id2">
+<h2>コンストラクタとファクトリーモジュール<a class="headerlink" href="#id2" title="このヘッドラインへのパーマリンク">¶</a></h2>
+<p>スクリプトベースのビルドシステムでは上記のように</p>
+<ul class="simple">
+<li><p>要素の書き出し</p></li>
+<li><p>スクリプトによるビルド</p></li>
+</ul>
+<p>の２本を柱として構成されています。</p>
+<p>grisではこの２つの柱をそれぞれ</p>
+<ul class="simple">
+<li><p>ファクトリーモジュール</p></li>
+<li><p>コンストラクタ</p></li>
+</ul>
+<p>というシステムとして提供しています。</p>
+<p>ファクトリーモジュールは要素の書き出しを行うためのインターフェースの
+提供を行います。
+コンストラクタはファクトリによって書き出された要素を組み立てるための
+スクリプトを管理、実行するための仕組みを提供します。</p>
+<div class="section" id="id3">
+<h3>ファクトリーウィンドウ<a class="headerlink" href="#id3" title="このヘッドラインへのパーマリンク">¶</a></h3>
+<p>これらコンストラクタとファクトリーモジュールを管理、運用するための専用GUI
+<strong>「ファクトリーウィンドウ」</strong>
+がgrisには用意されています。</p>
+<a class="reference internal image-reference" href="../_images/001.png"><img alt="../_images/001.png" src="../_images/001.png" style="width: 400px;" /></a>
+<p>ファクトリーウィンドウは、その名の通りファクトリーが提供する機能をユーザーに
+インターフェースから操作させるためのGUIを提供します。</p>
+<p>また、合わせてコンストラクタの実行や、これら一連のアセットに必用なプロジェクト
+データの管理も行うためのインターフェースを提供します。</p>
+</div>
+<div class="section" id="constructor">
+<h3>コンストラクタ(Constructor)<a class="headerlink" href="#constructor" title="このヘッドラインへのパーマリンク">¶</a></h3>
+<div class="section" id="id4">
+<h4>概要<a class="headerlink" href="#id4" title="このヘッドラインへのパーマリンク">¶</a></h4>
+<p>コンストラクタはスクリプトの実行順序やリギングをスクリプトで行うための補助する
+メソッドを多数備えたシステムを内包したクラスです。</p>
+<p>このクラスを実行すると、記述されている決まった手順に従ってスクリプトを
+実行していきます。</p>
+<p>grisには標準的な機能を持つコンストラクタ
+<strong>「StandardConstructor」</strong>
+がありますが、開発者はコンストラクタをカスタマイズする事によりプロジェクトの
+運用に沿った手順を実行するカスタムコンストラクタを作ることもできます。</p>
+</div>
+<div class="section" id="extraconstructor">
+<h4>エクストラコンストラクタ(ExtraConstructor)<a class="headerlink" href="#extraconstructor" title="このヘッドラインへのパーマリンク">¶</a></h4>
+<p>コンストラクタはカスタイズ可能ですが、プロジェクトごとに微妙に違う挙動の
+コンストラクタを作成するのは非効率な場合があります。
+また特定の種類のアセットだけ少し違う手順のフローに乗せたい時も、わざわざ
+コンストラクタを別に用意するのは手間がかかってしまいます。</p>
+<p>そんな場合はコンストラクタの一部の機能を拡張する事ができる
+<strong>「エクストラコンストラクタ」</strong>
+が有効な場合があります。</p>
+<p>エクストラコンストラクタはメインとなるコンストラクタの実行するメソッドの
+前後に任意の処理を差し込んだり、コンストラクタの持つメソッド自体を強制的に
+上書きしたりなど、幅広いカスタマイズを行う事ができます。</p>
+<p>またエクストラコンストラクタはアセットごとのコンストラクタ内で個別に
+インストールする設計のため、アセットごとに任意の処理を入れる/入れないを
+選択できるため、非常に汎用性が高くなっています。</p>
+</div>
+</div>
+<div class="section" id="factorymodule">
+<h3>ファクトリーモジュール(FactoryModule)<a class="headerlink" href="#factorymodule" title="このヘッドラインへのパーマリンク">¶</a></h3>
+<div class="section" id="id5">
+<h4>概要<a class="headerlink" href="#id5" title="このヘッドラインへのパーマリンク">¶</a></h4>
+<p>ファクトリーモジュールはコンストラクタがビルドする際に必用となる要素を
+書き出すための仕組みを提供する事を目的としています。</p>
+<p>コンストラクタは自身が必用とするファクトリモジュールを
+指定できるようになっており、指定されたファクトリーモジュールは
+ファクトリーウィンドウのカテゴリ欄に表示され、
+GUIから任意の要素を書き出せるようになります。</p>
+</div>
+<div class="section" id="id6">
+<h4>代表的なファクトリーモジュール<a class="headerlink" href="#id6" title="このヘッドラインへのパーマリンク">¶</a></h4>
+<p>gris標準で内包されているファクトリーモジュールは以下のような物があります。</p>
+<table class="colwidths-given docutils align-default" id="id8">
+<caption><span class="caption-text">gris標準ファクトリー一覧（例）</span><a class="headerlink" href="#id8" title="このテーブルへのパーマリンク">¶</a></caption>
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 90%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p>jointBuilder</p></td>
+<td><p>ジョイントの作成補助、モジュラーリグの作成、保存を行う</p></td>
+</tr>
+<tr class="row-even"><td><p>cageExporter</p></td>
+<td><p>ウェイトを入れるケージの保存を行う。</p></td>
+</tr>
+<tr class="row-odd"><td><p>weightManager</p></td>
+<td><p>ウェイトの書き出しを行う。</p></td>
+</tr>
+<tr class="row-even"><td><p>extraJointManager</p></td>
+<td><p>補助骨を作成、書き出しを行う。</p></td>
+</tr>
+<tr class="row-odd"><td><p>drivenManager</p></td>
+<td><p>ドリブンキーの編集、書き出しを行う。</p></td>
+</tr>
+<tr class="row-even"><td><p>controllerExporter</p></td>
+<td><p>コントローラの編集、書き出しを行う。</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+<div class="section" id="sbr-projectdirectory">
+<span id="id7"></span><h2>プロジェクトディレクトリ<a class="headerlink" href="#sbr-projectdirectory" title="このヘッドラインへのパーマリンク">¶</a></h2>
+<p>grisのスクリプトベースのビルドには２つの柱がある事を紹介しました。
+これらを運用するためにはそれぞれの要素を書き出すディレクトリや、
+コンストラクタを記述したスクリプトを保存するためのディレクトリなど、アセットに
+関連する一通りのデータを格納する場所が必用になります。</p>
+<p>これらのデータをひとまとめにして保存するディレクトリを
+<strong>「プロジェクトディレクトリ」</strong>
+と呼びます。</p>
+</div>
+<div class="section" id="factorysettings">
+<h2>ファクトリーセッティング(FactorySettings)<a class="headerlink" href="#factorysettings" title="このヘッドラインへのパーマリンク">¶</a></h2>
+<p>プロジェクトディレクトリ内にはコンストラクタ用のデータや、各種書き出すファイル
+などが混在します。これらのデータを管理、運用するための仕組みが
+<strong>「ファクトリーセッティング」</strong>
+です。</p>
+<p>ファクトリーセッティングはコンストラクタとファクトリーモジュールをつなぐための
+システムであり、ファクトリーウィンドウはこのシステムを運用するためのGUI
+となっています。</p>
+<p>ファクトリーセッティングによって保持されている情報はプロジェクトディレクトリ
+直下に
+<strong>「grisFactoryWorkspace.xml」</strong>
+というファイルに記述されます。</p>
+<p>逆に言うならば、この
+<strong>grisFactoryWorkspace.xml</strong>
+が存在するディレクトリが、プロジェクトディレクトリという扱いになります。</p>
+<p>FactorySettingsについての詳細は
+<span class="xref std std-doc">factorySettings</span>
+をご覧下さい。</p>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="scriptingForFactory.html" class="btn btn-neutral float-right" title="ファクトリーのスクリプティングガイド" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="updateLog.html" class="btn btn-neutral float-left" title="更新履歴" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        
+        &copy; 著作権 2020, EskeYoshinob
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

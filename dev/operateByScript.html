@@ -1,0 +1,322 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="ja" >
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>スクリプトによって操作する &mdash; gris3 1.0.0 ドキュメント</title>
+  
+
+  
+  <link rel="stylesheet" href="../_static/css/customTheme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+
+  
+  
+  
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/doctools.js"></script>
+        <script src="../_static/language_data.js"></script>
+        <script src="../_static/translations.js"></script>
+    
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+    
+    <link rel="author" title="このドキュメントについて" href="../about.html" />
+    <link rel="index" title="索引" href="../genindex.html" />
+    <link rel="search" title="検索" href="../search.html" />
+    <link rel="prev" title="命名規則管理システム" href="namingRuleSystem.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../index.html" class="icon icon-home" alt="Documentation Home"> gris3
+          
+
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">スタートアップ</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../contents/install.html">インストールと起動</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../contents/updateLog.html">更新履歴</a></li>
+</ul>
+<p class="caption"><span class="caption-text">マニュアル</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../contents/scriptBasedRigging.html">ScriptBasedRigging-概要</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../contents/scriptingForFactory.html">ファクトリーのスクリプティングガイド</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../contents/namingRule.html">命名規則</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../contents/rigUnits.html">Rig Units</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../contents/includedExtraConstructors.html">組み込み済みExtraConstructor</a></li>
+</ul>
+<p class="caption"><span class="caption-text">ガジェット</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../gadgets/jointEditor.html">Joint Editor</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../gadgets/modelSetup.html">Model Setup</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../gadgets/renamer.html">Renamer</a></li>
+</ul>
+<p class="caption"><span class="caption-text">スクリプトツール</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../tools/jointEditor.html">jointEditor</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../tools/extraJoint.html">extraJoint</a></li>
+</ul>
+<p class="caption"><span class="caption-text">開発者向けドキュメント</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="factorySettings.html">ファクトリーセッティング</a></li>
+<li class="toctree-l1"><a class="reference internal" href="makingRigUnits.html">リグユニットの開発</a></li>
+<li class="toctree-l1"><a class="reference internal" href="constructor.html">コンストラクタ</a></li>
+<li class="toctree-l1"><a class="reference internal" href="extraConstructor.html">エクストラコンストラクタ</a></li>
+<li class="toctree-l1"><a class="reference internal" href="namingRuleSystem.html">命名規則管理システム</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">スクリプトによって操作する</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#id3">プロジェクトを設定する</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#id4">ルートノードを作成する</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#id5">ユニットとベースジョイントを作成する</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#id6">プリセットからジョイントを作成</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#id7">ビルドする</a></li>
+</ul>
+</li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">gris3</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
+        
+      <li>スクリプトによって操作する</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../_sources/dev/operateByScript.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="id1">
+<h1>スクリプトによって操作する<a class="headerlink" href="#id1" title="このヘッドラインへのパーマリンク">¶</a></h1>
+<p>grisではMaya本体同様、スクリプトによって制御するための機構を備えています。</p>
+<p>この章ではコマンドによる制御を行う方法を、
+プロジェクトディレクトリの制作から順を追って紹介します。</p>
+<p>別の章で説明されている制御コードのリンクもついています。</p>
+<div class="contents local topic" id="id2">
+<p class="topic-title">目次</p>
+<ul class="simple">
+<li><p><a class="reference internal" href="#id3" id="id8">プロジェクトを設定する</a></p></li>
+<li><p><a class="reference internal" href="#id4" id="id9">ルートノードを作成する</a></p></li>
+<li><p><a class="reference internal" href="#id5" id="id10">ユニットとベースジョイントを作成する</a></p></li>
+<li><p><a class="reference internal" href="#id6" id="id11">プリセットからジョイントを作成</a></p></li>
+<li><p><a class="reference internal" href="#id7" id="id12">ビルドする</a></p></li>
+</ul>
+</div>
+<div class="section" id="id3">
+<h2><a class="toc-backref" href="#id8">プロジェクトを設定する</a><a class="headerlink" href="#id3" title="このヘッドラインへのパーマリンク">¶</a></h2>
+<p>grisで作業する場合、最初にアセットごとにプロジェクトディレクトリをする必要があります。
+プロジェクトディレクトリの作成には以下のドキュメントを参照して下さい。</p>
+<ul class="simple">
+<li><p><a class="reference internal" href="factorySettings.html#fs-createprojdir"><span class="std std-ref">プロジェクトディレクトリをコマンドで作成する</span></a></p></li>
+</ul>
+<p>上記リンクのコマンドを実行するとプロジェクトの新規作成が行われ、
+FactorySettingsは作成されたプロジェクトが適用されます。
+すでにプロジェクトが存在する場合は、
+その内容がFactorySettingsのカレント状態として適用されます。</p>
+</div>
+<div class="section" id="id4">
+<h2><a class="toc-backref" href="#id9">ルートノードを作成する</a><a class="headerlink" href="#id4" title="このヘッドラインへのパーマリンク">¶</a></h2>
+<p>プロジェクトを設定したらルートノードを作成します。
+ルートノードを作成するには、
+プロジェクトが設定されたディレクトリがすでに存在する必要があります。</p>
+<p>プロジェクト設定済みのディレクトリが存在する場合、
+以下のコマンドを実行するとアセットのルートを作成する事ができます。</p>
+<div class="highlight-python notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">gris3</span> <span class="kn">import</span> <span class="n">core</span>
+<span class="n">core</span><span class="o">.</span><span class="n">createRoot</span><span class="p">(</span><span class="s1">&#39;任意のディレクトリパス&#39;</span><span class="p">)</span>
+</pre></div>
+</td></tr></table></div>
+<p>coreモジュールは現在のFactorySettingsに応じて、
+リグ制作のトリガーとなるコマンドを実行する機能を提供します。</p>
+<p><strong>createRoot</strong>
+は設定されているFactorySettingsで指定されているConstructorのルート作成コマンドを呼び出します。</p>
+<p>デフォルトのStandardConstructorでは戻り値として
+<strong>grisNode.GrisRoot</strong>
+オブジェクトが返されます。</p>
+</div>
+<div class="section" id="id5">
+<h2><a class="toc-backref" href="#id10">ユニットとベースジョイントを作成する</a><a class="headerlink" href="#id5" title="このヘッドラインへのパーマリンク">¶</a></h2>
+<p>JointCreatorのprocessメソッドを実行することにより、
+ユニットとベースジョイントを作成することができます。
+詳細は以下をご覧下さい。</p>
+<ul class="simple">
+<li><p><a class="reference internal" href="makingRigUnits.html#mru-jcprocess"><span class="std std-ref">process</span></a></p></li>
+</ul>
+</div>
+<div class="section" id="id6">
+<h2><a class="toc-backref" href="#id11">プリセットからジョイントを作成</a><a class="headerlink" href="#id6" title="このヘッドラインへのパーマリンク">¶</a></h2>
+<p>ルートを作成すると、リグユニット作成やユニットを使用したジョイントの作成が
+行えるようになります。</p>
+<p>今回は簡単に作成できるプリセットを使用してみます。
+プリセットを使用するにはcoreモジュールのexecPreset関数を使用します。</p>
+<div class="highlight-python notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">gris3</span> <span class="kn">import</span> <span class="n">core</span>
+<span class="n">core</span><span class="o">.</span><span class="n">execPreset</span><span class="p">(</span><span class="s1">&#39;basicHumanPreset&#39;</span><span class="p">)</span>
+</pre></div>
+</td></tr></table></div>
+<p>これで人型のプリセットを使用して人体のジョイントが作成されました。</p>
+</div>
+<div class="section" id="id7">
+<h2><a class="toc-backref" href="#id12">ビルドする</a><a class="headerlink" href="#id7" title="このヘッドラインへのパーマリンク">¶</a></h2>
+<ul class="simple">
+<li><p><a class="reference internal" href="factorySettings.html#fs-executebuildscript"><span class="std std-ref">プロジェクトディレクトリのビルドスクリプトを実行する</span></a></p></li>
+</ul>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+      
+        <a href="namingRuleSystem.html" class="btn btn-neutral float-left" title="命名規則管理システム" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        
+        &copy; 著作権 2020, EskeYoshinob
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

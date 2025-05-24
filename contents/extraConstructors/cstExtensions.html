@@ -1,0 +1,332 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="ja" >
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>cstExtensions &mdash; gris3 1.0.0 ドキュメント</title>
+  
+
+  
+  <link rel="stylesheet" href="../../_static/css/customTheme.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+
+  
+  
+  
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
+        <script src="../../_static/jquery.js"></script>
+        <script src="../../_static/underscore.js"></script>
+        <script src="../../_static/doctools.js"></script>
+        <script src="../../_static/language_data.js"></script>
+        <script src="../../_static/translations.js"></script>
+    
+    <script type="text/javascript" src="../../_static/js/theme.js"></script>
+
+    
+    <link rel="author" title="このドキュメントについて" href="../../about.html" />
+    <link rel="index" title="索引" href="../../genindex.html" />
+    <link rel="search" title="検索" href="../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../../index.html" class="icon icon-home" alt="Documentation Home"> gris3
+          
+
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">スタートアップ</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../install.html">インストールと起動</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../updateLog.html">更新履歴</a></li>
+</ul>
+<p class="caption"><span class="caption-text">マニュアル</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../scriptBasedRigging.html">ScriptBasedRigging-概要</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../scriptingForFactory.html">ファクトリーのスクリプティングガイド</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../namingRule.html">命名規則</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../rigUnits.html">Rig Units</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../includedExtraConstructors.html">組み込み済みExtraConstructor</a></li>
+</ul>
+<p class="caption"><span class="caption-text">ガジェット</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../gadgets/jointEditor.html">Joint Editor</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../gadgets/modelSetup.html">Model Setup</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../gadgets/renamer.html">Renamer</a></li>
+</ul>
+<p class="caption"><span class="caption-text">スクリプトツール</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../tools/jointEditor.html">jointEditor</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../tools/extraJoint.html">extraJoint</a></li>
+</ul>
+<p class="caption"><span class="caption-text">開発者向けドキュメント</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../dev/factorySettings.html">ファクトリーセッティング</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../dev/makingRigUnits.html">リグユニットの開発</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../dev/constructor.html">コンストラクタ</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../dev/extraConstructor.html">エクストラコンストラクタ</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../dev/namingRuleSystem.html">命名規則管理システム</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../dev/operateByScript.html">スクリプトによって操作する</a></li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">gris3</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../index.html" class="icon icon-home"></a> &raquo;</li>
+        
+      <li>cstExtensions</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../../_sources/contents/extraConstructors/cstExtensions.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="cstextensions">
+<h1>cstExtensions<a class="headerlink" href="#cstextensions" title="このヘッドラインへのパーマリンク">¶</a></h1>
+<p>コンストラクタに追加・拡張機能を提供するExtraConstructorです。</p>
+<p>funcモジュールと違い、
+こちらはコンストラクタの仕様に則ったルール内で使用できる機能を提供します。</p>
+<p>このExtraConstructorをインストールしてもコンストラクタ自体の挙動に変化はなく、
+コンストラクタで以下のメソッドが使用できるようになります。</p>
+<div class="section" id="alignjointonsurface">
+<h2>alignJointOnSurface<a class="headerlink" href="#alignjointonsurface" title="このヘッドラインへのパーマリンク">¶</a></h2>
+<p>このメソッドは任意のNurbsSurfaceにジョイントチェーンを追従させる機能を提供します。
+またジョイントチェーンにはFKコントローラが追加され、
+サーフェースに追従した状態からオフセットでFK制御が可能になります。
+メソッドの引数は以下の通りです。</p>
+<table class="docutils align-default" id="id2">
+<caption><span class="caption-text">引数の説明</span><a class="headerlink" href="#id2" title="このテーブルへのパーマリンク">¶</a></caption>
+<colgroup>
+<col style="width: 33%" />
+<col style="width: 33%" />
+<col style="width: 33%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p><strong>引数名</strong></p></td>
+<td><p><strong>型</strong></p></td>
+<td><p><strong>説明</strong></p></td>
+</tr>
+<tr class="row-even"><td><p>joints</p></td>
+<td><p>list</p></td>
+<td><p>サーフェースに追従するジョイントの名前のリストを指定します。</p>
+<p>このリストにはジョイントチェーンのトップノードの名前のリストを入れます。</p>
+<p>各ジョイントチェーンの末端までサーフェースに追従するようになります。</p>
+</td>
+</tr>
+<tr class="row-odd"><td><p>surfaceName</p></td>
+<td><p>str</p></td>
+<td><p>ジョイントを追従させるためのNurbsサーフェース名を指定します。</p></td>
+</tr>
+<tr class="row-even"><td><p>ctrlRoot</p></td>
+<td><p>gris3.node.Transform</p></td>
+<td><p>ジョイントチェーンをFK制御するためのコントローラを格納するためのルートノードを指定します。</p></td>
+</tr>
+<tr class="row-odd"><td><p>setupRoot</p></td>
+<td><p>gris3.node.Transform</p></td>
+<td><p>ジョイントがサーフェースに追従するための仕組みを格納するためのグループノードを指定します。</p></td>
+</tr>
+<tr class="row-even"><td><p>basename</p></td>
+<td><p>str</p></td>
+<td><p>animSet等、各必要ノードのベースとなる名前を指定します。</p></td>
+</tr>
+<tr class="row-odd"><td><p>blendAttrName</p></td>
+<td><p>str</p></td>
+<td><p>各FKコントローラがサーフェースに追従するかどうかのブレンド率を設定するためのアトリビュート名を指定します。</p></td>
+</tr>
+<tr class="row-even"><td><p>globalBlendAttr</p></td>
+<td><p>str</p></td>
+<td><p>全FKコントローラがサーフェースに追従するかどうかのブレンド率を設定するためのアトリビュート名を指定します。</p>
+<p>こちらはノード名.アトリビュート名という形で一つのコントローラのアトリビュートを指定します。</p>
+</td>
+</tr>
+<tr class="row-odd"><td><p>sc</p></td>
+<td><p>gris3.tools.curvePrimitives.PrimitiveCreator</p></td>
+<td><p>各FKコントローラに使用するコントローラーのシェイプを定義するオブジェクトを指定します。</p></td>
+</tr>
+<tr class="row-even"><td><p>scModifier</p></td>
+<td><p>dict</p></td>
+<td><p>各FKコントローラを作成する際に、L/R/Cなど位置に応じた設定を変更するための辞書を指定します。</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="id1">
+<h2>使用例<a class="headerlink" href="#id1" title="このヘッドラインへのパーマリンク">¶</a></h2>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># 予めこのExtraConstructorはインストールされているものとする。</span>
+<span class="kn">from</span> <span class="nn">gris3</span> <span class="kn">import</span> <span class="n">constructors</span><span class="p">,</span> <span class="n">func</span><span class="p">,</span> <span class="n">node</span>
+<span class="n">mainModule</span> <span class="o">=</span> <span class="n">constructors</span><span class="o">.</span><span class="n">mainModule</span><span class="p">(</span><span class="vm">__name__</span><span class="p">,</span> <span class="kc">True</span><span class="p">)</span>
+
+<span class="k">class</span> <span class="nc">Constructor</span><span class="p">(</span><span class="n">mainModule</span><span class="o">.</span><span class="n">Constructor</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">setupCollar</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="n">base_name</span> <span class="o">=</span> <span class="s1">&#39;collar&#39;</span>
+        <span class="n">parent_jnt</span> <span class="o">=</span> <span class="s1">&#39;spineC_jnt_C&#39;</span>
+        <span class="n">setup_root</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">createSetupRoot</span><span class="p">(</span>
+            <span class="n">base_name</span><span class="p">,</span> <span class="n">parentJoint</span><span class="o">=</span><span class="n">parent_jnt</span><span class="p">,</span> <span class="n">isFollow</span><span class="o">=</span><span class="kc">True</span>
+        <span class="p">)</span>
+        <span class="n">ctrl_root</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">createCtrlRoot</span><span class="p">(</span><span class="n">base_name</span><span class="p">,</span> <span class="n">parentJoint</span><span class="o">=</span><span class="n">parent_jnt</span><span class="p">)</span>
+
+        <span class="n">sc</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">shapeCreator</span><span class="p">()</span>
+        <span class="n">sc</span><span class="o">.</span><span class="n">setCurveType</span><span class="p">(</span><span class="s1">&#39;pin&#39;</span><span class="p">)</span>
+        <span class="n">sc</span><span class="o">.</span><span class="n">setTranslation</span><span class="p">()</span>
+        <span class="n">sc</span><span class="o">.</span><span class="n">setSize</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+
+        <span class="k">for</span> <span class="n">joint</span> <span class="ow">in</span> <span class="p">[</span>
+            <span class="s1">&#39;collarA_jnt_L&#39;</span><span class="p">,</span> <span class="s1">&#39;collarB_jnt_L&#39;</span><span class="p">,</span> <span class="s1">&#39;collarA_jnt_R&#39;</span><span class="p">,</span> <span class="s1">&#39;collarB_jnt_R&#39;</span><span class="p">,</span>
+        <span class="p">]:</span>
+            <span class="n">ctrls</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">alignJointOnSurface</span><span class="p">(</span>
+                <span class="n">joint</span><span class="p">,</span> <span class="s1">&#39;collarBase_srfShape&#39;</span><span class="p">,</span> <span class="n">ctrl_root</span><span class="p">,</span> <span class="n">setup_root</span><span class="p">,</span>
+                <span class="n">base_name</span><span class="p">,</span> <span class="s1">&#39;followCollarToBody&#39;</span><span class="p">,</span>
+                <span class="s1">&#39;spineHip_ctrl_C.followCollarToBody&#39;</span><span class="p">,</span>
+                <span class="n">sc</span>
+            <span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        
+        &copy; 著作権 2020, EskeYoshinob
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

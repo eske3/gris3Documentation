@@ -1,0 +1,585 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="ja" >
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Joint Editor &mdash; gris3 1.0.0 ドキュメント</title>
+  
+
+  
+  <link rel="stylesheet" href="../_static/css/customTheme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+
+  
+  
+  
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/doctools.js"></script>
+        <script src="../_static/language_data.js"></script>
+        <script src="../_static/translations.js"></script>
+    
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+    
+    <link rel="author" title="このドキュメントについて" href="../about.html" />
+    <link rel="index" title="索引" href="../genindex.html" />
+    <link rel="search" title="検索" href="../search.html" />
+    <link rel="next" title="Model Setup" href="modelSetup.html" />
+    <link rel="prev" title="組み込み済みExtraConstructor" href="../contents/includedExtraConstructors.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../index.html" class="icon icon-home" alt="Documentation Home"> gris3
+          
+
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">スタートアップ</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../contents/install.html">インストールと起動</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../contents/updateLog.html">更新履歴</a></li>
+</ul>
+<p class="caption"><span class="caption-text">マニュアル</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../contents/scriptBasedRigging.html">ScriptBasedRigging-概要</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../contents/scriptingForFactory.html">ファクトリーのスクリプティングガイド</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../contents/namingRule.html">命名規則</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../contents/rigUnits.html">Rig Units</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../contents/includedExtraConstructors.html">組み込み済みExtraConstructor</a></li>
+</ul>
+<p class="caption"><span class="caption-text">ガジェット</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Joint Editor</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#create-new-joint">Create new joint</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#id1">作成する</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id2">何かを選択した状態で作成する。</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#transform">Transformノードが選択されている場合</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id3">コンポーネントが選択されている場合</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#ctrl">Ctrlを押しながらボタンをクリックする</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#arrange-radius-between-start-to-end-joint">Arrange radius between start to end joint</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#parent-tools">Parent Tools</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#parent-chain">Parent chain</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#camera-based-parent-tool">Camera based parent tool</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#joint-splitter">Joint Splitter</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#interactive-splitter">Interactive Splitter</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#id4">操作方法</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id5">オプション</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#executive-splitter">Executive Splitter</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#joint-axis-editor">Joint Axis Editor</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#apply-to-children">Apply to Children</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#freeze">Freeze</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#primary-axis">Primary Axis</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#axis">Axis</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#target">Target</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#secondary-axis">Secondary Axis</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#id6">Axis</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id7">Target</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#nodetips">NodeのTips</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#mirror-joints">Mirror Joints</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#apply-to-chilren">Apply to chilren</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#behavior">Behavior</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#mirror-axis">Mirror Axis</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#replace-name-for-the-mirrored-joints">Replace name for the mirrored joints</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#parent-options">Parent Options</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#finisher">Finisher</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#fix-orientation">Fix orientation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#mirror-to-opposite-side">Mirror to opposite side</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#mirror-from-firset-selection-to-second-selection">Mirror from firset selection to second selection</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#connect-inverse-scale">Connect inverse scale</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="modelSetup.html">Model Setup</a></li>
+<li class="toctree-l1"><a class="reference internal" href="renamer.html">Renamer</a></li>
+</ul>
+<p class="caption"><span class="caption-text">スクリプトツール</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../tools/jointEditor.html">jointEditor</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../tools/extraJoint.html">extraJoint</a></li>
+</ul>
+<p class="caption"><span class="caption-text">開発者向けドキュメント</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../dev/factorySettings.html">ファクトリーセッティング</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../dev/makingRigUnits.html">リグユニットの開発</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../dev/constructor.html">コンストラクタ</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../dev/extraConstructor.html">エクストラコンストラクタ</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../dev/namingRuleSystem.html">命名規則管理システム</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../dev/operateByScript.html">スクリプトによって操作する</a></li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">gris3</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
+        
+      <li>Joint Editor</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../_sources/gadgets/jointEditor.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="joint-editor">
+<h1>Joint Editor<a class="headerlink" href="#joint-editor" title="このヘッドラインへのパーマリンク">¶</a></h1>
+<p>このガジェットはジョイントを作成、編集するための便利機能を提供します。</p>
+<div class="section" id="create-new-joint">
+<h2>Create new joint<a class="headerlink" href="#create-new-joint" title="このヘッドラインへのパーマリンク">¶</a></h2>
+<p>ジョイントの作成するための便利機能です。</p>
+<a class="reference internal image-reference" href="../_images/0013.png"><img alt="../_images/0013.png" src="../_images/0013.png" style="width: 300px;" /></a>
+<div class="section" id="id1">
+<h3>作成する<a class="headerlink" href="#id1" title="このヘッドラインへのパーマリンク">¶</a></h3>
+<p>ボタンをクリックするとジョイントが作成されます。
+何も選択していない場合は原点にジョイントが1つ作成されます。</p>
+<a class="reference internal image-reference" href="../_images/create001.png"><img alt="../_images/create001.png" src="../_images/create001.png" style="width: 300px;" /></a>
+</div>
+<div class="section" id="id2">
+<h3>何かを選択した状態で作成する。<a class="headerlink" href="#id2" title="このヘッドラインへのパーマリンク">¶</a></h3>
+<p>選択状態に応じて結果が変わります。</p>
+<div class="section" id="transform">
+<h4>Transformノードが選択されている場合<a class="headerlink" href="#transform" title="このヘッドラインへのパーマリンク">¶</a></h4>
+<p>Transformノードが選択されている場合、各ノードの直下にジョイントが作成されます。</p>
+<a class="reference internal image-reference" href="../_images/create002.png"><img alt="../_images/create002.png" src="../_images/create002.png" style="width: 300px;" /></a>
+</div>
+<div class="section" id="id3">
+<h4>コンポーネントが選択されている場合<a class="headerlink" href="#id3" title="このヘッドラインへのパーマリンク">¶</a></h4>
+<p>頂点が選択されている場合、各頂点上にジョイントが作成されます。</p>
+<a class="reference internal image-reference" href="../_images/create003.png"><img alt="../_images/create003.png" src="../_images/create003.png" style="width: 300px;" /></a>
+<a class="reference internal image-reference" href="../_images/create004.png"><img alt="../_images/create004.png" src="../_images/create004.png" style="width: 300px;" /></a>
+<p>エッジやフェースの場合は、各コンポーネントの中点にジョイントが作成されます。</p>
+<a class="reference internal image-reference" href="../_images/create005.png"><img alt="../_images/create005.png" src="../_images/create005.png" style="width: 300px;" /></a>
+<a class="reference internal image-reference" href="../_images/create006.png"><img alt="../_images/create006.png" src="../_images/create006.png" style="width: 300px;" /></a>
+</div>
+<div class="section" id="ctrl">
+<h4>Ctrlを押しながらボタンをクリックする<a class="headerlink" href="#ctrl" title="このヘッドラインへのパーマリンク">¶</a></h4>
+<p>選択している状態で、Ctrlを押しながらボタンをクリックすると、
+選択コンポーネントやTransformの中心にジョイントが一つ作成されます。</p>
+<a class="reference internal image-reference" href="../_images/create007.png"><img alt="../_images/create007.png" src="../_images/create007.png" style="width: 300px;" /></a>
+<a class="reference internal image-reference" href="../_images/create008.png"><img alt="../_images/create008.png" src="../_images/create008.png" style="width: 300px;" /></a>
+</div>
+</div>
+</div>
+<div class="section" id="arrange-radius-between-start-to-end-joint">
+<h2>Arrange radius between start to end joint<a class="headerlink" href="#arrange-radius-between-start-to-end-joint" title="このヘッドラインへのパーマリンク">¶</a></h2>
+<p>ジョイントチェーンのサイズを調整するための機能です。</p>
+<a class="reference internal image-reference" href="../_images/0022.png"><img alt="../_images/0022.png" src="../_images/0022.png" style="width: 300px;" /></a>
+<p>ジョイントを2つ選択してからボタンをクリックします。</p>
+<p>最初に選択したジョイントと最後に選択したジョイントの間のジョイントチェーンの大きさを変更します。
+最初に選択したジョイントの大きさから最後に選択したジョイントの多きさ滑らかになるように、
+間の各ジョイントチェーンの大きさを変更します。</p>
+<p>最後に選択したジョイントは最初に選択したジョイントの子である必要があります。</p>
+<a class="reference internal image-reference" href="../_images/arrange001.png"><img alt="../_images/arrange001.png" src="../_images/arrange001.png" style="width: 300px;" /></a>
+<a class="reference internal image-reference" href="../_images/arrange002.png"><img alt="../_images/arrange002.png" src="../_images/arrange002.png" style="width: 300px;" /></a>
+<p>複数のジョイントチェーンを選択してCtrlを押しながらクリックすると、
+各ジョイントから末端のジョイントにかけてジョイントチェーンの大きさをまとめて変更します。</p>
+<a class="reference internal image-reference" href="../_images/arrange003.png"><img alt="../_images/arrange003.png" src="../_images/arrange003.png" style="width: 300px;" /></a>
+<a class="reference internal image-reference" href="../_images/arrange004.png"><img alt="../_images/arrange004.png" src="../_images/arrange004.png" style="width: 300px;" /></a>
+</div>
+<div class="section" id="parent-tools">
+<h2>Parent Tools<a class="headerlink" href="#parent-tools" title="このヘッドラインへのパーマリンク">¶</a></h2>
+<p>ジョイントチェーンを作成する上で便利な機能を提供するツール群です。</p>
+<a class="reference internal image-reference" href="../_images/003.png"><img alt="../_images/003.png" src="../_images/003.png" style="width: 300px;" /></a>
+<div class="section" id="parent-chain">
+<h3>Parent chain<a class="headerlink" href="#parent-chain" title="このヘッドラインへのパーマリンク">¶</a></h3>
+<p>選択した順番にジョイントを親子付けします。</p>
+<a class="reference internal image-reference" href="../_images/parent001.png"><img alt="../_images/parent001.png" src="../_images/parent001.png" style="width: 300px;" /></a>
+<a class="reference internal image-reference" href="../_images/parent002.png"><img alt="../_images/parent002.png" src="../_images/parent002.png" style="width: 300px;" /></a>
+<p>紫ボタンの方は選択とは逆順にジョイントを親子付けします。</p>
+<a class="reference internal image-reference" href="../_images/parent003.png"><img alt="../_images/parent003.png" src="../_images/parent003.png" style="width: 300px;" /></a>
+</div>
+<div class="section" id="camera-based-parent-tool">
+<h3>Camera based parent tool<a class="headerlink" href="#camera-based-parent-tool" title="このヘッドラインへのパーマリンク">¶</a></h3>
+<p>このツールは複数のジョイントを任意の流れに沿ってペアレントし、
+ジョイントチェーンを作成する機能です。</p>
+<p>予めペアレント化したいジョイントを選択してから、
+このボタンをクリックしてツールを起動します。</p>
+<a class="reference internal image-reference" href="../_images/parent004.png"><img alt="../_images/parent004.png" src="../_images/parent004.png" style="width: 300px;" /></a>
+<p>ツールを起動すると画面が少しだけ暗くなるので、
+作成したいジョイントチェーンの方向にドラッグします。</p>
+<a class="reference internal image-reference" href="../_images/parent005.png"><img alt="../_images/parent005.png" src="../_images/parent005.png" style="width: 300px;" /></a>
+<p>成功すると、ドラッグした方向にジョイントがペアレントされてチェーンが生成されます。</p>
+<a class="reference internal image-reference" href="../_images/parent006.png"><img alt="../_images/parent006.png" src="../_images/parent006.png" style="width: 300px;" /></a>
+<div class="admonition note">
+<p class="admonition-title">注釈</p>
+<p>この機能を正しく機能させるためには、
+できるだけジョイントは規則正しく並んでいる方が望ましいです。</p>
+<p>また、ジョイントの末端の位置が不揃いだと、
+最良の結果を得られない可能性が高くなります。</p>
+</div>
+</div>
+</div>
+<div class="section" id="joint-splitter">
+<h2>Joint Splitter<a class="headerlink" href="#joint-splitter" title="このヘッドラインへのパーマリンク">¶</a></h2>
+<p>既存のジョイントを分割するための機能を提供するツール群です。</p>
+<p>このツールを使用する場合、分割したいジョイントの子を選択してから使用します。</p>
+<a class="reference internal image-reference" href="../_images/004.png"><img alt="../_images/004.png" src="../_images/004.png" style="width: 300px;" /></a>
+<div class="section" id="interactive-splitter">
+<h3>Interactive Splitter<a class="headerlink" href="#interactive-splitter" title="このヘッドラインへのパーマリンク">¶</a></h3>
+<div class="section" id="id4">
+<h4>操作方法<a class="headerlink" href="#id4" title="このヘッドラインへのパーマリンク">¶</a></h4>
+<p>まずは分割したいジョイントの子を選択します。</p>
+<a class="reference internal image-reference" href="../_images/splitter001.png"><img alt="../_images/splitter001.png" src="../_images/splitter001.png" style="width: 300px;" /></a>
+<p>続いてIntaractive Splitterのスライダをドラッグすると、
+リアルタイムでジョイントが分割されます。</p>
+<a class="reference internal image-reference" href="../_images/splitter002.png"><img alt="../_images/splitter002.png" src="../_images/splitter002.png" style="width: 300px;" /></a>
+<p>好みの分割数になったらスライダを離して完了です。</p>
+<a class="reference internal image-reference" href="../_images/splitter003.png"><img alt="../_images/splitter003.png" src="../_images/splitter003.png" style="width: 300px;" /></a>
+</div>
+<div class="section" id="id5">
+<h4>オプション<a class="headerlink" href="#id5" title="このヘッドラインへのパーマリンク">¶</a></h4>
+<p>スライダ左のフィールドには分割数の最小値、右には最大値を入れます。</p>
+<p>スライダをドラッグする際、操作がシビアすぎる場合に調整して下さい。</p>
+</div>
+</div>
+<div class="section" id="executive-splitter">
+<h3>Executive Splitter<a class="headerlink" href="#executive-splitter" title="このヘッドラインへのパーマリンク">¶</a></h3>
+<p>Interactive Splitterとは逆に、設定に基づいた数にジョイントを分割します。
+何度も同じ数だけ分割する場合に便利です。</p>
+<p>分割を実行するには分割したいジョイントの子を選択し、
+スライダ右の＋ボタンをクリックします。</p>
+</div>
+</div>
+<div class="section" id="joint-axis-editor">
+<h2>Joint Axis Editor<a class="headerlink" href="#joint-axis-editor" title="このヘッドラインへのパーマリンク">¶</a></h2>
+<p>ジョイントの軸の向きを調整する機能を提供するツールです。
+Maya標準のOrient Joint機能を拡張したような機能になっています。</p>
+<p>この機能は選択したジョイントの軸の向きを調整するための機能です。</p>
+<a class="reference internal image-reference" href="../_images/005.png"><img alt="../_images/005.png" src="../_images/005.png" style="width: 300px;" /></a>
+<div class="section" id="apply-to-children">
+<h3>Apply to Children<a class="headerlink" href="#apply-to-children" title="このヘッドラインへのパーマリンク">¶</a></h3>
+<p>このチェックがOnの場合、選択ジョイントの子階層にも適用します。</p>
+</div>
+<div class="section" id="freeze">
+<h3>Freeze<a class="headerlink" href="#freeze" title="このヘッドラインへのパーマリンク">¶</a></h3>
+<p>軸調整後、フリーズをかけます。
+このためApplyToChildrenがOffでも子階層のRotate値は0になります。</p>
+</div>
+<div class="section" id="primary-axis">
+<h3>Primary Axis<a class="headerlink" href="#primary-axis" title="このヘッドラインへのパーマリンク">¶</a></h3>
+<p>このセクションでは選択したジョイントを最優先でどの方向に向けるかを設定します。</p>
+<p>基本的な動きとしてはTargetで指定した方向に、Axisで設定した軸を向けます。</p>
+<div class="section" id="axis">
+<h4>Axis<a class="headerlink" href="#axis" title="このヘッドラインへのパーマリンク">¶</a></h4>
+<p>どの軸をターゲットの方向へ向けるかを設定します。</p>
+</div>
+<div class="section" id="target">
+<h4>Target<a class="headerlink" href="#target" title="このヘッドラインへのパーマリンク">¶</a></h4>
+<p>Axisの向ける対象を設定します。</p>
+<table class="docutils align-default">
+<colgroup>
+<col style="width: 50%" />
+<col style="width: 50%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p>First Child</p></td>
+<td><p>操作対象ジョイントの子のうち、Outliner上で一番上にあるノードを対象にします。</p></td>
+</tr>
+<tr class="row-even"><td><p>Origin</p></td>
+<td><p>このオプションで指定した、操作前の軸にAxisを対象にします。</p></td>
+</tr>
+<tr class="row-odd"><td><p>Vector</p></td>
+<td><p>このオプションで指定したワールド空間での軸に対象にします。</p></td>
+</tr>
+<tr class="row-even"><td><p>Node</p></td>
+<td><p>このフィールドに設定したTransformノードを対象にします。</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div class="section" id="secondary-axis">
+<h3>Secondary Axis<a class="headerlink" href="#secondary-axis" title="このヘッドラインへのパーマリンク">¶</a></h3>
+<p>このセクションでは選択したジョイントをPrimaryの方に向けつつ、
+もう一つの軸をどの方向に向けるかを設定します。</p>
+<p>基本的な動きとしてはTargetで指定した方向に、Axisで設定した軸を向けます。</p>
+<div class="section" id="id6">
+<h4>Axis<a class="headerlink" href="#id6" title="このヘッドラインへのパーマリンク">¶</a></h4>
+<p>どの軸をターゲットの方向へ向けるかを設定します。
+Primary Axisは必ずそのターゲットの方に向くのに対し、
+こちらの軸はその姿勢を維持しながらできるだけ指定されたターゲットの方に向けます。</p>
+</div>
+<div class="section" id="id7">
+<h4>Target<a class="headerlink" href="#id7" title="このヘッドラインへのパーマリンク">¶</a></h4>
+<p>Axisの向ける対象を設定します。</p>
+<table class="docutils align-default">
+<colgroup>
+<col style="width: 50%" />
+<col style="width: 50%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p>Origin</p></td>
+<td><p>このオプションで指定した、操作前の軸にAxisを対象にします。</p></td>
+</tr>
+<tr class="row-even"><td><p>Vector</p></td>
+<td><p>このオプションで指定したワールド空間での軸に対象にします。</p></td>
+</tr>
+<tr class="row-odd"><td><p>Node</p></td>
+<td><p>このフィールドに設定したTransformノードを対象にします。</p></td>
+</tr>
+<tr class="row-even"><td><p>Surface</p></td>
+<td><p>このフィールドにポリゴンかNurbsの法線方向を対象にします。</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="nodetips">
+<h4>NodeのTips<a class="headerlink" href="#nodetips" title="このヘッドラインへのパーマリンク">¶</a></h4>
+<p>TargetをNodeにしている場合、
+フィールドに登録されているTransformノードの方に軸を向けます。</p>
+<p>このノードはTransformであれば何でもいいので、
+perspカメラを登録すればカメラの方向に軸を向ける事ができます。</p>
+<p>指や服の揺れものなど、軸の向きを複雑に調整しなくてはいけない場合に便利です。</p>
+<a class="reference internal image-reference" href="../_images/editAxis001.png"><img alt="../_images/editAxis001.png" src="../_images/editAxis001.png" style="width: 300px;" /></a>
+<p>↓</p>
+<a class="reference internal image-reference" href="../_images/editAxis002.png"><img alt="../_images/editAxis002.png" src="../_images/editAxis002.png" style="width: 300px;" /></a>
+<p>また、Nodeには複数のTransformノードを指定する事ができます。
+その場合、操作対象ジョイントから最も近いTransformノードをSecandary Axisのターゲットとして使用します。</p>
+</div>
+</div>
+</div>
+<div class="section" id="mirror-joints">
+<h2>Mirror Joints<a class="headerlink" href="#mirror-joints" title="このヘッドラインへのパーマリンク">¶</a></h2>
+<p>ジョイントをミラーリングします。</p>
+<a class="reference internal image-reference" href="../_images/006.png"><img alt="../_images/006.png" src="../_images/006.png" style="width: 300px;" /></a>
+<p>この機能はMaya標準のMirror Jointとほぼ同等の機能を持っていますが、
+このツールでは標準機能と違い複数のジョイントを選択して、
+まとめてミラーリングする事ができます。</p>
+<div class="section" id="apply-to-chilren">
+<h3>Apply to chilren<a class="headerlink" href="#apply-to-chilren" title="このヘッドラインへのパーマリンク">¶</a></h3>
+<p>この設定がOnの場合、子ジョイントもまとめてミラーリングします。</p>
+</div>
+<div class="section" id="behavior">
+<h3>Behavior<a class="headerlink" href="#behavior" title="このヘッドラインへのパーマリンク">¶</a></h3>
+<p>Behaviorでミラーリングします。</p>
+</div>
+<div class="section" id="mirror-axis">
+<h3>Mirror Axis<a class="headerlink" href="#mirror-axis" title="このヘッドラインへのパーマリンク">¶</a></h3>
+<p>ミラーリングする軸を指定します。</p>
+</div>
+<div class="section" id="replace-name-for-the-mirrored-joints">
+<h3>Replace name for the mirrored joints<a class="headerlink" href="#replace-name-for-the-mirrored-joints" title="このヘッドラインへのパーマリンク">¶</a></h3>
+<p>元のジョイントの名前から&quot;Search for&quot;の文字列を検索し、
+ミラーされたジョイントには&quot;Replace with&quot;の文字列に置き換えてリネームします。</p>
+</div>
+<div class="section" id="parent-options">
+<h3>Parent Options<a class="headerlink" href="#parent-options" title="このヘッドラインへのパーマリンク">¶</a></h3>
+<p>ミラーリングされたジョイントの親を指定する事ができます。
+Parent to replaced name parentがOnの状態にすると、
+ミラーリング元のジョイントの親ノードの名前から&quot;Search for&quot;の文字列を検索し、
+&quot;Replace with&quot;で置き換えたノードの子にミラーリングされたジョイントを配置します。</p>
+<p>置き換えた名前のノードがない場合はこの処理をスキップします。</p>
+</div>
+</div>
+<div class="section" id="finisher">
+<h2>Finisher<a class="headerlink" href="#finisher" title="このヘッドラインへのパーマリンク">¶</a></h2>
+<p>ジョイントの仕上げ作業に使用する機能をまとめたツール群です。</p>
+<a class="reference internal image-reference" href="../_images/007.png"><img alt="../_images/007.png" src="../_images/007.png" style="width: 300px;" /></a>
+<div class="section" id="fix-orientation">
+<h3>Fix orientation<a class="headerlink" href="#fix-orientation" title="このヘッドラインへのパーマリンク">¶</a></h3>
+<img alt="../_images/finisher001.png" src="../_images/finisher001.png" />
+<p>選択したジョイントと、その一番したの階層までのジョイントに対して軸補正を行います。</p>
+<p>軸補正とは</p>
+<ul class="simple">
+<li><p>子階層に向けてX軸（または-X軸）を向ける</p></li>
+<li><p>それ意外の軸は極力維持</p></li>
+</ul>
+<p>を行ないます。</p>
+</div>
+<div class="section" id="mirror-to-opposite-side">
+<h3>Mirror to opposite side<a class="headerlink" href="#mirror-to-opposite-side" title="このヘッドラインへのパーマリンク">¶</a></h3>
+<img alt="../_images/finisher002.png" src="../_images/finisher002.png" />
+<p>選択したジョイントの反対側のジョイントに対してミラーリングを適用します。
+反対側とは命名規則に則ったジョイント名である事を前提に、
+位置を表す文字列がLの場合R、Rの場合Lに対して適用します。</p>
+<p>既存のジョイントに対してミラーリングをかけたい場合に便利です。</p>
+</div>
+<div class="section" id="mirror-from-firset-selection-to-second-selection">
+<h3>Mirror from firset selection to second selection<a class="headerlink" href="#mirror-from-firset-selection-to-second-selection" title="このヘッドラインへのパーマリンク">¶</a></h3>
+<img alt="../_images/finisher003.png" src="../_images/finisher003.png" />
+<p>&quot;Mirro to opposite side&quot;は自動的に反対側のジョイントを探してきますが、
+こちらはn番目のジョイントの位置をn+1番目ののジョイントにミラーリングして適用します。</p>
+</div>
+<div class="section" id="connect-inverse-scale">
+<h3>Connect inverse scale<a class="headerlink" href="#connect-inverse-scale" title="このヘッドラインへのパーマリンク">¶</a></h3>
+<img alt="../_images/finisher004.png" src="../_images/finisher004.png" />
+<p>選択したジョイントの親ノードのscaleを、選択ジョイントのinverseSacleに接続します。</p>
+</div>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="modelSetup.html" class="btn btn-neutral float-right" title="Model Setup" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="../contents/includedExtraConstructors.html" class="btn btn-neutral float-left" title="組み込み済みExtraConstructor" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        
+        &copy; 著作権 2020, EskeYoshinob
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

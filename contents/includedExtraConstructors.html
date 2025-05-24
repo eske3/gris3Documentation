@@ -1,0 +1,622 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="ja" >
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>組み込み済みExtraConstructor &mdash; gris3 1.0.0 ドキュメント</title>
+  
+
+  
+  <link rel="stylesheet" href="../_static/css/customTheme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+
+  
+  
+  
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/doctools.js"></script>
+        <script src="../_static/language_data.js"></script>
+        <script src="../_static/translations.js"></script>
+    
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+    
+    <link rel="author" title="このドキュメントについて" href="../about.html" />
+    <link rel="index" title="索引" href="../genindex.html" />
+    <link rel="search" title="検索" href="../search.html" />
+    <link rel="next" title="Joint Editor" href="../gadgets/jointEditor.html" />
+    <link rel="prev" title="Rig Units" href="rigUnits.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../index.html" class="icon icon-home" alt="Documentation Home"> gris3
+          
+
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">スタートアップ</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="install.html">インストールと起動</a></li>
+<li class="toctree-l1"><a class="reference internal" href="updateLog.html">更新履歴</a></li>
+</ul>
+<p class="caption"><span class="caption-text">マニュアル</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="scriptBasedRigging.html">ScriptBasedRigging-概要</a></li>
+<li class="toctree-l1"><a class="reference internal" href="scriptingForFactory.html">ファクトリーのスクリプティングガイド</a></li>
+<li class="toctree-l1"><a class="reference internal" href="namingRule.html">命名規則</a></li>
+<li class="toctree-l1"><a class="reference internal" href="rigUnits.html">Rig Units</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">組み込み済みExtraConstructor</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#constcollector">constCollector</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#addnodefilter">addNodeFilter</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#usedefault">useDefault</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id5">使用例</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#subdivsmoothsetting">subdivSmoothSetting</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#cstextensions">cstExtensions</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#alignjointonsurface">alignJointOnSurface</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id6">使用例</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#fkctrlhelper">fkCtrlHelper</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#id7">使用方法</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id8">使用例</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#unityhumanscaler">unityHumanScaler</a></li>
+</ul>
+</li>
+</ul>
+<p class="caption"><span class="caption-text">ガジェット</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../gadgets/jointEditor.html">Joint Editor</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../gadgets/modelSetup.html">Model Setup</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../gadgets/renamer.html">Renamer</a></li>
+</ul>
+<p class="caption"><span class="caption-text">スクリプトツール</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../tools/jointEditor.html">jointEditor</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../tools/extraJoint.html">extraJoint</a></li>
+</ul>
+<p class="caption"><span class="caption-text">開発者向けドキュメント</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../dev/factorySettings.html">ファクトリーセッティング</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../dev/makingRigUnits.html">リグユニットの開発</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../dev/constructor.html">コンストラクタ</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../dev/extraConstructor.html">エクストラコンストラクタ</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../dev/namingRuleSystem.html">命名規則管理システム</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../dev/operateByScript.html">スクリプトによって操作する</a></li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">gris3</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
+        
+      <li>組み込み済みExtraConstructor</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../_sources/contents/includedExtraConstructors.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="extraconstructor">
+<h1>組み込み済みExtraConstructor<a class="headerlink" href="#extraconstructor" title="このヘッドラインへのパーマリンク">¶</a></h1>
+<p>ここでは予め組み込まれているExtraConstructorについて解説します。</p>
+<div class="section" id="constcollector">
+<h2>constCollector<a class="headerlink" href="#constcollector" title="このヘッドラインへのパーマリンク">¶</a></h2>
+<p>ctrl_grp内に存在する、
+コントローラーをまとめるグループ内にあるコンストレインをすべてrig_grp内に収集します。</p>
+<p>インストール後の戻り値である、
+このExtraConstructorのインスタンスに対して以下のような設定を行うことができます。</p>
+<table class="docutils align-default" id="id9">
+<caption><span class="caption-text">設定できる機能一覧</span><a class="headerlink" href="#id9" title="このテーブルへのパーマリンク">¶</a></caption>
+<colgroup>
+<col style="width: 33%" />
+<col style="width: 33%" />
+<col style="width: 33%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p><strong>メソッド名/変数名</strong></p></td>
+<td><p><strong>引数の型</strong></p></td>
+<td><p><strong>説明</strong></p></td>
+</tr>
+<tr class="row-even"><td><p>addNodeFilter</p></td>
+<td><p><a href="#id1"><span class="problematic" id="id2">*</span></a>function</p></td>
+<td><p>判別用のフィルタ関数を追加します。</p></td>
+</tr>
+<tr class="row-odd"><td><p>removeNodeFilter</p></td>
+<td><p><a href="#id3"><span class="problematic" id="id4">*</span></a>function</p></td>
+<td><p>判別用のフィルタ関数を削除します。</p></td>
+</tr>
+<tr class="row-even"><td><p>useDefault</p></td>
+<td><p>bool</p></td>
+<td><p>デフォルトのフォルタ（コンストレインだけを取得）を
+使用するかどうかを指定します。</p></td>
+</tr>
+<tr class="row-odd"><td><p>ConstGroupName(メンバ変数)</p></td>
+<td><p>str</p></td>
+<td><p>コンストレインを格納するグループ名を指定します。</p>
+<p>デフォルトではctrlCst_grpという名前のグループに格納されます。</p>
+<p>これはメンバ変数なので、直接=で任意の名前を代入して下さい。</p>
+</td>
+</tr>
+</tbody>
+</table>
+<div class="section" id="addnodefilter">
+<h3>addNodeFilter<a class="headerlink" href="#addnodefilter" title="このヘッドラインへのパーマリンク">¶</a></h3>
+<p>このメソッドはグループ内にあるノードを収集する際にフィルタとなる関数を追加することができます。
+デフォルトではコンストレインノードをすべて収集するようになっていますが、
+他にも収集するものを追加場合にはこのメソッドを使用して独自のフィルタを追加して下さい。</p>
+<p>このメソッドにわたす引数は関数です。
+関数は以下のフォーマットで定義して下さい。</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">functionName</span><span class="p">(</span><span class="n">node_name</span><span class="p">):</span>
+    <span class="k">return</span> <span class="kc">True</span>
+</pre></div>
+</div>
+<p>第一引数はフィルタするためのノード名を受け取るようにします。
+また戻り値はフィルタの結果の可否をBoolとして返します。</p>
+<p>フィルタは複数追加することができます。
+このコンストラクタは追加したフィルタすべてでノードのテストを行い、
+一つでもTrueになれば収集対象となるようになっています。</p>
+</div>
+<div class="section" id="usedefault">
+<h3>useDefault<a class="headerlink" href="#usedefault" title="このヘッドラインへのパーマリンク">¶</a></h3>
+<p>このメソッドはデフォルトで動作するフィルタ機能をOFFにします。
+デフォルトで動作するフィルタは、
+グループ内のすべてのコンストレインノードを適用対象とするようになっています。</p>
+<p>デフォルトフィルタは以下の内容になっています。</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">maya</span> <span class="kn">import</span> <span class="n">cmds</span>
+<span class="k">def</span> <span class="nf">defaultFilter</span><span class="p">(</span><span class="n">target</span><span class="p">):</span>
+    <span class="k">return</span> <span class="nb">bool</span><span class="p">(</span><span class="n">cmds</span><span class="o">.</span><span class="n">ls</span><span class="p">(</span><span class="n">target</span><span class="p">,</span> <span class="nb">type</span><span class="o">=</span><span class="s1">&#39;constraint&#39;</span><span class="p">))</span>
+</pre></div>
+</div>
+<p>コンストレインすべてを収集対象としたくない場合はこのメソッドでTrueを設定し、
+独自の収集関数を追加して下さい。</p>
+</div>
+<div class="section" id="id5">
+<h3>使用例<a class="headerlink" href="#id5" title="このヘッドラインへのパーマリンク">¶</a></h3>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">Constructor</span><span class="p">(</span><span class="n">constructors</span><span class="o">.</span><span class="n">currentConstructor</span><span class="p">()):</span>
+    <span class="k">def</span> <span class="nf">ignoreAimConstraint</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">node_name</span><span class="p">):</span>
+        <span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">            エイムコンストレインだけを収集の対象から外すフィルタ。</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="p">(</span>
+            <span class="n">cmds</span><span class="o">.</span><span class="n">ls</span><span class="p">(</span><span class="n">node_name</span><span class="p">,</span> <span class="nb">type</span><span class="o">=</span><span class="s1">&#39;constraint&#39;</span><span class="p">)</span> <span class="ow">and</span>
+            <span class="ow">not</span> <span class="n">cmds</span><span class="o">.</span><span class="n">ls</span><span class="p">(</span><span class="n">node_name</span><span class="p">,</span> <span class="nb">type</span><span class="o">=</span><span class="s1">&#39;aimConstraint&#39;</span><span class="p">)</span>
+        <span class="p">):</span>
+            <span class="k">return</span> <span class="kc">True</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">return</span> <span class="kc">False</span>
+
+    <span class="k">def</span> <span class="nf">init</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="n">ext_cst</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">installExtraConstructor</span><span class="p">(</span><span class="s1">&#39;constCollector&#39;</span><span class="p">)</span>
+        <span class="n">ext_cst</span><span class="o">.</span><span class="n">addNodeFilter</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">ignoreAimConstraint</span><span class="p">)</span>
+        <span class="n">ext_cst</span><span class="o">.</span><span class="n">useDefault</span><span class="p">(</span><span class="kc">False</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="subdivsmoothsetting">
+<h2>subdivSmoothSetting<a class="headerlink" href="#subdivsmoothsetting" title="このヘッドラインへのパーマリンク">¶</a></h2>
+<p>モデルにsubdiv_setという名前のセットがある場合、
+このセットメンバーのジオメトリに対してsmoothMeshPreviewの処理を追加します。</p>
+<p><strong>モデルはstandardConstructorが提供するモデルルールに則っている必要があります。</strong></p>
+<p>デフォルトではsubdiv_set内のオブジェクトに対して以下の設定を行います。</p>
+<table class="docutils align-default">
+<colgroup>
+<col style="width: 50%" />
+<col style="width: 50%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p>スムース表示</p></td>
+<td><p>オン</p></td>
+</tr>
+<tr class="row-even"><td><p>レンダリング時にプレビューと同じ分割を使用する</p></td>
+<td><p>オフ</p></td>
+</tr>
+<tr class="row-odd"><td><p>プレビューの分割レベル</p></td>
+<td><p>０</p></td>
+</tr>
+<tr class="row-even"><td><p>レンダリング時の分割レベル</p></td>
+<td><p>２</p></td>
+</tr>
+</tbody>
+</table>
+<p>インストール後の戻り値である、
+このExtraConstructorのインスタンスに対して以下のような設定を行うことができます。</p>
+<table class="docutils align-default" id="id10">
+<caption><span class="caption-text">設定できる機能一覧</span><a class="headerlink" href="#id10" title="このテーブルへのパーマリンク">¶</a></caption>
+<colgroup>
+<col style="width: 33%" />
+<col style="width: 33%" />
+<col style="width: 33%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p><strong>変数名</strong></p></td>
+<td><p><strong>引数の型</strong></p></td>
+<td><p><strong>説明</strong></p></td>
+</tr>
+<tr class="row-even"><td><p>SetName</p></td>
+<td><p>str</p></td>
+<td><p>作業対象となるセット名を設定します。</p></td>
+</tr>
+<tr class="row-odd"><td><p>PreviewLevel</p></td>
+<td><p>int</p></td>
+<td><p>プレビュー時の分割数を0～4で設定します。</p></td>
+</tr>
+<tr class="row-even"><td><p>RenderSmoothLevel</p></td>
+<td><p>int</p></td>
+<td><p>レンダリング時の分割数を0～4で設定します。</p></td>
+</tr>
+</tbody>
+</table>
+<p>なお、このExtraConstructorをインストールしていて、
+かつsubdiv_setがない場合はすべてのレンダリングジオメトリがサブディビ処理の対象になります。
+もしサブディビ処理を入れたくない場合は必ずこのコンストラクタはインストールしないようにして下さい。</p>
+</div>
+<div class="section" id="cstextensions">
+<h2>cstExtensions<a class="headerlink" href="#cstextensions" title="このヘッドラインへのパーマリンク">¶</a></h2>
+<p>コンストラクタに追加・拡張機能を提供するExtraConstructorです。</p>
+<p>funcモジュールと違い、
+こちらはコンストラクタの仕様に則ったルール内で使用できる機能を提供します。</p>
+<p>このExtraConstructorをインストールしてもコンストラクタ自体の挙動に変化はなく、
+コンストラクタで以下のメソッドが使用できるようになります。</p>
+<div class="section" id="alignjointonsurface">
+<h3>alignJointOnSurface<a class="headerlink" href="#alignjointonsurface" title="このヘッドラインへのパーマリンク">¶</a></h3>
+<p>このメソッドは任意のNurbsSurfaceにジョイントチェーンを追従させる機能を提供します。
+またジョイントチェーンにはFKコントローラが追加され、
+サーフェースに追従した状態からオフセットでFK制御が可能になります。
+メソッドの引数は以下の通りです。</p>
+<table class="docutils align-default" id="id11">
+<caption><span class="caption-text">引数の説明</span><a class="headerlink" href="#id11" title="このテーブルへのパーマリンク">¶</a></caption>
+<colgroup>
+<col style="width: 33%" />
+<col style="width: 33%" />
+<col style="width: 33%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p><strong>引数名</strong></p></td>
+<td><p><strong>型</strong></p></td>
+<td><p><strong>説明</strong></p></td>
+</tr>
+<tr class="row-even"><td><p>joints</p></td>
+<td><p>list</p></td>
+<td><p>サーフェースに追従するジョイントの名前のリストを指定します。</p>
+<p>このリストにはジョイントチェーンのトップノードの名前のリストを入れます。</p>
+<p>各ジョイントチェーンの末端までサーフェースに追従するようになります。</p>
+</td>
+</tr>
+<tr class="row-odd"><td><p>surfaceName</p></td>
+<td><p>str</p></td>
+<td><p>ジョイントを追従させるためのNurbsサーフェース名を指定します。</p></td>
+</tr>
+<tr class="row-even"><td><p>ctrlRoot</p></td>
+<td><p>gris3.node.Transform</p></td>
+<td><p>ジョイントチェーンをFK制御するためのコントローラを格納するためのルートノードを指定します。</p></td>
+</tr>
+<tr class="row-odd"><td><p>setupRoot</p></td>
+<td><p>gris3.node.Transform</p></td>
+<td><p>ジョイントがサーフェースに追従するための仕組みを格納するためのグループノードを指定します。</p></td>
+</tr>
+<tr class="row-even"><td><p>basename</p></td>
+<td><p>str</p></td>
+<td><p>animSet等、各必要ノードのベースとなる名前を指定します。</p></td>
+</tr>
+<tr class="row-odd"><td><p>blendAttrName</p></td>
+<td><p>str</p></td>
+<td><p>各FKコントローラがサーフェースに追従するかどうかのブレンド率を設定するためのアトリビュート名を指定します。</p></td>
+</tr>
+<tr class="row-even"><td><p>globalBlendAttr</p></td>
+<td><p>str</p></td>
+<td><p>全FKコントローラがサーフェースに追従するかどうかのブレンド率を設定するためのアトリビュート名を指定します。</p>
+<p>こちらはノード名.アトリビュート名という形で一つのコントローラのアトリビュートを指定します。</p>
+</td>
+</tr>
+<tr class="row-odd"><td><p>sc</p></td>
+<td><p>gris3.tools.curvePrimitives.PrimitiveCreator</p></td>
+<td><p>各FKコントローラに使用するコントローラーのシェイプを定義するオブジェクトを指定します。</p></td>
+</tr>
+<tr class="row-even"><td><p>scModifier</p></td>
+<td><p>dict</p></td>
+<td><p>各FKコントローラを作成する際に、L/R/Cなど位置に応じた設定を変更するための辞書を指定します。</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="id6">
+<h3>使用例<a class="headerlink" href="#id6" title="このヘッドラインへのパーマリンク">¶</a></h3>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># 予めこのExtraConstructorはインストールされているものとする。</span>
+<span class="kn">from</span> <span class="nn">gris3</span> <span class="kn">import</span> <span class="n">constructors</span><span class="p">,</span> <span class="n">func</span><span class="p">,</span> <span class="n">node</span>
+<span class="n">mainModule</span> <span class="o">=</span> <span class="n">constructors</span><span class="o">.</span><span class="n">mainModule</span><span class="p">(</span><span class="vm">__name__</span><span class="p">,</span> <span class="kc">True</span><span class="p">)</span>
+
+<span class="k">class</span> <span class="nc">Constructor</span><span class="p">(</span><span class="n">mainModule</span><span class="o">.</span><span class="n">Constructor</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">setupCollar</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="n">base_name</span> <span class="o">=</span> <span class="s1">&#39;collar&#39;</span>
+        <span class="n">parent_jnt</span> <span class="o">=</span> <span class="s1">&#39;spineC_jnt_C&#39;</span>
+        <span class="n">setup_root</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">createSetupRoot</span><span class="p">(</span>
+            <span class="n">base_name</span><span class="p">,</span> <span class="n">parentJoint</span><span class="o">=</span><span class="n">parent_jnt</span><span class="p">,</span> <span class="n">isFollow</span><span class="o">=</span><span class="kc">True</span>
+        <span class="p">)</span>
+        <span class="n">ctrl_root</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">createCtrlRoot</span><span class="p">(</span><span class="n">base_name</span><span class="p">,</span> <span class="n">parentJoint</span><span class="o">=</span><span class="n">parent_jnt</span><span class="p">)</span>
+
+        <span class="n">sc</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">shapeCreator</span><span class="p">()</span>
+        <span class="n">sc</span><span class="o">.</span><span class="n">setCurveType</span><span class="p">(</span><span class="s1">&#39;pin&#39;</span><span class="p">)</span>
+        <span class="n">sc</span><span class="o">.</span><span class="n">setTranslation</span><span class="p">()</span>
+        <span class="n">sc</span><span class="o">.</span><span class="n">setSize</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+
+        <span class="k">for</span> <span class="n">joint</span> <span class="ow">in</span> <span class="p">[</span>
+            <span class="s1">&#39;collarA_jnt_L&#39;</span><span class="p">,</span> <span class="s1">&#39;collarB_jnt_L&#39;</span><span class="p">,</span> <span class="s1">&#39;collarA_jnt_R&#39;</span><span class="p">,</span> <span class="s1">&#39;collarB_jnt_R&#39;</span><span class="p">,</span>
+        <span class="p">]:</span>
+            <span class="n">ctrls</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">alignJointOnSurface</span><span class="p">(</span>
+                <span class="n">joint</span><span class="p">,</span> <span class="s1">&#39;collarBase_srfShape&#39;</span><span class="p">,</span> <span class="n">ctrl_root</span><span class="p">,</span> <span class="n">setup_root</span><span class="p">,</span>
+                <span class="n">base_name</span><span class="p">,</span> <span class="s1">&#39;followCollarToBody&#39;</span><span class="p">,</span>
+                <span class="s1">&#39;spineHip_ctrl_C.followCollarToBody&#39;</span><span class="p">,</span>
+                <span class="n">sc</span>
+            <span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="fkctrlhelper">
+<h2>fkCtrlHelper<a class="headerlink" href="#fkctrlhelper" title="このヘッドラインへのパーマリンク">¶</a></h2>
+<p>FKコントローラの作成を補助する機能を提供するExtraConstructorです。
+親子付けやFKコントローラの作成などの一連の流れ作業を簡単なコマンドで行います。</p>
+<div class="section" id="id7">
+<h3>使用方法<a class="headerlink" href="#id7" title="このヘッドラインへのパーマリンク">¶</a></h3>
+<p>このExtraConstructorをインストールすると、メインのConstructorに</p>
+<p><strong>setJointAsFkController</strong></p>
+<p>メソッドが追加されます。
+ユーザーはこのメソッドを使用して任意のジョイントの親子付と
+FKコントローラの作成を行うことができます。</p>
+<table class="docutils align-default" id="id12">
+<caption><span class="caption-text">引数の説明</span><a class="headerlink" href="#id12" title="このテーブルへのパーマリンク">¶</a></caption>
+<colgroup>
+<col style="width: 33%" />
+<col style="width: 33%" />
+<col style="width: 33%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p><strong>引数名</strong></p></td>
+<td><p><strong>型</strong></p></td>
+<td><p><strong>説明</strong></p></td>
+</tr>
+<tr class="row-even"><td><p>joints</p></td>
+<td><p>str or list</p></td>
+<td><p>FKコントローラにするジョイント名のリストを指定します。
+渡す値はジョイント名のリストまたは単体の名前になります。</p></td>
+</tr>
+<tr class="row-odd"><td><p>parent</p></td>
+<td><p>str</p></td>
+<td><p>FKコントローラにするジョイントの親ジョイント名を指定します。</p></td>
+</tr>
+<tr class="row-even"><td><p>setName</p></td>
+<td><p>str</p></td>
+<td><p>作成されるFKコントローラが帰属するAnimSet名を指定します。</p></td>
+</tr>
+<tr class="row-odd"><td><p>side=None</p></td>
+<td><p>str</p></td>
+<td><p>FKコントローラの位置を表す文字（'L'や'R'、'None'など）</p></td>
+</tr>
+<tr class="row-even"><td><p>shapeCreator=None</p></td>
+<td><p>gris3.tools.curvePrimitives.PrimitiveCreator</p></td>
+<td><p>作成されるFKコントローラの形状を指定します。</p></td>
+</tr>
+<tr class="row-odd"><td><p>ctrlArgs=None</p></td>
+<td><p>dict</p></td>
+<td><p>内部で呼ばれるtoControllerメソッドに渡すオプションを辞書形式で指定します。</p></td>
+</tr>
+<tr class="row-even"><td><p>connectArgs=None</p></td>
+<td><p>dict</p></td>
+<td><p>内部で呼ばれるconnectControllerメソッドに渡すオプションを辞書形式で指定します。</p></td>
+</tr>
+<tr class="row-odd"><td><p>expandChildren=False</p></td>
+<td><p>bool</p></td>
+<td><p>このオプションをTrueにすると、第一引数jointsに渡したノードの子が操作対象になります。
+目的のジョイントをグループ分けしている場合などに便利です。</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="id8">
+<h3>使用例<a class="headerlink" href="#id8" title="このヘッドラインへのパーマリンク">¶</a></h3>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># __init__.py</span>
+<span class="kn">from</span> <span class="nn">gris3</span> <span class="kn">import</span> <span class="n">constructors</span><span class="p">,</span> <span class="n">func</span><span class="p">,</span> <span class="n">node</span>
+<span class="n">cmds</span> <span class="o">=</span> <span class="n">func</span><span class="o">.</span><span class="n">cmds</span>
+
+<span class="n">LOD_LIST</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;high&#39;</span><span class="p">,</span> <span class="s1">&#39;low&#39;</span><span class="p">]</span>
+
+<span class="k">class</span> <span class="nc">Constructor</span><span class="p">(</span><span class="n">constructors</span><span class="o">.</span><span class="n">currentConstructor</span><span class="p">()):</span>
+    <span class="k">def</span> <span class="nf">init</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">installExtraConstructor</span><span class="p">(</span><span class="s1">&#39;fkCtrlHelper&#39;</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">createController</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="c1"># FKコントローラの親ジョイント名</span>
+        <span class="n">parent_joint</span> <span class="o">=</span> <span class="s1">&#39;spineA_jnt_C&#39;</span>
+
+        <span class="c1"># コントローラ形状の設定。</span>
+        <span class="n">sc</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">shapeCreator</span><span class="p">()</span>
+        <span class="n">sc</span><span class="o">.</span><span class="n">setCurveType</span><span class="p">(</span><span class="s1">&#39;circleArrow&#39;</span><span class="p">)</span>
+        <span class="n">sc</span><span class="o">.</span><span class="n">setRotation</span><span class="p">((</span><span class="mf">180.0</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">,</span> <span class="mf">90.0</span><span class="p">))</span>
+        <span class="n">sc</span><span class="o">.</span><span class="n">setSize</span><span class="p">(</span><span class="mf">8.0</span><span class="p">)</span>
+
+        <span class="c1"># コントローラの作成オプション。</span>
+        <span class="n">opt</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;option&#39;</span><span class="p">:</span><span class="bp">self</span><span class="o">.</span><span class="n">ChainCtrl</span><span class="o">|</span><span class="bp">self</span><span class="o">.</span><span class="n">IgnoreEndCtrl</span><span class="p">}</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">setJointAsFkController</span><span class="p">(</span>
+            <span class="s1">&#39;skirtJoint_grp&#39;</span><span class="p">,</span> <span class="n">parent_joint</span><span class="p">,</span> <span class="s1">&#39;skirt&#39;</span><span class="p">,</span>
+            <span class="n">shapeCreator</span><span class="o">=</span><span class="n">sc</span><span class="p">,</span> <span class="n">ctrlArgs</span><span class="o">=</span><span class="n">opt</span><span class="p">,</span> <span class="n">connectArgs</span><span class="o">=</span><span class="n">opt</span><span class="p">,</span>
+            <span class="n">expandChildren</span><span class="o">=</span><span class="kc">True</span>
+        <span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="unityhumanscaler">
+<h2>unityHumanScaler<a class="headerlink" href="#unityhumanscaler" title="このヘッドラインへのパーマリンク">¶</a></h2>
+<p>hand_jnt_L(R)以下で、
+handユニットに属するジョイントのインバーススケールの効果をOFFにする機能を提供します。</p>
+<p>非常に古いExtraConstructorであり、
+拡張性がないため将来的には別のものに置き換わる可能性があります。</p>
+<p>なお、名前にUnityとついていますがこれは昔の名前の名残で、
+現在は特にUnity専用というわけではありません。</p>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="../gadgets/jointEditor.html" class="btn btn-neutral float-right" title="Joint Editor" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="rigUnits.html" class="btn btn-neutral float-left" title="Rig Units" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        
+        &copy; 著作権 2020, EskeYoshinob
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

@@ -1,0 +1,324 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="ja" >
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>constCollector &mdash; gris3 1.0.0 ドキュメント</title>
+  
+
+  
+  <link rel="stylesheet" href="../../_static/css/customTheme.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+
+  
+  
+  
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
+        <script src="../../_static/jquery.js"></script>
+        <script src="../../_static/underscore.js"></script>
+        <script src="../../_static/doctools.js"></script>
+        <script src="../../_static/language_data.js"></script>
+        <script src="../../_static/translations.js"></script>
+    
+    <script type="text/javascript" src="../../_static/js/theme.js"></script>
+
+    
+    <link rel="author" title="このドキュメントについて" href="../../about.html" />
+    <link rel="index" title="索引" href="../../genindex.html" />
+    <link rel="search" title="検索" href="../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../../index.html" class="icon icon-home" alt="Documentation Home"> gris3
+          
+
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">スタートアップ</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../install.html">インストールと起動</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../updateLog.html">更新履歴</a></li>
+</ul>
+<p class="caption"><span class="caption-text">マニュアル</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../scriptBasedRigging.html">ScriptBasedRigging-概要</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../scriptingForFactory.html">ファクトリーのスクリプティングガイド</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../namingRule.html">命名規則</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../rigUnits.html">Rig Units</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../includedExtraConstructors.html">組み込み済みExtraConstructor</a></li>
+</ul>
+<p class="caption"><span class="caption-text">ガジェット</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../gadgets/jointEditor.html">Joint Editor</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../gadgets/modelSetup.html">Model Setup</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../gadgets/renamer.html">Renamer</a></li>
+</ul>
+<p class="caption"><span class="caption-text">スクリプトツール</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../tools/jointEditor.html">jointEditor</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../tools/extraJoint.html">extraJoint</a></li>
+</ul>
+<p class="caption"><span class="caption-text">開発者向けドキュメント</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../dev/factorySettings.html">ファクトリーセッティング</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../dev/makingRigUnits.html">リグユニットの開発</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../dev/constructor.html">コンストラクタ</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../dev/extraConstructor.html">エクストラコンストラクタ</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../dev/namingRuleSystem.html">命名規則管理システム</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../dev/operateByScript.html">スクリプトによって操作する</a></li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">gris3</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../index.html" class="icon icon-home"></a> &raquo;</li>
+        
+      <li>constCollector</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../../_sources/contents/extraConstructors/constCollector.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="constcollector">
+<h1>constCollector<a class="headerlink" href="#constcollector" title="このヘッドラインへのパーマリンク">¶</a></h1>
+<p>ctrl_grp内に存在する、
+コントローラーをまとめるグループ内にあるコンストレインをすべてrig_grp内に収集します。</p>
+<p>インストール後の戻り値である、
+このExtraConstructorのインスタンスに対して以下のような設定を行うことができます。</p>
+<table class="docutils align-default" id="id6">
+<caption><span class="caption-text">設定できる機能一覧</span><a class="headerlink" href="#id6" title="このテーブルへのパーマリンク">¶</a></caption>
+<colgroup>
+<col style="width: 33%" />
+<col style="width: 33%" />
+<col style="width: 33%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p><strong>メソッド名/変数名</strong></p></td>
+<td><p><strong>引数の型</strong></p></td>
+<td><p><strong>説明</strong></p></td>
+</tr>
+<tr class="row-even"><td><p>addNodeFilter</p></td>
+<td><p><a href="#id1"><span class="problematic" id="id2">*</span></a>function</p></td>
+<td><p>判別用のフィルタ関数を追加します。</p></td>
+</tr>
+<tr class="row-odd"><td><p>removeNodeFilter</p></td>
+<td><p><a href="#id3"><span class="problematic" id="id4">*</span></a>function</p></td>
+<td><p>判別用のフィルタ関数を削除します。</p></td>
+</tr>
+<tr class="row-even"><td><p>useDefault</p></td>
+<td><p>bool</p></td>
+<td><p>デフォルトのフォルタ（コンストレインだけを取得）を
+使用するかどうかを指定します。</p></td>
+</tr>
+<tr class="row-odd"><td><p>ConstGroupName(メンバ変数)</p></td>
+<td><p>str</p></td>
+<td><p>コンストレインを格納するグループ名を指定します。</p>
+<p>デフォルトではctrlCst_grpという名前のグループに格納されます。</p>
+<p>これはメンバ変数なので、直接=で任意の名前を代入して下さい。</p>
+</td>
+</tr>
+</tbody>
+</table>
+<div class="section" id="addnodefilter">
+<h2>addNodeFilter<a class="headerlink" href="#addnodefilter" title="このヘッドラインへのパーマリンク">¶</a></h2>
+<p>このメソッドはグループ内にあるノードを収集する際にフィルタとなる関数を追加することができます。
+デフォルトではコンストレインノードをすべて収集するようになっていますが、
+他にも収集するものを追加場合にはこのメソッドを使用して独自のフィルタを追加して下さい。</p>
+<p>このメソッドにわたす引数は関数です。
+関数は以下のフォーマットで定義して下さい。</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">functionName</span><span class="p">(</span><span class="n">node_name</span><span class="p">):</span>
+    <span class="k">return</span> <span class="kc">True</span>
+</pre></div>
+</div>
+<p>第一引数はフィルタするためのノード名を受け取るようにします。
+また戻り値はフィルタの結果の可否をBoolとして返します。</p>
+<p>フィルタは複数追加することができます。
+このコンストラクタは追加したフィルタすべてでノードのテストを行い、
+一つでもTrueになれば収集対象となるようになっています。</p>
+</div>
+<div class="section" id="usedefault">
+<h2>useDefault<a class="headerlink" href="#usedefault" title="このヘッドラインへのパーマリンク">¶</a></h2>
+<p>このメソッドはデフォルトで動作するフィルタ機能をOFFにします。
+デフォルトで動作するフィルタは、
+グループ内のすべてのコンストレインノードを適用対象とするようになっています。</p>
+<p>デフォルトフィルタは以下の内容になっています。</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">maya</span> <span class="kn">import</span> <span class="n">cmds</span>
+<span class="k">def</span> <span class="nf">defaultFilter</span><span class="p">(</span><span class="n">target</span><span class="p">):</span>
+    <span class="k">return</span> <span class="nb">bool</span><span class="p">(</span><span class="n">cmds</span><span class="o">.</span><span class="n">ls</span><span class="p">(</span><span class="n">target</span><span class="p">,</span> <span class="nb">type</span><span class="o">=</span><span class="s1">&#39;constraint&#39;</span><span class="p">))</span>
+</pre></div>
+</div>
+<p>コンストレインすべてを収集対象としたくない場合はこのメソッドでTrueを設定し、
+独自の収集関数を追加して下さい。</p>
+</div>
+<div class="section" id="id5">
+<h2>使用例<a class="headerlink" href="#id5" title="このヘッドラインへのパーマリンク">¶</a></h2>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">Constructor</span><span class="p">(</span><span class="n">constructors</span><span class="o">.</span><span class="n">currentConstructor</span><span class="p">()):</span>
+    <span class="k">def</span> <span class="nf">ignoreAimConstraint</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">node_name</span><span class="p">):</span>
+        <span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">            エイムコンストレインだけを収集の対象から外すフィルタ。</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="p">(</span>
+            <span class="n">cmds</span><span class="o">.</span><span class="n">ls</span><span class="p">(</span><span class="n">node_name</span><span class="p">,</span> <span class="nb">type</span><span class="o">=</span><span class="s1">&#39;constraint&#39;</span><span class="p">)</span> <span class="ow">and</span>
+            <span class="ow">not</span> <span class="n">cmds</span><span class="o">.</span><span class="n">ls</span><span class="p">(</span><span class="n">node_name</span><span class="p">,</span> <span class="nb">type</span><span class="o">=</span><span class="s1">&#39;aimConstraint&#39;</span><span class="p">)</span>
+        <span class="p">):</span>
+            <span class="k">return</span> <span class="kc">True</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">return</span> <span class="kc">False</span>
+
+    <span class="k">def</span> <span class="nf">init</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="n">ext_cst</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">installExtraConstructor</span><span class="p">(</span><span class="s1">&#39;constCollector&#39;</span><span class="p">)</span>
+        <span class="n">ext_cst</span><span class="o">.</span><span class="n">addNodeFilter</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">ignoreAimConstraint</span><span class="p">)</span>
+        <span class="n">ext_cst</span><span class="o">.</span><span class="n">useDefault</span><span class="p">(</span><span class="kc">False</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        
+        &copy; 著作権 2020, EskeYoshinob
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

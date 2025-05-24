@@ -1,0 +1,640 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="ja" >
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>命名規則管理システム &mdash; gris3 1.0.0 ドキュメント</title>
+  
+
+  
+  <link rel="stylesheet" href="../_static/css/customTheme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+
+  
+  
+  
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/doctools.js"></script>
+        <script src="../_static/language_data.js"></script>
+        <script src="../_static/translations.js"></script>
+    
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+    
+    <link rel="author" title="このドキュメントについて" href="../about.html" />
+    <link rel="index" title="索引" href="../genindex.html" />
+    <link rel="search" title="検索" href="../search.html" />
+    <link rel="next" title="スクリプトによって操作する" href="operateByScript.html" />
+    <link rel="prev" title="エクストラコンストラクタ" href="extraConstructor.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../index.html" class="icon icon-home" alt="Documentation Home"> gris3
+          
+
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">スタートアップ</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../contents/install.html">インストールと起動</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../contents/updateLog.html">更新履歴</a></li>
+</ul>
+<p class="caption"><span class="caption-text">マニュアル</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../contents/scriptBasedRigging.html">ScriptBasedRigging-概要</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../contents/scriptingForFactory.html">ファクトリーのスクリプティングガイド</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../contents/namingRule.html">命名規則</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../contents/rigUnits.html">Rig Units</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../contents/includedExtraConstructors.html">組み込み済みExtraConstructor</a></li>
+</ul>
+<p class="caption"><span class="caption-text">ガジェット</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../gadgets/jointEditor.html">Joint Editor</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../gadgets/modelSetup.html">Model Setup</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../gadgets/renamer.html">Renamer</a></li>
+</ul>
+<p class="caption"><span class="caption-text">スクリプトツール</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../tools/jointEditor.html">jointEditor</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../tools/extraJoint.html">extraJoint</a></li>
+</ul>
+<p class="caption"><span class="caption-text">開発者向けドキュメント</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="factorySettings.html">ファクトリーセッティング</a></li>
+<li class="toctree-l1"><a class="reference internal" href="makingRigUnits.html">リグユニットの開発</a></li>
+<li class="toctree-l1"><a class="reference internal" href="constructor.html">コンストラクタ</a></li>
+<li class="toctree-l1"><a class="reference internal" href="extraConstructor.html">エクストラコンストラクタ</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">命名規則管理システム</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#nrs-minimumnamingrule">命名規則の最小限のルール</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#id3">命名規則に従った名前の操作と仕組み</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#namerule">NameRuleオブジェクト</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id4">ベース名やノードの種類を置き換える</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#func-name">func.Nameの正体</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#id5">命名規則管理クラス</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#system-abstractnamerule">system.AbstractNameRuleクラス</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#system-basicnamerule">system.BasicNameRuleクラス</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#basicnamerule">BasicNameRuleクラスをカスタマイズする</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#id6">命名規則のチェックパターンを編集する</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#allnamepattern">AllNamePatternを各要素に分解する</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id9">分解した要素を任意の順番に置き換える</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id10">サンプルコード</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#id11">カスタム命名規則管理クラスでキャストできるようにする</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#id12">キャスト方法を最適化する</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="operateByScript.html">スクリプトによって操作する</a></li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">gris3</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
+        
+      <li>命名規則管理システム</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../_sources/dev/namingRuleSystem.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="id1">
+<h1>命名規則管理システム<a class="headerlink" href="#id1" title="このヘッドラインへのパーマリンク">¶</a></h1>
+<p>データの管理を行う上で名前のルールは非常に重要です。
+grisではジョイントやリグ、コントローラを作成する際の命名規則を厳重に管理しています。</p>
+<p>命名規則の管理を行うシステムをカスタマイズする事で、独自の命名規則に従ったシステムを構築する事ができます。</p>
+<div class="section" id="nrs-minimumnamingrule">
+<span id="id2"></span><h2>命名規則の最小限のルール<a class="headerlink" href="#nrs-minimumnamingrule" title="このヘッドラインへのパーマリンク">¶</a></h2>
+<p>命名規則をカスタマイズする事はできますが、必要最低限のルールは存在します。
+命名規則管理システムをカスタマイズする上で、以下の要素は必ず意識する必要があります。</p>
+<ul class="simple">
+<li><p>ベース名（主に名前をつける対象を表す具体的な名前）</p></li>
+<li><p>ノードの種類</p></li>
+<li><p>位置を表す文字列</p></li>
+<li><p>プレフィックス</p></li>
+<li><p>サフィックス</p></li>
+<li><p>ベース名に追加する特殊文字</p></li>
+<li><p>ネームスペース</p></li>
+</ul>
+<p>命名規則はこれらの要素を組み合わせて作る必要がありますが、
+全ての要素を入れる必要はありません。</p>
+<p>命名規則を作成する際、上記の要素を`＿`で区切ります。
+例えばGrisデフォルトの命名規則では以下のようになります。</p>
+<blockquote>
+<div><p>ベース名_ノードの種類_位置を表す文字列</p>
+<p>spineA_jnt_C</p>
+</div></blockquote>
+</div>
+<div class="section" id="id3">
+<h2>命名規則に従った名前の操作と仕組み<a class="headerlink" href="#id3" title="このヘッドラインへのパーマリンク">¶</a></h2>
+<div class="section" id="namerule">
+<h3>NameRuleオブジェクト<a class="headerlink" href="#namerule" title="このヘッドラインへのパーマリンク">¶</a></h3>
+<p>一度girsの命名規則に従った名前の扱い方を、サンプルコードを見ながら見てみましょう。</p>
+<div class="highlight-python notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">gris3</span> <span class="kn">import</span> <span class="n">func</span>
+<span class="n">n</span> <span class="o">=</span> <span class="n">func</span><span class="o">.</span><span class="n">Name</span><span class="p">(</span><span class="s1">&#39;spineA_jnt_C&#39;</span><span class="p">)</span>
+<span class="n">n</span><span class="o">.</span><span class="n">name</span><span class="p">()</span>
+<span class="c1"># Result: spineA #</span>
+<span class="n">n</span><span class="o">.</span><span class="n">nodeType</span><span class="p">()</span>
+<span class="c1"># Result: jnt #</span>
+<span class="n">n</span><span class="o">.</span><span class="n">position</span><span class="p">()</span>
+<span class="c1"># Result: C #</span>
+
+<span class="n">n2</span> <span class="o">=</span> <span class="n">func</span><span class="o">.</span><span class="n">Name</span><span class="p">(</span><span class="s1">&#39;J_C_spineA&#39;</span><span class="p">)</span>
+<span class="c1"># Error: ValueError: The given name is not supported : J_C_spineA #</span>
+</pre></div>
+</td></tr></table></div>
+<p>Name関数に文字列を渡すと、文字列を解析して
+<a class="reference internal" href="#nrs-minimumnamingrule"><span class="std std-ref">命名規則の最小限のルール</span></a>
+の要素に分解した状態でデータを保持する
+<strong>NameRuleオブジェクト</strong>
+が返されます。</p>
+<p>NameRuleオブジェクトでは各要素に対して
+<strong>name</strong>
+や
+<strong>nodeType</strong>
+などの専用メソッドを用いてアクセスする事ができます。</p>
+<p>また、命名規則違反の文字列を渡された場合はエラーを返します。</p>
+</div>
+<div class="section" id="id4">
+<h3>ベース名やノードの種類を置き換える<a class="headerlink" href="#id4" title="このヘッドラインへのパーマリンク">¶</a></h3>
+<p>NameRuleオブジェクトはベース名やノードの種類、
+位置を表す文字列などの最小限の要素ごとにアクセスできるだけでなく、
+編集を加える事も可能です。</p>
+<p>以下のサンプルコードではNameRuleオブジェクト化した後に、
+ベース名とノードの種類に変更を加えています。</p>
+<div class="highlight-python notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3
+4
+5
+6
+7
+8</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">gris3</span> <span class="kn">import</span> <span class="n">func</span>
+<span class="n">n</span> <span class="o">=</span> <span class="n">func</span><span class="o">.</span><span class="n">Name</span><span class="p">(</span><span class="s1">&#39;spineA_jnt_C&#39;</span><span class="p">)</span>
+<span class="n">n</span><span class="o">.</span><span class="n">setNodeType</span><span class="p">(</span><span class="s1">&#39;jntProxy&#39;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">n</span><span class="p">())</span>
+<span class="c1"># Result: spineA_jntProxy_C #</span>
+<span class="n">n</span><span class="o">.</span><span class="n">setName</span><span class="p">(</span><span class="s1">&#39;head&#39;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">n</span><span class="p">())</span>
+<span class="c1"># Result: head_jntProxy_C #</span>
+</pre></div>
+</td></tr></table></div>
+<p>NameRuleオブジェクトは()を付けて呼び出す事により、
+変更後の名前を文字列として返します。</p>
+</div>
+<div class="section" id="func-name">
+<span id="nrs-funcname"></span><h3>func.Nameの正体<a class="headerlink" href="#func-name" title="このヘッドラインへのパーマリンク">¶</a></h3>
+<p>func.Nameは実はラッパー関数であり、
+実際にNameRuleオブジェクトの生成は別のシステムが担っています。</p>
+<p>func.Nameの内部は以下のようになっています。</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">Name</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s1">&#39;&#39;</span><span class="p">):</span>
+    <span class="kn">from</span> <span class="nn">.system</span> <span class="kn">import</span> <span class="n">GlobalSys</span>
+    <span class="k">return</span> <span class="n">GlobalSys</span><span class="p">()</span><span class="o">.</span><span class="n">nameRule</span><span class="p">()(</span><span class="n">name</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Name関数の内部ではsystemモジュールのGlobalSysクラスが呼びだれており、
+このクラスがNameRuleオブジェクトを生成して返すようになっています。</p>
+<p>GlobalSysクラスはgrisの全体管理を行うシステムクラスです。
+このクラスが現在有効となっているNameRuleオブジェクトを返す事により、
+システムで作成されるノードの名前を一意のルールで管理する事ができるようになっています。</p>
+</div>
+</div>
+<div class="section" id="id5">
+<h2>命名規則管理クラス<a class="headerlink" href="#id5" title="このヘッドラインへのパーマリンク">¶</a></h2>
+<p>grisでは命名規則を管理するための「
+<strong>NameRule</strong>
+」オブジェクトが存在しています。、</p>
+<p>GlobalSysクラスは
+<a class="reference internal" href="#nrs-funcname"><span class="std std-ref">func.Nameの正体</span></a>
+で紹介したように、現在有効になっているNameRuleオブジェクトを返しています。</p>
+<p>開発者はこのNameRuleオブジェクトをカスタマイズし、
+GlobalSysにカスタムNameRuleオブジェクトをセットする事により、
+システム全体の命名規則の管理を行う事ができるようになります。</p>
+<div class="section" id="system-abstractnamerule">
+<h3>system.AbstractNameRuleクラス<a class="headerlink" href="#system-abstractnamerule" title="このヘッドラインへのパーマリンク">¶</a></h3>
+<p>このクラスは命名規則の定義を行うための抽象クラスです。
+<a class="reference internal" href="#nrs-minimumnamingrule"><span class="std std-ref">命名規則の最小限のルール</span></a>
+の要件をベースに名前ルールを定義する事ができるように設計されています。</p>
+</div>
+<div class="section" id="system-basicnamerule">
+<h3>system.BasicNameRuleクラス<a class="headerlink" href="#system-basicnamerule" title="このヘッドラインへのパーマリンク">¶</a></h3>
+<p>このクラスはsystem.AbstractNameRuleクラスのサブクラスであり、
+grisの基本形となる命名規則を定義、管理するクラスです。
+デフォルトではこの命名規則管理クラスによって名前が決定されます。</p>
+<p>このクラスでは</p>
+<ul class="simple">
+<li><p>ネームスペース</p></li>
+<li><p>ベース名</p></li>
+<li><p>ノードの種類</p></li>
+<li><p>位置</p></li>
+</ul>
+<dl class="simple">
+<dt>で構成される名前をサポートしています。</dt><dd><p><strong>(ネームスペース:)ノード名_ノードの種類(_位置）</strong></p>
+</dd>
+</dl>
+<p>のルールに則った文字列をインスタンス生成時に受け取ると、
+解析後、問題なければ各要素に分けて名前を保持します。</p>
+<p>問題がある場合はエラーを返します。</p>
+</div>
+</div>
+<div class="section" id="basicnamerule">
+<span id="nrc-customizenameruleclass"></span><h2>BasicNameRuleクラスをカスタマイズする<a class="headerlink" href="#basicnamerule" title="このヘッドラインへのパーマリンク">¶</a></h2>
+<p>BasicNameRuleクラスは必要最低限の機能を持った命名管理クラスですが、
+プロジェクトによっては必要要素は同じでもベース名やノードの種類名などの位置が違う場合もあります。</p>
+<table class="docutils align-default">
+<colgroup>
+<col style="width: 33%" />
+<col style="width: 33%" />
+<col style="width: 33%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p>元の命名規則</p></td>
+<td><p>(ネームスペース:)ノード名_ノードの種類(_位置）</p></td>
+<td><p>例）spineA_jnt_C</p></td>
+</tr>
+<tr class="row-even"><td><p>新しい命名規則</p></td>
+<td><p>(ネームスペース:)ノードの種類_位置_ノード名</p></td>
+<td><p>例）J_C_spineA</p></td>
+</tr>
+</tbody>
+</table>
+<p>このような場合、元のBasicNameRuleクラスを継承したサブクラスを作成すると良いでしょう。</p>
+<div class="section" id="id6">
+<h3>命名規則のチェックパターンを編集する<a class="headerlink" href="#id6" title="このヘッドラインへのパーマリンク">¶</a></h3>
+<p>BasicNameRuleクラスには命名規則をチェックするための４つのアトリビュートがあります。</p>
+<table class="docutils align-default">
+<colgroup>
+<col style="width: 33%" />
+<col style="width: 33%" />
+<col style="width: 33%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p><strong>アトリビュート名</strong></p></td>
+<td><p><strong>デフォルト値</strong></p></td>
+<td><p><strong>説明</strong></p></td>
+</tr>
+<tr class="row-even"><td><p>AllNamePattern</p></td>
+<td><p>^([a-zA-Z][a-zA-Zd]+:<a href="#id7"><span class="problematic" id="id8">|</span></a>)([a-zA-Z][a-zA-Zd]+)_([a-zA-Zd]+)(?:_([A-Z]+)$|$)</p></td>
+<td><p>入力文字列チェック用の正規表現</p></td>
+</tr>
+<tr class="row-odd"><td><p>NamePattern</p></td>
+<td><p>^[a-zA-Z][a-zA-Zd]+$</p></td>
+<td><p>ベース名のチェック用正規表現</p></td>
+</tr>
+<tr class="row-even"><td><p>TypePattern</p></td>
+<td><p>^[a-zA-Zd]+$</p></td>
+<td><p>ノードの種類のチェック用正規表現</p></td>
+</tr>
+<tr class="row-odd"><td><p>PosPattern</p></td>
+<td><p>'^[A-Z]+$'</p></td>
+<td><p>位置を表す文字列のチェック用正規表現</p></td>
+</tr>
+</tbody>
+</table>
+<p>これらアトリビュートはすべて正規表現オブジェクトです。</p>
+<p>継承したサブクラスでこれらアトリビュートを変更する事により入力文字列のチェックを行う事ができるようになります。</p>
+<p>AllNamePatternに使用する正規表現は（）でグループ化し、
+後の工程で要素ごとに取り出せるようにする必要があります。</p>
+</div>
+<div class="section" id="allnamepattern">
+<h3>AllNamePatternを各要素に分解する<a class="headerlink" href="#allnamepattern" title="このヘッドラインへのパーマリンク">¶</a></h3>
+<p>上記アトリビュートの変更は、チェック機構の変更を意味します。
+変更した後に、AllNamePatternによって返される正規表現オブジェクトを使用して各要素に分解する必要があります。</p>
+<p>正規表現オブジェクトから要素の分解を行うにはsetupメソッドを上書きします。</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">setup</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="n">mobj</span><span class="p">):</span>
+</pre></div>
+</div>
+<p>引き数mobjはAllNamePatternによって生成された正規表現オブジェクトです。</p>
+<p>setupメソッド内では、self.setNameやself.setNodeType、
+self.setPositionなどのメソッドを使用して要素として登録します。</p>
+</div>
+<div class="section" id="id9">
+<h3>分解した要素を任意の順番に置き換える<a class="headerlink" href="#id9" title="このヘッドラインへのパーマリンク">¶</a></h3>
+<p>setupで分解した要素をそれぞれに登録し終わったら、最後に各要素の順番を変更します。
+養素の順番を変更するにはelementsメソッドを上書きします。</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">elements</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="k">return</span> <span class="p">[]</span>
+</pre></div>
+</div>
+<p>BasicNameRuleクラスはelementsで返された文字列のリストを_で結合して返すようになります。</p>
+</div>
+<div class="section" id="id10">
+<h3>サンプルコード<a class="headerlink" href="#id10" title="このヘッドラインへのパーマリンク">¶</a></h3>
+<div class="highlight-python notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">re</span>
+<span class="kn">from</span> <span class="nn">gris3</span> <span class="kn">import</span> <span class="n">system</span>
+<span class="k">class</span> <span class="nc">MyNameRule</span><span class="p">(</span><span class="n">system</span><span class="o">.</span><span class="n">BasicNameRule</span><span class="p">):</span>
+    <span class="n">AllNamePattern</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span>
+        <span class="s1">&#39;^([a-zA-Z][a-zA-Z\d]+:|)([A-Z])_([A-Z])_([a-zA-Z][a-zA-Z\d]+$)&#39;</span>
+    <span class="p">)</span>
+    <span class="n">NamePattern</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span><span class="s1">&#39;^[a-zA-Z][a-zA-Z\d]+$&#39;</span><span class="p">)</span>
+    <span class="n">TypePattern</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span><span class="s1">&#39;^[a-zA-Z]&#39;</span><span class="p">)</span>
+    <span class="n">PosPattern</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span><span class="s1">&#39;^[A-Z]&#39;</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">setup</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="n">mobj</span><span class="p">):</span>
+        <span class="c1"># 引き数mobjはAllNamePatternのsearchを行った結果の正規表現オブジェクト。</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">setNamespace</span><span class="p">(</span><span class="n">mobj</span><span class="o">.</span><span class="n">group</span><span class="p">(</span><span class="mi">1</span><span class="p">)[:</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">setName</span><span class="p">(</span><span class="n">mobj</span><span class="o">.</span><span class="n">group</span><span class="p">(</span><span class="mi">4</span><span class="p">))</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">setNodeType</span><span class="p">(</span><span class="n">mobj</span><span class="o">.</span><span class="n">group</span><span class="p">(</span><span class="mi">2</span><span class="p">))</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">setPosition</span><span class="p">(</span><span class="n">mobj</span><span class="o">.</span><span class="n">group</span><span class="p">(</span><span class="mi">3</span><span class="p">))</span>
+
+    <span class="k">def</span> <span class="nf">elements</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">nodeType</span><span class="p">(),</span> <span class="bp">self</span><span class="o">.</span><span class="n">position</span><span class="p">(),</span> <span class="bp">self</span><span class="o">.</span><span class="n">name</span><span class="p">()]</span>
+
+<span class="n">MyNameRule</span><span class="p">(</span><span class="s1">&#39;J_C_spineA&#39;</span><span class="p">)</span>
+<span class="c1"># Result: J_C_spineA #</span>
+</pre></div>
+</td></tr></table></div>
+</div>
+</div>
+<div class="section" id="id11">
+<h2>カスタム命名規則管理クラスでキャストできるようにする<a class="headerlink" href="#id11" title="このヘッドラインへのパーマリンク">¶</a></h2>
+<p>命名規則オブジェクトをカスタマイズするメリットとして、
+ある命名規則をカスタムした命名規則にキャストする事ができると言う点があります。</p>
+<p>命名規則オブジェクトは
+<strong>&gt;&gt;</strong>
+演算子をサポートしており、
+この演算子を使用する事によって名前を別の規則にキャストする事ができます。</p>
+<p><a class="reference internal" href="#nrc-customizenameruleclass"><span class="std std-ref">BasicNameRuleクラスをカスタマイズする</span></a>
+でカスタムした命名規則オブジェクトを使用して、gris標準命名規則からキャストを行ってみます。</p>
+<div class="highlight-python notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3
+4
+5
+6</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">gris3</span> <span class="kn">import</span> <span class="n">system</span>
+<span class="n">s</span> <span class="o">=</span> <span class="n">system</span><span class="o">.</span><span class="n">BasicNameRule</span><span class="p">(</span><span class="s1">&#39;spineA_jnt_C&#39;</span><span class="p">)</span>
+<span class="n">d</span> <span class="o">=</span> <span class="n">MyNameRule</span><span class="p">()</span>
+<span class="n">s</span> <span class="o">&gt;&gt;</span> <span class="n">d</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">d</span><span class="p">())</span>
+<span class="c1"># Result: jnt_C_spineA #</span>
+</pre></div>
+</td></tr></table></div>
+<div class="section" id="id12">
+<h3>キャスト方法を最適化する<a class="headerlink" href="#id12" title="このヘッドラインへのパーマリンク">¶</a></h3>
+<p>無事キャストが完了し、カスタムした命名規則に変換されました。</p>
+<p>しかしカスタムした命名規則はノードの種類を表す文字列を１文字と定義しているため、
+キャスト後の名前は正しくありません。</p>
+<p>そこでノードの種類を設定するsetNodeTypeメソッドをカスタマイズして、
+理想的な名前にキャストできるよう挙動を修正します。</p>
+<p><a class="reference internal" href="#nrc-customizenameruleclass"><span class="std std-ref">BasicNameRuleクラスをカスタマイズする</span></a>
+でカスタマイズしたクラスのsetNodeTypeを変更します。</p>
+<div class="highlight-python notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">re</span>
+<span class="kn">from</span> <span class="nn">gris3</span> <span class="kn">import</span> <span class="n">system</span>
+<span class="k">class</span> <span class="nc">MyNameRule</span><span class="p">(</span><span class="n">system</span><span class="o">.</span><span class="n">BasicNameRule</span><span class="p">):</span>
+    <span class="n">AllNamePattern</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span>
+        <span class="s1">&#39;^([a-zA-Z][a-zA-Z\d]+:|)([A-Z])_([A-Z])_([a-zA-Z][a-zA-Z\d]+$)&#39;</span>
+    <span class="p">)</span>
+    <span class="n">NamePattern</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span><span class="s1">&#39;^[a-zA-Z][a-zA-Z\d]+$&#39;</span><span class="p">)</span>
+    <span class="n">TypePattern</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span><span class="s1">&#39;^[a-zA-Z]&#39;</span><span class="p">)</span>
+    <span class="n">PosPattern</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span><span class="s1">&#39;^[A-Z]&#39;</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">setup</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="n">mobj</span><span class="p">):</span>
+        <span class="c1"># 引き数mobjはAllNamePatternのsearchを行った結果の正規表現オブジェクト。</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">setNamespace</span><span class="p">(</span><span class="n">mobj</span><span class="o">.</span><span class="n">group</span><span class="p">(</span><span class="mi">1</span><span class="p">)[:</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">setName</span><span class="p">(</span><span class="n">mobj</span><span class="o">.</span><span class="n">group</span><span class="p">(</span><span class="mi">4</span><span class="p">))</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">setNodeType</span><span class="p">(</span><span class="n">mobj</span><span class="o">.</span><span class="n">group</span><span class="p">(</span><span class="mi">2</span><span class="p">))</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">setPosition</span><span class="p">(</span><span class="n">mobj</span><span class="o">.</span><span class="n">group</span><span class="p">(</span><span class="mi">3</span><span class="p">))</span>
+
+    <span class="k">def</span> <span class="nf">elements</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">nodeType</span><span class="p">(),</span> <span class="bp">self</span><span class="o">.</span><span class="n">position</span><span class="p">(),</span> <span class="bp">self</span><span class="o">.</span><span class="n">name</span><span class="p">()]</span>
+
+    <span class="k">def</span> <span class="nf">setNodeType</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">nodeType</span><span class="p">):</span>
+        <span class="nb">super</span><span class="p">(</span><span class="n">MyNameRule</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="n">setNodeType</span><span class="p">(</span><span class="n">nodeType</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">upper</span><span class="p">())</span>
+
+
+<span class="n">s</span> <span class="o">=</span> <span class="n">system</span><span class="o">.</span><span class="n">BasicNameRule</span><span class="p">(</span><span class="s1">&#39;spineA_jnt_C&#39;</span><span class="p">)</span>
+<span class="n">d</span> <span class="o">=</span> <span class="n">MyNameRule</span><span class="p">()</span>
+<span class="n">s</span> <span class="o">&gt;&gt;</span> <span class="n">d</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">d</span><span class="p">())</span>
+<span class="c1"># Result: J_C_spineA #</span>
+</pre></div>
+</td></tr></table></div>
+<p>これで無事正しいキャストができるようになりました。</p>
+</div>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="operateByScript.html" class="btn btn-neutral float-right" title="スクリプトによって操作する" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="extraConstructor.html" class="btn btn-neutral float-left" title="エクストラコンストラクタ" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        
+        &copy; 著作権 2020, EskeYoshinob
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>
