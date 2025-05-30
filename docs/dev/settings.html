@@ -7,7 +7,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Renamer &mdash; gris3 1.0.0 ドキュメント</title>
+  <title>設定にまつわる機能 &mdash; gris3 1.0.0 ドキュメント</title>
   
 
   
@@ -38,8 +38,7 @@
     <link rel="author" title="このドキュメントについて" href="../about.html" />
     <link rel="index" title="索引" href="../genindex.html" />
     <link rel="search" title="検索" href="../search.html" />
-    <link rel="next" title="jointEditor" href="../tools/jointEditor.html" />
-    <link rel="prev" title="Model Setup" href="modelSetup.html" /> 
+    <link rel="prev" title="スクリプトによって操作する" href="operateByScript.html" /> 
 </head>
 
 <body class="wy-body-for-nav">
@@ -98,10 +97,10 @@
 <li class="toctree-l1"><a class="reference internal" href="../contents/includedExtraConstructors.html">組み込み済みExtraConstructor</a></li>
 </ul>
 <p class="caption"><span class="caption-text">ガジェット</span></p>
-<ul class="current">
-<li class="toctree-l1"><a class="reference internal" href="jointEditor.html">Joint Editor</a></li>
-<li class="toctree-l1"><a class="reference internal" href="modelSetup.html">Model Setup</a></li>
-<li class="toctree-l1 current"><a class="current reference internal" href="#">Renamer</a></li>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../gadgets/jointEditor.html">Joint Editor</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../gadgets/modelSetup.html">Model Setup</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../gadgets/renamer.html">Renamer</a></li>
 </ul>
 <p class="caption"><span class="caption-text">スクリプトツール</span></p>
 <ul>
@@ -109,15 +108,22 @@
 <li class="toctree-l1"><a class="reference internal" href="../tools/extraJoint.html">extraJoint</a></li>
 </ul>
 <p class="caption"><span class="caption-text">開発者向けドキュメント</span></p>
-<ul>
-<li class="toctree-l1"><a class="reference internal" href="../dev/factorySettings.html">ファクトリーセッティング</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../dev/factoryModules.html">ファクトリーモジュール</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../dev/makingRigUnits.html">リグユニットの開発</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../dev/constructor.html">コンストラクタ</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../dev/extraConstructor.html">エクストラコンストラクタ</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../dev/namingRuleSystem.html">命名規則管理システム</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../dev/operateByScript.html">スクリプトによって操作する</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../dev/settings.html">設定にまつわる機能</a></li>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="factorySettings.html">ファクトリーセッティング</a></li>
+<li class="toctree-l1"><a class="reference internal" href="factoryModules.html">ファクトリーモジュール</a></li>
+<li class="toctree-l1"><a class="reference internal" href="makingRigUnits.html">リグユニットの開発</a></li>
+<li class="toctree-l1"><a class="reference internal" href="constructor.html">コンストラクタ</a></li>
+<li class="toctree-l1"><a class="reference internal" href="extraConstructor.html">エクストラコンストラクタ</a></li>
+<li class="toctree-l1"><a class="reference internal" href="namingRuleSystem.html">命名規則管理システム</a></li>
+<li class="toctree-l1"><a class="reference internal" href="operateByScript.html">スクリプトによって操作する</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">設定にまつわる機能</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#globalsettings-xml">globalSettings.xml</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#id2">標準的なフォーマット</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id3">利用可能なタグ</a></li>
+</ul>
+</li>
+</ul>
+</li>
 </ul>
 
             
@@ -164,13 +170,13 @@
     
       <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
         
-      <li>Renamer</li>
+      <li>設定にまつわる機能</li>
     
     
       <li class="wy-breadcrumbs-aside">
         
             
-            <a href="../_sources/gadgets/renamer.rst.txt" rel="nofollow"> View page source</a>
+            <a href="../_sources/dev/settings.rst.txt" rel="nofollow"> View page source</a>
           
         
       </li>
@@ -183,8 +189,57 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
             
-  <div class="section" id="renamer">
-<h1>Renamer<a class="headerlink" href="#renamer" title="このヘッドラインへのパーマリンク">¶</a></h1>
+  <div class="section" id="id1">
+<h1>設定にまつわる機能<a class="headerlink" href="#id1" title="このヘッドラインへのパーマリンク">¶</a></h1>
+<p>settingsモジュールはGRISに関する各種設定を定義します。</p>
+<div class="section" id="globalsettings-xml">
+<span id="st-globalsettingsxml"></span><h2>globalSettings.xml<a class="headerlink" href="#globalsettings-xml" title="このヘッドラインへのパーマリンク">¶</a></h2>
+<p>このXMLファイルはGRISの拡張モジュールを検索する際に、
+検索するモジュールのプレフィックスとなるPythonパッケージを指定できます。</p>
+<div class="section" id="id2">
+<h3>標準的なフォーマット<a class="headerlink" href="#id2" title="このヘッドラインへのパーマリンク">¶</a></h3>
+<p>標準では以下のような内容で記述されています。</p>
+<div class="highlight-xml notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3
+4
+5
+6</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="cp">&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot; ?&gt;</span>
+<span class="nt">&lt;grisPref&gt;</span>
+    <span class="nt">&lt;constructorPrefix&gt;</span>gris3AddOns.constructors<span class="nt">&lt;/constructorPrefix&gt;</span>
+    <span class="nt">&lt;rigUnitPrefix&gt;</span>gris3AddOns.rigUnits<span class="nt">&lt;/rigUnitPrefix&gt;</span>
+    <span class="nt">&lt;factoryModules&gt;</span>gris3AddOns.factoryModules<span class="nt">&lt;/factoryModules&gt;</span>
+<span class="nt">&lt;/grisPref&gt;</span>
+</pre></div>
+</td></tr></table></div>
+</div>
+<div class="section" id="id3">
+<h3>利用可能なタグ<a class="headerlink" href="#id3" title="このヘッドラインへのパーマリンク">¶</a></h3>
+<p>タグで指定すると、対応した機能を指定したPythonパッケージの中から検索するようになります。</p>
+<p>ここで指定する内容はファイルパスではなく、Pythonパッケージである点にご注意下さい。</p>
+<table class="docutils align-default" id="id4">
+<caption><span class="caption-text">有効なタグ一覧</span><a class="headerlink" href="#id4" title="このテーブルへのパーマリンク">¶</a></caption>
+<colgroup>
+<col style="width: 50%" />
+<col style="width: 50%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p>constructorPrefix</p></td>
+<td><p>ここで指定したPythonパッケージの下にカスタムのConstructorモジュールを配置すると,
+コンストラクタとして認識されるようになる。</p></td>
+</tr>
+<tr class="row-even"><td><p>rigUnitPrefix</p></td>
+<td><p>ここで指定したPythonパッケージの下にリグユニット用モジュールを配置すると,
+リグモジュールとして認識されるようになる。</p></td>
+</tr>
+<tr class="row-odd"><td><p>factoryModules</p></td>
+<td><p>ここで指定したPythonパッケージの下にFactoryModuleを配置すると、
+FactoryModuleの一つとしてConstructor内で利用できるようになる。</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
 </div>
 
 
@@ -195,10 +250,8 @@
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
-        <a href="../tools/jointEditor.html" class="btn btn-neutral float-right" title="jointEditor" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
       
-      
-        <a href="modelSetup.html" class="btn btn-neutral float-left" title="Model Setup" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+        <a href="operateByScript.html" class="btn btn-neutral float-left" title="スクリプトによって操作する" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
       
     </div>
   

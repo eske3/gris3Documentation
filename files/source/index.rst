@@ -52,11 +52,13 @@ gris3 Documentation
     :caption: 開発者向けドキュメント
 
     /dev/factorySettings
+    /dev/factoryModules
     /dev/makingRigUnits
     /dev/constructor
     /dev/extraConstructor
     /dev/namingRuleSystem
     /dev/operateByScript
+    /dev/settings
 
 
 Indices and Tables

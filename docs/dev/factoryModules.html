@@ -1,0 +1,457 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="ja" >
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>ファクトリーモジュール &mdash; gris3 1.0.0 ドキュメント</title>
+  
+
+  
+  <link rel="stylesheet" href="../_static/css/customTheme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+
+  
+  
+  
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/doctools.js"></script>
+        <script src="../_static/language_data.js"></script>
+        <script src="../_static/translations.js"></script>
+    
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+    
+    <link rel="author" title="このドキュメントについて" href="../about.html" />
+    <link rel="index" title="索引" href="../genindex.html" />
+    <link rel="search" title="検索" href="../search.html" />
+    <link rel="next" title="リグユニットの開発" href="makingRigUnits.html" />
+    <link rel="prev" title="ファクトリーセッティング" href="factorySettings.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../index.html" class="icon icon-home" alt="Documentation Home"> gris3
+          
+
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">スタートアップ</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../contents/install.html">インストールと起動</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../contents/updateLog.html">更新履歴</a></li>
+</ul>
+<p class="caption"><span class="caption-text">マニュアル</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../contents/scriptBasedRigging.html">ScriptBasedRigging-概要</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../contents/scriptingForFactory.html">ファクトリーのスクリプティングガイド</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../contents/namingRule.html">命名規則</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../contents/rigUnits.html">Rig Units</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../contents/includedExtraConstructors.html">組み込み済みExtraConstructor</a></li>
+</ul>
+<p class="caption"><span class="caption-text">ガジェット</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../gadgets/jointEditor.html">Joint Editor</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../gadgets/modelSetup.html">Model Setup</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../gadgets/renamer.html">Renamer</a></li>
+</ul>
+<p class="caption"><span class="caption-text">スクリプトツール</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../tools/jointEditor.html">jointEditor</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../tools/extraJoint.html">extraJoint</a></li>
+</ul>
+<p class="caption"><span class="caption-text">開発者向けドキュメント</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="factorySettings.html">ファクトリーセッティング</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">ファクトリーモジュール</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#id2">仕様</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#id3">モジュールの仕様</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#init-py">__init__.py</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#id4">作成に使用するクラス</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#factorymodules-abstractdepartment">factoryModules.AbstractDepartment</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#id5">よく使用するメソッド一覧</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#factorymodules-abstractdepartmentgui">factoryModules.AbstractDepartmentGUI</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="makingRigUnits.html">リグユニットの開発</a></li>
+<li class="toctree-l1"><a class="reference internal" href="constructor.html">コンストラクタ</a></li>
+<li class="toctree-l1"><a class="reference internal" href="extraConstructor.html">エクストラコンストラクタ</a></li>
+<li class="toctree-l1"><a class="reference internal" href="namingRuleSystem.html">命名規則管理システム</a></li>
+<li class="toctree-l1"><a class="reference internal" href="operateByScript.html">スクリプトによって操作する</a></li>
+<li class="toctree-l1"><a class="reference internal" href="settings.html">設定にまつわる機能</a></li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">gris3</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
+        
+      <li>ファクトリーモジュール</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../_sources/dev/factoryModules.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="id1">
+<h1>ファクトリーモジュール<a class="headerlink" href="#id1" title="このヘッドラインへのパーマリンク">¶</a></h1>
+<p>コンストラクタがビルドする際に、
+必要となる要素を作成、書き出すための仕組みを提供することを目的とした
+モジュール群です。</p>
+<p>ファクトリーモジュールは都合に応じて追加、拡張することができます。</p>
+<div class="section" id="id2">
+<h2>仕様<a class="headerlink" href="#id2" title="このヘッドラインへのパーマリンク">¶</a></h2>
+<p>ファクトリーモジュールを追加するにはFactoryModulesパス内に
+任意の仕様で作成したPythonモジュールを作成します。</p>
+<p>FactoryModuleパスはデフォルトではfactoryModulesパッケージ直下、
+ならびに
+<strong>globalSettings.xml</strong>
+によって定義されるPythonモジュール内になります。</p>
+<div class="admonition seealso">
+<p class="admonition-title">参考</p>
+<p><a class="reference internal" href="settings.html#st-globalsettingsxml"><span class="std std-ref">globalSettings.xml</span></a></p>
+</div>
+<div class="section" id="id3">
+<h3>モジュールの仕様<a class="headerlink" href="#id3" title="このヘッドラインへのパーマリンク">¶</a></h3>
+<p>ファクトリーモジュールは、Pythonのモジュールでもパッケージでも問題ありませんが、
+基本的にはパッケージで作成することをオススメします。
+以下基本的なパッケージ構成を示します。</p>
+<div><svg height="280" viewBox="0 0 448 280" width="448" xmlns="http://www.w3.org/2000/svg" xmlns:inkspace="http://www.inkscape.org/namespaces/inkscape" xmlns:xlink="http://www.w3.org/1999/xlink">
+  <defs id="defs_block">
+    <filter height="1.504" id="filter_blur" inkspace:collect="always" width="1.1575" x="-0.07875" y="-0.252">
+      <feGaussianBlur id="feGaussianBlur3780" inkspace:collect="always" stdDeviation="4.2" />
+    </filter>
+  </defs>
+  <title>blockdiag</title>
+  <desc />
+  <polygon fill="rgb(0,0,0)" points="67,46 179,46 195,62 195,86 67,86 67,46" stroke="rgb(0,0,0)" style="filter:url(#filter_blur);opacity:0.7;fill-opacity:1" />
+  <rect fill="rgb(0,0,0)" height="40" stroke="rgb(0,0,0)" style="filter:url(#filter_blur);opacity:0.7;fill-opacity:1" width="128" x="259" y="46" />
+  <rect fill="rgb(0,0,0)" height="40" stroke="rgb(0,0,0)" style="filter:url(#filter_blur);opacity:0.7;fill-opacity:1" width="128" x="259" y="126" />
+  <rect fill="rgb(0,0,0)" height="40" stroke="rgb(0,0,0)" style="filter:url(#filter_blur);opacity:0.7;fill-opacity:1" width="128" x="267" y="214" />
+  <rect fill="rgb(0,0,0)" height="40" stroke="rgb(0,0,0)" style="filter:url(#filter_blur);opacity:0.7;fill-opacity:1" width="128" x="263" y="210" />
+  <rect fill="rgb(0,0,0)" height="40" stroke="rgb(0,0,0)" style="filter:url(#filter_blur);opacity:0.7;fill-opacity:1" width="128" x="259" y="206" />
+  <polygon fill="rgb(207,188,122)" points="64,40 176,40 192,56 192,80 64,80 64,40" stroke="rgb(0,0,0)" />
+  <path d="M 176 40 L 176 56" fill="none" stroke="rgb(0,0,0)" />
+  <path d="M 176 56 L 192 56" fill="none" stroke="rgb(0,0,0)" />
+  <text fill="rgb(0,0,0)" font-family="sans-serif" font-size="11" font-style="normal" font-weight="normal" text-anchor="middle" textLength="102" x="128.0" y="66">FactoryModuleName</text>
+  <rect fill="rgb(255,255,255)" height="40" stroke="rgb(0,0,0)" width="128" x="256" y="40" />
+  <text fill="rgb(0,0,0)" font-family="sans-serif" font-size="11" font-style="normal" font-weight="normal" text-anchor="middle" textLength="66" x="320.0" y="66">__init__.py</text>
+  <rect fill="rgb(255,255,255)" height="40" stroke="rgb(0,0,0)" width="128" x="256" y="120" />
+  <text fill="rgb(0,0,0)" font-family="sans-serif" font-size="11" font-style="normal" font-weight="normal" text-anchor="middle" textLength="48" x="320.0" y="146">icon.png</text>
+  <rect fill="rgb(255,255,255)" height="40" stroke="rgb(0,0,0)" width="128" x="264" y="208" />
+  <rect fill="rgb(255,255,255)" height="40" stroke="rgb(0,0,0)" width="128" x="260" y="204" />
+  <rect fill="rgb(255,255,255)" height="40" stroke="rgb(0,0,0)" width="128" x="256" y="200" />
+  <text fill="rgb(0,0,0)" font-family="sans-serif" font-size="11" font-style="normal" font-weight="normal" text-anchor="middle" textLength="114" x="320.0" y="226">python_module.py...</text>
+  <path d="M 192 60 L 248 60" fill="none" stroke="rgb(0,0,0)" />
+  <polygon fill="rgb(0,0,0)" points="255,60 248,56 248,64 255,60" stroke="rgb(0,0,0)" />
+  <path d="M 192 60 L 224 60" fill="none" stroke="rgb(0,0,0)" />
+  <path d="M 224 60 L 224 140" fill="none" stroke="rgb(0,0,0)" />
+  <path d="M 224 140 L 248 140" fill="none" stroke="rgb(0,0,0)" />
+  <polygon fill="rgb(0,0,0)" points="255,140 248,136 248,144 255,140" stroke="rgb(0,0,0)" />
+  <path d="M 192 60 L 224 60" fill="none" stroke="rgb(0,0,0)" />
+  <path d="M 224 60 L 224 220" fill="none" stroke="rgb(0,0,0)" />
+  <path d="M 224 220 L 248 220" fill="none" stroke="rgb(0,0,0)" />
+  <polygon fill="rgb(0,0,0)" points="255,220 248,216 248,224 255,220" stroke="rgb(0,0,0)" />
+</svg>
+</div>
+</div>
+<div class="section" id="init-py">
+<h3>__init__.py<a class="headerlink" href="#init-py" title="このヘッドラインへのパーマリンク">¶</a></h3>
+<p>このモジュール内には必ず
+<a class="reference internal" href="#fm-abstractdepartmentclass"><span class="std std-ref">factoryModules.AbstractDepartment</span></a>
+クラスを継承した
+<strong>Departmentクラス</strong>
+を作成する必要があります。</p>
+<p>また、ファクトリー用のGUIについては
+<a class="reference internal" href="#fm-abstractdepartmentguiclass"><span class="std std-ref">factoryModules.AbstractDepartmentGUI</span></a>
+を継承したクラスを作成し、DepartmentクラスのGUIメソッドで返します。</p>
+<div class="literal-block-wrapper docutils container" id="id6">
+<div class="code-block-caption"><span class="caption-text">__init__.py</span><a class="headerlink" href="#id6" title="このコードへのパーマリンク">¶</a></div>
+<div class="highlight-python notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">gris3</span> <span class="kn">import</span> <span class="n">factoryModules</span>
+
+
+<span class="k">class</span> <span class="nc">Department</span><span class="p">(</span><span class="n">factoryModules</span><span class="o">.</span><span class="n">AbstractDepartment</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">init</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">setDirectoryName</span><span class="p">(</span><span class="s1">&#39;extraJointScripts&#39;</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">label</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">            表示するラベルを返す。</span>
+
+<span class="sd">            Returns:</span>
+<span class="sd">                str:</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="s1">&#39;Custom Factory&#39;</span>
+
+    <span class="k">def</span> <span class="nf">priority</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">            表示順序のプライオリティを返す</span>
+
+<span class="sd">            Returns:</span>
+<span class="sd">                int:</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="mi">10</span>
+
+    <span class="k">def</span> <span class="nf">GUI</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">            GUIを返す。</span>
+
+<span class="sd">            Returns:</span>
+<span class="sd">                CustomFactoryGUI:</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="n">CustomFactoryGUI</span>
+</pre></div>
+</td></tr></table></div>
+</div>
+</div>
+</div>
+<div class="section" id="id4">
+<h2>作成に使用するクラス<a class="headerlink" href="#id4" title="このヘッドラインへのパーマリンク">¶</a></h2>
+<p>ファクトリーモジュールを作成するにあたって、以下のクラスを使用します。</p>
+<ul class="simple">
+<li><p><a class="reference internal" href="#fm-abstractdepartmentclass"><span class="std std-ref">factoryModules.AbstractDepartment</span></a></p></li>
+<li><p><a class="reference internal" href="#fm-abstractdepartmentguiclass"><span class="std std-ref">factoryModules.AbstractDepartmentGUI</span></a></p></li>
+</ul>
+</div>
+<div class="section" id="factorymodules-abstractdepartment">
+<span id="fm-abstractdepartmentclass"></span><h2>factoryModules.AbstractDepartment<a class="headerlink" href="#factorymodules-abstractdepartment" title="このヘッドラインへのパーマリンク">¶</a></h2>
+<p>このクラスはFactoryのセクションを定義する機能を提供する基底クラスです。</p>
+<p>新たなファクトリーモジュールを作成する場合はこのクラスを継承したクラスを
+作成する必要があります。</p>
+<div class="section" id="id5">
+<h3>よく使用するメソッド一覧<a class="headerlink" href="#id5" title="このヘッドラインへのパーマリンク">¶</a></h3>
+<table class="docutils align-default" id="id7">
+<caption><span class="caption-text">メソッド一覧</span><a class="headerlink" href="#id7" title="このテーブルへのパーマリンク">¶</a></caption>
+<colgroup>
+<col style="width: 50%" />
+<col style="width: 50%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p>init</p></td>
+<td><p>__init__内で呼ばれる初期化用のオーバーライド用メソッド。
+用途の指定は特にないので、初期化用として自由に使用可能。</p></td>
+</tr>
+<tr class="row-even"><td><p>label -&gt; str</p></td>
+<td><p>Factoryの一覧に表示されるときのラベルを返す上書き用メソッド。</p></td>
+</tr>
+<tr class="row-odd"><td><p>setAliasName(name : str)</p></td>
+<td><p>Factoryの一覧に表示されるときのエイリアス名を設定する。
+こちらでエイリアス名が設定されている場合、
+labelの戻り値ではなくこちらがFactoryの一覧に表示される。</p></td>
+</tr>
+<tr class="row-even"><td><p>priority -&gt; int</p></td>
+<td><p>Factoryのリストに表示する際の優先度を返す上書き用メソッド。
+数字が高い方がリストの上に表示される。
+-1の場合はリストの下方へ回される。</p></td>
+</tr>
+<tr class="row-odd"><td><p>directoryName -&gt; str</p></td>
+<td><p>操作対象ディレクトリ名を返す。</p></td>
+</tr>
+<tr class="row-even"><td><p>rootPath -&gt; str</p></td>
+<td><p>Factoryが現在管理するプロジェクトのルートパスを返す。
+directoryNameと合わせて操作対象となるディレクトリパスを取得できる。</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div class="section" id="factorymodules-abstractdepartmentgui">
+<span id="fm-abstractdepartmentguiclass"></span><h2>factoryModules.AbstractDepartmentGUI<a class="headerlink" href="#factorymodules-abstractdepartmentgui" title="このヘッドラインへのパーマリンク">¶</a></h2>
+<p>このクラスはFactory内に表示するGUIのベースを提供します。</p>
+<p>AbstractDepartmentクラスのGUIメソッドでは、このクラスを継承した
+クラスを返す必要があります。</p>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="makingRigUnits.html" class="btn btn-neutral float-right" title="リグユニットの開発" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="factorySettings.html" class="btn btn-neutral float-left" title="ファクトリーセッティング" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        
+        &copy; 著作権 2020, EskeYoshinob
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>
