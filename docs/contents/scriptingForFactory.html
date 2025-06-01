@@ -129,23 +129,27 @@
 </ul>
 </li>
 <li class="toctree-l3"><a class="reference internal" href="#id26">重要ノードを取得する</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id27">デバッグモード</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#id28">デバッグの使い方</a></li>
+</ul>
+</li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="#func">funcモジュール</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="#id27">階層構造に関する関数</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#id29">階層構造に関する関数</a><ul>
 <li class="toctree-l4"><a class="reference internal" href="#listnodechain">listNodeChain</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#listlength">listLength</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#listlengthratio">listLengthRatio</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#listsinglechain">listSingleChain</a></li>
 </ul>
 </li>
-<li class="toctree-l3"><a class="reference internal" href="#id28">アトリビュートの状態を操作する関数</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#id30">アトリビュートの状態を操作する関数</a><ul>
 <li class="toctree-l4"><a class="reference internal" href="#locktransform">lockTransform</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#unlocktransform">unlockTransform</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#controlchannels">controlChannels</a></li>
 </ul>
 </li>
-<li class="toctree-l3"><a class="reference internal" href="#id29">アトリビュートのコネクションを操作する関数</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#id31">アトリビュートのコネクションを操作する関数</a><ul>
 <li class="toctree-l4"><a class="reference internal" href="#fconnectattr">fConnectAttr</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#transferconnection">transferConnection</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#replaceconnections">replaceConnections</a></li>
@@ -160,31 +164,31 @@
 <li class="toctree-l4"><a class="reference internal" href="#blendtransform">blendTransform</a></li>
 </ul>
 </li>
-<li class="toctree-l3"><a class="reference internal" href="#id30">Transformを拘束する</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#id32">Transformを拘束する</a><ul>
 <li class="toctree-l4"><a class="reference internal" href="#surfacefitter">SurfaceFitter</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#localconstraint">localConstraint</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#fixconstraint">fixConstraint</a></li>
 </ul>
 </li>
-<li class="toctree-l3"><a class="reference internal" href="#id31">デフォーマーを追加する</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#id33">デフォーマーを追加する</a><ul>
 <li class="toctree-l4"><a class="reference internal" href="#wrap">wrap</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#localwrap">localWrap</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#createsculptdeformer">createSculptDeformer</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#softmodification">SoftModification</a></li>
 </ul>
 </li>
-<li class="toctree-l3"><a class="reference internal" href="#id35">長さや角度を検知する</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#id37">長さや角度を検知する</a><ul>
 <li class="toctree-l4"><a class="reference internal" href="#createdistancedrivernode">createDistanceDriverNode</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#id36">createSculptDeformer</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id38">createSculptDeformer</a></li>
 </ul>
 </li>
-<li class="toctree-l3"><a class="reference internal" href="#id37">ジョイントチェーンのツイスト、ベンド制御を行う</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#id39">ジョイントチェーンのツイスト、ベンド制御を行う</a><ul>
 <li class="toctree-l4"><a class="reference internal" href="#createnontwistedbender">createNonTwistedBender</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#createbendcontrol">createBendControl</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#createbendtwistcontrol">createBendTwistControl</a></li>
 </ul>
 </li>
-<li class="toctree-l3"><a class="reference internal" href="#id38">バインドジョイントに関する関数</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#id40">バインドジョイントに関する関数</a><ul>
 <li class="toctree-l4"><a class="reference internal" href="#createbindjoint">createBindJoint</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#findbindjoint">findBindJoint</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#connecttobindjoint">connectToBindJoint</a></li>
@@ -296,8 +300,8 @@
 </pre></div>
 </div>
 <p>showFactory関数には引き数を渡すことが出来ます。</p>
-<table class="docutils align-default" id="id39">
-<caption><span class="caption-text">showFactoryの引き数</span><a class="headerlink" href="#id39" title="このテーブルへのパーマリンク">¶</a></caption>
+<table class="docutils align-default" id="id41">
+<caption><span class="caption-text">showFactoryの引き数</span><a class="headerlink" href="#id41" title="このテーブルへのパーマリンク">¶</a></caption>
 <colgroup>
 <col style="width: 33%" />
 <col style="width: 33%" />
@@ -700,8 +704,8 @@ translateのようにデフォルトの挙動が接続解除時に値を残す�
 mayaの既存コマンドのラッパーコマンドを使用することによりオブジェクト化する事も
 可能です。
 ラッパーコマンドは基本的に元のコマンドと同じ引数を使用できます。</p>
-<table class="docutils align-default" id="id40">
-<caption><span class="caption-text">代表的なラッパーコマンド</span><a class="headerlink" href="#id40" title="このテーブルへのパーマリンク">¶</a></caption>
+<table class="docutils align-default" id="id42">
+<caption><span class="caption-text">代表的なラッパーコマンド</span><a class="headerlink" href="#id42" title="このテーブルへのパーマリンク">¶</a></caption>
 <colgroup>
 <col style="width: 50%" />
 <col style="width: 50%" />
@@ -905,8 +909,8 @@ grisのファクトリー機能によるビルドは、
 <span class="p">)</span>
 </pre></div>
 </div>
-<table class="docutils align-default" id="id41">
-<caption><span class="caption-text">引数</span><a class="headerlink" href="#id41" title="このテーブルへのパーマリンク">¶</a></caption>
+<table class="docutils align-default" id="id43">
+<caption><span class="caption-text">引数</span><a class="headerlink" href="#id43" title="このテーブルへのパーマリンク">¶</a></caption>
 <colgroup>
 <col style="width: 33%" />
 <col style="width: 33%" />
@@ -956,8 +960,8 @@ grisのファクトリー機能によるビルドは、
 targetとの紐付けを行います。
 これによりtargetはtoControllerで作成されたTransformノードによって動かされるようになり、
 Transformノードもコントローラとしてアニメーターが選択できるようにシェイプが追加されます。</p>
-<table class="docutils align-default" id="id42">
-<caption><span class="caption-text">引数</span><a class="headerlink" href="#id42" title="このテーブルへのパーマリンク">¶</a></caption>
+<table class="docutils align-default" id="id44">
+<caption><span class="caption-text">引数</span><a class="headerlink" href="#id44" title="このテーブルへのパーマリンク">¶</a></caption>
 <colgroup>
 <col style="width: 33%" />
 <col style="width: 33%" />
@@ -1115,8 +1119,8 @@ listに入れる順番は階層の下から順になります。</p>
 <p>connectControllerと違いこちらのメソッドはペアレントしつつコントローラシェイプを
 追加する以外には何も行いません。
 ですのでコントローラから任意のノードへの制御は自前で紐付ける必要があります。</p>
-<table class="docutils align-default" id="id43">
-<caption><span class="caption-text">引数</span><a class="headerlink" href="#id43" title="このテーブルへのパーマリンク">¶</a></caption>
+<table class="docutils align-default" id="id45">
+<caption><span class="caption-text">引数</span><a class="headerlink" href="#id45" title="このテーブルへのパーマリンク">¶</a></caption>
 <colgroup>
 <col style="width: 33%" />
 <col style="width: 33%" />
@@ -1256,8 +1260,8 @@ parentJointに任意のジョイントを指定すると、
 </div>
 <div class="section" id="id25">
 <h4>デフォルト値一覧<a class="headerlink" href="#id25" title="このヘッドラインへのパーマリンク">¶</a></h4>
-<table class="docutils align-default" id="id44">
-<caption><span class="caption-text">createCtrlRootのデフォルト値</span><a class="headerlink" href="#id44" title="このテーブルへのパーマリンク">¶</a></caption>
+<table class="docutils align-default" id="id46">
+<caption><span class="caption-text">createCtrlRootのデフォルト値</span><a class="headerlink" href="#id46" title="このテーブルへのパーマリンク">¶</a></caption>
 <colgroup>
 <col style="width: 50%" />
 <col style="width: 50%" />
@@ -1282,8 +1286,8 @@ parentJointに任意のジョイントを指定すると、
 </tr>
 </tbody>
 </table>
-<table class="docutils align-default" id="id45">
-<caption><span class="caption-text">createRigRootのデフォルト値</span><a class="headerlink" href="#id45" title="このテーブルへのパーマリンク">¶</a></caption>
+<table class="docutils align-default" id="id47">
+<caption><span class="caption-text">createRigRootのデフォルト値</span><a class="headerlink" href="#id47" title="このテーブルへのパーマリンク">¶</a></caption>
 <colgroup>
 <col style="width: 50%" />
 <col style="width: 50%" />
@@ -1308,8 +1312,8 @@ parentJointに任意のジョイントを指定すると、
 </tr>
 </tbody>
 </table>
-<table class="docutils align-default" id="id46">
-<caption><span class="caption-text">createSetupRootのデフォルト値</span><a class="headerlink" href="#id46" title="このテーブルへのパーマリンク">¶</a></caption>
+<table class="docutils align-default" id="id48">
+<caption><span class="caption-text">createSetupRootのデフォルト値</span><a class="headerlink" href="#id48" title="このテーブルへのパーマリンク">¶</a></caption>
 <colgroup>
 <col style="width: 50%" />
 <col style="width: 50%" />
@@ -1340,8 +1344,8 @@ parentJointに任意のジョイントを指定すると、
 <h3>重要ノードを取得する<a class="headerlink" href="#id26" title="このヘッドラインへのパーマリンク">¶</a></h3>
 <p>リグの構造内に存在する重要ノードにアクセスするためのメソッドを紹介します。
 名前決め打ちで取得するよりも、こちらのメソッドを介して取得することをオススメしています。</p>
-<table class="docutils align-default" id="id47">
-<caption><span class="caption-text">重要ノード取得メソッド(Constructorクラスのメソッド)</span><a class="headerlink" href="#id47" title="このテーブルへのパーマリンク">¶</a></caption>
+<table class="docutils align-default" id="id49">
+<caption><span class="caption-text">重要ノード取得メソッド(Constructorクラスのメソッド)</span><a class="headerlink" href="#id49" title="このテーブルへのパーマリンク">¶</a></caption>
 <colgroup>
 <col style="width: 33%" />
 <col style="width: 33%" />
@@ -1383,13 +1387,76 @@ parentJointに任意のジョイントを指定すると、
 </tbody>
 </table>
 </div>
+<div class="section" id="id27">
+<h3>デバッグモード<a class="headerlink" href="#id27" title="このヘッドラインへのパーマリンク">¶</a></h3>
+<p>ビルドする際、通常の実行モードの他にデバッグモードでビルドすることもできます。</p>
+<p>デバッグモードでは</p>
+<ul class="simple">
+<li><p>debugModeメソッドの戻り値に任意の文字列が返ってくるようになる。</p></li>
+<li><p>isDebugModeメソッドの戻り値がTrueになる。（通常の実行モードではFalse）</p></li>
+</ul>
+<p>という変更が起こります。</p>
+<div class="section" id="id28">
+<h4>デバッグの使い方<a class="headerlink" href="#id28" title="このヘッドラインへのパーマリンク">¶</a></h4>
+<p>デバッグモードはGUIのDebugボタンを押すことにより実行します。</p>
+<a class="reference internal image-reference" href="../_images/debug001.png"><img alt="../_images/debug001.png" src="../_images/debug001.png" style="width: 300px;" /></a>
+<p>Debugボタンの横にはデバッグモードの種類が一覧として出ています。
+デフォルトでは
+<strong>Debug</strong>
+のみです。</p>
+<p>この一覧を増やす場合はConstructorクラスのクラス変数
+<strong>DebugModeList</strong>
+を上書きします。</p>
+<div class="highlight-python notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3
+4
+5</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">gris3</span> <span class="kn">import</span> <span class="n">constructors</span><span class="p">,</span> <span class="n">func</span><span class="p">,</span> <span class="n">node</span>
+<span class="n">mainModule</span> <span class="o">=</span> <span class="n">constructors</span><span class="o">.</span><span class="n">mainModule</span><span class="p">(</span><span class="vm">__name__</span><span class="p">,</span> <span class="kc">True</span><span class="p">)</span>
+
+<span class="k">class</span> <span class="nc">Constructor</span><span class="p">(</span><span class="n">mainModule</span><span class="o">.</span><span class="n">Constructor</span><span class="p">):</span>
+    <span class="n">DebugModeList</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;Test1&#39;</span><span class="p">,</span> <span class="s1">&#39;Test2&#39;</span><span class="p">,</span> <span class="s1">&#39;Test3&#39;</span><span class="p">]</span>
+</pre></div>
+</td></tr></table></div>
+<p>クラスの変数を上書きした状態で、
+そのモジュールをFactoryのScript一覧から選択すると、
+Debugボタンの横の一覧の種類が増えます。</p>
+<a class="reference internal image-reference" href="../_images/debug002.png"><img alt="../_images/debug002.png" src="../_images/debug002.png" style="width: 300px;" /></a>
+<p>一覧からデバッグの種類を選択し、Debugボタンを押します。
+するとConstructorの中で
+<strong>debugMode</strong>
+メソッドを呼ぶと、戻り値が一覧から選択した内容を返すようになります。</p>
+<div class="highlight-python notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">gris3</span> <span class="kn">import</span> <span class="n">constructors</span><span class="p">,</span> <span class="n">func</span><span class="p">,</span> <span class="n">node</span>
+<span class="n">mainModule</span> <span class="o">=</span> <span class="n">constructors</span><span class="o">.</span><span class="n">mainModule</span><span class="p">(</span><span class="vm">__name__</span><span class="p">,</span> <span class="kc">True</span><span class="p">)</span>
+
+<span class="k">class</span> <span class="nc">Constructor</span><span class="p">(</span><span class="n">mainModule</span><span class="o">.</span><span class="n">Constructor</span><span class="p">):</span>
+    <span class="n">DebugModeList</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;Test1&#39;</span><span class="p">,</span> <span class="s1">&#39;Test2&#39;</span><span class="p">,</span> <span class="s1">&#39;Test3&#39;</span><span class="p">]</span>
+
+    <span class="k">def</span> <span class="nf">preSetupForLod</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">debugMode</span><span class="p">()</span> <span class="o">==</span> <span class="s1">&#39;Test1&#39;</span><span class="p">:</span>
+            <span class="c1"># 戻り値が一覧から選択した内容になる。</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Debug mode : Test1&#39;</span><span class="p">)</span>
+</pre></div>
+</td></tr></table></div>
+<p>あとはif文などで振り分けて、その状況に応じた任意の内容を記述します。</p>
+</div>
+</div>
 </div>
 <div class="section" id="func">
 <h2>funcモジュール<a class="headerlink" href="#func" title="このヘッドラインへのパーマリンク">¶</a></h2>
 <p>このモジュールはリギングする上で便利な関数などを提供します。
 このセクションでは代表的な便利関数の紹介を行います。</p>
-<div class="section" id="id27">
-<h3>階層構造に関する関数<a class="headerlink" href="#id27" title="このヘッドラインへのパーマリンク">¶</a></h3>
+<div class="section" id="id29">
+<h3>階層構造に関する関数<a class="headerlink" href="#id29" title="このヘッドラインへのパーマリンク">¶</a></h3>
 <div class="section" id="listnodechain">
 <h4>listNodeChain<a class="headerlink" href="#listnodechain" title="このヘッドラインへのパーマリンク">¶</a></h4>
 <p>任意の2つのトランスフォームノードが親子の時、
@@ -1425,8 +1492,8 @@ parentJointに任意のジョイントを指定すると、
 <h4>listSingleChain<a class="headerlink" href="#listsinglechain" title="このヘッドラインへのパーマリンク">¶</a></h4>
 </div>
 </div>
-<div class="section" id="id28">
-<h3>アトリビュートの状態を操作する関数<a class="headerlink" href="#id28" title="このヘッドラインへのパーマリンク">¶</a></h3>
+<div class="section" id="id30">
+<h3>アトリビュートの状態を操作する関数<a class="headerlink" href="#id30" title="このヘッドラインへのパーマリンク">¶</a></h3>
 <div class="section" id="locktransform">
 <h4>lockTransform<a class="headerlink" href="#locktransform" title="このヘッドラインへのパーマリンク">¶</a></h4>
 </div>
@@ -1437,8 +1504,8 @@ parentJointに任意のジョイントを指定すると、
 <h4>controlChannels<a class="headerlink" href="#controlchannels" title="このヘッドラインへのパーマリンク">¶</a></h4>
 </div>
 </div>
-<div class="section" id="id29">
-<h3>アトリビュートのコネクションを操作する関数<a class="headerlink" href="#id29" title="このヘッドラインへのパーマリンク">¶</a></h3>
+<div class="section" id="id31">
+<h3>アトリビュートのコネクションを操作する関数<a class="headerlink" href="#id31" title="このヘッドラインへのパーマリンク">¶</a></h3>
 <div class="section" id="fconnectattr">
 <h4>fConnectAttr<a class="headerlink" href="#fconnectattr" title="このヘッドラインへのパーマリンク">¶</a></h4>
 </div>
@@ -1484,8 +1551,8 @@ targetsはtransformノードのリストである必要があります。</p>
 <h4>blendTransform<a class="headerlink" href="#blendtransform" title="このヘッドラインへのパーマリンク">¶</a></h4>
 </div>
 </div>
-<div class="section" id="id30">
-<h3>Transformを拘束する<a class="headerlink" href="#id30" title="このヘッドラインへのパーマリンク">¶</a></h3>
+<div class="section" id="id32">
+<h3>Transformを拘束する<a class="headerlink" href="#id32" title="このヘッドラインへのパーマリンク">¶</a></h3>
 <div class="section" id="surfacefitter">
 <h4>SurfaceFitter<a class="headerlink" href="#surfacefitter" title="このヘッドラインへのパーマリンク">¶</a></h4>
 </div>
@@ -1496,8 +1563,8 @@ targetsはtransformノードのリストである必要があります。</p>
 <h4>fixConstraint<a class="headerlink" href="#fixconstraint" title="このヘッドラインへのパーマリンク">¶</a></h4>
 </div>
 </div>
-<div class="section" id="id31">
-<h3>デフォーマーを追加する<a class="headerlink" href="#id31" title="このヘッドラインへのパーマリンク">¶</a></h3>
+<div class="section" id="id33">
+<h3>デフォーマーを追加する<a class="headerlink" href="#id33" title="このヘッドラインへのパーマリンク">¶</a></h3>
 <div class="section" id="wrap">
 <h4>wrap<a class="headerlink" href="#wrap" title="このヘッドラインへのパーマリンク">¶</a></h4>
 </div>
@@ -1535,8 +1602,8 @@ targetsはtransformノードのリストである必要があります。</p>
 <p>このクラスはメッシュにsoftModificationデフォーマーと、
 それを制御するためのコントローラを作成するための機能を提供します。</p>
 <a class="reference internal image-reference" href="../_images/softMod001.png"><img alt="../_images/softMod001.png" src="../_images/softMod001.png" style="width: 300px;" /></a>
-<div class="section" id="id32">
-<h5>作成する<a class="headerlink" href="#id32" title="このヘッドラインへのパーマリンク">¶</a></h5>
+<div class="section" id="id34">
+<h5>作成する<a class="headerlink" href="#id34" title="このヘッドラインへのパーマリンク">¶</a></h5>
 <p>使用するにはクラスをインスタンスし、操作対象となるメッシュに対して
 <strong>createWithControllerSystem</strong>
 メソッドを使用します。</p>
@@ -1565,8 +1632,8 @@ targetsはtransformノードのリストである必要があります。</p>
 の戻り値として返ってきます。</p>
 <a class="reference internal image-reference" href="../_images/softMod002.png"><img alt="../_images/softMod002.png" src="../_images/softMod002.png" style="width: 200px;" /></a>
 </div>
-<div class="section" id="id33">
-<h5>コントローラの位置を編集する<a class="headerlink" href="#id33" title="このヘッドラインへのパーマリンク">¶</a></h5>
+<div class="section" id="id35">
+<h5>コントローラの位置を編集する<a class="headerlink" href="#id35" title="このヘッドラインへのパーマリンク">¶</a></h5>
 <p>コントローラとその代理ノードは対になっています。
 ctrlSpaceProxyとctrlSpaceを同じ位置に移動する事により、コントローラの初期位置を
 変更する事ができます。</p>
@@ -1597,8 +1664,8 @@ ctrlSpaceProxyとctrlSpaceを同じ位置に移動する事により、コント
 <p>このようにsoftModRadius_ctrlのradiusは１のままですが、
 半径が0.5に小さくなっているのがわかります。</p>
 </div>
-<div class="section" id="id34">
-<h5>作成時の名前を操作する<a class="headerlink" href="#id34" title="このヘッドラインへのパーマリンク">¶</a></h5>
+<div class="section" id="id36">
+<h5>作成時の名前を操作する<a class="headerlink" href="#id36" title="このヘッドラインへのパーマリンク">¶</a></h5>
 <p>デフォルトのままでは特定の名前になってしまいますが、
 以下のメソッドを使用すると任意の名前に変更する事ができます。</p>
 <table class="docutils align-default">
@@ -1663,17 +1730,17 @@ ctrlSpaceProxyとctrlSpaceを同じ位置に移動する事により、コント
 </div>
 </div>
 </div>
-<div class="section" id="id35">
-<h3>長さや角度を検知する<a class="headerlink" href="#id35" title="このヘッドラインへのパーマリンク">¶</a></h3>
+<div class="section" id="id37">
+<h3>長さや角度を検知する<a class="headerlink" href="#id37" title="このヘッドラインへのパーマリンク">¶</a></h3>
 <div class="section" id="createdistancedrivernode">
 <h4>createDistanceDriverNode<a class="headerlink" href="#createdistancedrivernode" title="このヘッドラインへのパーマリンク">¶</a></h4>
 </div>
-<div class="section" id="id36">
-<h4>createSculptDeformer<a class="headerlink" href="#id36" title="このヘッドラインへのパーマリンク">¶</a></h4>
+<div class="section" id="id38">
+<h4>createSculptDeformer<a class="headerlink" href="#id38" title="このヘッドラインへのパーマリンク">¶</a></h4>
 </div>
 </div>
-<div class="section" id="id37">
-<h3>ジョイントチェーンのツイスト、ベンド制御を行う<a class="headerlink" href="#id37" title="このヘッドラインへのパーマリンク">¶</a></h3>
+<div class="section" id="id39">
+<h3>ジョイントチェーンのツイスト、ベンド制御を行う<a class="headerlink" href="#id39" title="このヘッドラインへのパーマリンク">¶</a></h3>
 <div class="section" id="createnontwistedbender">
 <h4>createNonTwistedBender<a class="headerlink" href="#createnontwistedbender" title="このヘッドラインへのパーマリンク">¶</a></h4>
 </div>
@@ -1684,8 +1751,8 @@ ctrlSpaceProxyとctrlSpaceを同じ位置に移動する事により、コント
 <h4>createBendTwistControl<a class="headerlink" href="#createbendtwistcontrol" title="このヘッドラインへのパーマリンク">¶</a></h4>
 </div>
 </div>
-<div class="section" id="id38">
-<h3>バインドジョイントに関する関数<a class="headerlink" href="#id38" title="このヘッドラインへのパーマリンク">¶</a></h3>
+<div class="section" id="id40">
+<h3>バインドジョイントに関する関数<a class="headerlink" href="#id40" title="このヘッドラインへのパーマリンク">¶</a></h3>
 <div class="section" id="createbindjoint">
 <h4>createBindJoint<a class="headerlink" href="#createbindjoint" title="このヘッドラインへのパーマリンク">¶</a></h4>
 </div>

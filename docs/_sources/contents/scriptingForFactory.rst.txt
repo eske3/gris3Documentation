@@ -927,6 +927,72 @@ parentJointに任意のジョイントを指定すると、
         - node.Transform
         - レンダリングジオメトリを格納したグループノードを返す。
 
+
+デバッグモード
+-----------------------
+ビルドする際、通常の実行モードの他にデバッグモードでビルドすることもできます。
+
+デバッグモードでは
+
+- debugModeメソッドの戻り値に任意の文字列が返ってくるようになる。
+- isDebugModeメソッドの戻り値がTrueになる。（通常の実行モードではFalse）
+
+という変更が起こります。
+
+デバッグの使い方
+++++++++++++++++++++++++++++
+デバッグモードはGUIのDebugボタンを押すことにより実行します。
+
+.. image:: ../img/scriptingForFactory/debug001.png
+    :width: 300
+
+Debugボタンの横にはデバッグモードの種類が一覧として出ています。
+デフォルトでは
+**Debug**
+のみです。
+
+この一覧を増やす場合はConstructorクラスのクラス変数
+**DebugModeList**
+を上書きします。
+
+.. code-block:: python
+    :linenos:
+    
+    from gris3 import constructors, func, node
+    mainModule = constructors.mainModule(__name__, True)
+
+    class Constructor(mainModule.Constructor):
+        DebugModeList = ['Test1', 'Test2', 'Test3']
+
+クラスの変数を上書きした状態で、
+そのモジュールをFactoryのScript一覧から選択すると、
+Debugボタンの横の一覧の種類が増えます。
+
+.. image:: ../img/scriptingForFactory/debug002.png
+    :width: 300
+
+一覧からデバッグの種類を選択し、Debugボタンを押します。
+するとConstructorの中で
+**debugMode**
+メソッドを呼ぶと、戻り値が一覧から選択した内容を返すようになります。
+
+.. code-block:: python
+    :linenos:
+    
+    from gris3 import constructors, func, node
+    mainModule = constructors.mainModule(__name__, True)
+
+    class Constructor(mainModule.Constructor):
+        DebugModeList = ['Test1', 'Test2', 'Test3']
+        
+        def preSetupForLod(self):
+            if self.debugMode() == 'Test1':
+                # 戻り値が一覧から選択した内容になる。
+                print('Debug mode : Test1')
+
+あとはif文などで振り分けて、その状況に応じた任意の内容を記述します。
+
+
 funcモジュール
 ===========================
 このモジュールはリギングする上で便利な関数などを提供します。
