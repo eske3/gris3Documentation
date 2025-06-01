@@ -56,6 +56,7 @@ gris3 Documentation
     /dev/makingRigUnits
     /dev/constructor
     /dev/extraConstructor
+    /dev/basicFacialSystem
     /dev/namingRuleSystem
     /dev/operateByScript
     /dev/settings
