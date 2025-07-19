@@ -41,7 +41,7 @@ layerモジュールには以下の重要な機能が含まれます。
   #. 大元の顔ジオメトリのグループ（以後face_grp）をレイヤー毎にコピー
   #. 各レイヤー用の顔メッシュのoutMeshとinMeshをそれぞれ接続する
   #. コピーした顔のメッシュに対し、各レイヤーで任意のリグを構築
- 
+
 となります。
 3番については、
 接続する順番はlayerManagerにlayerOperatorを設定する順序に準じます。
@@ -153,7 +153,7 @@ BFSオブジェクトのdefaultLayerOperatorsメソッドを呼ぶと、
 
 
 標準搭載のlayerOperatorを一覧、追加する
-+++++++++++++++++++++++++++++++++++++++
+++++++++++++++++++++++++++++++++++++++++++
 
 標準搭載されているlayerOperatorを一覧するには
 layerOperatorsパッケージのlistAllLayerOperators
@@ -182,3 +182,58 @@ listAllLayerOperatorsの戻り値は辞書であり、
             cst = self.installExtraConstructor('basicFacialSystem')
             lo = layerOperators.listAllLayerOperators()
             cst.layerManager().addLayers(lo['BlendShape']) # BlendShapeレイヤを追加
+
+
+追加されたLayerOperatorを初期化時に調整する
+++++++++++++++++++++++++++++++++++++++++++++++++++++++
+本ExtraConstructorがインストールされると、ビルド時に様々な処理が行われます。
+その中で最初の処理として「大元の顔ジオメトリグループのコピー」が行われます。
+
+（
+:ref:`BFS-LayerModule`
+Phase1に該当）
+
+Phase１ではlayerManagerの
+**setup**
+が呼ばれますが、その中では
+
+  1. 大元の顔ジオメトリのグループをコピー
+  2. 追加されたlayerOperatorのインスタンスを作成
+  3. インスタンスにコピーされた顔ジオメトリグループを渡す
+  4. コピーされた顔ジオメトリグループに対し、一つ前のレイヤーのコピーされた
+     顔ジオメトリグループを接続する
+
+という処理が行われます。
+
+この中で「２」の処理で初めてLayerOperatorのインスタンスが作成されます。
+このインスタンス化されたLayerOperator（以下Layerオブジェクト）に対し、初期化処理
+を行いたい場合があります。（クラスのメンバ変数の変更など）
+
+その場合は、インストール先のコンストラクタ内で
+
+**initFacialLayerOperator(self, operator:basicFacialSystem.layer.LayerOperator):**
+
+メソッドを追加すると、Layerオブジェクトの初期化処理をカスタマイズすることができます。
+
+下記の例ではtweakedLayerOperatorに対し、StackFaceName変数の内容を変更しています。
+
+.. code-block:: python
+    :linenos:
+
+    from gris3 import constructors
+    class Constructor(constructors.currentConstructor()):
+        def init(self):
+            cst = self.installExtraConstructor('basicFacialSystem')
+            cst.layerManager().addLayers(*cst.defaultLayerOperators())
+
+        def initFacialLayerOperator(self, operator):
+            if operator.prefix() == 'tweek':
+                # tweakLayerOperatorのメンバ変数を変更。
+                operator.StackFaceName = {
+                    'face':'head_geo', 'faceParts':['facialBrowJnt_grp']
+                }
+
+
+このように、layerOperator開発時ににメンバ変数を設けておくと、
+後から操作対象やオペレーションのスイッチなどをアセット毎に行えるようになるため
+非常に汎用性があがるためお勧めです。
