@@ -26,7 +26,8 @@ author = 'eske'
 # The full version, including alpha/beta/rc tags
 release = '1.0.0'
 
-
+for p in sys.path:
+    print(p)
 # -- General configuration ---------------------------------------------------
 
 # Add any Sphinx extension module names here, as strings. They can be
@@ -36,6 +37,7 @@ extensions = [
     'sphinx.ext.autodoc',
     'sphinx.ext.viewcode',
     'sphinx.ext.napoleon',
+    'japanesesupport',
 ]
 
 # Add any paths that contain templates here, relative to this directory.
