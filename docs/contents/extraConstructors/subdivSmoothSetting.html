@@ -105,6 +105,7 @@
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../../tools/jointEditor.html">jointEditor</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../tools/extraJoint.html">extraJoint</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../tools/facialMemoryManager.html">facialMemoryManager</a></li>
 </ul>
 <p class="caption"><span class="caption-text">開発者向けドキュメント</span></p>
 <ul>
@@ -116,6 +117,10 @@
 <li class="toctree-l1"><a class="reference internal" href="../../dev/namingRuleSystem.html">命名規則管理システム</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../dev/operateByScript.html">スクリプトによって操作する</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../dev/settings.html">設定にまつわる機能</a></li>
+</ul>
+<p class="caption"><span class="caption-text">GUI開発向け</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../dev_ui/extendedUI.html">uilib.extendedUIモジュール</a></li>
 </ul>
 
             
@@ -183,8 +188,7 @@
             
   <div class="section" id="subdivsmoothsetting">
 <h1>subdivSmoothSetting<a class="headerlink" href="#subdivsmoothsetting" title="このヘッドラインへのパーマリンク">¶</a></h1>
-<p>モデルにsubdiv_setという名前のセットがある場合、
-このセットメンバーのジオメトリに対してsmoothMeshPreviewの処理を追加します。</p>
+<p>モデルにsubdiv_setという名前のセットがある場合、このセットメンバーのジオメトリに対してsmoothMeshPreviewの処理を追加します。</p>
 <p><strong>モデルはstandardConstructorが提供するモデルルールに則っている必要があります。</strong></p>
 <p>デフォルトではsubdiv_set内のオブジェクトに対して以下の設定を行います。</p>
 <table class="docutils align-default">
@@ -207,8 +211,7 @@
 </tr>
 </tbody>
 </table>
-<p>インストール後の戻り値である、
-このExtraConstructorのインスタンスに対して以下のような設定を行うことができます。</p>
+<p>インストール後の戻り値である、このExtraConstructorのインスタンスに対して以下のような設定を行うことができます。</p>
 <table class="docutils align-default" id="id1">
 <caption><span class="caption-text">設定できる機能一覧</span><a class="headerlink" href="#id1" title="このテーブルへのパーマリンク">¶</a></caption>
 <colgroup>
@@ -235,9 +238,7 @@
 </tr>
 </tbody>
 </table>
-<p>なお、このExtraConstructorをインストールしていて、
-かつsubdiv_setがない場合はすべてのレンダリングジオメトリがサブディビ処理の対象になります。
-もしサブディビ処理を入れたくない場合は必ずこのコンストラクタはインストールしないようにして下さい。</p>
+<p>なお、このExtraConstructorをインストールしていて、かつsubdiv_setがない場合はすべてのレンダリングジオメトリがサブディビ処理の対象になります。もしサブディビ処理を入れたくない場合は必ずこのコンストラクタはインストールしないようにして下さい。</p>
 </div>
 
 

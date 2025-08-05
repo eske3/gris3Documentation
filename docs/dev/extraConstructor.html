@@ -107,6 +107,7 @@
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../tools/jointEditor.html">jointEditor</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../tools/extraJoint.html">extraJoint</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../tools/facialMemoryManager.html">facialMemoryManager</a></li>
 </ul>
 <p class="caption"><span class="caption-text">開発者向けドキュメント</span></p>
 <ul class="current">
@@ -124,6 +125,10 @@
 <li class="toctree-l1"><a class="reference internal" href="namingRuleSystem.html">命名規則管理システム</a></li>
 <li class="toctree-l1"><a class="reference internal" href="operateByScript.html">スクリプトによって操作する</a></li>
 <li class="toctree-l1"><a class="reference internal" href="settings.html">設定にまつわる機能</a></li>
+</ul>
+<p class="caption"><span class="caption-text">GUI開発向け</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../dev_ui/extendedUI.html">uilib.extendedUIモジュール</a></li>
 </ul>
 
             
@@ -191,18 +196,12 @@
             
   <div class="section" id="id1">
 <h1>エクストラコンストラクタ<a class="headerlink" href="#id1" title="このヘッドラインへのパーマリンク">¶</a></h1>
-<p>エクストラコンストラクタはコンストラクタを拡張するためのプラグインのような働きをする仕組みです。
-リグのビルド用スクリプトのコンストラクタ内でインストールする事によって効果を発揮します。</p>
-<p>開発者はエクストラコンストラクタを用意する事により、
-本体のコンストラクタを変更せずに機能を拡張することができます。
-これによりプロジェクトや特定のアセットに特化したフローを制作し、
-機構の再利用性を高めることができます。</p>
+<p>エクストラコンストラクタはコンストラクタを拡張するためのプラグインのような働きをする仕組みです。リグのビルド用スクリプトのコンストラクタ内でインストールする事によって効果を発揮します。</p>
+<p>開発者はエクストラコンストラクタを用意する事により、本体のコンストラクタを変更せずに機能を拡張することができます。これによりプロジェクトや特定のアセットに特化したフローを制作し、機構の再利用性を高めることができます。</p>
 <div class="section" id="extraconstructor">
 <span id="excst-extraconstructor"></span><h2>ExtraConstructor<a class="headerlink" href="#extraconstructor" title="このヘッドラインへのパーマリンク">¶</a></h2>
-<p>このクラスはコンストラクタを拡張するための機構を提供するクラスです。
-開発者はこのクラスを継承したサブクラスに独自の機構を記述します。</p>
-<p>ユーザーは使用する際に、
-このExtraConstructorをインストールすることによって効果を発揮するようになります。</p>
+<p>このクラスはコンストラクタを拡張するための機構を提供するクラスです。開発者はこのクラスを継承したサブクラスに独自の機構を記述します。</p>
+<p>ユーザーは使用する際に、このExtraConstructorをインストールすることによって効果を発揮するようになります。</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">Constructor</span><span class="p">(</span><span class="n">constructors</span><span class="o">.</span><span class="n">currentConstructor</span><span class="p">()):</span>
     <span class="k">def</span> <span class="nf">init</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">installExtraConstructor</span><span class="p">(</span><span class="s1">&#39;cstExtensions&#39;</span><span class="p">)</span>
@@ -210,13 +209,10 @@
 </div>
 <div class="section" id="id2">
 <h3>仕様<a class="headerlink" href="#id2" title="このヘッドラインへのパーマリンク">¶</a></h3>
-<p>ExtraConstructorはConstructorクラスが定義するConstructionOrder
-によって実行されるメソッドの前後に任意の処理を追加するようになっています。</p>
+<p>ExtraConstructorはConstructorクラスが定義するConstructionOrderによって実行されるメソッドの前後に任意の処理を追加するようになっています。</p>
 <div class="admonition seealso">
 <p class="admonition-title">参考</p>
-<p>ConstructionOrderについては
-<a class="reference internal" href="constructor.html#cst-constructionorder"><span class="std std-ref">ConstructionOrder</span></a>
-をご確認下さい。</p>
+<p>ConstructionOrderについては<a class="reference internal" href="constructor.html#cst-constructionorder"><span class="std std-ref">ConstructionOrder</span></a>をご確認下さい。</p>
 </div>
 </div>
 </div>

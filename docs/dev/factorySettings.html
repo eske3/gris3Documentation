@@ -39,7 +39,7 @@
     <link rel="index" title="索引" href="../genindex.html" />
     <link rel="search" title="検索" href="../search.html" />
     <link rel="next" title="ファクトリーモジュール" href="factoryModules.html" />
-    <link rel="prev" title="extraJoint" href="../tools/extraJoint.html" /> 
+    <link rel="prev" title="facialMemoryManager" href="../tools/facialMemoryManager.html" /> 
 </head>
 
 <body class="wy-body-for-nav">
@@ -107,6 +107,7 @@
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../tools/jointEditor.html">jointEditor</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../tools/extraJoint.html">extraJoint</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../tools/facialMemoryManager.html">facialMemoryManager</a></li>
 </ul>
 <p class="caption"><span class="caption-text">開発者向けドキュメント</span></p>
 <ul class="current">
@@ -145,6 +146,10 @@
 <li class="toctree-l1"><a class="reference internal" href="namingRuleSystem.html">命名規則管理システム</a></li>
 <li class="toctree-l1"><a class="reference internal" href="operateByScript.html">スクリプトによって操作する</a></li>
 <li class="toctree-l1"><a class="reference internal" href="settings.html">設定にまつわる機能</a></li>
+</ul>
+<p class="caption"><span class="caption-text">GUI開発向け</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../dev_ui/extendedUI.html">uilib.extendedUIモジュール</a></li>
 </ul>
 
             
@@ -212,10 +217,7 @@
             
   <div class="section" id="id1">
 <h1>ファクトリーセッティング<a class="headerlink" href="#id1" title="このヘッドラインへのパーマリンク">¶</a></h1>
-<p>このシステムは、コンストラクタとファクトリーモジュールを管理、
-運用するためのものです。
-この章ではコマンドによってファクトリーセッティングを操作し、
-どのような挙動を行うものなのかを解説していきます。</p>
+<p>このシステムは、コンストラクタとファクトリーモジュールを管理、運用するためのものです。この章ではコマンドによってファクトリーセッティングを操作し、どのような挙動を行うものなのかを解説していきます。</p>
 <div class="section" id="id2">
 <h2>運用に使用するクラス<a class="headerlink" href="#id2" title="このヘッドラインへのパーマリンク">¶</a></h2>
 <p>ファクトリーセッティングを運用するにあたって、主に以下のクラスを使用します。</p>
@@ -227,14 +229,11 @@
 </div>
 <div class="section" id="factory-factorydata">
 <span id="fs-factorydataclass"></span><h2>factory.FactoryData<a class="headerlink" href="#factory-factorydata" title="このヘッドラインへのパーマリンク">¶</a></h2>
-<p>このクラスはファクトリーセッティングそのものであり、
-このクラスでプロジェクトディレクトリ単位のファクトリーの設定を作成、
-編集する事ができます。</p>
+<p>このクラスはファクトリーセッティングそのものであり、このクラスでプロジェクトディレクトリ単位のファクトリーの設定を作成、編集する事ができます。</p>
 <p>FactoryDataクラスではスクリプトベースのリギングを行う上で必用な情報を設定します。</p>
 <div class="section" id="setrootpath-str">
 <h3>setRootPath(str)<a class="headerlink" href="#setrootpath-str" title="このヘッドラインへのパーマリンク">¶</a></h3>
-<p>このメソッドはファクトリーセッティングを行う上で最も重要なメソッドです。
-このメソッドの引数にはディレクトリパスを指定します。</p>
+<p>このメソッドはファクトリーセッティングを行う上で最も重要なメソッドです。このメソッドの引数にはディレクトリパスを指定します。</p>
 <div class="highlight-python notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
 2
 3</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">gris3</span> <span class="kn">import</span> <span class="n">factory</span>
@@ -242,10 +241,7 @@
 <span class="n">settings</span><span class="o">.</span><span class="n">setRootPath</span><span class="p">(</span><span class="s1">&#39;D:/assets/testRig&#39;</span><span class="p">)</span>
 </pre></div>
 </td></tr></table></div>
-<p>指定されたディレクトリパスは、ファクトリーセッティングの
-プロジェクトディレクトリとして認識されます。
-ファクトリーの操作は、
-全てこのプロジェクトディレクトリとして認識されたデータに対して行われます。</p>
+<p>指定されたディレクトリパスは、ファクトリーセッティングのプロジェクトディレクトリとして認識されます。ファクトリーの操作は、全てこのプロジェクトディレクトリとして認識されたデータに対して行われます。</p>
 <div class="admonition seealso">
 <p class="admonition-title">参考</p>
 <p><a class="reference internal" href="../contents/scriptBasedRigging.html#sbr-projectdirectory"><span class="std std-ref">プロジェクトディレクトリ</span></a></p>
@@ -253,9 +249,7 @@
 </div>
 <div class="section" id="id3">
 <h3>その他の編集・参照用メソッド<a class="headerlink" href="#id3" title="このヘッドラインへのパーマリンク">¶</a></h3>
-<p>ルートディレクトリを設定したら、以下のメソッドも使用する事ができます。
-この設定により、ファクトリーセッティングとして操作する対象のアセット情報を
-登録する事ができます。</p>
+<p>ルートディレクトリを設定したら、以下のメソッドも使用する事ができます。この設定により、ファクトリーセッティングとして操作する対象のアセット情報を登録する事ができます。</p>
 <table class="docutils align-default" id="id12">
 <caption><span class="caption-text">メソッド一覧</span><a class="headerlink" href="#id12" title="このテーブルへのパーマリンク">¶</a></caption>
 <colgroup>
@@ -273,10 +267,7 @@
 <td><p>プロジェクト名を設定する。</p></td>
 </tr>
 <tr class="row-even"><td><p>setConstructorName(str)</p></td>
-<td><p>使用するコンストラクタ名を設定する。
-使用できるコンストラクタ名については
-<a class="reference internal" href="#fs-listconstructornames"><span class="std std-ref">使用可能コンストラクタの一覧を取得する</span></a>
-を参照。</p></td>
+<td><p>使用するコンストラクタ名を設定する。使用できるコンストラクタ名については<a class="reference internal" href="#fs-listconstructornames"><span class="std std-ref">使用可能コンストラクタの一覧を取得する</span></a>を参照。</p></td>
 </tr>
 </tbody>
 </table>
@@ -298,13 +289,7 @@
 </div>
 <div class="section" id="id4">
 <h3>情報をプロジェクトディレクトリに保存する。<a class="headerlink" href="#id4" title="このヘッドラインへのパーマリンク">¶</a></h3>
-<p>これらの情報を設定した後に、
-<strong>saveFile</strong>
-メソッドを使用すると
-<strong>setRootPath</strong>
-で指定したディレクトリの直下に、設定された情報に基づいた
-<strong>grisFactoryWorkspace.xml</strong>
-が作成されます。</p>
+<p>これらの情報を設定した後に、<strong>saveFile</strong>メソッドを使用すると<strong>setRootPath</strong>で指定したディレクトリの直下に、設定された情報に基づいた<strong>grisFactoryWorkspace.xml</strong>が作成されます。</p>
 <div class="highlight-python notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
 2
 3
@@ -327,9 +312,7 @@
 </div>
 <div class="section" id="id5">
 <h3>既存のプロジェクトディレクトリの情報を取得する。<a class="headerlink" href="#id5" title="このヘッドラインへのパーマリンク">¶</a></h3>
-<p>すでに設定用xmlファイルが保存されているプロジェクトディレクトリに対して
-setRootPathを行った場合、設定ファイルが自動的に読み込まれ、アセット情報が
-設定されている状態になります。</p>
+<p>すでに設定用xmlファイルが保存されているプロジェクトディレクトリに対してsetRootPathを行った場合、設定ファイルが自動的に読み込まれ、アセット情報が設定されている状態になります。</p>
 <p>設定されている情報を取得するには以下のメソッドを使用することで可能です。</p>
 <table class="docutils align-default" id="id13">
 <caption><span class="caption-text">メソッド一覧</span><a class="headerlink" href="#id13" title="このテーブルへのパーマリンク">¶</a></caption>
@@ -367,21 +350,12 @@ setRootPathを行った場合、設定ファイルが自動的に読み込まれ
 </div>
 <div class="section" id="constructors-constructormanager">
 <span id="fs-constructormanager"></span><h2>constructors.ConstructorManager<a class="headerlink" href="#constructors-constructormanager" title="このヘッドラインへのパーマリンク">¶</a></h2>
-<p>このクラスはコンストラクタを管理するためのクラスです。
-カレントのコンストラクタを設定したり、使用できるコンストラクタのリストの情報など
-を管理しています。</p>
-<p>また、コンストラクタにはデフォルトで取り扱うファクトリーモジュールの情報も
-持っています。
-ファクトリーセッティングを運用する上で、
-このファクトリーモジュールの情報が必用になるため、
-これらクラスを使用して必用な情報を集めてきます。</p>
-<p>コンストラクタ自体の詳細な説明については
-<a class="reference internal" href="constructor.html"><span class="doc">コンストラクタ</span></a>
-をご覧下さい。</p>
+<p>このクラスはコンストラクタを管理するためのクラスです。カレントのコンストラクタを設定したり、使用できるコンストラクタのリストの情報などを管理しています。</p>
+<p>また、コンストラクタにはデフォルトで取り扱うファクトリーモジュールの情報も持っています。ファクトリーセッティングを運用する上で、このファクトリーモジュールの情報が必用になるため、これらクラスを使用して必用な情報を集めてきます。</p>
+<p>コンストラクタ自体の詳細な説明については<a class="reference internal" href="constructor.html"><span class="doc">コンストラクタ</span></a>をご覧下さい。</p>
 <div class="section" id="fs-listconstructornames">
 <span id="id6"></span><h3>使用可能コンストラクタの一覧を取得する<a class="headerlink" href="#fs-listconstructornames" title="このヘッドラインへのパーマリンク">¶</a></h3>
-<p>ファクトリーセッティングに渡す、使用可能なコンストラクター名の一覧を取得するには
-以下の方法で行います。</p>
+<p>ファクトリーセッティングに渡す、使用可能なコンストラクター名の一覧を取得するには以下の方法で行います。</p>
 <div class="highlight-python notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
 2
 3
@@ -394,13 +368,8 @@ setRootPathを行った場合、設定ファイルが自動的に読み込まれ
 </div>
 <div class="section" id="id7">
 <h3>コンストラクタのインスタンスを取得する<a class="headerlink" href="#id7" title="このヘッドラインへのパーマリンク">¶</a></h3>
-<p>各コンストラクタは、pythonのモジュールとして記述されています。
-このモジュール自体を取得するには
-<strong>module</strong>
-メソッドを使用します。</p>
-<p>このメソッドの引数には
-<strong>names</strong>
-メソッドによって取得できるリストのいずれかの文字列になります。</p>
+<p>各コンストラクタは、pythonのモジュールとして記述されています。このモジュール自体を取得するには<strong>module</strong>メソッドを使用します。</p>
+<p>このメソッドの引数には<strong>names</strong>メソッドによって取得できるリストのいずれかの文字列になります。</p>
 <div class="highlight-python notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
 2
 3
@@ -410,8 +379,7 @@ setRootPathを行った場合、設定ファイルが自動的に読み込まれ
 <span class="c1"># Result: &lt;module &#39;gris3.constructors.standardConstructor&#39; from ~&gt;</span>
 </pre></div>
 </td></tr></table></div>
-<p>コンストラクタ用モジュールには必ずConstructorクラスが存在します。
-コンストラクタークラスの引数には上記のFactoryDataのインスタンスを渡します。</p>
+<p>コンストラクタ用モジュールには必ずConstructorクラスが存在します。コンストラクタークラスの引数には上記のFactoryDataのインスタンスを渡します。</p>
 <div class="highlight-python notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
  2
  3
@@ -440,12 +408,8 @@ setRootPathを行った場合、設定ファイルが自動的に読み込まれ
 </div>
 <div class="section" id="id8">
 <h3>デフォルトのファクトリーモジュール一覧を取得する<a class="headerlink" href="#id8" title="このヘッドラインへのパーマリンク">¶</a></h3>
-<p>前述のように、コンストラクタには取り扱うファクトリーモジュールの
-デフォルトセットが登録されています。
-この一覧を取得し、FactoryDataに反映させます。</p>
-<p>デフォルトのファクトリーモジュールセットは
-<strong>FactoryModules</strong>
-変数内に格納されています。</p>
+<p>前述のように、コンストラクタには取り扱うファクトリーモジュールのデフォルトセットが登録されています。この一覧を取得し、FactoryDataに反映させます。</p>
+<p>デフォルトのファクトリーモジュールセットは<strong>FactoryModules</strong>変数内に格納されています。</p>
 <div class="highlight-python notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
  2
  3
@@ -473,9 +437,7 @@ setRootPathを行った場合、設定ファイルが自動的に読み込まれ
 <span class="c1">#)</span>
 </pre></div>
 </td></tr></table></div>
-<p>この変数に格納されているのは
-<strong>ModuleInfo</strong>
-クラスを複数持つリストです。</p>
+<p>この変数に格納されているのは<strong>ModuleInfo</strong>クラスを複数持つリストです。</p>
 <p>ModuleInfoは</p>
 <ul class="simple">
 <li><p>モジュール名</p></li>
@@ -483,18 +445,12 @@ setRootPathを行った場合、設定ファイルが自動的に読み込まれ
 <li><p>エイリアス名（別名）</p></li>
 <li><p>内部操作する際にキーワードとなるタグ</p></li>
 </ul>
-<p>の４つの情報を持つクラスで、
-ファクトリーセッティングやコンストラクタはこの情報を元にファクトリーモジュールの
-管理を行います。</p>
+<p>の４つの情報を持つクラスで、ファクトリーセッティングやコンストラクタはこの情報を元にファクトリーモジュールの管理を行います。</p>
 <div class="admonition seealso">
 <p class="admonition-title">参考</p>
-<p>ModuleInfoの詳細については
-<a class="reference internal" href="constructor.html#cst-moduleinfo"><span class="std std-ref">ModuleInfoクラス</span></a>
-をご覧下さい。</p>
+<p>ModuleInfoの詳細については<a class="reference internal" href="constructor.html#cst-moduleinfo"><span class="std std-ref">ModuleInfoクラス</span></a>をご覧下さい。</p>
 </div>
-<p>ユーザーはアセットごとにこの情報をカスタマイズする事が出来ますが、
-基本的にコンストラクタが要求するデフォルトのファクトリーモジュールセットは
-必ず作るようにして下さい。</p>
+<p>ユーザーはアセットごとにこの情報をカスタマイズする事が出来ますが、基本的にコンストラクタが要求するデフォルトのファクトリーモジュールセットは必ず作るようにして下さい。</p>
 <p>このファクトリーモジュールセットをFactoryDataオブジェクトに追加します。</p>
 <div class="literal-block-wrapper docutils container" id="id14">
 <div class="code-block-caption"><span class="caption-text">FactoryDataにモジュールセットを登録し、保存する。</span><a class="headerlink" href="#id14" title="このコードへのパーマリンク">¶</a></div>
@@ -520,33 +476,19 @@ setRootPathを行った場合、設定ファイルが自動的に読み込まれ
 </pre></div>
 </td></tr></table></div>
 </div>
-<p>この操作により、このアセットが取り扱うコンストラクタと、
-ファクトリーモジュールのセットに関する設定が完了しました。</p>
-<p>完了するとgrisFactoryWorkspace.xml内には各種情報とファクトリーモジュールセット
-に関する情報が追記されます。</p>
+<p>この操作により、このアセットが取り扱うコンストラクタと、ファクトリーモジュールのセットに関する設定が完了しました。</p>
+<p>完了するとgrisFactoryWorkspace.xml内には各種情報とファクトリーモジュールセットに関する情報が追記されます。</p>
 </div>
 </div>
 <div class="section" id="factorymodules-factorymodulemanager">
 <span id="fs-factorymodulemanager"></span><h2>factoryModules.FactoryModuleManager<a class="headerlink" href="#factorymodules-factorymodulemanager" title="このヘッドラインへのパーマリンク">¶</a></h2>
-<p>このクラスはgrisが管理するファクトリーモジュールの管理や、
-情報取得機能を提供するクラスです。</p>
-<p>このクラスのインスタンスを作成すると、
-grisが管理するファクトリーモジュールを一度全てインポートします。
-この処理は時間がかかるため、
-このクラスはシングルトンになっており余計な処理を挟まないようになっています。</p>
-<p>ファクトリーモジュールは要素の書き出し機能と、
-書き出し先がペアとなる事で成立します。
-モジュールと書き出し先のペアリングは、
-ファクトリーセッティングによりプロジェクトディレクトリ単位で設定する事ができます。
-しかし、毎回ペアリングを設定しなくてもいいように、
-各ファクトリーモジュールはデフォルトの書き出し先名を持っています。</p>
+<p>このクラスはgrisが管理するファクトリーモジュールの管理や、情報取得機能を提供するクラスです。</p>
+<p>このクラスのインスタンスを作成すると、grisが管理するファクトリーモジュールを一度全てインポートします。この処理は時間がかかるため、このクラスはシングルトンになっており余計な処理を挟まないようになっています。</p>
+<p>ファクトリーモジュールは要素の書き出し機能と、書き出し先がペアとなる事で成立します。モジュールと書き出し先のペアリングは、ファクトリーセッティングによりプロジェクトディレクトリ単位で設定する事ができます。しかし、毎回ペアリングを設定しなくてもいいように、各ファクトリーモジュールはデフォルトの書き出し先名を持っています。</p>
 <p>FactoryModuleManagerクラスはこのペアリング情報を提供します。</p>
 <div class="section" id="id9">
 <h3>モジュールと書き出し先のデフォルトのペア情報を取得する<a class="headerlink" href="#id9" title="このヘッドラインへのパーマリンク">¶</a></h3>
-<p>FactoryModuleManagerのmoduleNameListメソッドを使用すると、
-現在使用可能なファクトリーモジュールの一覧が取得できます。
-この一覧は辞書型式になっており、
-モジュール名とそのモジュールを管理するクラスにアクセスできるようになります。</p>
+<p>FactoryModuleManagerのmoduleNameListメソッドを使用すると、現在使用可能なファクトリーモジュールの一覧が取得できます。この一覧は辞書型式になっており、モジュール名とそのモジュールを管理するクラスにアクセスできるようになります。</p>
 <div class="highlight-python notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
  2
  3
@@ -576,10 +518,8 @@ grisが管理するファクトリーモジュールを一度全てインポー�
 <span class="c1">#}</span>
 </pre></div>
 </td></tr></table></div>
-<p>各モジュールには必ずDepartmentクラスを持っており、
-このクラスが各モジュールの動作を定義しています。</p>
-<p>モジュールのデフォルトで設定されている
-書き出し先ディレクトリ名もこのクラスが管理しています。</p>
+<p>各モジュールには必ずDepartmentクラスを持っており、このクラスが各モジュールの動作を定義しています。</p>
+<p>モジュールのデフォルトで設定されている書き出し先ディレクトリ名もこのクラスが管理しています。</p>
 <div class="literal-block-wrapper docutils container" id="id15">
 <div class="code-block-caption"><span class="caption-text">jointBuilderモジュールのデフォルト書き出し先名を取得する。</span><a class="headerlink" href="#id15" title="このコードへのパーマリンク">¶</a></div>
 <div class="highlight-python notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
@@ -598,13 +538,8 @@ grisが管理するファクトリーモジュールを一度全てインポー�
 </div>
 <div class="section" id="factorymodules-factorysettings">
 <span id="fs-factorysettingsclass"></span><h2>factoryModules.FactorySettings<a class="headerlink" href="#factorymodules-factorysettings" title="このヘッドラインへのパーマリンク">¶</a></h2>
-<p>このクラスはファクトリーウィンドウと紐付けられた非常に重要なクラスですが、
-実態は
-<a class="reference internal" href="#fs-factorydataclass"><span class="std std-ref">factory.FactoryData</span></a>
-クラスを親クラスとしたサブクラスです。</p>
-<p>従って
-<a class="reference internal" href="#fs-createprojdir"><span class="std std-ref">プロジェクトディレクトリをコマンドで作成する</span></a>
-内で記述されている</p>
+<p>このクラスはファクトリーウィンドウと紐付けられた非常に重要なクラスですが、実態は<a class="reference internal" href="#fs-factorydataclass"><span class="std std-ref">factory.FactoryData</span></a>クラスを親クラスとしたサブクラスです。</p>
+<p>従って<a class="reference internal" href="#fs-createprojdir"><span class="std std-ref">プロジェクトディレクトリをコマンドで作成する</span></a>内で記述されている</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">settings</span> <span class="o">=</span> <span class="n">factory</span><span class="o">.</span><span class="n">FactoryData</span><span class="p">()</span>
 </pre></div>
 </div>
@@ -615,9 +550,7 @@ grisが管理するファクトリーモジュールを一度全てインポー�
 <p>に置き換えても動作するようになっています。</p>
 <div class="section" id="factorydata">
 <h3>FactoryDataクラスとの違い<a class="headerlink" href="#factorydata" title="このヘッドラインへのパーマリンク">¶</a></h3>
-<p>前述の説明だけ見るとほぼFactoryDataクラスと同じ内容ですが、
-こちらはQtCore.QObjectからも多重継承しており、
-設定変更を行う度にGUIへシグナルを送出するようになっています。</p>
+<p>前述の説明だけ見るとほぼFactoryDataクラスと同じ内容ですが、こちらはQtCore.QObjectからも多重継承しており、設定変更を行う度にGUIへシグナルを送出するようになっています。</p>
 <div><svg height="200" viewBox="0 0 448 200" width="448" xmlns="http://www.w3.org/2000/svg" xmlns:inkspace="http://www.inkscape.org/namespaces/inkscape" xmlns:xlink="http://www.w3.org/1999/xlink">
   <defs id="defs_block">
     <filter height="1.504" id="filter_blur" inkspace:collect="always" width="1.1575" x="-0.07875" y="-0.252">
@@ -644,17 +577,12 @@ grisが管理するファクトリーモジュールを一度全てインポー�
   <polygon fill="rgb(0,0,0)" points="255,60 248,56 248,64 255,60" stroke="rgb(0,0,0)" />
 </svg>
 </div>
-<p>そのため、このクラスはシングルトンで作られており、
-存在するファクトリーウィンドウや実行するConstructorなど、
-すべてに対して影響を与えます。</p>
+<p>そのため、このクラスはシングルトンで作られており、存在するファクトリーウィンドウや実行するConstructorなど、すべてに対して影響を与えます。</p>
 <div class="admonition warning">
 <p class="admonition-title">警告</p>
 <p>このクラスはGUIへの影響が大きいため取り扱いには注意が必用です。</p>
 </div>
-<p>ファクトリーセッティングというシステムにおいては、
-起動中のアプリ内で復数のアセットを同時進行で扱う事はないという前提があります。
-そのためファクトリーセッティングでは常に現在作業中のアセットの情報のみが提供され、
-Constructorに関する機能はこの一つのアセットの情報のみを取り扱うように設計されています。</p>
+<p>ファクトリーセッティングというシステムにおいては、起動中のアプリ内で復数のアセットを同時進行で扱う事はないという前提があります。そのためファクトリーセッティングでは常に現在作業中のアセットの情報のみが提供され、Constructorに関する機能はこの一つのアセットの情報のみを取り扱うように設計されています。</p>
 <div><svg height="280" viewBox="0 0 448 280" width="448" xmlns="http://www.w3.org/2000/svg" xmlns:inkspace="http://www.inkscape.org/namespaces/inkscape" xmlns:xlink="http://www.w3.org/1999/xlink">
   <defs id="defs_block">
     <filter height="1.504" id="filter_blur" inkspace:collect="always" width="1.1575" x="-0.07875" y="-0.252">
@@ -696,12 +624,8 @@ Constructorに関する機能はこの一つのアセットの情報のみを取
   <text fill="rgb(0,0,0)" font-family="sans-serif" font-size="11" font-style="normal" font-weight="normal" text-anchor="middle" textLength="24" x="224.0" y="211">data</text>
 </svg>
 </div>
-<p>代表的なのはconstructorモジュールのcurrentConstructorメソッドです。
-このメソッドは現在FactorySettingsクラスのsetRootPathされている
-プロジェクトディレクトリが設定されているコンストラクタを返すようになっています。</p>
-<p>これはcurrentConstructor内でFactorySettingsクラスを呼び出し、
-このクラスがセットしているプロジェクトディレクトリの設定を
-読み取るようになっているためです。</p>
+<p>代表的なのはconstructorモジュールのcurrentConstructorメソッドです。このメソッドは現在FactorySettingsクラスのsetRootPathされているプロジェクトディレクトリが設定されているコンストラクタを返すようになっています。</p>
+<p>これはcurrentConstructor内でFactorySettingsクラスを呼び出し、このクラスがセットしているプロジェクトディレクトリの設定を読み取るようになっているためです。</p>
 <div><svg height="120" viewBox="0 0 448 120" width="448" xmlns="http://www.w3.org/2000/svg" xmlns:inkspace="http://www.inkscape.org/namespaces/inkscape" xmlns:xlink="http://www.w3.org/1999/xlink">
   <defs id="defs_block">
     <filter height="1.504" id="filter_blur" inkspace:collect="always" width="1.1575" x="-0.07875" y="-0.252">
@@ -732,17 +656,11 @@ Constructorに関する機能はこの一つのアセットの情報のみを取
 </div>
 <div class="section" id="factorysettingsfactorydata">
 <h3>FactorySettingsを任意のFactoryDataに置き換える<a class="headerlink" href="#factorysettingsfactorydata" title="このヘッドラインへのパーマリンク">¶</a></h3>
-<p>通常はFactorySettingsを使用する事によって問題なく運用する事ができますが、
-このクラスはファクトリーウィンドウなどのGUIにも影響を及ぼすため、
-スクリプトを裏で実行したい場合などには向かないケースもあります。</p>
+<p>通常はFactorySettingsを使用する事によって問題なく運用する事ができますが、このクラスはファクトリーウィンドウなどのGUIにも影響を及ぼすため、スクリプトを裏で実行したい場合などには向かないケースもあります。</p>
 <p>このようにGUI起動中に別の設定でConstructorを実行したいなどの場合は</p>
 <p><strong>factoryModulues.startManualy</strong></p>
-<p>を使用します。
-このクラスはインスタンス作成時にFactoryDataオブジェクトを渡して使用する、
-with文用のコンテキストです。</p>
-<p>このクラスをwith文で使用すると、
-with内で呼ばれるFactorySettingsは全てインスタンス時に渡した
-FactoryDataオブジェクトに置き換わります。</p>
+<p>を使用します。このクラスはインスタンス作成時にFactoryDataオブジェクトを渡して使用する、with文用のコンテキストです。</p>
+<p>このクラスをwith文で使用すると、with内で呼ばれるFactorySettingsは全てインスタンス時に渡したFactoryDataオブジェクトに置き換わります。</p>
 <div class="highlight-python notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
  2
  3
@@ -800,18 +718,14 @@ FactoryDataオブジェクトに置き換わります。</p>
 <span class="c1"># =========================================================================</span>
 </pre></div>
 </td></tr></table></div>
-<p>constructorモジュール内の機能にはFactorySettingsにアクセスしているものが多いため、
-このモジュールにまつわる何かを呼ぶ際にはstartManualyを使用すると良いでしょう。</p>
+<p>constructorモジュール内の機能にはFactorySettingsにアクセスしているものが多いため、このモジュールにまつわる何かを呼ぶ際にはstartManualyを使用すると良いでしょう。</p>
 </div>
 </div>
 <div class="section" id="fs-createprojdir">
 <span id="id10"></span><h2>プロジェクトディレクトリをコマンドで作成する<a class="headerlink" href="#fs-createprojdir" title="このヘッドラインへのパーマリンク">¶</a></h2>
-<p>このセクションでは前述した仕組みを使用して、
-スクリプトでファクトリーが取り扱うプロジェクトディレクトリを作成してみましょう。</p>
-<p>以下のコードでは任意のディレクトリにstandardConstructorのデフォルトセットを設定し、
-プロジェクトディレクトリを作成しています。</p>
-<p>尚、FactoryDataにセットするディレクトリパスは、
-予め作成しておく必用があります。</p>
+<p>このセクションでは前述した仕組みを使用して、スクリプトでファクトリーが取り扱うプロジェクトディレクトリを作成してみましょう。</p>
+<p>以下のコードでは任意のディレクトリにstandardConstructorのデフォルトセットを設定し、プロジェクトディレクトリを作成しています。</p>
+<p>尚、FactoryDataにセットするディレクトリパスは、予め作成しておく必用があります。</p>
 <div class="highlight-python notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
  2
  3
@@ -926,10 +840,8 @@ FactoryDataオブジェクトに置き換わります。</p>
 </div>
 <div class="section" id="fs-executebuildscript">
 <span id="id11"></span><h2>プロジェクトディレクトリのビルドスクリプトを実行する<a class="headerlink" href="#fs-executebuildscript" title="このヘッドラインへのパーマリンク">¶</a></h2>
-<p>このセクションではアセットのリギングが完了した
-プロジェクトディレクトリのスクリプトを、コマンドから実行してみましょう。</p>
-<p>まずは定番の、
-FactoryDataクラスを作成してプロジェクトディレクトリのパスを設定から初めます。</p>
+<p>このセクションではアセットのリギングが完了したプロジェクトディレクトリのスクリプトを、コマンドから実行してみましょう。</p>
+<p>まずは定番の、FactoryDataクラスを作成してプロジェクトディレクトリのパスを設定から初めます。</p>
 <div class="highlight-python notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
 2
 3</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">gris3</span> <span class="kn">import</span> <span class="n">factory</span>
@@ -949,13 +861,9 @@ FactoryDataクラスを作成してプロジェクトディレクトリのパス
 </span><span class="hll"><span class="c1"># Result: [&#39;setup_high&#39;, &#39;setup_low&#39;, &#39;__init__&#39;] #</span>
 </span></pre></div>
 </td></tr></table></div>
-<p>FactoryData.listScriptsメソッドは、
-Constructorとして実行可能なPythonモジュールがリストとして返ってきます。</p>
-<p>Constructorとして実行可能とは、
-単純にモジュール内にConstructorという名前の機能が存在するかどうかで判定しています。
-また原則として__init__は実行しても無効です。（対応する読み込みモデルが存在しないため）</p>
-<p>最後にこのリストの中の一つを実行してみましょう。
-尚リストの中身がわかっているのであれば、listScriptsは行う必要はありません。</p>
+<p>FactoryData.listScriptsメソッドは、Constructorとして実行可能なPythonモジュールがリストとして返ってきます。</p>
+<p>Constructorとして実行可能とは、単純にモジュール内にConstructorという名前の機能が存在するかどうかで判定しています。また原則として__init__は実行しても無効です。（対応する読み込みモデルが存在しないため）</p>
+<p>最後にこのリストの中の一つを実行してみましょう。尚リストの中身がわかっているのであれば、listScriptsは行う必要はありません。</p>
 <div class="highlight-python notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
 2
 3
@@ -980,7 +888,7 @@ Constructorとして実行可能なPythonモジュールがリストとして返
         <a href="factoryModules.html" class="btn btn-neutral float-right" title="ファクトリーモジュール" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
       
       
-        <a href="../tools/extraJoint.html" class="btn btn-neutral float-left" title="extraJoint" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+        <a href="../tools/facialMemoryManager.html" class="btn btn-neutral float-left" title="facialMemoryManager" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
       
     </div>
   

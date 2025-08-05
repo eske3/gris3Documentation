@@ -38,6 +38,7 @@
     <link rel="author" title="このドキュメントについて" href="../about.html" />
     <link rel="index" title="索引" href="../genindex.html" />
     <link rel="search" title="検索" href="../search.html" />
+    <link rel="next" title="uilib.extendedUIモジュール" href="../dev_ui/extendedUI.html" />
     <link rel="prev" title="スクリプトによって操作する" href="operateByScript.html" /> 
 </head>
 
@@ -106,6 +107,7 @@
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../tools/jointEditor.html">jointEditor</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../tools/extraJoint.html">extraJoint</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../tools/facialMemoryManager.html">facialMemoryManager</a></li>
 </ul>
 <p class="caption"><span class="caption-text">開発者向けドキュメント</span></p>
 <ul class="current">
@@ -124,6 +126,10 @@
 </li>
 </ul>
 </li>
+</ul>
+<p class="caption"><span class="caption-text">GUI開発向け</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../dev_ui/extendedUI.html">uilib.extendedUIモジュール</a></li>
 </ul>
 
             
@@ -194,8 +200,7 @@
 <p>settingsモジュールはGRISに関する各種設定を定義します。</p>
 <div class="section" id="globalsettings-xml">
 <span id="st-globalsettingsxml"></span><h2>globalSettings.xml<a class="headerlink" href="#globalsettings-xml" title="このヘッドラインへのパーマリンク">¶</a></h2>
-<p>このXMLファイルはGRISの拡張モジュールを検索する際に、
-検索するモジュールのプレフィックスとなるPythonパッケージを指定できます。</p>
+<p>このXMLファイルはGRISの拡張モジュールを検索する際に、検索するモジュールのプレフィックスとなるPythonパッケージを指定できます。</p>
 <div class="section" id="id2">
 <h3>標準的なフォーマット<a class="headerlink" href="#id2" title="このヘッドラインへのパーマリンク">¶</a></h3>
 <p>標準では以下のような内容で記述されています。</p>
@@ -225,16 +230,13 @@
 </colgroup>
 <tbody>
 <tr class="row-odd"><td><p>constructorPrefix</p></td>
-<td><p>ここで指定したPythonパッケージの下にカスタムのConstructorモジュールを配置すると,
-コンストラクタとして認識されるようになる。</p></td>
+<td><p>ここで指定したPythonパッケージの下にカスタムのConstructorモジュールを配置すると,コンストラクタとして認識されるようになる。</p></td>
 </tr>
 <tr class="row-even"><td><p>rigUnitPrefix</p></td>
-<td><p>ここで指定したPythonパッケージの下にリグユニット用モジュールを配置すると,
-リグモジュールとして認識されるようになる。</p></td>
+<td><p>ここで指定したPythonパッケージの下にリグユニット用モジュールを配置すると,リグモジュールとして認識されるようになる。</p></td>
 </tr>
 <tr class="row-odd"><td><p>factoryModules</p></td>
-<td><p>ここで指定したPythonパッケージの下にFactoryModuleを配置すると、
-FactoryModuleの一つとしてConstructor内で利用できるようになる。</p></td>
+<td><p>ここで指定したPythonパッケージの下にFactoryModuleを配置すると、FactoryModuleの一つとしてConstructor内で利用できるようになる。</p></td>
 </tr>
 </tbody>
 </table>
@@ -249,6 +251,8 @@ FactoryModuleの一つとしてConstructor内で利用できるようになる�
           <footer>
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="../dev_ui/extendedUI.html" class="btn btn-neutral float-right" title="uilib.extendedUIモジュール" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
       
       
         <a href="operateByScript.html" class="btn btn-neutral float-left" title="スクリプトによって操作する" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>

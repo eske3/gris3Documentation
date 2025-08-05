@@ -1,0 +1,396 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="ja" >
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>uilib.extendedUIモジュール &mdash; gris3 1.0.0 ドキュメント</title>
+  
+
+  
+  <link rel="stylesheet" href="../_static/css/customTheme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+
+  
+  
+  
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/doctools.js"></script>
+        <script src="../_static/language_data.js"></script>
+        <script src="../_static/translations.js"></script>
+    
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+    
+    <link rel="author" title="このドキュメントについて" href="../about.html" />
+    <link rel="index" title="索引" href="../genindex.html" />
+    <link rel="search" title="検索" href="../search.html" />
+    <link rel="prev" title="設定にまつわる機能" href="../dev/settings.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../index.html" class="icon icon-home" alt="Documentation Home"> gris3
+          
+
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">スタートアップ</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../contents/install.html">インストールと起動</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../contents/updateLog.html">更新履歴</a></li>
+</ul>
+<p class="caption"><span class="caption-text">マニュアル</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../contents/scriptBasedRigging.html">ScriptBasedRigging-概要</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../contents/scriptingForFactory.html">ファクトリーのスクリプティングガイド</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../contents/namingRule.html">命名規則</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../contents/rigUnits.html">Rig Units</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../contents/includedExtraConstructors.html">組み込み済みExtraConstructor</a></li>
+</ul>
+<p class="caption"><span class="caption-text">ガジェット</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../gadgets/jointEditor.html">Joint Editor</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../gadgets/modelSetup.html">Model Setup</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../gadgets/renamer.html">Renamer</a></li>
+</ul>
+<p class="caption"><span class="caption-text">スクリプトツール</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../tools/jointEditor.html">jointEditor</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../tools/extraJoint.html">extraJoint</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../tools/facialMemoryManager.html">facialMemoryManager</a></li>
+</ul>
+<p class="caption"><span class="caption-text">開発者向けドキュメント</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../dev/factorySettings.html">ファクトリーセッティング</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../dev/factoryModules.html">ファクトリーモジュール</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../dev/makingRigUnits.html">リグユニットの開発</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../dev/constructor.html">コンストラクタ</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../dev/extraConstructor.html">エクストラコンストラクタ</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../dev/namingRuleSystem.html">命名規則管理システム</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../dev/operateByScript.html">スクリプトによって操作する</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../dev/settings.html">設定にまつわる機能</a></li>
+</ul>
+<p class="caption"><span class="caption-text">GUI開発向け</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="current reference internal" href="#">uilib.extendedUIモジュール</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#filteredview">FilteredView</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#id1">メソッド</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id2">使用例</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">gris3</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
+        
+      <li>uilib.extendedUIモジュール</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../_sources/dev_ui/extendedUI.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="uilib-extendedui">
+<h1>uilib.extendedUIモジュール<a class="headerlink" href="#uilib-extendedui" title="このヘッドラインへのパーマリンク">¶</a></h1>
+<p>このモジュールは特殊な用途の拡張GUIを提供します。</p>
+<div class="section" id="filteredview">
+<span id="devui-etui-filteredview"></span><h2>FilteredView<a class="headerlink" href="#filteredview" title="このヘッドラインへのパーマリンク">¶</a></h2>
+<p>このクラスはQAbstractItemView系ウィジェットに表示フィルタ機能を追加したものを提供します。</p>
+<p>ビューウィジェットは<strong>createView</strong>関数を、モデルは<strong>createModel</strong>関数を用いて任意のものを作成します。</p>
+<p>作成されたビューにフォーカスされている時に、Tabキーを押すとフィルタ文字入力用のラインフィールドがビュー下部に表示されます。</p>
+<a class="reference internal image-reference" href="../_images/extenededUI_img001.png"><img alt="../_images/extenededUI_img001.png" src="../_images/extenededUI_img001.png" style="width: 400px;" /></a>
+<p>このフィールドに文字を入力すると、ビューはフィルタされた結果を表示します。</p>
+<a class="reference internal image-reference" href="../_images/extenededUI_img002.png"><img alt="../_images/extenededUI_img002.png" src="../_images/extenededUI_img002.png" style="width: 400px;" /></a>
+<div class="section" id="id1">
+<h3>メソッド<a class="headerlink" href="#id1" title="このヘッドラインへのパーマリンク">¶</a></h3>
+<p>以下に重要なメソッドを何点かリストアップします。</p>
+<table class="docutils align-default">
+<colgroup>
+<col style="width: 25%" />
+<col style="width: 25%" />
+<col style="width: 25%" />
+<col style="width: 25%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p><strong>メソッド名</strong></p></td>
+<td><p><strong>引数</strong></p></td>
+<td><p><strong>戻り値</strong></p></td>
+<td><p><strong>説明</strong></p></td>
+</tr>
+<tr class="row-even"><td><p>createView</p></td>
+<td></td>
+<td><p>QtWidgets.QAbstractItemView</p></td>
+<td><p>このウィジェットに使用するビューを作成して返します。</p></td>
+</tr>
+<tr class="row-odd"><td><p>createModel</p></td>
+<td></td>
+<td><p>QtGui.QStandardItemModel</p></td>
+<td><p>このウィジェットで使用する任意のItemModelを作成して返します。</p></td>
+</tr>
+<tr class="row-even"><td><p>filterKeyColumn</p></td>
+<td></td>
+<td><p>int</p></td>
+<td><p>フィルタに使用するカラム番号を返します。デフォルトは0です。</p></td>
+</tr>
+<tr class="row-odd"><td><p>view</p></td>
+<td></td>
+<td><p>QtWidgets.QAbstractItemView</p></td>
+<td><p>createViewで作成したビューにアクセスします。</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="id2">
+<h3>使用例<a class="headerlink" href="#id2" title="このヘッドラインへのパーマリンク">¶</a></h3>
+<div class="highlight-python notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+38
+39
+40
+41
+42
+43
+44</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">gris3.uilib</span> <span class="kn">import</span> <span class="n">QtWidgets</span><span class="p">,</span> <span class="n">QtGui</span><span class="p">,</span> <span class="n">QtCore</span>
+<span class="kn">from</span> <span class="nn">gris3.uilib</span> <span class="kn">import</span> <span class="n">extendedUI</span><span class="p">,</span> <span class="n">mayaUIlib</span>
+
+<span class="k">class</span> <span class="nc">SampleView</span><span class="p">(</span><span class="n">extendedUI</span><span class="o">.</span><span class="n">FilteredView</span><span class="p">):</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">parent</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+        <span class="nb">super</span><span class="p">(</span><span class="n">SampleView</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">parent</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">setWindowFlags</span><span class="p">(</span><span class="n">QtCore</span><span class="o">.</span><span class="n">Qt</span><span class="o">.</span><span class="n">Window</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">setWindowTitle</span><span class="p">(</span><span class="s1">&#39;GRIS ExtendedUI - FileteredView&#39;</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">createView</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">            ビューとして使用するQAbstractItemViewのサブクラスを作成して返す。</span>
+
+<span class="sd">            Returns:</span>
+<span class="sd">                QtWidgets.QListView:</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">view</span> <span class="o">=</span> <span class="n">QtWidgets</span><span class="o">.</span><span class="n">QListView</span><span class="p">()</span>
+        <span class="n">view</span><span class="o">.</span><span class="n">setVerticalScrollMode</span><span class="p">(</span><span class="n">QtWidgets</span><span class="o">.</span><span class="n">QListView</span><span class="o">.</span><span class="n">ScrollPerPixel</span><span class="p">)</span>
+        <span class="n">view</span><span class="o">.</span><span class="n">setHorizontalScrollMode</span><span class="p">(</span><span class="n">QtWidgets</span><span class="o">.</span><span class="n">QListView</span><span class="o">.</span><span class="n">ScrollPerPixel</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">view</span>
+
+    <span class="k">def</span> <span class="nf">createModel</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">            任意のItemModelを作成して返す。今回はQStringListModel。</span>
+
+<span class="sd">            Returns:</span>
+<span class="sd">                QtCore.QStringListModel:</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="n">QtCore</span><span class="o">.</span><span class="n">QStringListModel</span><span class="p">()</span>
+
+    <span class="k">def</span> <span class="nf">setItems</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">itemlist</span> <span class="p">:</span> <span class="nb">list</span><span class="p">):</span>
+        <span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">            ビューにアイテムを追加する。</span>
+
+<span class="sd">            Args:</span>
+<span class="sd">                itemlist(list):文字列のリスト</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">model</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">view</span><span class="p">()</span><span class="o">.</span><span class="n">model</span><span class="p">()</span><span class="o">.</span><span class="n">sourceModel</span><span class="p">()</span>
+        <span class="n">model</span><span class="o">.</span><span class="n">setStringList</span><span class="p">(</span><span class="n">itemlist</span><span class="p">)</span>
+
+<span class="n">view</span> <span class="o">=</span> <span class="n">SampleView</span><span class="p">(</span><span class="n">mayaUIlib</span><span class="o">.</span><span class="n">MainWindow</span><span class="p">)</span>
+<span class="n">view</span><span class="o">.</span><span class="n">resize</span><span class="p">(</span><span class="mi">480</span><span class="p">,</span> <span class="mi">600</span><span class="p">)</span>
+<span class="n">view</span><span class="o">.</span><span class="n">setItems</span><span class="p">([</span><span class="s1">&#39;hoge&#39;</span><span class="p">,</span> <span class="s1">&#39;age&#39;</span><span class="p">,</span> <span class="s1">&#39;sage&#39;</span><span class="p">,</span> <span class="s1">&#39;alpha&#39;</span><span class="p">,</span> <span class="s1">&#39;beta&#39;</span><span class="p">])</span>
+<span class="n">view</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</td></tr></table></div>
+</div>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+      
+        <a href="../dev/settings.html" class="btn btn-neutral float-left" title="設定にまつわる機能" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        
+        &copy; 著作権 2020, EskeYoshinob
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

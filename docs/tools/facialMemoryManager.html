@@ -1,0 +1,395 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="ja" >
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>facialMemoryManager &mdash; gris3 1.0.0 ドキュメント</title>
+  
+
+  
+  <link rel="stylesheet" href="../_static/css/customTheme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+
+  
+  
+  
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/doctools.js"></script>
+        <script src="../_static/language_data.js"></script>
+        <script src="../_static/translations.js"></script>
+    
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+    
+    <link rel="author" title="このドキュメントについて" href="../about.html" />
+    <link rel="index" title="索引" href="../genindex.html" />
+    <link rel="search" title="検索" href="../search.html" />
+    <link rel="next" title="ファクトリーセッティング" href="../dev/factorySettings.html" />
+    <link rel="prev" title="extraJoint" href="extraJoint.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../index.html" class="icon icon-home" alt="Documentation Home"> gris3
+          
+
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">スタートアップ</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../contents/install.html">インストールと起動</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../contents/updateLog.html">更新履歴</a></li>
+</ul>
+<p class="caption"><span class="caption-text">マニュアル</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../contents/scriptBasedRigging.html">ScriptBasedRigging-概要</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../contents/scriptingForFactory.html">ファクトリーのスクリプティングガイド</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../contents/namingRule.html">命名規則</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../contents/rigUnits.html">Rig Units</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../contents/includedExtraConstructors.html">組み込み済みExtraConstructor</a></li>
+</ul>
+<p class="caption"><span class="caption-text">ガジェット</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../gadgets/jointEditor.html">Joint Editor</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../gadgets/modelSetup.html">Model Setup</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../gadgets/renamer.html">Renamer</a></li>
+</ul>
+<p class="caption"><span class="caption-text">スクリプトツール</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="jointEditor.html">jointEditor</a></li>
+<li class="toctree-l1"><a class="reference internal" href="extraJoint.html">extraJoint</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">facialMemoryManager</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#id1">関数</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#listmanagernode">listManagerNode</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#createmanagernode">createManagerNode</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#facialmemorymanagerroot">FacialMemoryManagerRoot</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#id2">メソッド</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p class="caption"><span class="caption-text">開発者向けドキュメント</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../dev/factorySettings.html">ファクトリーセッティング</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../dev/factoryModules.html">ファクトリーモジュール</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../dev/makingRigUnits.html">リグユニットの開発</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../dev/constructor.html">コンストラクタ</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../dev/extraConstructor.html">エクストラコンストラクタ</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../dev/namingRuleSystem.html">命名規則管理システム</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../dev/operateByScript.html">スクリプトによって操作する</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../dev/settings.html">設定にまつわる機能</a></li>
+</ul>
+<p class="caption"><span class="caption-text">GUI開発向け</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../dev_ui/extendedUI.html">uilib.extendedUIモジュール</a></li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">gris3</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
+        
+      <li>facialMemoryManager</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../_sources/tools/facialMemoryManager.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="facialmemorymanager">
+<h1>facialMemoryManager<a class="headerlink" href="#facialmemorymanager" title="このヘッドラインへのパーマリンク">¶</a></h1>
+<p>このモジュールはブレンドシェイプの登録されたアトリビュートの組み合わせの状態を登録し、再現、管理するための機能を提供するモジュールです。モジュール名の通り、主に表情管理を行うための機能となります。</p>
+<div class="section" id="id1">
+<h2>関数<a class="headerlink" href="#id1" title="このヘッドラインへのパーマリンク">¶</a></h2>
+<div class="section" id="listmanagernode">
+<h3>listManagerNode<a class="headerlink" href="#listmanagernode" title="このヘッドラインへのパーマリンク">¶</a></h3>
+<p>シーン内の表情マネージャノードをリストします。戻り値は<a class="reference internal" href="#tfmm-facialmemorymanagerroot"><span class="std std-ref">FacialMemoryManagerRoot</span></a>を持つリストです。</p>
+</div>
+<div class="section" id="createmanagernode">
+<h3>createManagerNode<a class="headerlink" href="#createmanagernode" title="このヘッドラインへのパーマリンク">¶</a></h3>
+<p>フェイシャル情報を保持するノードを作成します。戻り値は<a class="reference internal" href="#tfmm-facialmemorymanagerroot"><span class="std std-ref">FacialMemoryManagerRoot</span></a>を持つリストです。</p>
+<table class="docutils align-default">
+<colgroup>
+<col style="width: 33%" />
+<col style="width: 33%" />
+<col style="width: 33%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p><strong>引数</strong></p></td>
+<td><p><strong>型</strong></p></td>
+<td><p><strong>説明</strong></p></td>
+</tr>
+<tr class="row-even"><td><p>parent</p></td>
+<td><p>str</p></td>
+<td><p>この関数で作成するFacialMemoryManagerRootノードの親ノードの名前</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div class="section" id="facialmemorymanagerroot">
+<span id="tfmm-facialmemorymanagerroot"></span><h2>FacialMemoryManagerRoot<a class="headerlink" href="#facialmemorymanagerroot" title="このヘッドラインへのパーマリンク">¶</a></h2>
+<p>登録した表情を管理します。</p>
+<div class="section" id="id2">
+<h3>メソッド<a class="headerlink" href="#id2" title="このヘッドラインへのパーマリンク">¶</a></h3>
+<table class="docutils align-default">
+<colgroup>
+<col style="width: 25%" />
+<col style="width: 25%" />
+<col style="width: 25%" />
+<col style="width: 25%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p><strong>メソッド名</strong></p></td>
+<td><p><strong>引数</strong></p></td>
+<td><p><strong>戻り値</strong></p></td>
+<td><p><strong>説明</strong></p></td>
+</tr>
+<tr class="row-even"><td><p>setBlendShapeName</p></td>
+<td><p>blendShapeName : str</p></td>
+<td></td>
+<td><p>操作対象となるブレンドシェイプ名を設定する。</p></td>
+</tr>
+<tr class="row-odd"><td><p>blendShapeName</p></td>
+<td></td>
+<td><p>str</p></td>
+<td><p>設定されている操作対象となるブレンドシェイプ名を返す。</p></td>
+</tr>
+<tr class="row-even"><td><p>blendShape</p></td>
+<td></td>
+<td><p>node.BlendShape</p></td>
+<td><p>設定されている操作対象ブレンドシェイプをオブジェクト形式で返す。</p></td>
+</tr>
+<tr class="row-odd"><td><p>listExpressions</p></td>
+<td></td>
+<td><p>OrderedDict</p></td>
+<td><p>このノードが保持する表情データノートのリストを返す。</p>
+<p>戻り値はOrderedDictで、表情名をキーとし、それに対応するTransformを値とする。</p>
+</td>
+</tr>
+<tr class="row-even"><td><p>listExpressionData</p></td>
+<td></td>
+<td><p>dict</p></td>
+<td><p>このノードが保持する表情データノードのリストを返す。</p>
+<p>戻り値は辞書型で、表情名をキーとし、それに対応するblendShapeのアトリビュート名と値の辞書を値としたデータ。</p>
+</td>
+</tr>
+<tr class="row-odd"><td><p>addExpression</p></td>
+<td><p>expressionName : str</p></td>
+<td></td>
+<td><p>現在のblendShapeのアトリビュート値を用いて、引数expressionで指定した表情データとして登録する。</p></td>
+</tr>
+<tr class="row-even"><td><p>setExpressionFromCurrentState</p></td>
+<td><p>expression : str</p></td>
+<td></td>
+<td><p>現在のblendShapeのアトリビュート値を用いて、引数expressionで指定した表情データとして登録する。</p></td>
+</tr>
+<tr class="row-odd"><td><p>clearExpressions</p></td>
+<td></td>
+<td></td>
+<td><p>保持する表情データノードをすべて破棄する。</p></td>
+</tr>
+<tr class="row-even"><td><p>removeExpression</p></td>
+<td><p>expression : str</p></td>
+<td></td>
+<td><p>引数expressionで指定した表情データを削除する。</p></td>
+</tr>
+<tr class="row-odd"><td><p>setExpressionFromDataList</p></td>
+<td><p>datalist : dict</p></td>
+<td></td>
+<td><p>引数datalistで指定した辞書データを元に、表情と対応値を一括設定する。</p>
+<p>datalistは</p>
+<p>キー：表情名</p>
+<p>値：表情に対応するblendShapeのアトリビュート名と値の辞書</p>
+<p>を持つ。</p>
+</td>
+</tr>
+<tr class="row-even"><td><p>updateExpressionFromDataList</p></td>
+<td><p>expressionlist : list</p></td>
+<td><p>int</p></td>
+<td><p>引数expressionlistで指定された表情名のリストで更新を行う。</p>
+<p>expressionlist内に既存の表情があった場合、その値は保持する。</p>
+<p>既存の表情リストとexpressionlistが順番も含めて全く同じだった場合は何もせずに0を返す。</p>
+<p>それ以外の場合は1を返す。</p>
+</td>
+</tr>
+<tr class="row-odd"><td><p>renameExpressionFromDataList</p></td>
+<td><p>expressionlist : list</p></td>
+<td><p>int</p></td>
+<td><p>引数expressionlistで指定された表情名のリストで更新を行う。</p>
+<p>expressionlist内に既存の表情があった場合、その値は保持する。</p>
+<p>既存の表情リストとexpressionlistが順番も含めて全く同じだった場合は何もせずに0を返す。</p>
+<p>それ以外の場合は1を返す。</p>
+</td>
+</tr>
+<tr class="row-even"><td><p>applyExpression</p></td>
+<td><p>expression : str</p></td>
+<td></td>
+<td><p>引数expressionで指定した表情パラメータをblendShapeに適用する。</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="../dev/factorySettings.html" class="btn btn-neutral float-right" title="ファクトリーセッティング" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="extraJoint.html" class="btn btn-neutral float-left" title="extraJoint" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        
+        &copy; 著作権 2020, EskeYoshinob
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

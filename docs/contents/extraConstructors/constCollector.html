@@ -105,6 +105,7 @@
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../../tools/jointEditor.html">jointEditor</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../tools/extraJoint.html">extraJoint</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../tools/facialMemoryManager.html">facialMemoryManager</a></li>
 </ul>
 <p class="caption"><span class="caption-text">開発者向けドキュメント</span></p>
 <ul>
@@ -116,6 +117,10 @@
 <li class="toctree-l1"><a class="reference internal" href="../../dev/namingRuleSystem.html">命名規則管理システム</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../dev/operateByScript.html">スクリプトによって操作する</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../dev/settings.html">設定にまつわる機能</a></li>
+</ul>
+<p class="caption"><span class="caption-text">GUI開発向け</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../dev_ui/extendedUI.html">uilib.extendedUIモジュール</a></li>
 </ul>
 
             
@@ -183,10 +188,8 @@
             
   <div class="section" id="constcollector">
 <h1>constCollector<a class="headerlink" href="#constcollector" title="このヘッドラインへのパーマリンク">¶</a></h1>
-<p>ctrl_grp内に存在する、
-コントローラーをまとめるグループ内にあるコンストレインをすべてrig_grp内に収集します。</p>
-<p>インストール後の戻り値である、
-このExtraConstructorのインスタンスに対して以下のような設定を行うことができます。</p>
+<p>ctrl_grp内に存在する、コントローラーをまとめるグループ内にあるコンストレインをすべてrig_grp内に収集します。</p>
+<p>インストール後の戻り値である、このExtraConstructorのインスタンスに対して以下のような設定を行うことができます。</p>
 <table class="docutils align-default" id="id6">
 <caption><span class="caption-text">設定できる機能一覧</span><a class="headerlink" href="#id6" title="このテーブルへのパーマリンク">¶</a></caption>
 <colgroup>
@@ -209,8 +212,7 @@
 </tr>
 <tr class="row-even"><td><p>useDefault</p></td>
 <td><p>bool</p></td>
-<td><p>デフォルトのフォルタ（コンストレインだけを取得）を
-使用するかどうかを指定します。</p></td>
+<td><p>デフォルトのフォルタ（コンストレインだけを取得）を使用するかどうかを指定します。</p></td>
 </tr>
 <tr class="row-odd"><td><p>ConstGroupName(メンバ変数)</p></td>
 <td><p>str</p></td>
@@ -223,34 +225,25 @@
 </table>
 <div class="section" id="addnodefilter">
 <h2>addNodeFilter<a class="headerlink" href="#addnodefilter" title="このヘッドラインへのパーマリンク">¶</a></h2>
-<p>このメソッドはグループ内にあるノードを収集する際にフィルタとなる関数を追加することができます。
-デフォルトではコンストレインノードをすべて収集するようになっていますが、
-他にも収集するものを追加場合にはこのメソッドを使用して独自のフィルタを追加して下さい。</p>
-<p>このメソッドにわたす引数は関数です。
-関数は以下のフォーマットで定義して下さい。</p>
+<p>このメソッドはグループ内にあるノードを収集する際にフィルタとなる関数を追加することができます。デフォルトではコンストレインノードをすべて収集するようになっていますが、他にも収集するものを追加場合にはこのメソッドを使用して独自のフィルタを追加して下さい。</p>
+<p>このメソッドにわたす引数は関数です。関数は以下のフォーマットで定義して下さい。</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">functionName</span><span class="p">(</span><span class="n">node_name</span><span class="p">):</span>
     <span class="k">return</span> <span class="kc">True</span>
 </pre></div>
 </div>
-<p>第一引数はフィルタするためのノード名を受け取るようにします。
-また戻り値はフィルタの結果の可否をBoolとして返します。</p>
-<p>フィルタは複数追加することができます。
-このコンストラクタは追加したフィルタすべてでノードのテストを行い、
-一つでもTrueになれば収集対象となるようになっています。</p>
+<p>第一引数はフィルタするためのノード名を受け取るようにします。また戻り値はフィルタの結果の可否をBoolとして返します。</p>
+<p>フィルタは複数追加することができます。このコンストラクタは追加したフィルタすべてでノードのテストを行い、一つでもTrueになれば収集対象となるようになっています。</p>
 </div>
 <div class="section" id="usedefault">
 <h2>useDefault<a class="headerlink" href="#usedefault" title="このヘッドラインへのパーマリンク">¶</a></h2>
-<p>このメソッドはデフォルトで動作するフィルタ機能をOFFにします。
-デフォルトで動作するフィルタは、
-グループ内のすべてのコンストレインノードを適用対象とするようになっています。</p>
+<p>このメソッドはデフォルトで動作するフィルタ機能をOFFにします。デフォルトで動作するフィルタは、グループ内のすべてのコンストレインノードを適用対象とするようになっています。</p>
 <p>デフォルトフィルタは以下の内容になっています。</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">maya</span> <span class="kn">import</span> <span class="n">cmds</span>
 <span class="k">def</span> <span class="nf">defaultFilter</span><span class="p">(</span><span class="n">target</span><span class="p">):</span>
     <span class="k">return</span> <span class="nb">bool</span><span class="p">(</span><span class="n">cmds</span><span class="o">.</span><span class="n">ls</span><span class="p">(</span><span class="n">target</span><span class="p">,</span> <span class="nb">type</span><span class="o">=</span><span class="s1">&#39;constraint&#39;</span><span class="p">))</span>
 </pre></div>
 </div>
-<p>コンストレインすべてを収集対象としたくない場合はこのメソッドでTrueを設定し、
-独自の収集関数を追加して下さい。</p>
+<p>コンストレインすべてを収集対象としたくない場合はこのメソッドでTrueを設定し、独自の収集関数を追加して下さい。</p>
 </div>
 <div class="section" id="id5">
 <h2>使用例<a class="headerlink" href="#id5" title="このヘッドラインへのパーマリンク">¶</a></h2>

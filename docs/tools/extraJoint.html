@@ -38,7 +38,7 @@
     <link rel="author" title="このドキュメントについて" href="../about.html" />
     <link rel="index" title="索引" href="../genindex.html" />
     <link rel="search" title="検索" href="../search.html" />
-    <link rel="next" title="ファクトリーセッティング" href="../dev/factorySettings.html" />
+    <link rel="next" title="facialMemoryManager" href="facialMemoryManager.html" />
     <link rel="prev" title="jointEditor" href="jointEditor.html" /> 
 </head>
 
@@ -121,6 +121,7 @@
 </li>
 </ul>
 </li>
+<li class="toctree-l1"><a class="reference internal" href="facialMemoryManager.html">facialMemoryManager</a></li>
 </ul>
 <p class="caption"><span class="caption-text">開発者向けドキュメント</span></p>
 <ul>
@@ -132,6 +133,10 @@
 <li class="toctree-l1"><a class="reference internal" href="../dev/namingRuleSystem.html">命名規則管理システム</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../dev/operateByScript.html">スクリプトによって操作する</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../dev/settings.html">設定にまつわる機能</a></li>
+</ul>
+<p class="caption"><span class="caption-text">GUI開発向け</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../dev_ui/extendedUI.html">uilib.extendedUIモジュール</a></li>
 </ul>
 
             
@@ -204,10 +209,7 @@
 <h2>関数<a class="headerlink" href="#id1" title="このヘッドラインへのパーマリンク">¶</a></h2>
 <div class="section" id="listextrajoints">
 <h3>listExtraJoints<a class="headerlink" href="#listextrajoints" title="このヘッドラインへのパーマリンク">¶</a></h3>
-<p>任意のノードのリストの中からExtraJointをリストします。
-戻り値は
-<a class="reference internal" href="#tej-extrajointclass"><span class="std std-ref">ExtraJoint</span></a>
-を持つリストです。</p>
+<p>任意のノードのリストの中からExtraJointをリストします。戻り値は<a class="reference internal" href="#tej-extrajointclass"><span class="std std-ref">ExtraJoint</span></a>を持つリストです。</p>
 <table class="docutils align-default">
 <colgroup>
 <col style="width: 33%" />
@@ -221,23 +223,18 @@
 </tr>
 <tr class="row-even"><td><p>nodelist</p></td>
 <td><p>list(またはNone）</p></td>
-<td><p>リストアップする対象となるノード名のリストを指定します。
-Noneが指定されている場合は選択ノードからリストアップされます。</p></td>
+<td><p>リストアップする対象となるノード名のリストを指定します。Noneが指定されている場合は選択ノードからリストアップされます。</p></td>
 </tr>
 <tr class="row-odd"><td><p>tag</p></td>
 <td><p>str</p></td>
-<td><p>このタグでリストアップするExtraJointをフィルタします。
-この引数で指定した文字列にマッチするタグを持つExtraJointだけがリストされます。</p></td>
+<td><p>このタグでリストアップするExtraJointをフィルタします。この引数で指定した文字列にマッチするタグを持つExtraJointだけがリストされます。</p></td>
 </tr>
 </tbody>
 </table>
 </div>
 <div class="section" id="selectextrajoint">
 <h3>selectExtraJoint<a class="headerlink" href="#selectextrajoint" title="このヘッドラインへのパーマリンク">¶</a></h3>
-<p>任意のノードの階層下にあるExtraJointを選択します。
-戻り値は選択された
-<a class="reference internal" href="#tej-extrajointclass"><span class="std std-ref">ExtraJoint</span></a>
-のリストを返します。</p>
+<p>任意のノードの階層下にあるExtraJointを選択します。戻り値は選択された<a class="reference internal" href="#tej-extrajointclass"><span class="std std-ref">ExtraJoint</span></a>のリストを返します。</p>
 <table class="docutils align-default">
 <colgroup>
 <col style="width: 33%" />
@@ -251,13 +248,11 @@ Noneが指定されている場合は選択ノードからリストアップさ�
 </tr>
 <tr class="row-even"><td><p>topNodes</p></td>
 <td><p>list(またはNone）</p></td>
-<td><p>この引数で指定されたノードの階層下にあるExtraJointを選択します。
-Noneの場合選択ノード下にあるExtraJointを選択します。</p></td>
+<td><p>この引数で指定されたノードの階層下にあるExtraJointを選択します。Noneの場合選択ノード下にあるExtraJointを選択します。</p></td>
 </tr>
 <tr class="row-odd"><td><p>tag</p></td>
 <td><p>str</p></td>
-<td><p>このタグで選択するExtraJointをフィルタします。
-この引数で指定した文字列にマッチするタグを持つExtraJointだけが選択されます。</p></td>
+<td><p>このタグで選択するExtraJointをフィルタします。この引数で指定した文字列にマッチするタグを持つExtraJointだけが選択されます。</p></td>
 </tr>
 </tbody>
 </table>
@@ -278,8 +273,7 @@ Noneの場合選択ノード下にあるExtraJointを選択します。</p></td>
 </tr>
 <tr class="row-even"><td><p>targetJoints</p></td>
 <td><p>list(またはNone）</p></td>
-<td><p>リストアップする対象となるノード名のリストを指定します。
-Noneが指定されている場合は選択ノードからリストアップされます。</p></td>
+<td><p>リストアップする対象となるノード名のリストを指定します。Noneが指定されている場合は選択ノードからリストアップされます。</p></td>
 </tr>
 </tbody>
 </table>
@@ -287,10 +281,7 @@ Noneが指定されている場合は選択ノードからリストアップさ�
 <div class="section" id="create">
 <h3>create<a class="headerlink" href="#create" title="このヘッドラインへのパーマリンク">¶</a></h3>
 <p>ExtraJointを作成します。</p>
-<p>引数parentLengthは親の長さを入力します。
-親の長さとは親ノードから親ノードの最初の子ノードまでの長さで、
-引数parentに指定したノードの同様の長さとの比率で、
-matrixで指定した位置に補正をかけます。</p>
+<p>引数parentLengthは親の長さを入力します。親の長さとは親ノードから親ノードの最初の子ノードまでの長さで、引数parentに指定したノードの同様の長さとの比率で、matrixで指定した位置に補正をかけます。</p>
 <table class="docutils align-default">
 <colgroup>
 <col style="width: 33%" />
@@ -328,8 +319,7 @@ matrixで指定した位置に補正をかけます。</p>
 </tr>
 <tr class="row-even"><td><p>matrix=None</p></td>
 <td><p>listまたはNone</p></td>
-<td><p>作成位置を表す行列を設定します。
-Noneが指定されている場合は親と同位置に配置されます。</p></td>
+<td><p>作成位置を表す行列を設定します。Noneが指定されている場合は親と同位置に配置されます。</p></td>
 </tr>
 <tr class="row-odd"><td><p>worldSpace=False</p></td>
 <td><p>bool</p></td>
@@ -430,7 +420,7 @@ Noneが指定されている場合は親と同位置に配置されます。</p>
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
-        <a href="../dev/factorySettings.html" class="btn btn-neutral float-right" title="ファクトリーセッティング" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+        <a href="facialMemoryManager.html" class="btn btn-neutral float-right" title="facialMemoryManager" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
       
       
         <a href="jointEditor.html" class="btn btn-neutral float-left" title="jointEditor" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>

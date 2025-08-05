@@ -105,6 +105,7 @@
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../../tools/jointEditor.html">jointEditor</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../tools/extraJoint.html">extraJoint</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../tools/facialMemoryManager.html">facialMemoryManager</a></li>
 </ul>
 <p class="caption"><span class="caption-text">開発者向けドキュメント</span></p>
 <ul>
@@ -116,6 +117,10 @@
 <li class="toctree-l1"><a class="reference internal" href="../../dev/namingRuleSystem.html">命名規則管理システム</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../dev/operateByScript.html">スクリプトによって操作する</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../dev/settings.html">設定にまつわる機能</a></li>
+</ul>
+<p class="caption"><span class="caption-text">GUI開発向け</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../dev_ui/extendedUI.html">uilib.extendedUIモジュール</a></li>
 </ul>
 
             
@@ -184,16 +189,11 @@
   <div class="section" id="cstextensions">
 <h1>cstExtensions<a class="headerlink" href="#cstextensions" title="このヘッドラインへのパーマリンク">¶</a></h1>
 <p>コンストラクタに追加・拡張機能を提供するExtraConstructorです。</p>
-<p>funcモジュールと違い、
-こちらはコンストラクタの仕様に則ったルール内で使用できる機能を提供します。</p>
-<p>このExtraConstructorをインストールしてもコンストラクタ自体の挙動に変化はなく、
-コンストラクタで以下のメソッドが使用できるようになります。</p>
+<p>funcモジュールと違い、こちらはコンストラクタの仕様に則ったルール内で使用できる機能を提供します。</p>
+<p>このExtraConstructorをインストールしてもコンストラクタ自体の挙動に変化はなく、コンストラクタで以下のメソッドが使用できるようになります。</p>
 <div class="section" id="alignjointonsurface">
 <h2>alignJointOnSurface<a class="headerlink" href="#alignjointonsurface" title="このヘッドラインへのパーマリンク">¶</a></h2>
-<p>このメソッドは任意のNurbsSurfaceにジョイントチェーンを追従させる機能を提供します。
-またジョイントチェーンにはFKコントローラが追加され、
-サーフェースに追従した状態からオフセットでFK制御が可能になります。
-メソッドの引数は以下の通りです。</p>
+<p>このメソッドは任意のNurbsSurfaceにジョイントチェーンを追従させる機能を提供します。またジョイントチェーンにはFKコントローラが追加され、サーフェースに追従した状態からオフセットでFK制御が可能になります。メソッドの引数は以下の通りです。</p>
 <table class="docutils align-default" id="id2">
 <caption><span class="caption-text">引数の説明</span><a class="headerlink" href="#id2" title="このテーブルへのパーマリンク">¶</a></caption>
 <colgroup>

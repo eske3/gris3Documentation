@@ -165,6 +165,7 @@
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../tools/jointEditor.html">jointEditor</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../tools/extraJoint.html">extraJoint</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../tools/facialMemoryManager.html">facialMemoryManager</a></li>
 </ul>
 <p class="caption"><span class="caption-text">開発者向けドキュメント</span></p>
 <ul>
@@ -176,6 +177,10 @@
 <li class="toctree-l1"><a class="reference internal" href="../dev/namingRuleSystem.html">命名規則管理システム</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../dev/operateByScript.html">スクリプトによって操作する</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../dev/settings.html">設定にまつわる機能</a></li>
+</ul>
+<p class="caption"><span class="caption-text">GUI開発向け</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../dev_ui/extendedUI.html">uilib.extendedUIモジュール</a></li>
 </ul>
 
             
@@ -250,8 +255,7 @@
 <a class="reference internal image-reference" href="../_images/0013.png"><img alt="../_images/0013.png" src="../_images/0013.png" style="width: 300px;" /></a>
 <div class="section" id="id1">
 <h3>作成する<a class="headerlink" href="#id1" title="このヘッドラインへのパーマリンク">¶</a></h3>
-<p>ボタンをクリックするとジョイントが作成されます。
-何も選択していない場合は原点にジョイントが1つ作成されます。</p>
+<p>ボタンをクリックするとジョイントが作成されます。何も選択していない場合は原点にジョイントが1つ作成されます。</p>
 <a class="reference internal image-reference" href="../_images/create001.png"><img alt="../_images/create001.png" src="../_images/create001.png" style="width: 300px;" /></a>
 </div>
 <div class="section" id="id2">
@@ -273,8 +277,7 @@
 </div>
 <div class="section" id="ctrl">
 <h4>Ctrlを押しながらボタンをクリックする<a class="headerlink" href="#ctrl" title="このヘッドラインへのパーマリンク">¶</a></h4>
-<p>選択している状態で、Ctrlを押しながらボタンをクリックすると、
-選択コンポーネントやTransformの中心にジョイントが一つ作成されます。</p>
+<p>選択している状態で、Ctrlを押しながらボタンをクリックすると、選択コンポーネントやTransformの中心にジョイントが一つ作成されます。</p>
 <a class="reference internal image-reference" href="../_images/create007.png"><img alt="../_images/create007.png" src="../_images/create007.png" style="width: 300px;" /></a>
 <a class="reference internal image-reference" href="../_images/create008.png"><img alt="../_images/create008.png" src="../_images/create008.png" style="width: 300px;" /></a>
 </div>
@@ -285,14 +288,11 @@
 <p>ジョイントチェーンのサイズを調整するための機能です。</p>
 <a class="reference internal image-reference" href="../_images/0022.png"><img alt="../_images/0022.png" src="../_images/0022.png" style="width: 300px;" /></a>
 <p>ジョイントを2つ選択してからボタンをクリックします。</p>
-<p>最初に選択したジョイントと最後に選択したジョイントの間のジョイントチェーンの大きさを変更します。
-最初に選択したジョイントの大きさから最後に選択したジョイントの多きさ滑らかになるように、
-間の各ジョイントチェーンの大きさを変更します。</p>
+<p>最初に選択したジョイントと最後に選択したジョイントの間のジョイントチェーンの大きさを変更します。最初に選択したジョイントの大きさから最後に選択したジョイントの多きさ滑らかになるように、間の各ジョイントチェーンの大きさを変更します。</p>
 <p>最後に選択したジョイントは最初に選択したジョイントの子である必要があります。</p>
 <a class="reference internal image-reference" href="../_images/arrange001.png"><img alt="../_images/arrange001.png" src="../_images/arrange001.png" style="width: 300px;" /></a>
 <a class="reference internal image-reference" href="../_images/arrange002.png"><img alt="../_images/arrange002.png" src="../_images/arrange002.png" style="width: 300px;" /></a>
-<p>複数のジョイントチェーンを選択してCtrlを押しながらクリックすると、
-各ジョイントから末端のジョイントにかけてジョイントチェーンの大きさをまとめて変更します。</p>
+<p>複数のジョイントチェーンを選択してCtrlを押しながらクリックすると、各ジョイントから末端のジョイントにかけてジョイントチェーンの大きさをまとめて変更します。</p>
 <a class="reference internal image-reference" href="../_images/arrange003.png"><img alt="../_images/arrange003.png" src="../_images/arrange003.png" style="width: 300px;" /></a>
 <a class="reference internal image-reference" href="../_images/arrange004.png"><img alt="../_images/arrange004.png" src="../_images/arrange004.png" style="width: 300px;" /></a>
 </div>
@@ -310,22 +310,17 @@
 </div>
 <div class="section" id="camera-based-parent-tool">
 <h3>Camera based parent tool<a class="headerlink" href="#camera-based-parent-tool" title="このヘッドラインへのパーマリンク">¶</a></h3>
-<p>このツールは複数のジョイントを任意の流れに沿ってペアレントし、
-ジョイントチェーンを作成する機能です。</p>
-<p>予めペアレント化したいジョイントを選択してから、
-このボタンをクリックしてツールを起動します。</p>
+<p>このツールは複数のジョイントを任意の流れに沿ってペアレントし、ジョイントチェーンを作成する機能です。</p>
+<p>予めペアレント化したいジョイントを選択してから、このボタンをクリックしてツールを起動します。</p>
 <a class="reference internal image-reference" href="../_images/parent004.png"><img alt="../_images/parent004.png" src="../_images/parent004.png" style="width: 300px;" /></a>
-<p>ツールを起動すると画面が少しだけ暗くなるので、
-作成したいジョイントチェーンの方向にドラッグします。</p>
+<p>ツールを起動すると画面が少しだけ暗くなるので、作成したいジョイントチェーンの方向にドラッグします。</p>
 <a class="reference internal image-reference" href="../_images/parent005.png"><img alt="../_images/parent005.png" src="../_images/parent005.png" style="width: 300px;" /></a>
 <p>成功すると、ドラッグした方向にジョイントがペアレントされてチェーンが生成されます。</p>
 <a class="reference internal image-reference" href="../_images/parent006.png"><img alt="../_images/parent006.png" src="../_images/parent006.png" style="width: 300px;" /></a>
 <div class="admonition note">
 <p class="admonition-title">注釈</p>
-<p>この機能を正しく機能させるためには、
-できるだけジョイントは規則正しく並んでいる方が望ましいです。</p>
-<p>また、ジョイントの末端の位置が不揃いだと、
-最良の結果を得られない可能性が高くなります。</p>
+<p>この機能を正しく機能させるためには、できるだけジョイントは規則正しく並んでいる方が望ましいです。</p>
+<p>また、ジョイントの末端の位置が不揃いだと、最良の結果を得られない可能性が高くなります。</p>
 </div>
 </div>
 </div>
@@ -340,8 +335,7 @@
 <h4>操作方法<a class="headerlink" href="#id4" title="このヘッドラインへのパーマリンク">¶</a></h4>
 <p>まずは分割したいジョイントの子を選択します。</p>
 <a class="reference internal image-reference" href="../_images/splitter001.png"><img alt="../_images/splitter001.png" src="../_images/splitter001.png" style="width: 300px;" /></a>
-<p>続いてIntaractive Splitterのスライダをドラッグすると、
-リアルタイムでジョイントが分割されます。</p>
+<p>続いてIntaractive Splitterのスライダをドラッグすると、リアルタイムでジョイントが分割されます。</p>
 <a class="reference internal image-reference" href="../_images/splitter002.png"><img alt="../_images/splitter002.png" src="../_images/splitter002.png" style="width: 300px;" /></a>
 <p>好みの分割数になったらスライダを離して完了です。</p>
 <a class="reference internal image-reference" href="../_images/splitter003.png"><img alt="../_images/splitter003.png" src="../_images/splitter003.png" style="width: 300px;" /></a>
@@ -354,16 +348,13 @@
 </div>
 <div class="section" id="executive-splitter">
 <h3>Executive Splitter<a class="headerlink" href="#executive-splitter" title="このヘッドラインへのパーマリンク">¶</a></h3>
-<p>Interactive Splitterとは逆に、設定に基づいた数にジョイントを分割します。
-何度も同じ数だけ分割する場合に便利です。</p>
-<p>分割を実行するには分割したいジョイントの子を選択し、
-スライダ右の＋ボタンをクリックします。</p>
+<p>Interactive Splitterとは逆に、設定に基づいた数にジョイントを分割します。何度も同じ数だけ分割する場合に便利です。</p>
+<p>分割を実行するには分割したいジョイントの子を選択し、スライダ右の＋ボタンをクリックします。</p>
 </div>
 </div>
 <div class="section" id="joint-axis-editor">
 <h2>Joint Axis Editor<a class="headerlink" href="#joint-axis-editor" title="このヘッドラインへのパーマリンク">¶</a></h2>
-<p>ジョイントの軸の向きを調整する機能を提供するツールです。
-Maya標準のOrient Joint機能を拡張したような機能になっています。</p>
+<p>ジョイントの軸の向きを調整する機能を提供するツールです。Maya標準のOrient Joint機能を拡張したような機能になっています。</p>
 <p>この機能は選択したジョイントの軸の向きを調整するための機能です。</p>
 <a class="reference internal image-reference" href="../_images/005.png"><img alt="../_images/005.png" src="../_images/005.png" style="width: 300px;" /></a>
 <div class="section" id="apply-to-children">
@@ -372,8 +363,7 @@ Maya標準のOrient Joint機能を拡張したような機能になっていま�
 </div>
 <div class="section" id="freeze">
 <h3>Freeze<a class="headerlink" href="#freeze" title="このヘッドラインへのパーマリンク">¶</a></h3>
-<p>軸調整後、フリーズをかけます。
-このためApplyToChildrenがOffでも子階層のRotate値は0になります。</p>
+<p>軸調整後、フリーズをかけます。このためApplyToChildrenがOffでも子階層のRotate値は0になります。</p>
 </div>
 <div class="section" id="primary-axis">
 <h3>Primary Axis<a class="headerlink" href="#primary-axis" title="このヘッドラインへのパーマリンク">¶</a></h3>
@@ -410,14 +400,11 @@ Maya標準のOrient Joint機能を拡張したような機能になっていま�
 </div>
 <div class="section" id="secondary-axis">
 <h3>Secondary Axis<a class="headerlink" href="#secondary-axis" title="このヘッドラインへのパーマリンク">¶</a></h3>
-<p>このセクションでは選択したジョイントをPrimaryの方に向けつつ、
-もう一つの軸をどの方向に向けるかを設定します。</p>
+<p>このセクションでは選択したジョイントをPrimaryの方に向けつつ、もう一つの軸をどの方向に向けるかを設定します。</p>
 <p>基本的な動きとしてはTargetで指定した方向に、Axisで設定した軸を向けます。</p>
 <div class="section" id="id6">
 <h4>Axis<a class="headerlink" href="#id6" title="このヘッドラインへのパーマリンク">¶</a></h4>
-<p>どの軸をターゲットの方向へ向けるかを設定します。
-Primary Axisは必ずそのターゲットの方に向くのに対し、
-こちらの軸はその姿勢を維持しながらできるだけ指定されたターゲットの方に向けます。</p>
+<p>どの軸をターゲットの方向へ向けるかを設定します。Primary Axisは必ずそのターゲットの方に向くのに対し、こちらの軸はその姿勢を維持しながらできるだけ指定されたターゲットの方に向けます。</p>
 </div>
 <div class="section" id="id7">
 <h4>Target<a class="headerlink" href="#id7" title="このヘッドラインへのパーマリンク">¶</a></h4>
@@ -445,16 +432,13 @@ Primary Axisは必ずそのターゲットの方に向くのに対し、
 </div>
 <div class="section" id="nodetips">
 <h4>NodeのTips<a class="headerlink" href="#nodetips" title="このヘッドラインへのパーマリンク">¶</a></h4>
-<p>TargetをNodeにしている場合、
-フィールドに登録されているTransformノードの方に軸を向けます。</p>
-<p>このノードはTransformであれば何でもいいので、
-perspカメラを登録すればカメラの方向に軸を向ける事ができます。</p>
+<p>TargetをNodeにしている場合、フィールドに登録されているTransformノードの方に軸を向けます。</p>
+<p>このノードはTransformであれば何でもいいので、perspカメラを登録すればカメラの方向に軸を向ける事ができます。</p>
 <p>指や服の揺れものなど、軸の向きを複雑に調整しなくてはいけない場合に便利です。</p>
 <a class="reference internal image-reference" href="../_images/editAxis001.png"><img alt="../_images/editAxis001.png" src="../_images/editAxis001.png" style="width: 300px;" /></a>
 <p>↓</p>
 <a class="reference internal image-reference" href="../_images/editAxis002.png"><img alt="../_images/editAxis002.png" src="../_images/editAxis002.png" style="width: 300px;" /></a>
-<p>また、Nodeには複数のTransformノードを指定する事ができます。
-その場合、操作対象ジョイントから最も近いTransformノードをSecandary Axisのターゲットとして使用します。</p>
+<p>また、Nodeには複数のTransformノードを指定する事ができます。その場合、操作対象ジョイントから最も近いTransformノードをSecandary Axisのターゲットとして使用します。</p>
 </div>
 </div>
 </div>
@@ -462,9 +446,7 @@ perspカメラを登録すればカメラの方向に軸を向ける事ができ
 <h2>Mirror Joints<a class="headerlink" href="#mirror-joints" title="このヘッドラインへのパーマリンク">¶</a></h2>
 <p>ジョイントをミラーリングします。</p>
 <a class="reference internal image-reference" href="../_images/006.png"><img alt="../_images/006.png" src="../_images/006.png" style="width: 300px;" /></a>
-<p>この機能はMaya標準のMirror Jointとほぼ同等の機能を持っていますが、
-このツールでは標準機能と違い複数のジョイントを選択して、
-まとめてミラーリングする事ができます。</p>
+<p>この機能はMaya標準のMirror Jointとほぼ同等の機能を持っていますが、このツールでは標準機能と違い複数のジョイントを選択して、まとめてミラーリングする事ができます。</p>
 <div class="section" id="apply-to-chilren">
 <h3>Apply to chilren<a class="headerlink" href="#apply-to-chilren" title="このヘッドラインへのパーマリンク">¶</a></h3>
 <p>この設定がOnの場合、子ジョイントもまとめてミラーリングします。</p>
@@ -479,15 +461,11 @@ perspカメラを登録すればカメラの方向に軸を向ける事ができ
 </div>
 <div class="section" id="replace-name-for-the-mirrored-joints">
 <h3>Replace name for the mirrored joints<a class="headerlink" href="#replace-name-for-the-mirrored-joints" title="このヘッドラインへのパーマリンク">¶</a></h3>
-<p>元のジョイントの名前から&quot;Search for&quot;の文字列を検索し、
-ミラーされたジョイントには&quot;Replace with&quot;の文字列に置き換えてリネームします。</p>
+<p>元のジョイントの名前から&quot;Search for&quot;の文字列を検索し、ミラーされたジョイントには&quot;Replace with&quot;の文字列に置き換えてリネームします。</p>
 </div>
 <div class="section" id="parent-options">
 <h3>Parent Options<a class="headerlink" href="#parent-options" title="このヘッドラインへのパーマリンク">¶</a></h3>
-<p>ミラーリングされたジョイントの親を指定する事ができます。
-Parent to replaced name parentがOnの状態にすると、
-ミラーリング元のジョイントの親ノードの名前から&quot;Search for&quot;の文字列を検索し、
-&quot;Replace with&quot;で置き換えたノードの子にミラーリングされたジョイントを配置します。</p>
+<p>ミラーリングされたジョイントの親を指定する事ができます。Parent to replaced name parentがOnの状態にすると、ミラーリング元のジョイントの親ノードの名前から&quot;Search for&quot;の文字列を検索し、&quot;Replace with&quot;で置き換えたノードの子にミラーリングされたジョイントを配置します。</p>
 <p>置き換えた名前のノードがない場合はこの処理をスキップします。</p>
 </div>
 </div>
@@ -509,16 +487,13 @@ Parent to replaced name parentがOnの状態にすると、
 <div class="section" id="mirror-to-opposite-side">
 <h3>Mirror to opposite side<a class="headerlink" href="#mirror-to-opposite-side" title="このヘッドラインへのパーマリンク">¶</a></h3>
 <img alt="../_images/finisher002.png" src="../_images/finisher002.png" />
-<p>選択したジョイントの反対側のジョイントに対してミラーリングを適用します。
-反対側とは命名規則に則ったジョイント名である事を前提に、
-位置を表す文字列がLの場合R、Rの場合Lに対して適用します。</p>
+<p>選択したジョイントの反対側のジョイントに対してミラーリングを適用します。反対側とは命名規則に則ったジョイント名である事を前提に、位置を表す文字列がLの場合R、Rの場合Lに対して適用します。</p>
 <p>既存のジョイントに対してミラーリングをかけたい場合に便利です。</p>
 </div>
 <div class="section" id="mirror-from-firset-selection-to-second-selection">
 <h3>Mirror from firset selection to second selection<a class="headerlink" href="#mirror-from-firset-selection-to-second-selection" title="このヘッドラインへのパーマリンク">¶</a></h3>
 <img alt="../_images/finisher003.png" src="../_images/finisher003.png" />
-<p>&quot;Mirro to opposite side&quot;は自動的に反対側のジョイントを探してきますが、
-こちらはn番目のジョイントの位置をn+1番目ののジョイントにミラーリングして適用します。</p>
+<p>&quot;Mirro to opposite side&quot;は自動的に反対側のジョイントを探してきますが、こちらはn番目のジョイントの位置をn+1番目ののジョイントにミラーリングして適用します。</p>
 </div>
 <div class="section" id="connect-inverse-scale">
 <h3>Connect inverse scale<a class="headerlink" href="#connect-inverse-scale" title="このヘッドラインへのパーマリンク">¶</a></h3>

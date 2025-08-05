@@ -107,6 +107,7 @@
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../tools/jointEditor.html">jointEditor</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../tools/extraJoint.html">extraJoint</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../tools/facialMemoryManager.html">facialMemoryManager</a></li>
 </ul>
 <p class="caption"><span class="caption-text">開発者向けドキュメント</span></p>
 <ul class="current">
@@ -143,6 +144,10 @@
 </li>
 <li class="toctree-l1"><a class="reference internal" href="operateByScript.html">スクリプトによって操作する</a></li>
 <li class="toctree-l1"><a class="reference internal" href="settings.html">設定にまつわる機能</a></li>
+</ul>
+<p class="caption"><span class="caption-text">GUI開発向け</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../dev_ui/extendedUI.html">uilib.extendedUIモジュール</a></li>
 </ul>
 
             
@@ -210,13 +215,11 @@
             
   <div class="section" id="id1">
 <h1>命名規則管理システム<a class="headerlink" href="#id1" title="このヘッドラインへのパーマリンク">¶</a></h1>
-<p>データの管理を行う上で名前のルールは非常に重要です。
-grisではジョイントやリグ、コントローラを作成する際の命名規則を厳重に管理しています。</p>
+<p>データの管理を行う上で名前のルールは非常に重要です。grisではジョイントやリグ、コントローラを作成する際の命名規則を厳重に管理しています。</p>
 <p>命名規則の管理を行うシステムをカスタマイズする事で、独自の命名規則に従ったシステムを構築する事ができます。</p>
 <div class="section" id="nrs-minimumnamingrule">
 <span id="id2"></span><h2>命名規則の最小限のルール<a class="headerlink" href="#nrs-minimumnamingrule" title="このヘッドラインへのパーマリンク">¶</a></h2>
-<p>命名規則をカスタマイズする事はできますが、必要最低限のルールは存在します。
-命名規則管理システムをカスタマイズする上で、以下の要素は必ず意識する必要があります。</p>
+<p>命名規則をカスタマイズする事はできますが、必要最低限のルールは存在します。命名規則管理システムをカスタマイズする上で、以下の要素は必ず意識する必要があります。</p>
 <ul class="simple">
 <li><p>ベース名（主に名前をつける対象を表す具体的な名前）</p></li>
 <li><p>ノードの種類</p></li>
@@ -226,10 +229,8 @@ grisではジョイントやリグ、コントローラを作成する際の命�
 <li><p>ベース名に追加する特殊文字</p></li>
 <li><p>ネームスペース</p></li>
 </ul>
-<p>命名規則はこれらの要素を組み合わせて作る必要がありますが、
-全ての要素を入れる必要はありません。</p>
-<p>命名規則を作成する際、上記の要素を`＿`で区切ります。
-例えばGrisデフォルトの命名規則では以下のようになります。</p>
+<p>命名規則はこれらの要素を組み合わせて作る必要がありますが、全ての要素を入れる必要はありません。</p>
+<p>命名規則を作成する際、上記の要素を`＿`で区切ります。例えばGrisデフォルトの命名規則では以下のようになります。</p>
 <blockquote>
 <div><p>ベース名_ノードの種類_位置を表す文字列</p>
 <p>spineA_jnt_C</p>
@@ -263,25 +264,14 @@ grisではジョイントやリグ、コントローラを作成する際の命�
 <span class="c1"># Error: ValueError: The given name is not supported : J_C_spineA #</span>
 </pre></div>
 </td></tr></table></div>
-<p>Name関数に文字列を渡すと、文字列を解析して
-<a class="reference internal" href="#nrs-minimumnamingrule"><span class="std std-ref">命名規則の最小限のルール</span></a>
-の要素に分解した状態でデータを保持する
-<strong>NameRuleオブジェクト</strong>
-が返されます。</p>
-<p>NameRuleオブジェクトでは各要素に対して
-<strong>name</strong>
-や
-<strong>nodeType</strong>
-などの専用メソッドを用いてアクセスする事ができます。</p>
+<p>Name関数に文字列を渡すと、文字列を解析して<a class="reference internal" href="#nrs-minimumnamingrule"><span class="std std-ref">命名規則の最小限のルール</span></a>の要素に分解した状態でデータを保持する<strong>NameRuleオブジェクト</strong>が返されます。</p>
+<p>NameRuleオブジェクトでは各要素に対して<strong>name</strong>や<strong>nodeType</strong>などの専用メソッドを用いてアクセスする事ができます。</p>
 <p>また、命名規則違反の文字列を渡された場合はエラーを返します。</p>
 </div>
 <div class="section" id="id4">
 <h3>ベース名やノードの種類を置き換える<a class="headerlink" href="#id4" title="このヘッドラインへのパーマリンク">¶</a></h3>
-<p>NameRuleオブジェクトはベース名やノードの種類、
-位置を表す文字列などの最小限の要素ごとにアクセスできるだけでなく、
-編集を加える事も可能です。</p>
-<p>以下のサンプルコードではNameRuleオブジェクト化した後に、
-ベース名とノードの種類に変更を加えています。</p>
+<p>NameRuleオブジェクトはベース名やノードの種類、位置を表す文字列などの最小限の要素ごとにアクセスできるだけでなく、編集を加える事も可能です。</p>
+<p>以下のサンプルコードではNameRuleオブジェクト化した後に、ベース名とノードの種類に変更を加えています。</p>
 <div class="highlight-python notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
 2
 3
@@ -299,48 +289,33 @@ grisではジョイントやリグ、コントローラを作成する際の命�
 <span class="c1"># Result: head_jntProxy_C #</span>
 </pre></div>
 </td></tr></table></div>
-<p>NameRuleオブジェクトは()を付けて呼び出す事により、
-変更後の名前を文字列として返します。</p>
+<p>NameRuleオブジェクトは()を付けて呼び出す事により、変更後の名前を文字列として返します。</p>
 </div>
 <div class="section" id="func-name">
 <span id="nrs-funcname"></span><h3>func.Nameの正体<a class="headerlink" href="#func-name" title="このヘッドラインへのパーマリンク">¶</a></h3>
-<p>func.Nameはラッパー関数であり、
-実際にNameRuleオブジェクトの生成は別のシステムが担っています。</p>
+<p>func.Nameはラッパー関数であり、実際にNameRuleオブジェクトの生成は別のシステムが担っています。</p>
 <p>func.Nameの内部は以下のようになっています。</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">Name</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s1">&#39;&#39;</span><span class="p">):</span>
     <span class="kn">from</span> <span class="nn">.system</span> <span class="kn">import</span> <span class="n">GlobalSys</span>
     <span class="k">return</span> <span class="n">GlobalSys</span><span class="p">()</span><span class="o">.</span><span class="n">nameRule</span><span class="p">()(</span><span class="n">name</span><span class="p">)</span>
 </pre></div>
 </div>
-<p>Name関数の内部ではsystemモジュールのGlobalSysクラスが呼びだされており、
-このクラスがNameRuleオブジェクトを生成して返すようになっています。</p>
-<p>GlobalSysクラスはgrisの全体管理を行うシステムクラスです。
-このクラスが現在有効となっているNameRuleオブジェクトを返す事により、
-システムで作成されるノードの名前を一意のルールで管理する事ができるようになっています。</p>
+<p>Name関数の内部ではsystemモジュールのGlobalSysクラスが呼びだされており、このクラスがNameRuleオブジェクトを生成して返すようになっています。</p>
+<p>GlobalSysクラスはgrisの全体管理を行うシステムクラスです。このクラスが現在有効となっているNameRuleオブジェクトを返す事により、システムで作成されるノードの名前を一意のルールで管理する事ができるようになっています。</p>
 </div>
 </div>
 <div class="section" id="id5">
 <h2>命名規則管理クラス<a class="headerlink" href="#id5" title="このヘッドラインへのパーマリンク">¶</a></h2>
-<p>grisでは命名規則を管理するための「
-<strong>NameRule</strong>
-」オブジェクトが存在しています。、</p>
-<p>GlobalSysクラスは
-<a class="reference internal" href="#nrs-funcname"><span class="std std-ref">func.Nameの正体</span></a>
-で紹介したように、現在有効になっているNameRuleオブジェクトを返しています。</p>
-<p>開発者はこのNameRuleオブジェクトをカスタマイズし、
-GlobalSysにカスタムNameRuleオブジェクトをセットする事により、
-システム全体の命名規則の管理を行う事ができるようになります。</p>
+<p>grisでは命名規則を管理するための「<strong>NameRule</strong>」オブジェクトが存在しています。、</p>
+<p>GlobalSysクラスは<a class="reference internal" href="#nrs-funcname"><span class="std std-ref">func.Nameの正体</span></a>で紹介したように、現在有効になっているNameRuleオブジェクトを返しています。</p>
+<p>開発者はこのNameRuleオブジェクトをカスタマイズし、GlobalSysにカスタムNameRuleオブジェクトをセットする事により、システム全体の命名規則の管理を行う事ができるようになります。</p>
 <div class="section" id="system-abstractnamerule">
 <h3>system.AbstractNameRuleクラス<a class="headerlink" href="#system-abstractnamerule" title="このヘッドラインへのパーマリンク">¶</a></h3>
-<p>このクラスは命名規則の定義を行うための抽象クラスです。
-<a class="reference internal" href="#nrs-minimumnamingrule"><span class="std std-ref">命名規則の最小限のルール</span></a>
-の要件をベースに名前ルールを定義する事ができるように設計されています。</p>
+<p>このクラスは命名規則の定義を行うための抽象クラスです。<a class="reference internal" href="#nrs-minimumnamingrule"><span class="std std-ref">命名規則の最小限のルール</span></a>の要件をベースに名前ルールを定義する事ができるように設計されています。</p>
 </div>
 <div class="section" id="system-basicnamerule">
 <h3>system.BasicNameRuleクラス<a class="headerlink" href="#system-basicnamerule" title="このヘッドラインへのパーマリンク">¶</a></h3>
-<p>このクラスはsystem.AbstractNameRuleクラスのサブクラスであり、
-grisの基本形となる命名規則を定義、管理するクラスです。
-デフォルトではこの命名規則管理クラスによって名前が決定されます。</p>
+<p>このクラスはsystem.AbstractNameRuleクラスのサブクラスであり、grisの基本形となる命名規則を定義、管理するクラスです。デフォルトではこの命名規則管理クラスによって名前が決定されます。</p>
 <p>このクラスでは</p>
 <ul class="simple">
 <li><p>ネームスペース</p></li>
@@ -352,15 +327,13 @@ grisの基本形となる命名規則を定義、管理するクラスです。
 <dt>で構成される名前をサポートしています。</dt><dd><p><strong>(ネームスペース:)ノード名_ノードの種類(_位置）</strong></p>
 </dd>
 </dl>
-<p>のルールに則った文字列をインスタンス生成時に受け取ると、
-解析後、問題なければ各要素に分けて名前を保持します。</p>
+<p>のルールに則った文字列をインスタンス生成時に受け取ると、解析後、問題なければ各要素に分けて名前を保持します。</p>
 <p>問題がある場合はエラーを返します。</p>
 </div>
 </div>
 <div class="section" id="basicnamerule">
 <span id="nrc-customizenameruleclass"></span><h2>BasicNameRuleクラスをカスタマイズする<a class="headerlink" href="#basicnamerule" title="このヘッドラインへのパーマリンク">¶</a></h2>
-<p>BasicNameRuleクラスは必要最低限の機能を持った命名管理クラスですが、
-プロジェクトによっては必要要素は同じでもベース名やノードの種類名などの位置が違う場合もあります。</p>
+<p>BasicNameRuleクラスは必要最低限の機能を持った命名管理クラスですが、プロジェクトによっては必要要素は同じでもベース名やノードの種類名などの位置が違う場合もあります。</p>
 <table class="docutils align-default">
 <colgroup>
 <col style="width: 33%" />
@@ -413,25 +386,21 @@ grisの基本形となる命名規則を定義、管理するクラスです。
 </table>
 <p>これらアトリビュートはすべて正規表現オブジェクトです。</p>
 <p>継承したサブクラスでこれらアトリビュートを変更する事により入力文字列のチェックを行う事ができるようになります。</p>
-<p>AllNamePatternに使用する正規表現は（）でグループ化し、
-後の工程で要素ごとに取り出せるようにする必要があります。</p>
+<p>AllNamePatternに使用する正規表現は（）でグループ化し、後の工程で要素ごとに取り出せるようにする必要があります。</p>
 </div>
 <div class="section" id="allnamepattern">
 <h3>AllNamePatternを各要素に分解する<a class="headerlink" href="#allnamepattern" title="このヘッドラインへのパーマリンク">¶</a></h3>
-<p>上記アトリビュートの変更は、チェック機構の変更を意味します。
-変更した後に、AllNamePatternによって返される正規表現オブジェクトを使用して各要素に分解する必要があります。</p>
+<p>上記アトリビュートの変更は、チェック機構の変更を意味します。変更した後に、AllNamePatternによって返される正規表現オブジェクトを使用して各要素に分解する必要があります。</p>
 <p>正規表現オブジェクトから要素の分解を行うにはsetupメソッドを上書きします。</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">setup</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="n">mobj</span><span class="p">):</span>
 </pre></div>
 </div>
 <p>引き数mobjはAllNamePatternによって生成された正規表現オブジェクトです。</p>
-<p>setupメソッド内では、self.setNameやself.setNodeType、
-self.setPositionなどのメソッドを使用して要素として登録します。</p>
+<p>setupメソッド内では、self.setNameやself.setNodeType、self.setPositionなどのメソッドを使用して要素として登録します。</p>
 </div>
 <div class="section" id="id9">
 <h3>分解した要素を任意の順番に置き換える<a class="headerlink" href="#id9" title="このヘッドラインへのパーマリンク">¶</a></h3>
-<p>setupで分解した要素をそれぞれに登録し終わったら、最後に各要素の順番を変更します。
-養素の順番を変更するにはelementsメソッドを上書きします。</p>
+<p>setupで分解した要素をそれぞれに登録し終わったら、最後に各要素の順番を変更します。養素の順番を変更するにはelementsメソッドを上書きします。</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">elements</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
     <span class="k">return</span> <span class="p">[]</span>
 </pre></div>
@@ -489,14 +458,9 @@ self.setPositionなどのメソッドを使用して要素として登録しま�
 </div>
 <div class="section" id="id11">
 <h2>カスタム命名規則管理クラスでキャストできるようにする<a class="headerlink" href="#id11" title="このヘッドラインへのパーマリンク">¶</a></h2>
-<p>命名規則オブジェクトをカスタマイズするメリットとして、
-ある命名規則をカスタムした命名規則にキャストする事ができると言う点があります。</p>
-<p>命名規則オブジェクトは
-<strong>&gt;&gt;</strong>
-演算子をサポートしており、
-この演算子を使用する事によって名前を別の規則にキャストする事ができます。</p>
-<p><a class="reference internal" href="#nrc-customizenameruleclass"><span class="std std-ref">BasicNameRuleクラスをカスタマイズする</span></a>
-でカスタムした命名規則オブジェクトを使用して、gris標準命名規則からキャストを行ってみます。</p>
+<p>命名規則オブジェクトをカスタマイズするメリットとして、ある命名規則をカスタムした命名規則にキャストする事ができると言う点があります。</p>
+<p>命名規則オブジェクトは<strong>&gt;&gt;</strong>演算子をサポートしており、この演算子を使用する事によって名前を別の規則にキャストする事ができます。</p>
+<p><a class="reference internal" href="#nrc-customizenameruleclass"><span class="std std-ref">BasicNameRuleクラスをカスタマイズする</span></a>でカスタムした命名規則オブジェクトを使用して、gris標準命名規則からキャストを行ってみます。</p>
 <div class="highlight-python notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
 2
 3
@@ -513,12 +477,9 @@ self.setPositionなどのメソッドを使用して要素として登録しま�
 <div class="section" id="id12">
 <h3>キャスト方法を最適化する<a class="headerlink" href="#id12" title="このヘッドラインへのパーマリンク">¶</a></h3>
 <p>無事キャストが完了し、カスタムした命名規則に変換されました。</p>
-<p>しかしカスタムした命名規則はノードの種類を表す文字列を１文字と定義しているため、
-キャスト後の名前は正しくありません。</p>
-<p>そこでノードの種類を設定するsetNodeTypeメソッドをカスタマイズして、
-理想的な名前にキャストできるよう挙動を修正します。</p>
-<p><a class="reference internal" href="#nrc-customizenameruleclass"><span class="std std-ref">BasicNameRuleクラスをカスタマイズする</span></a>
-でカスタマイズしたクラスのsetNodeTypeを変更します。</p>
+<p>しかしカスタムした命名規則はノードの種類を表す文字列を１文字と定義しているため、キャスト後の名前は正しくありません。</p>
+<p>そこでノードの種類を設定するsetNodeTypeメソッドをカスタマイズして、理想的な名前にキャストできるよう挙動を修正します。</p>
+<p><a class="reference internal" href="#nrc-customizenameruleclass"><span class="std std-ref">BasicNameRuleクラスをカスタマイズする</span></a>でカスタマイズしたクラスのsetNodeTypeを変更します。</p>
 <div class="highlight-python notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
  2
  3

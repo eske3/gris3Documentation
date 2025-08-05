@@ -107,6 +107,7 @@
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../tools/jointEditor.html">jointEditor</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../tools/extraJoint.html">extraJoint</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../tools/facialMemoryManager.html">facialMemoryManager</a></li>
 </ul>
 <p class="caption"><span class="caption-text">開発者向けドキュメント</span></p>
 <ul class="current">
@@ -131,6 +132,10 @@
 <li class="toctree-l1"><a class="reference internal" href="namingRuleSystem.html">命名規則管理システム</a></li>
 <li class="toctree-l1"><a class="reference internal" href="operateByScript.html">スクリプトによって操作する</a></li>
 <li class="toctree-l1"><a class="reference internal" href="settings.html">設定にまつわる機能</a></li>
+</ul>
+<p class="caption"><span class="caption-text">GUI開発向け</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../dev_ui/extendedUI.html">uilib.extendedUIモジュール</a></li>
 </ul>
 
             
@@ -198,27 +203,19 @@
             
   <div class="section" id="id1">
 <h1>ファクトリーモジュール<a class="headerlink" href="#id1" title="このヘッドラインへのパーマリンク">¶</a></h1>
-<p>コンストラクタがビルドする際に、
-必要となる要素を作成、書き出すための仕組みを提供することを目的とした
-モジュール群です。</p>
+<p>コンストラクタがビルドする際に、必要となる要素を作成、書き出すための仕組みを提供することを目的としたモジュール群です。</p>
 <p>ファクトリーモジュールは都合に応じて追加、拡張することができます。</p>
 <div class="section" id="id2">
 <h2>仕様<a class="headerlink" href="#id2" title="このヘッドラインへのパーマリンク">¶</a></h2>
-<p>ファクトリーモジュールを追加するにはFactoryModulesパス内に
-任意の仕様で作成したPythonモジュールを作成します。</p>
-<p>FactoryModuleパスはデフォルトではfactoryModulesパッケージ直下、
-ならびに
-<strong>globalSettings.xml</strong>
-によって定義されるPythonモジュール内になります。</p>
+<p>ファクトリーモジュールを追加するにはFactoryModulesパス内に任意の仕様で作成したPythonモジュールを作成します。</p>
+<p>FactoryModuleパスはデフォルトではfactoryModulesパッケージ直下、ならびに<strong>globalSettings.xml</strong>によって定義されるPythonモジュール内になります。</p>
 <div class="admonition seealso">
 <p class="admonition-title">参考</p>
 <p><a class="reference internal" href="settings.html#st-globalsettingsxml"><span class="std std-ref">globalSettings.xml</span></a></p>
 </div>
 <div class="section" id="id3">
 <h3>モジュールの仕様<a class="headerlink" href="#id3" title="このヘッドラインへのパーマリンク">¶</a></h3>
-<p>ファクトリーモジュールは、Pythonのモジュールでもパッケージでも問題ありませんが、
-基本的にはパッケージで作成することをオススメします。
-以下基本的なパッケージ構成を示します。</p>
+<p>ファクトリーモジュールは、Pythonのモジュールでもパッケージでも問題ありませんが、基本的にはパッケージで作成することをオススメします。以下基本的なパッケージ構成を示します。</p>
 <div><svg height="280" viewBox="0 0 448 280" width="448" xmlns="http://www.w3.org/2000/svg" xmlns:inkspace="http://www.inkscape.org/namespaces/inkscape" xmlns:xlink="http://www.w3.org/1999/xlink">
   <defs id="defs_block">
     <filter height="1.504" id="filter_blur" inkspace:collect="always" width="1.1575" x="-0.07875" y="-0.252">
@@ -260,14 +257,8 @@
 </div>
 <div class="section" id="init-py">
 <h3>__init__.py<a class="headerlink" href="#init-py" title="このヘッドラインへのパーマリンク">¶</a></h3>
-<p>このモジュール内には必ず
-<a class="reference internal" href="#fm-abstractdepartmentclass"><span class="std std-ref">factoryModules.AbstractDepartment</span></a>
-クラスを継承した
-<strong>Departmentクラス</strong>
-を作成する必要があります。</p>
-<p>また、ファクトリー用のGUIについては
-<a class="reference internal" href="#fm-abstractdepartmentguiclass"><span class="std std-ref">factoryModules.AbstractDepartmentGUI</span></a>
-を継承したクラスを作成し、DepartmentクラスのGUIメソッドで返します。</p>
+<p>このモジュール内には必ず<a class="reference internal" href="#fm-abstractdepartmentclass"><span class="std std-ref">factoryModules.AbstractDepartment</span></a>クラスを継承した<strong>Departmentクラス</strong>を作成する必要があります。</p>
+<p>また、ファクトリー用のGUIについては<a class="reference internal" href="#fm-abstractdepartmentguiclass"><span class="std std-ref">factoryModules.AbstractDepartmentGUI</span></a>を継承したクラスを作成し、DepartmentクラスのGUIメソッドで返します。</p>
 <div class="literal-block-wrapper docutils container" id="id6">
 <div class="code-block-caption"><span class="caption-text">__init__.py</span><a class="headerlink" href="#id6" title="このコードへのパーマリンク">¶</a></div>
 <div class="highlight-python notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
@@ -351,8 +342,7 @@
 <div class="section" id="factorymodules-abstractdepartment">
 <span id="fm-abstractdepartmentclass"></span><h2>factoryModules.AbstractDepartment<a class="headerlink" href="#factorymodules-abstractdepartment" title="このヘッドラインへのパーマリンク">¶</a></h2>
 <p>このクラスはFactoryのセクションを定義する機能を提供する基底クラスです。</p>
-<p>新たなファクトリーモジュールを作成する場合はこのクラスを継承したクラスを
-作成する必要があります。</p>
+<p>新たなファクトリーモジュールを作成する場合はこのクラスを継承したクラスを作成する必要があります。</p>
 <div class="section" id="id5">
 <h3>よく使用するメソッド一覧<a class="headerlink" href="#id5" title="このヘッドラインへのパーマリンク">¶</a></h3>
 <table class="docutils align-default" id="id7">
@@ -363,28 +353,22 @@
 </colgroup>
 <tbody>
 <tr class="row-odd"><td><p>init</p></td>
-<td><p>__init__内で呼ばれる初期化用のオーバーライド用メソッド。
-用途の指定は特にないので、初期化用として自由に使用可能。</p></td>
+<td><p>__init__内で呼ばれる初期化用のオーバーライド用メソッド。用途の指定は特にないので、初期化用として自由に使用可能。</p></td>
 </tr>
 <tr class="row-even"><td><p>label -&gt; str</p></td>
 <td><p>Factoryの一覧に表示されるときのラベルを返す上書き用メソッド。</p></td>
 </tr>
 <tr class="row-odd"><td><p>setAliasName(name : str)</p></td>
-<td><p>Factoryの一覧に表示されるときのエイリアス名を設定する。
-こちらでエイリアス名が設定されている場合、
-labelの戻り値ではなくこちらがFactoryの一覧に表示される。</p></td>
+<td><p>Factoryの一覧に表示されるときのエイリアス名を設定する。こちらでエイリアス名が設定されている場合、labelの戻り値ではなくこちらがFactoryの一覧に表示される。</p></td>
 </tr>
 <tr class="row-even"><td><p>priority -&gt; int</p></td>
-<td><p>Factoryのリストに表示する際の優先度を返す上書き用メソッド。
-数字が高い方がリストの上に表示される。
--1の場合はリストの下方へ回される。</p></td>
+<td><p>Factoryのリストに表示する際の優先度を返す上書き用メソッド。数字が高い方がリストの上に表示される。-1の場合はリストの下方へ回される。</p></td>
 </tr>
 <tr class="row-odd"><td><p>directoryName -&gt; str</p></td>
 <td><p>操作対象ディレクトリ名を返す。</p></td>
 </tr>
 <tr class="row-even"><td><p>rootPath -&gt; str</p></td>
-<td><p>Factoryが現在管理するプロジェクトのルートパスを返す。
-directoryNameと合わせて操作対象となるディレクトリパスを取得できる。</p></td>
+<td><p>Factoryが現在管理するプロジェクトのルートパスを返す。directoryNameと合わせて操作対象となるディレクトリパスを取得できる。</p></td>
 </tr>
 </tbody>
 </table>
@@ -393,8 +377,7 @@ directoryNameと合わせて操作対象となるディレクトリパスを取�
 <div class="section" id="factorymodules-abstractdepartmentgui">
 <span id="fm-abstractdepartmentguiclass"></span><h2>factoryModules.AbstractDepartmentGUI<a class="headerlink" href="#factorymodules-abstractdepartmentgui" title="このヘッドラインへのパーマリンク">¶</a></h2>
 <p>このクラスはFactory内に表示するGUIのベースを提供します。</p>
-<p>AbstractDepartmentクラスのGUIメソッドでは、このクラスを継承した
-クラスを返す必要があります。</p>
+<p>AbstractDepartmentクラスのGUIメソッドでは、このクラスを継承したクラスを返す必要があります。</p>
 </div>
 </div>
 

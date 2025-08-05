@@ -105,6 +105,7 @@
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../../tools/jointEditor.html">jointEditor</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../tools/extraJoint.html">extraJoint</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../tools/facialMemoryManager.html">facialMemoryManager</a></li>
 </ul>
 <p class="caption"><span class="caption-text">開発者向けドキュメント</span></p>
 <ul>
@@ -116,6 +117,10 @@
 <li class="toctree-l1"><a class="reference internal" href="../../dev/namingRuleSystem.html">命名規則管理システム</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../dev/operateByScript.html">スクリプトによって操作する</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../dev/settings.html">設定にまつわる機能</a></li>
+</ul>
+<p class="caption"><span class="caption-text">GUI開発向け</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../dev_ui/extendedUI.html">uilib.extendedUIモジュール</a></li>
 </ul>
 
             
@@ -183,15 +188,12 @@
             
   <div class="section" id="fkctrlhelper">
 <h1>fkCtrlHelper<a class="headerlink" href="#fkctrlhelper" title="このヘッドラインへのパーマリンク">¶</a></h1>
-<p>FKコントローラの作成を補助する機能を提供するExtraConstructorです。
-親子付けやFKコントローラの作成などの一連の流れ作業を簡単なコマンドで行います。</p>
+<p>FKコントローラの作成を補助する機能を提供するExtraConstructorです。親子付けやFKコントローラの作成などの一連の流れ作業を簡単なコマンドで行います。</p>
 <div class="section" id="id1">
 <h2>使用方法<a class="headerlink" href="#id1" title="このヘッドラインへのパーマリンク">¶</a></h2>
 <p>このExtraConstructorをインストールすると、メインのConstructorに</p>
 <p><strong>setJointAsFkController</strong></p>
-<p>メソッドが追加されます。
-ユーザーはこのメソッドを使用して任意のジョイントの親子付と
-FKコントローラの作成を行うことができます。</p>
+<p>メソッドが追加されます。ユーザーはこのメソッドを使用して任意のジョイントの親子付とFKコントローラの作成を行うことができます。</p>
 <table class="docutils align-default" id="id3">
 <caption><span class="caption-text">引数の説明</span><a class="headerlink" href="#id3" title="このテーブルへのパーマリンク">¶</a></caption>
 <colgroup>
@@ -206,8 +208,7 @@ FKコントローラの作成を行うことができます。</p>
 </tr>
 <tr class="row-even"><td><p>joints</p></td>
 <td><p>str or list</p></td>
-<td><p>FKコントローラにするジョイント名のリストを指定します。
-渡す値はジョイント名のリストまたは単体の名前になります。</p></td>
+<td><p>FKコントローラにするジョイント名のリストを指定します。渡す値はジョイント名のリストまたは単体の名前になります。</p></td>
 </tr>
 <tr class="row-odd"><td><p>parent</p></td>
 <td><p>str</p></td>
@@ -235,8 +236,7 @@ FKコントローラの作成を行うことができます。</p>
 </tr>
 <tr class="row-odd"><td><p>expandChildren=False</p></td>
 <td><p>bool</p></td>
-<td><p>このオプションをTrueにすると、第一引数jointsに渡したノードの子が操作対象になります。
-目的のジョイントをグループ分けしている場合などに便利です。</p></td>
+<td><p>このオプションをTrueにすると、第一引数jointsに渡したノードの子が操作対象になります。目的のジョイントをグループ分けしている場合などに便利です。</p></td>
 </tr>
 </tbody>
 </table>

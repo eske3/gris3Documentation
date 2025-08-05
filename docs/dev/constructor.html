@@ -107,6 +107,7 @@
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../tools/jointEditor.html">jointEditor</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../tools/extraJoint.html">extraJoint</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../tools/facialMemoryManager.html">facialMemoryManager</a></li>
 </ul>
 <p class="caption"><span class="caption-text">開発者向けドキュメント</span></p>
 <ul class="current">
@@ -131,6 +132,10 @@
 <li class="toctree-l1"><a class="reference internal" href="namingRuleSystem.html">命名規則管理システム</a></li>
 <li class="toctree-l1"><a class="reference internal" href="operateByScript.html">スクリプトによって操作する</a></li>
 <li class="toctree-l1"><a class="reference internal" href="settings.html">設定にまつわる機能</a></li>
+</ul>
+<p class="caption"><span class="caption-text">GUI開発向け</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../dev_ui/extendedUI.html">uilib.extendedUIモジュール</a></li>
 </ul>
 
             
@@ -198,8 +203,7 @@
             
   <div class="section" id="id1">
 <h1>コンストラクタ<a class="headerlink" href="#id1" title="このヘッドラインへのパーマリンク">¶</a></h1>
-<p>コンストラクタはリグ自体の仕様を定義し、
-スクリプトベースリギングのスクリプト実行の流れを制御するための仕組みです。</p>
+<p>コンストラクタはリグ自体の仕様を定義し、スクリプトベースリギングのスクリプト実行の流れを制御するための仕組みです。</p>
 <p>コンストラクタシステムには主に</p>
 <ul class="simple">
 <li><p>Constructorクラス</p></li>
@@ -210,23 +214,18 @@
 <p>などによって構成されています。</p>
 <div class="section" id="constructor">
 <span id="cst-constructor"></span><h2>Constructor<a class="headerlink" href="#constructor" title="このヘッドラインへのパーマリンク">¶</a></h2>
-<p>このクラスはリグ自体の仕様を定義し、スクリプトによるリグの実行の流れを制御する
-仕組みの中核となる機構です。</p>
+<p>このクラスはリグ自体の仕様を定義し、スクリプトによるリグの実行の流れを制御する仕組みの中核となる機構です。</p>
 <div class="section" id="id2">
 <h3>リグの仕様<a class="headerlink" href="#id2" title="このヘッドラインへのパーマリンク">¶</a></h3>
-<p>リグの仕様とはすなわち、Maya内のリグにおける階層構造や名前の規則など、
-ありとあらゆる仕様を指します。</p>
-<p>grisではデフォルト仕様のBasicConstructorが存在しますが、開発者はこのクラスを
-継承したサブクラスでさまざまな動作をカスマイズする事ができます。</p>
+<p>リグの仕様とはすなわち、Maya内のリグにおける階層構造や名前の規則など、ありとあらゆる仕様を指します。</p>
+<p>grisではデフォルト仕様のBasicConstructorが存在しますが、開発者はこのクラスを継承したサブクラスでさまざまな動作をカスマイズする事ができます。</p>
 <p>カスタマイズする要素としては大まかに以下の要素があります。</p>
 <ul class="simple">
 <li><p><a class="reference internal" href="#cst-createroot"><span class="std std-ref">ルートの作成</span></a></p></li>
 <li><p><a class="reference internal" href="#cst-createctrlroot"><span class="std std-ref">コントローラルートの作成</span></a></p></li>
 <li><p><a class="reference internal" href="#cst-scripttemplate"><span class="std std-ref">スクリプトテンプレートの作成</span></a></p></li>
 </ul>
-<p>BasicConstructorクラスには未定義の場合にデフォルトで動作する関数が用意されていますが、
-これら関数を置き換えることにより、
-独自の仕様の階層を持つリグのフォーマットを作成することができます。</p>
+<p>BasicConstructorクラスには未定義の場合にデフォルトで動作する関数が用意されていますが、これら関数を置き換えることにより、独自の仕様の階層を持つリグのフォーマットを作成することができます。</p>
 <div class="section" id="cst-createroot">
 <span id="id3"></span><h4>ルートの作成<a class="headerlink" href="#cst-createroot" title="このヘッドラインへのパーマリンク">¶</a></h4>
 <p>リグ全体を格納するためのルートノードと、そのサブグループの作成を定義します。</p>
@@ -242,11 +241,8 @@
 </div>
 <div class="section" id="constructionorder">
 <span id="cst-constructionorder"></span><h3>ConstructionOrder<a class="headerlink" href="#constructionorder" title="このヘッドラインへのパーマリンク">¶</a></h3>
-<p>ConstructionOrderはFactoryからリグのビルドスクリプトを実行する際に、
-実行されるメソッドの順番のことを指します。
-ConstructionOrderはConstructorクラスのメンバ変数ProcessListによって定義します。</p>
-<p>ProcessListはtupleまたはlistであり、その中には３つの文字列を含むtupleを格納します。
-３つの文字列はそれぞれ</p>
+<p>ConstructionOrderはFactoryからリグのビルドスクリプトを実行する際に、実行されるメソッドの順番のことを指します。ConstructionOrderはConstructorクラスのメンバ変数ProcessListによって定義します。</p>
+<p>ProcessListはtupleまたはlistであり、その中には３つの文字列を含むtupleを格納します。３つの文字列はそれぞれ</p>
 <ul class="simple">
 <li><p>メソッド名</p></li>
 <li><p>メソッド開始時にユーザーに提示するメッセージテキスト</p></li>

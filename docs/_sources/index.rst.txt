@@ -45,6 +45,7 @@ gris3 Documentation
 
     /tools/jointEditor
     /tools/extraJoint
+    /tools/facialMemoryManager
 
 .. toctree::
     :maxdepth: 3
@@ -60,6 +61,12 @@ gris3 Documentation
     /dev/operateByScript
     /dev/settings
 
+.. toctree::
+    :maxdepth: 3
+    :hidden:
+    :caption: GUI開発向け
+
+    /dev_ui/extendedUI
 
 Indices and Tables
 ===================
