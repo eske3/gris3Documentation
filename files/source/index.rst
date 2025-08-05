@@ -50,6 +50,13 @@ gris3 Documentation
 .. toctree::
     :maxdepth: 3
     :hidden:
+    :caption: エクスポーター
+
+    /exporters/skinWeightExporter
+
+.. toctree::
+    :maxdepth: 3
+    :hidden:
     :caption: 開発者向けドキュメント
 
     /dev/factorySettings
