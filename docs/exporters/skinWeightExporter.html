@@ -1,0 +1,529 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="ja" >
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>skinWeightExporter &mdash; gris3 1.0.0 ドキュメント</title>
+  
+
+  
+  <link rel="stylesheet" href="../_static/css/customTheme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+
+  
+  
+  
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/doctools.js"></script>
+        <script src="../_static/language_data.js"></script>
+        <script src="../_static/translations.js"></script>
+    
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+    
+    <link rel="author" title="このドキュメントについて" href="../about.html" />
+    <link rel="index" title="索引" href="../genindex.html" />
+    <link rel="search" title="検索" href="../search.html" />
+    <link rel="next" title="ファクトリーセッティング" href="../dev/factorySettings.html" />
+    <link rel="prev" title="facialMemoryManager" href="../tools/facialMemoryManager.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../index.html" class="icon icon-home" alt="Documentation Home"> gris3
+          
+
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">スタートアップ</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../contents/install.html">インストールと起動</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../contents/updateLog.html">更新履歴</a></li>
+</ul>
+<p class="caption"><span class="caption-text">マニュアル</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../contents/scriptBasedRigging.html">ScriptBasedRigging-概要</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../contents/scriptingForFactory.html">ファクトリーのスクリプティングガイド</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../contents/namingRule.html">命名規則</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../contents/rigUnits.html">Rig Units</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../contents/includedExtraConstructors.html">組み込み済みExtraConstructor</a></li>
+</ul>
+<p class="caption"><span class="caption-text">ガジェット</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../gadgets/jointEditor.html">Joint Editor</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../gadgets/modelSetup.html">Model Setup</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../gadgets/renamer.html">Renamer</a></li>
+</ul>
+<p class="caption"><span class="caption-text">スクリプトツール</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../tools/jointEditor.html">jointEditor</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../tools/extraJoint.html">extraJoint</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../tools/facialMemoryManager.html">facialMemoryManager</a></li>
+</ul>
+<p class="caption"><span class="caption-text">エクスポーター</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="current reference internal" href="#">skinWeightExporter</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#id1">仕様</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#exporter">Exporterクラス</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#restorer">Restorerクラス</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#eswe-exporterclass">Exporter</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#id3">メソッド</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id4">使用例</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#eswe-restorerclass">Restorer</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#id6">メソッド</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id7">使用例</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#basictemporaryweight">BasicTemporaryWeight</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#temporaryweight">TemporaryWeight</a></li>
+</ul>
+</li>
+</ul>
+<p class="caption"><span class="caption-text">開発者向けドキュメント</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../dev/factorySettings.html">ファクトリーセッティング</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../dev/factoryModules.html">ファクトリーモジュール</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../dev/makingRigUnits.html">リグユニットの開発</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../dev/constructor.html">コンストラクタ</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../dev/extraConstructor.html">エクストラコンストラクタ</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../dev/namingRuleSystem.html">命名規則管理システム</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../dev/operateByScript.html">スクリプトによって操作する</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../dev/settings.html">設定にまつわる機能</a></li>
+</ul>
+<p class="caption"><span class="caption-text">GUI開発向け</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../dev_ui/extendedUI.html">uilib.extendedUIモジュール</a></li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">gris3</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
+        
+      <li>skinWeightExporter</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../_sources/exporters/skinWeightExporter.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="skinweightexporter">
+<h1>skinWeightExporter<a class="headerlink" href="#skinweightexporter" title="このヘッドラインへのパーマリンク">¶</a></h1>
+<p>このモジュールはskinClusterのウェイトを独自フォーマットでのmelによる書き出し、読み込み機能を提供します。</p>
+<div class="section" id="id1">
+<h2>仕様<a class="headerlink" href="#id1" title="このヘッドラインへのパーマリンク">¶</a></h2>
+<div class="section" id="exporter">
+<h3>Exporterクラス<a class="headerlink" href="#exporter" title="このヘッドラインへのパーマリンク">¶</a></h3>
+<p>このモジュールの<a class="reference internal" href="#eswe-exporterclass"><span class="std std-ref">Exporter</span></a>クラスによって任意のSkinClusterのウェイトをmelファイルとして書き出します。</p>
+<p>書き出されたMelファイルには以下の情報が含まれますが、この情報自体はコメントアウトされているため、Melファイルを直接読み込んでも反映されません。</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>ウェイト書き出し元のシェイプ名(str)</p></li>
+<li><p>ウェイト書き出し元のskinCluster名(str)</p></li>
+<li><p>スキニングのメソッドの種類(int)</p></li>
+<li><p>インフルエンスの上限の有無(bool)</p></li>
+<li><p>インフルエンスの上限数(int)</p></li>
+<li><p>インフルエンス数(int)</p></li>
+<li><p>ウェイト処理方法(int)</p></li>
+<li><p>ウェイト書き出し元にバインドしていたインフルエンスの登録順序(list)</p></li>
+</ul>
+</div></blockquote>
+<div class="admonition- admonition">
+<p class="admonition-title">参考</p>
+<p>以下、書き出されたmelファイルの参考例となります。</p>
+<div class="highlight-default notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23</pre></div></td><td class="code"><div class="highlight"><pre><span></span>// skinWeightExporter 1.0.0
+// Aother               : eske
+// Creation Date        : 2020/03/29 08:39:20
+// -----------------------------------------------------------------------------
+// Skinned Shape        : prpLandingGearRootTubeC_crv_RShape
+// Skin Cluster         : skinCluster75
+// Skinning Method      : 0
+// Maintain Max Inf     : False
+// Max Influences       : 2
+// Number of Influences : 3
+// Weight Distribution  : 1
+// Influence order      : {&quot;prpLandingGear_bndJnt_R&quot;, &quot;static_bndJnt&quot;, &quot;prpLandingGearTube_bndJnt_R&quot;}
+{
+    string $shape = &quot;prpLandingGearRootTubeC_crv_RShape&quot;;
+    string $skinCluster = findRelatedSkinCluster($shape);
+    string $attr[] = `listAttr -m -sn -st &quot;w&quot; ($skinCluster + &quot;.wl&quot;)`;
+    for ($a in $attr){
+        setAttr ($skinCluster + &quot;.&quot; + $a) 0;
+    }
+
+    setAttr ($skinCluster + &quot;.weightList[0].weights[1]&quot;) 1.0;
+    ...
+}
+</pre></div>
+</td></tr></table></div>
+</div>
+<p>書き出されたMelファイルを読み込むと、Mel内で指定されているオブジェクトがすでにバインドされている場合にそのオブジェクトのウェイトをファイルの情報で上書きします。</p>
+<p>インフルエンス数やバインドする順番などがファイルと違う場合は正しく反映されません。</p>
+</div>
+<div class="section" id="restorer">
+<h3>Restorerクラス<a class="headerlink" href="#restorer" title="このヘッドラインへのパーマリンク">¶</a></h3>
+<p>Exporterクラスと対になるのが<a class="reference internal" href="#eswe-restorerclass"><span class="std std-ref">Restorer</span></a>クラスになります。</p>
+<p>このクラスではExporterクラスで書き出されたMelファイルを受け取り、任意のシェイプに対してバインド、ウェイトの設定を行なうことができます。</p>
+<p>また、インフルエンスの名前に対して書き出したMelファイルの情報を修飾してからバインドすることも可能です。</p>
+<p>このように、ExporterとRestorerがセットとなって運用することが前提の仕様となっています。</p>
+</div>
+</div>
+<div class="section" id="eswe-exporterclass">
+<span id="id2"></span><h2>Exporter<a class="headerlink" href="#eswe-exporterclass" title="このヘッドラインへのパーマリンク">¶</a></h2>
+<p>このクラスは任意のシェイプに適用されているSkinClusterのウェイトを、任意のパスに書き出す機能を提供します。</p>
+<div class="section" id="id3">
+<h3>メソッド<a class="headerlink" href="#id3" title="このヘッドラインへのパーマリンク">¶</a></h3>
+<table class="docutils align-default">
+<colgroup>
+<col style="width: 25%" />
+<col style="width: 25%" />
+<col style="width: 25%" />
+<col style="width: 25%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p><strong>メソッド名</strong></p></td>
+<td><p><strong>引数</strong></p></td>
+<td><p><strong>戻り値</strong></p></td>
+<td><p><strong>説明</strong></p></td>
+</tr>
+<tr class="row-even"><td><p>setShape</p></td>
+<td><p>node : str</p></td>
+<td></td>
+<td><p>ウェイトを書き出すシェイプ名を設定します。</p></td>
+</tr>
+<tr class="row-odd"><td><p>shape</p></td>
+<td></td>
+<td><p>str</p></td>
+<td><p>setShapeで設定された、ウェイトを書き出すシェイプ名を返します。</p></td>
+</tr>
+<tr class="row-even"><td><p>setExportPath</p></td>
+<td><p>path : str</p></td>
+<td></td>
+<td><p>ウェイトファイルの書き出し先のファイル名をフルパスで指定します。</p></td>
+</tr>
+<tr class="row-odd"><td><p>export</p></td>
+<td></td>
+<td></td>
+<td><p>設定に基づいてウェイトを任意のパスへ書き出します。</p></td>
+</tr>
+<tr class="row-even"><td><p>setIsRemapIndex</p></td>
+<td><p>state : int</p></td>
+<td></td>
+<td><p>インデックス番号のリマップ処理を行うかどうかセットします。デフォルトはTrueですが、動作不良の温床になるため原則Trueのままが望ましいです。</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="id4">
+<h3>使用例<a class="headerlink" href="#id4" title="このヘッドラインへのパーマリンク">¶</a></h3>
+<div class="highlight-python notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3
+4
+5
+6</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">gris3.exporter</span> <span class="kn">import</span> <span class="n">skinWeightExporter</span>
+
+<span class="n">exp</span> <span class="o">=</span> <span class="n">skinWeightExporter</span><span class="o">.</span><span class="n">Exporter</span><span class="p">()</span>
+<span class="n">exp</span><span class="o">.</span><span class="n">setShape</span><span class="p">(</span><span class="s1">&#39;skinned_mesh&#39;</span><span class="p">)</span>    <span class="c1">#バインド済みのメッシュの名前</span>
+<span class="n">exp</span><span class="o">.</span><span class="n">setExportPath</span><span class="p">(</span><span class="s1">&#39;temp/test_weight.mel&#39;</span><span class="p">)</span> <span class="c1">#書き出し先のファイルパス</span>
+<span class="n">exp</span><span class="o">.</span><span class="n">export</span><span class="p">()</span>
+</pre></div>
+</td></tr></table></div>
+<div class="admonition caution">
+<p class="admonition-title">注意</p>
+<p>サンプルコードを実行する前に、あらかじめMayaのシーン中にskinned_meshという名前のバインド済みオブジェクトを用意しておく必要があります。</p>
+<p>また、書き出し先のディレクトリはあらかじめ作成しておく必要があります。</p>
+</div>
+</div>
+</div>
+<div class="section" id="eswe-restorerclass">
+<span id="id5"></span><h2>Restorer<a class="headerlink" href="#eswe-restorerclass" title="このヘッドラインへのパーマリンク">¶</a></h2>
+<p>このクラスはExporterによって書き出されたファイルを、任意のシェイプに任意の設定でバインド・ウェイトの復元を行なう機能を提供します。</p>
+<div class="section" id="id6">
+<h3>メソッド<a class="headerlink" href="#id6" title="このヘッドラインへのパーマリンク">¶</a></h3>
+<table class="docutils align-default">
+<colgroup>
+<col style="width: 25%" />
+<col style="width: 25%" />
+<col style="width: 25%" />
+<col style="width: 25%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p><strong>メソッド名</strong></p></td>
+<td><p><strong>引数</strong></p></td>
+<td><p><strong>戻り値</strong></p></td>
+<td><p><strong>説明</strong></p></td>
+</tr>
+<tr class="row-even"><td><p>__init__</p></td>
+<td><p>filepath : str</p></td>
+<td></td>
+<td><p>初期化を行なう。引数filepathには読み込み元のウェイトファイルのパスを指定できる。</p></td>
+</tr>
+<tr class="row-odd"><td><p>setFile</p></td>
+<td><p>path : str</p></td>
+<td></td>
+<td><p>再設定するウェイトファイルをフルパスで指定します。</p></td>
+</tr>
+<tr class="row-even"><td><p>setShape</p></td>
+<td><p>node : str</p></td>
+<td></td>
+<td><p>ターゲットとなるシェイプをセットします。</p></td>
+</tr>
+<tr class="row-odd"><td><p>shape</p></td>
+<td></td>
+<td><p>str</p></td>
+<td><p>ターゲットとなるシェイプを返します。</p></td>
+</tr>
+<tr class="row-even"><td><p>setSkinClusterName</p></td>
+<td><p>name : str</p></td>
+<td></td>
+<td><p>復元する時につけるskinClusterの名前を設定します。</p></td>
+</tr>
+<tr class="row-odd"><td><p>setInfluenceReplacer</p></td>
+<td><p>function : function</p></td>
+<td></td>
+<td><p>インフルエンスを置き換えるための関数を設定します。</p>
+<p>この関数はインフルエンス名のリストを受け取り、置換後のリストを返す関数である必要があります。</p>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="id7">
+<h3>使用例<a class="headerlink" href="#id7" title="このヘッドラインへのパーマリンク">¶</a></h3>
+<div class="highlight-python notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3
+4
+5</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">gris3.exporter</span> <span class="kn">import</span> <span class="n">skinWeightExporter</span>
+
+<span class="n">rst</span> <span class="o">=</span> <span class="n">skinWeightExporter</span><span class="o">.</span><span class="n">Restorer</span><span class="p">(</span><span class="s1">&#39;temp/test_weight.mel&#39;</span><span class="p">)</span> <span class="c1">#書き出し先のファイルパス</span>
+<span class="n">rst</span><span class="o">.</span><span class="n">setShape</span><span class="p">(</span><span class="n">face_name</span><span class="p">)</span> <span class="c1">#バインド前のメッシュの名前</span>
+<span class="n">rst</span><span class="o">.</span><span class="n">restore</span><span class="p">()</span>
+</pre></div>
+</td></tr></table></div>
+<div class="admonition hint">
+<p class="admonition-title">ヒント</p>
+<p>setInfluenceReplacerを使用すると、ウェイト書き出し時に使用したインフルエンスジョイント名に変更を加えた状態でウェイトを適用することができます。例えば、書き出す時はインフルエンスジョイント名が</p>
+<p>root_jnt_C</p>
+<p>だったのに対し、ウェイトを再設定する時は</p>
+<p>root_bndJnt_C</p>
+<p>のように命名規則が変わっていた場合、以下のような関数を設定するとうまく適用できるでしょう。</p>
+<div class="highlight-python notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3
+4
+5
+6
+7
+8
+9</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">gris3.exporter</span> <span class="kn">import</span> <span class="n">skinWeightExporter</span>
+
+<span class="k">def</span> <span class="nf">jnt_to_bindjoint</span><span class="p">(</span><span class="n">jointlist</span><span class="p">):</span>
+    <span class="k">return</span> <span class="p">[</span><span class="n">x</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s1">&#39;jnt&#39;</span><span class="p">,</span> <span class="s1">&#39;bndJnt&#39;</span><span class="p">)</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">jointlist</span><span class="p">]</span>
+
+<span class="n">rst</span> <span class="o">=</span> <span class="n">skinWeightExporter</span><span class="o">.</span><span class="n">Restorer</span><span class="p">(</span><span class="s1">&#39;temp/test_weight.mel&#39;</span><span class="p">)</span> <span class="c1">#書き出し先のファイルパス</span>
+<span class="n">rst</span><span class="o">.</span><span class="n">setShape</span><span class="p">(</span><span class="n">face_name</span><span class="p">)</span> <span class="c1">#バインド前のメッシュの名前</span>
+<span class="n">rst</span><span class="o">.</span><span class="n">setInfluenceReplacer</span><span class="p">(</span><span class="n">jnt_to_bindjoint</span><span class="p">)</span>
+<span class="n">rst</span><span class="o">.</span><span class="n">restore</span><span class="p">()</span>
+</pre></div>
+</td></tr></table></div>
+</div>
+</div>
+</div>
+<div class="section" id="basictemporaryweight">
+<span id="eswe-basictemporaryweightclass"></span><h2>BasicTemporaryWeight<a class="headerlink" href="#basictemporaryweight" title="このヘッドラインへのパーマリンク">¶</a></h2>
+<p>一時的にウェイトを書き出し、復元する機能を提供するクラス。</p>
+<p>saveメソッドでウェイトをテンポラリ領域に保存する。</p>
+<p>restoreメソッドでテンポラリファイルを用いて任意のノードにバインド、ウェイト適用を行う。</p>
+</div>
+<div class="section" id="temporaryweight">
+<span id="eswe-temporaryweightclass"></span><h2>TemporaryWeight<a class="headerlink" href="#temporaryweight" title="このヘッドラインへのパーマリンク">¶</a></h2>
+<p>一時的にウェイトを書き出し、復元する機能を提供するクラス。</p>
+<p>BasicTemporaryWeightとの違いは、このクラスではSaveメソッド実行時に選択ノード一つに対して処理を行うため、一時的な使用が簡単な作りになっている。</p>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="../dev/factorySettings.html" class="btn btn-neutral float-right" title="ファクトリーセッティング" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="../tools/facialMemoryManager.html" class="btn btn-neutral float-left" title="facialMemoryManager" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        
+        &copy; 著作権 2020, EskeYoshinob
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>
