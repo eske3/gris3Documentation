@@ -1,0 +1,717 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="ja" >
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Check Tools &mdash; gris3 1.0.0 ドキュメント</title>
+  
+
+  
+  <link rel="stylesheet" href="../_static/css/customTheme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+
+  
+  
+  
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/doctools.js"></script>
+        <script src="../_static/language_data.js"></script>
+        <script src="../_static/translations.js"></script>
+    
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+    
+    <link rel="author" title="このドキュメントについて" href="../about.html" />
+    <link rel="index" title="索引" href="../genindex.html" />
+    <link rel="search" title="検索" href="../search.html" />
+    <link rel="next" title="jointEditor" href="../tools/jointEditor.html" />
+    <link rel="prev" title="Renamer" href="renamer.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../index.html" class="icon icon-home" alt="Documentation Home"> gris3
+          
+
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">スタートアップ</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../contents/install.html">インストールと起動</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../contents/updateLog.html">更新履歴</a></li>
+</ul>
+<p class="caption"><span class="caption-text">マニュアル</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../contents/scriptBasedRigging.html">ScriptBasedRigging-概要</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../contents/scriptingForFactory.html">ファクトリーのスクリプティングガイド</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../contents/namingRule.html">命名規則</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../contents/rigUnits.html">Rig Units</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../contents/includedExtraConstructors.html">組み込み済みExtraConstructor</a></li>
+</ul>
+<p class="caption"><span class="caption-text">ガジェット</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="jointEditor.html">Joint Editor</a></li>
+<li class="toctree-l1"><a class="reference internal" href="modelSetup.html">Model Setup</a></li>
+<li class="toctree-l1"><a class="reference internal" href="renamer.html">Renamer</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Check Tools</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#id1">カテゴリを追加する。</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#python">Pythonモジュールを使用してテンプレートから作成する。</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id2">カテゴリを追加する。</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#categoryname">categoryName</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#moduleprefix">modulePrefix</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#options">options</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id3">使用例</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#id4">カテゴリ定義情報を書き出す</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id5">カテゴリ定義情報を書き出さずに起動する。</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#ggtct-listcategories">標準で付属しているカテゴリを一覧する</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#ggtct-defaultcategories">標準で付属しているカテゴリ</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#filepathchecker">filePathChecker</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#polycountchecker">polyCountChecker</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#scenedatachecker">sceneDataChecker</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#skininfluencechecker">skinInfluenceChecker</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#vtxcolorchecker">vtxColorChecker</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p class="caption"><span class="caption-text">スクリプトツール</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../tools/jointEditor.html">jointEditor</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../tools/extraJoint.html">extraJoint</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../tools/facialMemoryManager.html">facialMemoryManager</a></li>
+</ul>
+<p class="caption"><span class="caption-text">エクスポーター</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../exporters/skinWeightExporter.html">skinWeightExporter</a></li>
+</ul>
+<p class="caption"><span class="caption-text">開発者向けドキュメント</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../dev/factorySettings.html">ファクトリーセッティング</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../dev/factoryModules.html">ファクトリーモジュール</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../dev/makingRigUnits.html">リグユニットの開発</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../dev/constructor.html">コンストラクタ</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../dev/extraConstructor.html">エクストラコンストラクタ</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../dev/namingRuleSystem.html">命名規則管理システム</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../dev/operateByScript.html">スクリプトによって操作する</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../dev/settings.html">設定にまつわる機能</a></li>
+</ul>
+<p class="caption"><span class="caption-text">GUI開発向け</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../dev_ui/extendedUI.html">uilib.extendedUIモジュール</a></li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">gris3</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
+        
+      <li>Check Tools</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../_sources/gadgets/checkTools.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="check-tools">
+<h1>Check Tools<a class="headerlink" href="#check-tools" title="このヘッドラインへのパーマリンク">¶</a></h1>
+<p>このガジェットはアセットをチェックするためのチェック機能を提供します。</p>
+<a class="reference internal image-reference" href="../_images/checkToolsimg000.png"><img alt="../_images/checkToolsimg000.png" src="../_images/checkToolsimg000.png" style="width: 600px;" /></a>
+<div class="section" id="id1">
+<h2>カテゴリを追加する。<a class="headerlink" href="#id1" title="このヘッドラインへのパーマリンク">¶</a></h2>
+<p>CheckToolsはデフォルトでは何もチェックする項目がありません。</p>
+<a class="reference internal image-reference" href="../_images/checkToolsimg001.png"><img alt="../_images/checkToolsimg001.png" src="../_images/checkToolsimg001.png" style="width: 300px;" /></a>
+<p>CheckToolsを使用するには専用のフォーマットで作成されたカテゴリ定義ファイル（またはPythonの辞書オブジェクト）が必要になります。</p>
+<p>この章ではカテゴリ定義ファイル（またはデータ）を作成する方法を紹介します。</p>
+<div class="section" id="python">
+<h3>Pythonモジュールを使用してテンプレートから作成する。<a class="headerlink" href="#python" title="このヘッドラインへのパーマリンク">¶</a></h3>
+<p>checkToolsにはテンプレートから任意のカテゴリ定義データを作成するためのヘルパークラスが用意されています。</p>
+<p>このクラスを用いてカテゴリの定義を行いっていきます。</p>
+<p>カテゴリ作成を行うには</p>
+<blockquote>
+<div><p><strong>gris3.gadgets.checkTools.util</strong></p>
+</div></blockquote>
+<p>モジュールにある<strong>CategoryOptionTemplateCreator</strong>クラスを使用します。</p>
+<div class="highlight-python notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">gris3.gadgets.checkTools</span> <span class="kn">import</span> <span class="n">util</span>
+<span class="n">cat_opt</span> <span class="o">=</span> <span class="n">util</span><span class="o">.</span><span class="n">CategoryOptionTemplateCreator</span><span class="p">()</span>
+</pre></div>
+</td></tr></table></div>
+</div>
+<div class="section" id="id2">
+<h3>カテゴリを追加する。<a class="headerlink" href="#id2" title="このヘッドラインへのパーマリンク">¶</a></h3>
+<p>それではカテゴリを追加してみましょう。カテゴリを追加するには<strong>addCategory</strong>メソッドを使用します。</p>
+<table class="docutils align-default">
+<colgroup>
+<col style="width: 25%" />
+<col style="width: 25%" />
+<col style="width: 25%" />
+<col style="width: 25%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p><strong>メソッド名</strong></p></td>
+<td><p><strong>引数</strong></p></td>
+<td><p><strong>戻り値</strong></p></td>
+<td><p><strong>説明</strong></p></td>
+</tr>
+<tr class="row-even"><td><p>addCategory</p></td>
+<td><p>categoryName : str</p>
+<p>modulePrefix : str</p>
+<p>options : dict</p>
+</td>
+<td></td>
+<td><p>カテゴリをテンプレートに追加します。</p></td>
+</tr>
+</tbody>
+</table>
+<div class="section" id="categoryname">
+<h4>categoryName<a class="headerlink" href="#categoryname" title="このヘッドラインへのパーマリンク">¶</a></h4>
+<p>追加したいカテゴリ名を文字列で指定します。</p>
+<div class="admonition hint">
+<p class="admonition-title">ヒント</p>
+<p>GRISを標準で付属しているカテゴリモジュールを知るには<a class="reference internal" href="#ggtct-listcategories"><span class="std std-ref">標準で付属しているカテゴリを一覧する</span></a>をご覧下さい。</p>
+</div>
+</div>
+<div class="section" id="moduleprefix">
+<h4>modulePrefix<a class="headerlink" href="#moduleprefix" title="このヘッドラインへのパーマリンク">¶</a></h4>
+<p>カテゴリモジュールが標準ではない場合のモジュールプレフィックスを指定します。</p>
+<p>例えばカテゴリモジュールが外部モジュールaddonModulesのcheckToolsの中に格納されているsampleExtCheckerだった場合、modulePrefixは</p>
+<p><strong>addonModules.checkTools</strong></p>
+<p>になります。</p>
+</div>
+<div class="section" id="options">
+<h4>options<a class="headerlink" href="#options" title="このヘッドラインへのパーマリンク">¶</a></h4>
+<p>カテゴリモジュールに渡すオプションになります。オプションはカテゴリモジュール毎に設定されているので、各モジュールの説明を確認して下さい。</p>
+</div>
+<div class="section" id="id3">
+<h4>使用例<a class="headerlink" href="#id3" title="このヘッドラインへのパーマリンク">¶</a></h4>
+<div class="highlight-python notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3
+4
+5
+6
+7
+8
+9</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">gris3.gadgets.checkTools</span> <span class="kn">import</span> <span class="n">util</span>
+<span class="n">cat_opt</span> <span class="o">=</span> <span class="n">util</span><span class="o">.</span><span class="n">CategoryOptionTemplateCreator</span><span class="p">()</span>
+<span class="n">cat_opt</span><span class="o">.</span><span class="n">addCategory</span><span class="p">(</span><span class="s1">&#39;filePathChecker&#39;</span><span class="p">)</span>
+<span class="n">cat_opt</span><span class="o">.</span><span class="n">addCategory</span><span class="p">(</span><span class="s1">&#39;skinInfluenceChecker&#39;</span><span class="p">)</span>
+<span class="c1"># sceneDataCheckerには不要と判断するプラグイン名のリストをオプションで指定する必要がある。</span>
+<span class="n">cat_opt</span><span class="o">.</span><span class="n">addCategory</span><span class="p">(</span>
+    <span class="s1">&#39;sceneDataChecker&#39;</span><span class="p">,</span>
+    <span class="n">options</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;invalidPlugins&#39;</span><span class="p">:</span> <span class="p">[</span><span class="s1">&#39;mtoa&#39;</span><span class="p">,</span> <span class="s1">&#39;stereoCamera&#39;</span><span class="p">,</span> <span class="s1">&#39;Turtle&#39;</span><span class="p">]}</span>
+<span class="p">)</span>
+</pre></div>
+</td></tr></table></div>
+</div>
+</div>
+<div class="section" id="id4">
+<h3>カテゴリ定義情報を書き出す<a class="headerlink" href="#id4" title="このヘッドラインへのパーマリンク">¶</a></h3>
+<p>addCategoryで追加した情報を元にカテゴリ定義情報を出力するには<strong>getCategoryOption</strong>メソッドを使用します。</p>
+<div class="highlight-python notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">gris3.gadgets.checkTools</span> <span class="kn">import</span> <span class="n">util</span>
+<span class="n">cat_opt</span> <span class="o">=</span> <span class="n">util</span><span class="o">.</span><span class="n">CategoryOptionTemplateCreator</span><span class="p">()</span>
+<span class="n">cat_opt</span><span class="o">.</span><span class="n">addCategory</span><span class="p">(</span><span class="s1">&#39;filePathChecker&#39;</span><span class="p">)</span>
+<span class="n">cat_opt</span><span class="o">.</span><span class="n">addCategory</span><span class="p">(</span><span class="s1">&#39;skinInfluenceChecker&#39;</span><span class="p">)</span>
+<span class="c1"># sceneDataCheckerには不要と判断するプラグイン名のリストをオプションで指定する必要がある。</span>
+<span class="n">cat_opt</span><span class="o">.</span><span class="n">addCategory</span><span class="p">(</span>
+    <span class="s1">&#39;sceneDataChecker&#39;</span><span class="p">,</span>
+    <span class="n">invalidPlugins</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;mtoa&#39;</span><span class="p">,</span> <span class="s1">&#39;stereoCamera&#39;</span><span class="p">,</span> <span class="s1">&#39;Turtle&#39;</span><span class="p">]</span>
+<span class="p">)</span>
+<span class="c1"># json形式（テキスト）形式で出力。</span>
+<span class="n">textdata</span> <span class="o">=</span> <span class="n">cat_opt</span><span class="o">.</span><span class="n">getCategoryOption</span><span class="p">()</span>
+</pre></div>
+</td></tr></table></div>
+<p>出力されたデータ（Json形式のテキスト）</p>
+<div class="highlight-json notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="p">{</span>
+    <span class="nt">&quot;version&quot;</span><span class="p">:</span> <span class="s2">&quot;1.0.0&quot;</span><span class="p">,</span>
+    <span class="nt">&quot;dataType&quot;</span><span class="p">:</span> <span class="s2">&quot;grisCheckToolPreset&quot;</span><span class="p">,</span>
+    <span class="nt">&quot;defaultModulePrefix&quot;</span><span class="p">:</span> <span class="s2">&quot;-default&quot;</span><span class="p">,</span>
+    <span class="nt">&quot;categoryList&quot;</span><span class="p">:</span> <span class="p">[</span>
+        <span class="p">{</span>
+            <span class="nt">&quot;moduleName&quot;</span><span class="p">:</span> <span class="s2">&quot;filePathChecker&quot;</span><span class="p">,</span>
+            <span class="nt">&quot;options&quot;</span><span class="p">:</span> <span class="p">{}</span>
+        <span class="p">},</span>
+        <span class="p">{</span>
+            <span class="nt">&quot;moduleName&quot;</span><span class="p">:</span> <span class="s2">&quot;skinInfluenceChecker&quot;</span><span class="p">,</span>
+            <span class="nt">&quot;options&quot;</span><span class="p">:</span> <span class="p">{}</span>
+        <span class="p">},</span>
+        <span class="p">{</span>
+            <span class="nt">&quot;moduleName&quot;</span><span class="p">:</span> <span class="s2">&quot;sceneDataChecker&quot;</span><span class="p">,</span>
+            <span class="nt">&quot;options&quot;</span><span class="p">:</span> <span class="p">{</span>
+                <span class="nt">&quot;invalidPlugins&quot;</span><span class="p">:</span> <span class="p">[</span>
+                    <span class="s2">&quot;mtoa&quot;</span><span class="p">,</span>
+                    <span class="s2">&quot;stereoCamera&quot;</span><span class="p">,</span>
+                    <span class="s2">&quot;Turtle&quot;</span>
+                <span class="p">]</span>
+            <span class="p">}</span>
+        <span class="p">}</span>
+    <span class="p">]</span>
+<span class="p">}</span>
+</pre></div>
+</td></tr></table></div>
+<p>このメソッドを使用するとデフォルトではcheckToolsが読み込めるjson形式のテキストを出力します。</p>
+<p>この出力結果をjsonファイルとして任意の箇所へ保存し、そのファイルをcheckToolsに読み込ませることにより、定義されたカテゴリを表示するようになります。</p>
+<p>カテゴリファイルのjsonの保存には<strong>saveAsCategoryFile</strong>メソッドを使用することで簡単に行うことができます。</p>
+<p>このメソッドを使用する場合、書き出し先のディレクトリはすでに作成しておく必要がある点にご注意下さい。また、既存のファイルがある場合は強制的に上書きされる点もご注意下さい。</p>
+<p>戻り値は書き込みを行ったjsonファイルのフルパスになります。また、引数でjsonの拡張子をつけていなかった場合は自動で付与され、戻り値に反映されます。</p>
+<div class="highlight-python notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">os</span>
+<span class="kn">from</span> <span class="nn">gris3.gadgets.checkTools</span> <span class="kn">import</span> <span class="n">util</span>
+
+<span class="n">cat_opt</span> <span class="o">=</span> <span class="n">util</span><span class="o">.</span><span class="n">CategoryOptionTemplateCreator</span><span class="p">()</span>
+<span class="n">cat_opt</span><span class="o">.</span><span class="n">addCategory</span><span class="p">(</span><span class="s1">&#39;filePathChecker&#39;</span><span class="p">)</span>
+<span class="n">cat_opt</span><span class="o">.</span><span class="n">addCategory</span><span class="p">(</span><span class="s1">&#39;skinInfluenceChecker&#39;</span><span class="p">)</span>
+<span class="c1"># sceneDataCheckerには不要と判断するプラグイン名のリストをオプションで指定する必要がある。</span>
+<span class="n">cat_opt</span><span class="o">.</span><span class="n">addCategory</span><span class="p">(</span>
+    <span class="s1">&#39;sceneDataChecker&#39;</span><span class="p">,</span>
+    <span class="n">invalidPlugins</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;mtoa&#39;</span><span class="p">,</span> <span class="s1">&#39;stereoCamera&#39;</span><span class="p">,</span> <span class="s1">&#39;Turtle&#39;</span><span class="p">]</span>
+<span class="p">)</span>
+<span class="c1"># polyCountCheckerはカウント対象グループ名と上限値を設定する。</span>
+<span class="n">cat_opt</span><span class="o">.</span><span class="n">addCategory</span><span class="p">(</span>
+    <span class="s1">&#39;polyCountChecker&#39;</span><span class="p">,</span>
+    <span class="n">target</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;geo_grp&#39;</span><span class="p">],</span> <span class="n">goalCount</span><span class="o">=</span><span class="mi">80000</span><span class="p">,</span> <span class="n">limitCount</span><span class="o">=</span><span class="mi">100000</span>
+<span class="p">)</span>
+<span class="c1"># テンポラリに書き出し（Windowsの場合）</span>
+<span class="n">json_path</span> <span class="o">=</span> <span class="n">cat_opt</span><span class="o">.</span><span class="n">saveAsCategoryFile</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">expandvars</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;%TEMP%\testCheckToolTemplate.json&#39;</span><span class="p">))</span>
+
+
+<span class="c1"># 設定した内容に従ってcheckToolsを起動する。</span>
+<span class="kn">from</span> <span class="nn">gris3.gadgets</span> <span class="kn">import</span> <span class="n">checkTools</span>
+<span class="n">checkTools</span><span class="o">.</span><span class="n">showWindow</span><span class="p">(</span><span class="n">json_path</span><span class="p">)</span>
+</pre></div>
+</td></tr></table></div>
+<p>上記のサンプルコードでは一時ファイルを作成して、それをcheckToolsに読み込ませて起動しています。</p>
+<a class="reference internal image-reference" href="../_images/checkToolsimg002.png"><img alt="../_images/checkToolsimg002.png" src="../_images/checkToolsimg002.png" style="width: 300px;" /></a>
+<p>↑試しに処理を実行してみた結果。</p>
+</div>
+<div class="section" id="id5">
+<h3>カテゴリ定義情報を書き出さずに起動する。<a class="headerlink" href="#id5" title="このヘッドラインへのパーマリンク">¶</a></h3>
+<p>カテゴリ定義情報は書き出さなくとも、CategoryOptionTemplateCreatorで作成した情報をそのままcheckToolsに渡すことで起動することができます。</p>
+<div class="highlight-python notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">gris3.gadgets.checkTools</span> <span class="kn">import</span> <span class="n">util</span>
+<span class="n">cat_opt</span> <span class="o">=</span> <span class="n">util</span><span class="o">.</span><span class="n">CategoryOptionTemplateCreator</span><span class="p">()</span>
+<span class="n">cat_opt</span><span class="o">.</span><span class="n">addCategory</span><span class="p">(</span><span class="s1">&#39;filePathChecker&#39;</span><span class="p">)</span>
+<span class="n">cat_opt</span><span class="o">.</span><span class="n">addCategory</span><span class="p">(</span><span class="s1">&#39;skinInfluenceChecker&#39;</span><span class="p">)</span>
+<span class="n">cat_opt</span><span class="o">.</span><span class="n">addCategory</span><span class="p">(</span>
+    <span class="s1">&#39;sceneDataChecker&#39;</span><span class="p">,</span>
+    <span class="n">invalidPlugins</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;mtoa&#39;</span><span class="p">,</span> <span class="s1">&#39;stereoCamera&#39;</span><span class="p">,</span> <span class="s1">&#39;Turtle&#39;</span><span class="p">]</span>
+<span class="p">)</span>
+<span class="c1"># 辞書形式のデータとして生のまま書き出し</span>
+<span class="n">data</span> <span class="o">=</span> <span class="n">cat_opt</span><span class="o">.</span><span class="n">getCategoryOption</span><span class="p">(</span><span class="n">toJson</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+
+<span class="kn">from</span> <span class="nn">gris3.gadgets</span> <span class="kn">import</span> <span class="n">checkTools</span>
+<span class="c1"># 辞書データをそのまま渡す。</span>
+<span class="n">checkTools</span><span class="o">.</span><span class="n">showWindow</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
+</pre></div>
+</td></tr></table></div>
+<p>デバッグ時や中間ファイルを生成せずに配布したい場合などはこちらの起動コマンドを渡すと良いでしょう。</p>
+</div>
+</div>
+<div class="section" id="ggtct-listcategories">
+<span id="id6"></span><h2>標準で付属しているカテゴリを一覧する<a class="headerlink" href="#ggtct-listcategories" title="このヘッドラインへのパーマリンク">¶</a></h2>
+<p>GRISを標準で付属しているカテゴリモジュールを知るには<strong>gris3.gadgets.checkTools.util</strong>モジュールの<strong>listCategories</strong>関数を使用します。</p>
+<div class="highlight-python notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">gris3.gadgets.checkTools</span> <span class="kn">import</span> <span class="n">util</span>
+<span class="n">util</span><span class="o">.</span><span class="n">listCategories</span><span class="p">()</span>
+<span class="c1"># Result: [&#39;filePathChecker&#39;, &#39;polyCountChecker&#39;, &#39;sceneDataChecker&#39;, &#39;skinInfluenceChecker&#39;, &#39;vtxColorChecker&#39;]</span>
+</pre></div>
+</td></tr></table></div>
+<p>標準以外のカテゴリモジュールを一覧で取得するには第1引数<strong>modulePrefix</strong>に、カテゴリモジュールを内包するパッケージ名を記述します。</p>
+<div class="highlight-python notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">gris3.gadgets.checkTools</span> <span class="kn">import</span> <span class="n">util</span>
+<span class="c1"># addons.checkToolModules内にカテゴリモジュールがある場合</span>
+<span class="n">categories</span> <span class="o">=</span> <span class="n">util</span><span class="o">.</span><span class="n">listCategories</span><span class="p">(</span><span class="n">addons</span><span class="o">.</span><span class="n">checkToolModules</span><span class="p">)</span>
+</pre></div>
+</td></tr></table></div>
+</div>
+<div class="section" id="ggtct-defaultcategories">
+<span id="id7"></span><h2>標準で付属しているカテゴリ<a class="headerlink" href="#ggtct-defaultcategories" title="このヘッドラインへのパーマリンク">¶</a></h2>
+<div class="section" id="filepathchecker">
+<h3>filePathChecker<a class="headerlink" href="#filepathchecker" title="このヘッドラインへのパーマリンク">¶</a></h3>
+<p>任意のノードが参照しているファイルが存在するかどうかのチェックを行います。</p>
+<p>現状のバージョンではfileノードのUDIM設定などは対応していません。</p>
+<p><strong>オプション</strong></p>
+<table class="docutils align-default">
+<colgroup>
+<col style="width: 25%" />
+<col style="width: 25%" />
+<col style="width: 25%" />
+<col style="width: 25%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p><strong>オプション名</strong></p></td>
+<td><p><strong>型</strong></p></td>
+<td><p><strong>デフォルト値</strong></p></td>
+<td><p><strong>説明</strong></p></td>
+</tr>
+<tr class="row-even"><td><p>types</p></td>
+<td><p>list</p></td>
+<td><p>[('file', 'ftn')]</p></td>
+<td><p>(操作対象ノードのタイプ（str）、取得するアトリビュート名（str))</p>
+<p>の2つの情報を持つタプル（またはリスト）をリスト化したものを渡します。</p>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="polycountchecker">
+<h3>polyCountChecker<a class="headerlink" href="#polycountchecker" title="このヘッドラインへのパーマリンク">¶</a></h3>
+<p>任意のグループ内に格納されているポリゴンのカウントを行い、目標数に対して多い場合エラーとして表示されます。</p>
+<a class="reference internal image-reference" href="../_images/checkToolsimg004.png"><img alt="../_images/checkToolsimg004.png" src="../_images/checkToolsimg004.png" style="width: 300px;" /></a>
+<p><strong>オプション</strong></p>
+<table class="docutils align-default">
+<colgroup>
+<col style="width: 25%" />
+<col style="width: 25%" />
+<col style="width: 25%" />
+<col style="width: 25%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p><strong>オプション名</strong></p></td>
+<td><p><strong>型</strong></p></td>
+<td><p><strong>デフォルト値</strong></p></td>
+<td><p><strong>説明</strong></p></td>
+</tr>
+<tr class="row-even"><td><p>target</p></td>
+<td><p>list</p></td>
+<td><p>['all_grp']</p></td>
+<td><p>ポリゴン数をカウントする操作対象グループ名のリスト</p></td>
+</tr>
+<tr class="row-odd"><td><p>goalCount</p></td>
+<td><p>int</p></td>
+<td><p>None</p></td>
+<td><p>目標とするポリゴン数。</p>
+<p>この数を超えるとチェックツールでは警告として表示されます。</p>
+</td>
+</tr>
+<tr class="row-even"><td><p>limitCount</p></td>
+<td><p>int</p></td>
+<td><p>None</p></td>
+<td><p>上限値とするポリゴン数。</p>
+<p>この数を超えるとチェックツールではエラーとして表示されます。</p>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="scenedatachecker">
+<h3>sceneDataChecker<a class="headerlink" href="#scenedatachecker" title="このヘッドラインへのパーマリンク">¶</a></h3>
+<p>unknownプラグインの検知と、任意のプラグインが読み込まれているかどうかをチェックします。</p>
+<p>任意のプラグインの読み込みチェックについては、主に読み込む必要がないプラグインをリストアップする目的で使用します。</p>
+<a class="reference internal image-reference" href="../_images/checkToolsimg005.png"><img alt="../_images/checkToolsimg005.png" src="../_images/checkToolsimg005.png" style="width: 300px;" /></a>
+<p><strong>オプション</strong></p>
+<table class="docutils align-default">
+<colgroup>
+<col style="width: 25%" />
+<col style="width: 25%" />
+<col style="width: 25%" />
+<col style="width: 25%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p><strong>オプション名</strong></p></td>
+<td><p><strong>型</strong></p></td>
+<td><p><strong>デフォルト値</strong></p></td>
+<td><p><strong>説明</strong></p></td>
+</tr>
+<tr class="row-even"><td><p>invalidPlugins</p></td>
+<td><p>list</p></td>
+<td><p>[]</p></td>
+<td><p>シーン中で読み込んでおいて欲しくないプラグイン名（文字列)リストします。</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="skininfluencechecker">
+<h3>skinInfluenceChecker<a class="headerlink" href="#skininfluencechecker" title="このヘッドラインへのパーマリンク">¶</a></h3>
+<p>スキニングされたポリゴンの各頂点のインフルエンス数が既定値を超えていないかをチェックします。</p>
+<p><strong>オプション</strong></p>
+<table class="docutils align-default">
+<colgroup>
+<col style="width: 25%" />
+<col style="width: 25%" />
+<col style="width: 25%" />
+<col style="width: 25%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p><strong>オプション名</strong></p></td>
+<td><p><strong>型</strong></p></td>
+<td><p><strong>デフォルト値</strong></p></td>
+<td><p><strong>説明</strong></p></td>
+</tr>
+<tr class="row-even"><td><p>target</p></td>
+<td><p>list</p></td>
+<td><p>['geo_grp']</p></td>
+<td><p>チェックする対象となる、スキニングされたポリゴンを格納したグループ名（文字列）のリストを指定します。</p></td>
+</tr>
+<tr class="row-odd"><td><p>numberOfLimit</p></td>
+<td><p>int</p></td>
+<td><p>4</p></td>
+<td><p>インフルエンス数の上限値を設定します。</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="vtxcolorchecker">
+<h3>vtxColorChecker<a class="headerlink" href="#vtxcolorchecker" title="このヘッドラインへのパーマリンク">¶</a></h3>
+<p>ポリゴンの頂点カラーセットが入っているかどうかのチェックを行います。</p>
+<p><strong>オプション</strong></p>
+<table class="docutils align-default">
+<colgroup>
+<col style="width: 25%" />
+<col style="width: 25%" />
+<col style="width: 25%" />
+<col style="width: 25%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p><strong>オプション名</strong></p></td>
+<td><p><strong>型</strong></p></td>
+<td><p><strong>デフォルト値</strong></p></td>
+<td><p><strong>説明</strong></p></td>
+</tr>
+<tr class="row-even"><td><p>target</p></td>
+<td><p>list</p></td>
+<td><p>['all_grp']</p></td>
+<td><p>チェックする対象となるポリゴンを格納したグループ名（文字列）のリストを指定します。</p></td>
+</tr>
+<tr class="row-odd"><td><p>errorLevel</p></td>
+<td><p>int</p></td>
+<td><p>0</p></td>
+<td><p>警告止まりの場合１，エラーとして認識する場合は０を設定します。</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="../tools/jointEditor.html" class="btn btn-neutral float-right" title="jointEditor" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="renamer.html" class="btn btn-neutral float-left" title="Renamer" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        
+        &copy; 著作権 2020, EskeYoshinob
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

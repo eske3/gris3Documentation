@@ -37,6 +37,7 @@ gris3 Documentation
     /gadgets/jointEditor
     /gadgets/modelSetup
     /gadgets/renamer
+    /gadgets/checkTools
 
 .. toctree::
     :maxdepth: 3

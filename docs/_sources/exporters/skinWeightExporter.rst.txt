@@ -146,8 +146,6 @@ Exporter
 
 .. _ESWE-RestorerClass:
 
-
-
 Restorer
 ===========================
 このクラスはExporterによって書き出されたファイルを、任意のシェイプに任意の設定で
