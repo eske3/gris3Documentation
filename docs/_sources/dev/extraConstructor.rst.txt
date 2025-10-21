@@ -26,13 +26,65 @@ ExtraConstructor
         def init(self):
             self.installExtraConstructor('cstExtensions')
 
+
 仕様
 ----------------------
 ExtraConstructorはConstructorクラスが定義するConstructionOrder
 によって実行されるメソッドの前後に任意の処理を追加するようになっています。
+任意のメソッドの前に処理を追加したい場合、ExtraConstrutorに
+
+**_任意のメソッド名**
+
+| という形でメソッドを追加します。
+| 任意のメソッドの後に処理を追加する場合はExtraConstrutorに
+
+**任意のメソッド名**
+
+| という形でメソッドを追加します。
+| 下記の例ではConstructorのsetupメソッドの前後に処理を入れる場合の記述となります。
+
+.. code-block:: python
+
+    from gris3 import extraConstructor
+    class ExtraConstructor(extraConstructor.ExtraConstructor):
+        def _setup(self):
+            print('Do method before setup.')
+        
+        def setup(self):
+            print('Do method after setup.')
+
 
 .. seealso::
 
     ConstructionOrderについては
     :ref:`CST-constructionOrder`
     をご確認下さい。
+
+
+専用メソッド
+----------------------
+
+constructor(self) -> gris3.constructor.BasicConstructor
+++++++++++++++++++++++
+インストール先のConstrcutorを返します。
+
+createSetupParts(self)
+++++++++++++++++++++++
+このExtraConstrutorを運用するのに必要なノードを作成する場合はこのメソッドを
+オーバーライドします。
+
+このメソッドはConstrcutorのcreateExtraSetupPartsが呼ばれる際に使用されます。
+
+
+setupUtil(self) -> extraConstructor.ui.ExtraConstructorUtil
+++++++++++++++++++++++
+ExtraConstrutorを運用するのに必要なノードを作成するためのGUIを返します。
+
+このメソッドで返したGUIクラスは、FactoryのScriptsタブのExtra
+Const Utilタブに表示されるようになります。
+
+このメソッドの戻り値は
+
+**extraConstructor.ui.ExtraConstructorUtil**
+
+を継承したサブクラスのインスタンスとなります。

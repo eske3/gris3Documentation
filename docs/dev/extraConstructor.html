@@ -38,7 +38,7 @@
     <link rel="author" title="このドキュメントについて" href="../about.html" />
     <link rel="index" title="索引" href="../genindex.html" />
     <link rel="search" title="検索" href="../search.html" />
-    <link rel="next" title="命名規則管理システム" href="namingRuleSystem.html" />
+    <link rel="next" title="標準付属のフェイシャルシステム" href="basicFacialSystem.html" />
     <link rel="prev" title="コンストラクタ" href="constructor.html" /> 
 </head>
 
@@ -123,14 +123,21 @@
 <li class="toctree-l1 current"><a class="current reference internal" href="#">エクストラコンストラクタ</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="#extraconstructor">ExtraConstructor</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="#id2">仕様</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id3">専用メソッド</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#constructor-self-gris3-constructor-basicconstructor">constructor(self) -&gt; gris3.constructor.BasicConstructor</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#createsetupparts-self">createSetupParts(self)</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#setuputil-self-extraconstructor-ui-extraconstructorutil">setupUtil(self) -&gt; extraConstructor.ui.ExtraConstructorUtil</a></li>
 </ul>
 </li>
 </ul>
 </li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="basicFacialSystem.html">標準付属のフェイシャルシステム</a></li>
 <li class="toctree-l1"><a class="reference internal" href="namingRuleSystem.html">命名規則管理システム</a></li>
 <li class="toctree-l1"><a class="reference internal" href="operateByScript.html">スクリプトによって操作する</a></li>
 <li class="toctree-l1"><a class="reference internal" href="settings.html">設定にまつわる機能</a></li>
-<li class="toctree-l1"><a class="reference internal" href="checkTools.html">CheckToolsの拡張</a></li>
+<li class="toctree-l1"><a class="reference internal" href="checkTools.html">checkToolsの拡張</a></li>
 </ul>
 <p class="caption"><span class="caption-text">GUI開発向け</span></p>
 <ul>
@@ -215,10 +222,49 @@
 </div>
 <div class="section" id="id2">
 <h3>仕様<a class="headerlink" href="#id2" title="このヘッドラインへのパーマリンク">¶</a></h3>
-<p>ExtraConstructorはConstructorクラスが定義するConstructionOrderによって実行されるメソッドの前後に任意の処理を追加するようになっています。</p>
+<p>ExtraConstructorはConstructorクラスが定義するConstructionOrderによって実行されるメソッドの前後に任意の処理を追加するようになっています。任意のメソッドの前に処理を追加したい場合、ExtraConstrutorに</p>
+<p><strong>_任意のメソッド名</strong></p>
+<div class="line-block">
+<div class="line">という形でメソッドを追加します。</div>
+<div class="line">任意のメソッドの後に処理を追加する場合はExtraConstrutorに</div>
+</div>
+<p><strong>任意のメソッド名</strong></p>
+<div class="line-block">
+<div class="line">という形でメソッドを追加します。</div>
+<div class="line">下記の例ではConstructorのsetupメソッドの前後に処理を入れる場合の記述となります。</div>
+</div>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">gris3</span> <span class="kn">import</span> <span class="n">extraConstructor</span>
+<span class="k">class</span> <span class="nc">ExtraConstructor</span><span class="p">(</span><span class="n">extraConstructor</span><span class="o">.</span><span class="n">ExtraConstructor</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">_setup</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Do method before setup.&#39;</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">setup</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Do method after setup.&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
 <div class="admonition seealso">
 <p class="admonition-title">参考</p>
 <p>ConstructionOrderについては<a class="reference internal" href="constructor.html#cst-constructionorder"><span class="std std-ref">ConstructionOrder</span></a>をご確認下さい。</p>
+</div>
+</div>
+<div class="section" id="id3">
+<h3>専用メソッド<a class="headerlink" href="#id3" title="このヘッドラインへのパーマリンク">¶</a></h3>
+<div class="section" id="constructor-self-gris3-constructor-basicconstructor">
+<h4>constructor(self) -&gt; gris3.constructor.BasicConstructor<a class="headerlink" href="#constructor-self-gris3-constructor-basicconstructor" title="このヘッドラインへのパーマリンク">¶</a></h4>
+<p>インストール先のConstrcutorを返します。</p>
+</div>
+<div class="section" id="createsetupparts-self">
+<h4>createSetupParts(self)<a class="headerlink" href="#createsetupparts-self" title="このヘッドラインへのパーマリンク">¶</a></h4>
+<p>このExtraConstrutorを運用するのに必要なノードを作成する場合はこのメソッドをオーバーライドします。</p>
+<p>このメソッドはConstrcutorのcreateExtraSetupPartsが呼ばれる際に使用されます。</p>
+</div>
+<div class="section" id="setuputil-self-extraconstructor-ui-extraconstructorutil">
+<h4>setupUtil(self) -&gt; extraConstructor.ui.ExtraConstructorUtil<a class="headerlink" href="#setuputil-self-extraconstructor-ui-extraconstructorutil" title="このヘッドラインへのパーマリンク">¶</a></h4>
+<p>ExtraConstrutorを運用するのに必要なノードを作成するためのGUIを返します。</p>
+<p>このメソッドで返したGUIクラスは、FactoryのScriptsタブのExtraConst Utilタブに表示されるようになります。</p>
+<p>このメソッドの戻り値は</p>
+<p><strong>extraConstructor.ui.ExtraConstructorUtil</strong></p>
+<p>を継承したサブクラスのインスタンスとなります。</p>
 </div>
 </div>
 </div>
@@ -232,7 +278,7 @@
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
-        <a href="namingRuleSystem.html" class="btn btn-neutral float-right" title="命名規則管理システム" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+        <a href="basicFacialSystem.html" class="btn btn-neutral float-right" title="標準付属のフェイシャルシステム" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
       
       
         <a href="constructor.html" class="btn btn-neutral float-left" title="コンストラクタ" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>

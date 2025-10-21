@@ -1,0 +1,533 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="ja" >
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>標準付属のフェイシャルシステム &mdash; gris3 1.0.0 ドキュメント</title>
+  
+
+  
+  <link rel="stylesheet" href="../_static/css/customTheme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+
+  
+  
+  
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/doctools.js"></script>
+        <script src="../_static/language_data.js"></script>
+        <script src="../_static/translations.js"></script>
+    
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+    
+    <link rel="author" title="このドキュメントについて" href="../about.html" />
+    <link rel="index" title="索引" href="../genindex.html" />
+    <link rel="search" title="検索" href="../search.html" />
+    <link rel="next" title="命名規則管理システム" href="namingRuleSystem.html" />
+    <link rel="prev" title="エクストラコンストラクタ" href="extraConstructor.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../index.html" class="icon icon-home" alt="Documentation Home"> gris3
+          
+
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">スタートアップ</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../contents/install.html">インストールと起動</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../contents/updateLog.html">更新履歴</a></li>
+</ul>
+<p class="caption"><span class="caption-text">マニュアル</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../contents/scriptBasedRigging.html">ScriptBasedRigging-概要</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../contents/scriptingForFactory.html">ファクトリーのスクリプティングガイド</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../contents/namingRule.html">命名規則</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../contents/rigUnits.html">Rig Units</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../contents/includedExtraConstructors.html">組み込み済みExtraConstructor</a></li>
+</ul>
+<p class="caption"><span class="caption-text">ガジェット</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../gadgets/jointEditor.html">Joint Editor</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../gadgets/modelSetup.html">Model Setup</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../gadgets/renamer.html">Renamer</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../gadgets/checkTools.html">Check Tools</a></li>
+</ul>
+<p class="caption"><span class="caption-text">スクリプトツール</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../tools/jointEditor.html">jointEditor</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../tools/extraJoint.html">extraJoint</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../tools/facialMemoryManager.html">facialMemoryManager</a></li>
+</ul>
+<p class="caption"><span class="caption-text">エクスポーター</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../exporters/skinWeightExporter.html">skinWeightExporter</a></li>
+</ul>
+<p class="caption"><span class="caption-text">開発者向けドキュメント</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="factorySettings.html">ファクトリーセッティング</a></li>
+<li class="toctree-l1"><a class="reference internal" href="factoryModules.html">ファクトリーモジュール</a></li>
+<li class="toctree-l1"><a class="reference internal" href="makingRigUnits.html">リグユニットの開発</a></li>
+<li class="toctree-l1"><a class="reference internal" href="constructor.html">コンストラクタ</a></li>
+<li class="toctree-l1"><a class="reference internal" href="extraConstructor.html">エクストラコンストラクタ</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">標準付属のフェイシャルシステム</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#layer">layerモジュール</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#layeroperator">layerOperator</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#layermanager">layerManager</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#id2">標準搭載のlayerOperatorを一覧、追加する</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id3">追加されたLayerOperatorを初期化時に調整する</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="namingRuleSystem.html">命名規則管理システム</a></li>
+<li class="toctree-l1"><a class="reference internal" href="operateByScript.html">スクリプトによって操作する</a></li>
+<li class="toctree-l1"><a class="reference internal" href="settings.html">設定にまつわる機能</a></li>
+<li class="toctree-l1"><a class="reference internal" href="checkTools.html">checkToolsの拡張</a></li>
+</ul>
+<p class="caption"><span class="caption-text">GUI開発向け</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../dev_ui/extendedUI.html">uilib.extendedUIモジュール</a></li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">gris3</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
+        
+      <li>標準付属のフェイシャルシステム</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../_sources/dev/basicFacialSystem.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="id1">
+<h1>標準付属のフェイシャルシステム<a class="headerlink" href="#id1" title="このヘッドラインへのパーマリンク">¶</a></h1>
+<p>このセクションではGRIS標準で付属するフェイシャルシステム</p>
+<p><strong>basicFacialSystem</strong></p>
+<p>モジュールについて説明します。</p>
+<p>このモジュールは<strong>ExtraConstructor</strong>です。</p>
+<div class="admonition seealso">
+<p class="admonition-title">参考</p>
+<p>ExtraConstructorについては<a class="reference internal" href="extraConstructor.html#excst-extraconstructor"><span class="std std-ref">ExtraConstructor</span></a>をご確認下さい。</p>
+</div>
+<div class="admonition caution">
+<p class="admonition-title">注意</p>
+<p>このバージョンは現在開発中のため、今後仕様が大幅に変更される可能性があります。使用の際にはその点を十分に留意して下さい。</p>
+</div>
+<div class="section" id="layer">
+<span id="bfs-layermodule"></span><h2>layerモジュール<a class="headerlink" href="#layer" title="このヘッドラインへのパーマリンク">¶</a></h2>
+<p>このモジュールはフェイシャル機能をレイヤー化するための機能を提供します。layerモジュールには以下の重要な機能が含まれます。</p>
+<ul class="simple">
+<li><p><a class="reference internal" href="#bfs-layeroperatorclass"><span class="std std-ref">layerOperator</span></a></p></li>
+<li><p><a class="reference internal" href="#bfs-layermanagerclass"><span class="std std-ref">layerManager</span></a></p></li>
+</ul>
+<p>レイヤー化についての仕様は</p>
+<blockquote>
+<div><ol class="arabic simple">
+<li><p>大元の顔ジオメトリのグループ（以後face_grp）をレイヤー毎にコピー</p></li>
+<li><p>各レイヤー用の顔メッシュのoutMeshとinMeshをそれぞれ接続する</p></li>
+<li><p>コピーした顔のメッシュに対し、各レイヤーで任意のリグを構築</p></li>
+</ol>
+</div></blockquote>
+<p>となります。3番については、接続する順番はlayerManagerにlayerOperatorを設定する順序に準じます。</p>
+<p><strong>Phase 1</strong></p>
+<p>大元の顔ジオメトリのグループ（face_grp)を、任意のプレフィックを付けた状態でコピーし、各LayerOperatorに渡します。</p>
+<div><svg height="360" viewBox="0 0 448 360" width="448" xmlns="http://www.w3.org/2000/svg" xmlns:inkspace="http://www.inkscape.org/namespaces/inkscape" xmlns:xlink="http://www.w3.org/1999/xlink">
+  <defs id="defs_block">
+    <filter height="1.504" id="filter_blur" inkspace:collect="always" width="1.1575" x="-0.07875" y="-0.252">
+      <feGaussianBlur id="feGaussianBlur3780" inkspace:collect="always" stdDeviation="4.2" />
+    </filter>
+  </defs>
+  <title>blockdiag</title>
+  <desc />
+  <ellipse cx="131" cy="66" fill="rgb(0,0,0)" rx="64.0" ry="20.0" stroke="rgb(0,0,0)" style="filter:url(#filter_blur);opacity:0.7;fill-opacity:1" />
+  <path d="M 267 46 L 379 46 A8,8 0 0 1 387 54 L 387 78 A8,8 0 0 1 379 86 L 267 86 A8,8 0 0 1 259 78 L 259 54 A8,8 0 0 1 267 46" fill="rgb(0,0,0)" stroke="rgb(0,0,0)" style="filter:url(#filter_blur);opacity:0.7;fill-opacity:1" />
+  <path d="M 267 126 L 379 126 A8,8 0 0 1 387 134 L 387 158 A8,8 0 0 1 379 166 L 267 166 A8,8 0 0 1 259 158 L 259 134 A8,8 0 0 1 267 126" fill="rgb(0,0,0)" stroke="rgb(0,0,0)" style="filter:url(#filter_blur);opacity:0.7;fill-opacity:1" />
+  <path d="M 267 206 L 379 206 A8,8 0 0 1 387 214 L 387 238 A8,8 0 0 1 379 246 L 267 246 A8,8 0 0 1 259 238 L 259 214 A8,8 0 0 1 267 206" fill="rgb(0,0,0)" stroke="rgb(0,0,0)" style="filter:url(#filter_blur);opacity:0.7;fill-opacity:1" />
+  <path d="M 267 286 L 379 286 A8,8 0 0 1 387 294 L 387 318 A8,8 0 0 1 379 326 L 267 326 A8,8 0 0 1 259 318 L 259 294 A8,8 0 0 1 267 286" fill="rgb(0,0,0)" stroke="rgb(0,0,0)" style="filter:url(#filter_blur);opacity:0.7;fill-opacity:1" />
+  <ellipse cx="128" cy="60" fill="rgb(144,176,208)" rx="64.0" ry="20.0" stroke="rgb(0,0,0)" />
+  <text fill="rgb(0,0,0)" font-family="sans-serif" font-size="11" font-style="normal" font-weight="normal" text-anchor="middle" textLength="48" x="128.0" y="66">face_grp</text>
+  <path d="M 264 40 L 376 40 A8,8 0 0 1 384 48 L 384 72 A8,8 0 0 1 376 80 L 264 80 A8,8 0 0 1 256 72 L 256 48 A8,8 0 0 1 264 40" fill="rgb(255,255,255)" stroke="rgb(0,0,0)" />
+  <text fill="rgb(0,0,0)" font-family="sans-serif" font-size="11" font-style="normal" font-weight="normal" text-anchor="middle" textLength="90" x="320.0" y="66">Jaw Opened Face</text>
+  <path d="M 264 120 L 376 120 A8,8 0 0 1 384 128 L 384 152 A8,8 0 0 1 376 160 L 264 160 A8,8 0 0 1 256 152 L 256 128 A8,8 0 0 1 264 120" fill="rgb(255,255,255)" stroke="rgb(0,0,0)" />
+  <text fill="rgb(0,0,0)" font-family="sans-serif" font-size="11" font-style="normal" font-weight="normal" text-anchor="middle" textLength="96" x="320.0" y="146">Blend Shape Face</text>
+  <path d="M 264 200 L 376 200 A8,8 0 0 1 384 208 L 384 232 A8,8 0 0 1 376 240 L 264 240 A8,8 0 0 1 256 232 L 256 208 A8,8 0 0 1 264 200" fill="rgb(255,255,255)" stroke="rgb(0,0,0)" />
+  <text fill="rgb(0,0,0)" font-family="sans-serif" font-size="11" font-style="normal" font-weight="normal" text-anchor="middle" textLength="72" x="320.0" y="226">Tweaked Face</text>
+  <path d="M 264 280 L 376 280 A8,8 0 0 1 384 288 L 384 312 A8,8 0 0 1 376 320 L 264 320 A8,8 0 0 1 256 312 L 256 288 A8,8 0 0 1 264 280" fill="rgb(255,255,255)" stroke="rgb(0,0,0)" />
+  <text fill="rgb(0,0,0)" font-family="sans-serif" font-size="11" font-style="normal" font-weight="normal" text-anchor="middle" textLength="72" x="320.0" y="306">Skinned Face</text>
+  <path d="M 192 60 L 248 60" fill="none" stroke="rgb(0,0,0)" />
+  <polygon fill="rgb(0,0,0)" points="255,60 248,56 248,64 255,60" stroke="rgb(0,0,0)" />
+  <path d="M 192 60 L 224 60" fill="none" stroke="rgb(0,0,0)" />
+  <path d="M 224 60 L 224 140" fill="none" stroke="rgb(0,0,0)" />
+  <path d="M 224 140 L 248 140" fill="none" stroke="rgb(0,0,0)" />
+  <polygon fill="rgb(0,0,0)" points="255,140 248,136 248,144 255,140" stroke="rgb(0,0,0)" />
+  <path d="M 192 60 L 224 60" fill="none" stroke="rgb(0,0,0)" />
+  <path d="M 224 60 L 224 220" fill="none" stroke="rgb(0,0,0)" />
+  <path d="M 224 220 L 248 220" fill="none" stroke="rgb(0,0,0)" />
+  <polygon fill="rgb(0,0,0)" points="255,220 248,216 248,224 255,220" stroke="rgb(0,0,0)" />
+  <path d="M 192 60 L 224 60" fill="none" stroke="rgb(0,0,0)" />
+  <path d="M 224 60 L 224 300" fill="none" stroke="rgb(0,0,0)" />
+  <path d="M 224 300 L 248 300" fill="none" stroke="rgb(0,0,0)" />
+  <polygon fill="rgb(0,0,0)" points="255,300 248,296 248,304 255,300" stroke="rgb(0,0,0)" />
+  <rect fill="white" height="15" stroke="rgb(0,0,0)" width="40" x="204" y="38" />
+  <text fill="rgb(0,0,0)" font-family="sans-serif" font-size="11" font-style="normal" font-weight="normal" text-anchor="middle" textLength="24" x="224.0" y="51">copy</text>
+  <rect fill="white" height="15" stroke="rgb(0,0,0)" width="40" x="204" y="118" />
+  <text fill="rgb(0,0,0)" font-family="sans-serif" font-size="11" font-style="normal" font-weight="normal" text-anchor="middle" textLength="24" x="224.0" y="131">copy</text>
+  <rect fill="white" height="15" stroke="rgb(0,0,0)" width="40" x="204" y="198" />
+  <text fill="rgb(0,0,0)" font-family="sans-serif" font-size="11" font-style="normal" font-weight="normal" text-anchor="middle" textLength="24" x="224.0" y="211">copy</text>
+  <rect fill="white" height="15" stroke="rgb(0,0,0)" width="40" x="204" y="278" />
+  <text fill="rgb(0,0,0)" font-family="sans-serif" font-size="11" font-style="normal" font-weight="normal" text-anchor="middle" textLength="24" x="224.0" y="291">copy</text>
+</svg>
+</div>
+<p><strong>Phase 2</strong></p>
+<p>コピーされた各メッシュのinMesh、outMeshを接続します。（接続する順番はlayerManagerにlayerOperatorを設定する順序に準じます。）</p>
+<div><svg height="120" viewBox="0 0 832 120" width="832" xmlns="http://www.w3.org/2000/svg" xmlns:inkspace="http://www.inkscape.org/namespaces/inkscape" xmlns:xlink="http://www.w3.org/1999/xlink">
+  <defs id="defs_block">
+    <filter height="1.504" id="filter_blur" inkspace:collect="always" width="1.1575" x="-0.07875" y="-0.252">
+      <feGaussianBlur id="feGaussianBlur3780" inkspace:collect="always" stdDeviation="4.2" />
+    </filter>
+  </defs>
+  <title>blockdiag</title>
+  <desc />
+  <ellipse cx="131" cy="66" fill="rgb(0,0,0)" rx="64.0" ry="20.0" stroke="rgb(0,0,0)" style="filter:url(#filter_blur);opacity:0.7;fill-opacity:1" />
+  <ellipse cx="323" cy="66" fill="rgb(0,0,0)" rx="64.0" ry="20.0" stroke="rgb(0,0,0)" style="filter:url(#filter_blur);opacity:0.7;fill-opacity:1" />
+  <ellipse cx="515" cy="66" fill="rgb(0,0,0)" rx="64.0" ry="20.0" stroke="rgb(0,0,0)" style="filter:url(#filter_blur);opacity:0.7;fill-opacity:1" />
+  <ellipse cx="707" cy="66" fill="rgb(0,0,0)" rx="64.0" ry="20.0" stroke="rgb(0,0,0)" style="filter:url(#filter_blur);opacity:0.7;fill-opacity:1" />
+  <ellipse cx="128" cy="60" fill="rgb(144,176,208)" rx="64.0" ry="20.0" stroke="rgb(0,0,0)" />
+  <text fill="rgb(0,0,0)" font-family="sans-serif" font-size="11" font-style="normal" font-weight="normal" text-anchor="middle" textLength="90" x="128.0" y="66">Jaw Opened Face</text>
+  <ellipse cx="320" cy="60" fill="rgb(144,176,208)" rx="64.0" ry="20.0" stroke="rgb(0,0,0)" />
+  <text fill="rgb(0,0,0)" font-family="sans-serif" font-size="11" font-style="normal" font-weight="normal" text-anchor="middle" textLength="96" x="320.0" y="66">Blend Shape Face</text>
+  <ellipse cx="512" cy="60" fill="rgb(144,176,208)" rx="64.0" ry="20.0" stroke="rgb(0,0,0)" />
+  <text fill="rgb(0,0,0)" font-family="sans-serif" font-size="11" font-style="normal" font-weight="normal" text-anchor="middle" textLength="72" x="512.0" y="66">Tweaked Face</text>
+  <ellipse cx="704" cy="60" fill="rgb(144,176,208)" rx="64.0" ry="20.0" stroke="rgb(0,0,0)" />
+  <text fill="rgb(0,0,0)" font-family="sans-serif" font-size="11" font-style="normal" font-weight="normal" text-anchor="middle" textLength="72" x="704.0" y="66">Skinned Face</text>
+  <path d="M 192 60 L 248 60" fill="none" stroke="rgb(0,0,0)" />
+  <polygon fill="rgb(0,0,0)" points="255,60 248,56 248,64 255,60" stroke="rgb(0,0,0)" />
+  <path d="M 384 60 L 440 60" fill="none" stroke="rgb(0,0,0)" />
+  <polygon fill="rgb(0,0,0)" points="447,60 440,56 440,64 447,60" stroke="rgb(0,0,0)" />
+  <path d="M 576 60 L 632 60" fill="none" stroke="rgb(0,0,0)" />
+  <polygon fill="rgb(0,0,0)" points="639,60 632,56 632,64 639,60" stroke="rgb(0,0,0)" />
+  <rect fill="white" height="15" stroke="rgb(0,0,0)" width="52" x="198" y="38" />
+  <text fill="rgb(0,0,0)" font-family="sans-serif" font-size="11" font-style="normal" font-weight="normal" text-anchor="middle" textLength="36" x="224.0" y="51">in out</text>
+  <rect fill="white" height="15" stroke="rgb(0,0,0)" width="52" x="390" y="38" />
+  <text fill="rgb(0,0,0)" font-family="sans-serif" font-size="11" font-style="normal" font-weight="normal" text-anchor="middle" textLength="36" x="416.0" y="51">in out</text>
+  <rect fill="white" height="15" stroke="rgb(0,0,0)" width="52" x="582" y="38" />
+  <text fill="rgb(0,0,0)" font-family="sans-serif" font-size="11" font-style="normal" font-weight="normal" text-anchor="middle" textLength="36" x="608.0" y="51">in out</text>
+</svg>
+</div>
+<p><strong>Phase 3</strong></p>
+<p>各LayerOperatorではsetupやpostProcessメソッド内でコピーされたノードに編集を加え、リグの構築を行います。</p>
+<div><svg height="280" viewBox="0 0 640 280" width="640" xmlns="http://www.w3.org/2000/svg" xmlns:inkspace="http://www.inkscape.org/namespaces/inkscape" xmlns:xlink="http://www.w3.org/1999/xlink">
+  <defs id="defs_block">
+    <filter height="1.504" id="filter_blur" inkspace:collect="always" width="1.1575" x="-0.07875" y="-0.252">
+      <feGaussianBlur id="feGaussianBlur3780" inkspace:collect="always" stdDeviation="4.2" />
+    </filter>
+  </defs>
+  <title>blockdiag</title>
+  <desc />
+  <path d="M 75 46 L 187 46 A8,8 0 0 1 195 54 L 195 78 A8,8 0 0 1 187 86 L 75 86 A8,8 0 0 1 67 78 L 67 54 A8,8 0 0 1 75 46" fill="rgb(0,0,0)" stroke="rgb(0,0,0)" style="filter:url(#filter_blur);opacity:0.7;fill-opacity:1" />
+  <ellipse cx="515" cy="66" fill="rgb(0,0,0)" rx="64.0" ry="20.0" stroke="rgb(0,0,0)" style="filter:url(#filter_blur);opacity:0.7;fill-opacity:1" />
+  <polygon fill="rgb(0,0,0)" points="323,38 395,66 323,94 251,66 323,38" stroke="rgb(0,0,0)" style="filter:url(#filter_blur);opacity:0.7;fill-opacity:1" />
+  <polygon fill="rgb(0,0,0)" points="323,118 395,146 323,174 251,146 323,118" stroke="rgb(0,0,0)" style="filter:url(#filter_blur);opacity:0.7;fill-opacity:1" />
+  <polygon fill="rgb(0,0,0)" points="323,198 395,226 323,254 251,226 323,198" stroke="rgb(0,0,0)" style="filter:url(#filter_blur);opacity:0.7;fill-opacity:1" />
+  <path d="M 72 40 L 184 40 A8,8 0 0 1 192 48 L 192 72 A8,8 0 0 1 184 80 L 72 80 A8,8 0 0 1 64 72 L 64 48 A8,8 0 0 1 72 40" fill="rgb(255,255,255)" stroke="rgb(0,0,0)" />
+  <text fill="rgb(0,0,0)" font-family="sans-serif" font-size="11" font-style="normal" font-weight="normal" text-anchor="middle" textLength="96" x="128.0" y="66">Blend Shape Face</text>
+  <ellipse cx="512" cy="60" fill="rgb(144,176,208)" rx="64.0" ry="20.0" stroke="rgb(0,0,0)" />
+  <text fill="rgb(0,0,0)" font-family="sans-serif" font-size="11" font-style="normal" font-weight="normal" text-anchor="middle" textLength="90" x="512.0" y="66">Copied face_grp</text>
+  <polygon fill="rgb(240,208,128)" points="320,32 392,60 320,88 248,60 320,32" stroke="rgb(0,0,0)" />
+  <text fill="rgb(0,0,0)" font-family="sans-serif" font-size="11" font-style="normal" font-weight="normal" text-anchor="middle" textLength="54" x="320.0" y="66">Pre Setup</text>
+  <polygon fill="rgb(240,208,128)" points="320,112 392,140 320,168 248,140 320,112" stroke="rgb(0,0,0)" />
+  <text fill="rgb(0,0,0)" font-family="sans-serif" font-size="11" font-style="normal" font-weight="normal" text-anchor="middle" textLength="30" x="320.0" y="146">Setup</text>
+  <polygon fill="rgb(240,208,128)" points="320,192 392,220 320,248 248,220 320,192" stroke="rgb(0,0,0)" />
+  <text fill="rgb(0,0,0)" font-family="sans-serif" font-size="11" font-style="normal" font-weight="normal" text-anchor="middle" textLength="66" x="320.0" y="226">PostProcess</text>
+  <path d="M 192 60 L 240 60" fill="none" stroke="rgb(0,0,0)" />
+  <polygon fill="rgb(0,0,0)" points="247,60 240,56 240,64 247,60" stroke="rgb(0,0,0)" />
+  <path d="M 192 60 L 224 60" fill="none" stroke="rgb(0,0,0)" />
+  <path d="M 224 60 L 224 140" fill="none" stroke="rgb(0,0,0)" />
+  <path d="M 224 140 L 240 140" fill="none" stroke="rgb(0,0,0)" />
+  <polygon fill="rgb(0,0,0)" points="247,140 240,136 240,144 247,140" stroke="rgb(0,0,0)" />
+  <path d="M 192 60 L 224 60" fill="none" stroke="rgb(0,0,0)" />
+  <path d="M 224 60 L 224 220" fill="none" stroke="rgb(0,0,0)" />
+  <path d="M 224 220 L 240 220" fill="none" stroke="rgb(0,0,0)" />
+  <polygon fill="rgb(0,0,0)" points="247,220 240,216 240,224 247,220" stroke="rgb(0,0,0)" />
+  <path d="M 392 60 L 440 60" fill="none" stroke="rgb(0,0,0)" />
+  <polygon fill="rgb(0,0,0)" points="447,60 440,56 440,64 447,60" stroke="rgb(0,0,0)" />
+  <path d="M 392 140 L 432 140" fill="none" stroke="rgb(0,0,0)" />
+  <path d="M 432 140 L 432 60" fill="none" stroke="rgb(0,0,0)" />
+  <path d="M 432 60 L 440 60" fill="none" stroke="rgb(0,0,0)" />
+  <polygon fill="rgb(0,0,0)" points="447,60 440,56 440,64 447,60" stroke="rgb(0,0,0)" />
+  <path d="M 392 220 L 432 220" fill="none" stroke="rgb(0,0,0)" />
+  <path d="M 432 220 L 432 60" fill="none" stroke="rgb(0,0,0)" />
+  <path d="M 432 60 L 440 60" fill="none" stroke="rgb(0,0,0)" />
+  <polygon fill="rgb(0,0,0)" points="447,60 440,56 440,64 447,60" stroke="rgb(0,0,0)" />
+</svg>
+</div>
+<div class="section" id="layeroperator">
+<span id="bfs-layeroperatorclass"></span><h3>layerOperator<a class="headerlink" href="#layeroperator" title="このヘッドラインへのパーマリンク">¶</a></h3>
+<p>このクラスはフェイシャルの機能をレイヤー化する際に、各レイヤー単独の機能を実装するための基底クラスとなります。</p>
+<p>各レイヤーはこのクラスを継承し、各種メソッドをオーバーライドして動作を実装してきます。</p>
+<p>現在、標準以下のlayerOperatorが用意されています。</p>
+<ul class="simple">
+<li><p>BlendShape</p></li>
+<li><p>JawOpenner</p></li>
+<li><p>Tweaked</p></li>
+</ul>
+</div>
+<div class="section" id="layermanager">
+<span id="bfs-layermanagerclass"></span><h3>layerManager<a class="headerlink" href="#layermanager" title="このヘッドラインへのパーマリンク">¶</a></h3>
+<p><a class="reference internal" href="#bfs-layeroperatorclass"><span class="std std-ref">layerOperator</span></a>を管理する機能を提供します。この機能を経由してbasicFacialSystemにlayerOperatorを登録することにより、ビルド時に登録されたフェイシャルのリグが構築されます。</p>
+<p>layerManagerにはbasicFacialSystemをインストールした戻り値（以後BFSオブジェクト）の<strong>layerManager</strong>メソッドからアクセスすることができます。</p>
+<p>layerManager.addLayersメソッドを用いてlayerOperatorを追加することができます。BFSオブジェクトのdefaultLayerOperatorsメソッドを呼ぶと、標準で推奨されるlayerOperatorを取得できるので、まずはこれを追加してみると良いでしょう。</p>
+<div class="highlight-python notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3
+4
+5
+6</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">gris3</span> <span class="kn">import</span> <span class="n">constructors</span>
+
+<span class="k">class</span> <span class="nc">Constructor</span><span class="p">(</span><span class="n">constructors</span><span class="o">.</span><span class="n">currentConstructor</span><span class="p">()):</span>
+    <span class="k">def</span> <span class="nf">init</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="n">cst</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">installExtraConstructor</span><span class="p">(</span><span class="s1">&#39;basicFacialSystem&#39;</span><span class="p">)</span>
+        <span class="n">cst</span><span class="o">.</span><span class="n">layerManager</span><span class="p">()</span><span class="o">.</span><span class="n">addLayers</span><span class="p">(</span><span class="o">*</span><span class="n">cst</span><span class="o">.</span><span class="n">defaultLayerOperators</span><span class="p">())</span>
+</pre></div>
+</td></tr></table></div>
+<div class="section" id="id2">
+<h4>標準搭載のlayerOperatorを一覧、追加する<a class="headerlink" href="#id2" title="このヘッドラインへのパーマリンク">¶</a></h4>
+<p>標準搭載されているlayerOperatorを一覧するにはlayerOperatorsパッケージのlistAllLayerOperatorsを使用します。</p>
+<div class="highlight-python notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">gris3.extraConstructor.basicFacialSystem</span> <span class="kn">import</span> <span class="n">layerOperators</span>
+<span class="n">lo</span> <span class="o">=</span> <span class="n">layerOperators</span><span class="o">.</span><span class="n">listAllLayerOperators</span><span class="p">()</span>
+</pre></div>
+</td></tr></table></div>
+<p>listAllLayerOperatorsの戻り値は辞書であり、- レイヤー名をキー- 対応するクラスを値として保持しています。アクセスるには使用したいレイヤー名をキーとして渡します。</p>
+<div class="highlight-python notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3
+4
+5
+6
+7
+8</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">gris3</span> <span class="kn">import</span> <span class="n">constructors</span>
+<span class="kn">from</span> <span class="nn">gris3.extraConstructor.basicFacialSystem</span> <span class="kn">import</span> <span class="n">layerOperators</span>
+
+<span class="k">class</span> <span class="nc">Constructor</span><span class="p">(</span><span class="n">constructors</span><span class="o">.</span><span class="n">currentConstructor</span><span class="p">()):</span>
+    <span class="k">def</span> <span class="nf">init</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="n">cst</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">installExtraConstructor</span><span class="p">(</span><span class="s1">&#39;basicFacialSystem&#39;</span><span class="p">)</span>
+        <span class="n">lo</span> <span class="o">=</span> <span class="n">layerOperators</span><span class="o">.</span><span class="n">listAllLayerOperators</span><span class="p">()</span>
+        <span class="n">cst</span><span class="o">.</span><span class="n">layerManager</span><span class="p">()</span><span class="o">.</span><span class="n">addLayers</span><span class="p">(</span><span class="n">lo</span><span class="p">[</span><span class="s1">&#39;BlendShape&#39;</span><span class="p">])</span> <span class="c1"># BlendShapeレイヤを追加</span>
+</pre></div>
+</td></tr></table></div>
+</div>
+<div class="section" id="id3">
+<h4>追加されたLayerOperatorを初期化時に調整する<a class="headerlink" href="#id3" title="このヘッドラインへのパーマリンク">¶</a></h4>
+<p>本ExtraConstructorがインストールされると、ビルド時に様々な処理が行われます。その中で最初の処理として「大元の顔ジオメトリグループのコピー」が行われます。</p>
+<p>（<a class="reference internal" href="#bfs-layermodule"><span class="std std-ref">layerモジュール</span></a>Phase1に該当）</p>
+<p>Phase１ではlayerManagerの<strong>setup</strong>が呼ばれますが、その中では</p>
+<blockquote>
+<div><ol class="arabic simple">
+<li><p>大元の顔ジオメトリのグループをコピー</p></li>
+<li><p>追加されたlayerOperatorのインスタンスを作成</p></li>
+<li><p>インスタンスにコピーされた顔ジオメトリグループを渡す</p></li>
+<li><p>コピーされた顔ジオメトリグループに対し、一つ前のレイヤーのコピーされた顔ジオメトリグループを接続する</p></li>
+</ol>
+</div></blockquote>
+<p>という処理が行われます。</p>
+<p>この中で「２」の処理で初めてLayerOperatorのインスタンスが作成されます。このインスタンス化されたLayerOperator（以下Layerオブジェクト）に対し、初期化処理を行いたい場合があります。（クラスのメンバ変数の変更など）</p>
+<p>その場合は、インストール先のコンストラクタ内で</p>
+<p><strong>initFacialLayerOperator(self, operator:basicFacialSystem.layer.LayerOperator):</strong></p>
+<p>メソッドを追加すると、Layerオブジェクトの初期化処理をカスタマイズすることができます。</p>
+<p>下記の例ではtweakedLayerOperatorに対し、StackFaceName変数の内容を変更しています。</p>
+<div class="highlight-python notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">gris3</span> <span class="kn">import</span> <span class="n">constructors</span>
+<span class="k">class</span> <span class="nc">Constructor</span><span class="p">(</span><span class="n">constructors</span><span class="o">.</span><span class="n">currentConstructor</span><span class="p">()):</span>
+    <span class="k">def</span> <span class="nf">init</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="n">cst</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">installExtraConstructor</span><span class="p">(</span><span class="s1">&#39;basicFacialSystem&#39;</span><span class="p">)</span>
+        <span class="n">cst</span><span class="o">.</span><span class="n">layerManager</span><span class="p">()</span><span class="o">.</span><span class="n">addLayers</span><span class="p">(</span><span class="o">*</span><span class="n">cst</span><span class="o">.</span><span class="n">defaultLayerOperators</span><span class="p">())</span>
+
+    <span class="k">def</span> <span class="nf">initFacialLayerOperator</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">operator</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">operator</span><span class="o">.</span><span class="n">prefix</span><span class="p">()</span> <span class="o">==</span> <span class="s1">&#39;tweek&#39;</span><span class="p">:</span>
+            <span class="c1"># tweakLayerOperatorのメンバ変数を変更。</span>
+            <span class="n">operator</span><span class="o">.</span><span class="n">StackFaceName</span> <span class="o">=</span> <span class="p">{</span>
+                <span class="s1">&#39;face&#39;</span><span class="p">:</span><span class="s1">&#39;head_geo&#39;</span><span class="p">,</span> <span class="s1">&#39;faceParts&#39;</span><span class="p">:[</span><span class="s1">&#39;facialBrowJnt_grp&#39;</span><span class="p">]</span>
+            <span class="p">}</span>
+</pre></div>
+</td></tr></table></div>
+<p>このように、layerOperator開発時ににメンバ変数を設けておくと、後から操作対象やオペレーションのスイッチなどをアセット毎に行えるようになるため非常に汎用性があがるためお勧めです。</p>
+</div>
+</div>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="namingRuleSystem.html" class="btn btn-neutral float-right" title="命名規則管理システム" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="extraConstructor.html" class="btn btn-neutral float-left" title="エクストラコンストラクタ" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        
+        &copy; 著作権 2020, EskeYoshinob
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>
