@@ -109,4 +109,75 @@ FilteredView
 
 
 
+.. _DEVUI-ETUI-FileSelector:
+
+FileSelector、SavePathSelector、DirectorySelector
+============================================
+このクラスはファイルまたはディレクトリを選択するためのダイアログと、選択された
+ファイルを表示するLineEditがセットになったクラスです。
+
+.. image:: ../img/extenedUI/extenededUI_img003.png
+    :width: 400
+
+
+メソッド（共通）
+----------------------
+以下に重要なメソッドを何点かリストアップします。
+
+.. list-table::
+
+    +   -   **メソッド名**
+        -   **引数**
+        -   **戻り値**
+        -   **説明**
+    +   -   setLabel
+        -   label:str
+        -   
+        -   フィールド横の表示ラベルのテキストを設定します。
+    +   -   setTitle
+        -   label : str
+        -   
+        -   ファイルダイアログのウィンドウタイトルを設定します。
+    +   -   setPath
+        -   path:str
+            
+            normalize:bool
+        -   
+        -   パス入力フィールドにパスを設定します。
+    +   -   path
+        -   checkExisting:bool
+        -   str
+        -   フィールドに入力されているファイルパスを返します。
+            
+            checkExistingがTrueの場合は、フィールド内の文字列のファイルが存在
+            しない時に空文字を返します。
+
+
+使用例
+----------------------
+
+.. code-block:: python
+    :linenos:
+
+    from gris3 import uilib
+    from gris3.uilib import QtWidgets, QtGui, QtCore
+    QtWidgets, QtGui, QtCore = uilib.QtWidgets, uilib.QtGui, uilib.QtCore
+
+
+    w = QtWidgets.QWidget(mayaUIlib.MainWindow)
+    w.setWindowTitle('File Selector example')
+    w.setWindowFlags(QtCore.Qt.Window)
+
+    file_selector = extendedUI.FileSelector('File Path')
+    file_save_widget = extendedUI.SavePathSelector('Saved path')
+    dir_selector = extendedUI.DirectorySelector('Directory Path')
+
+    layout = QtWidgets.QVBoxLayout(w)
+    layout.addWidget(file_selector)
+    layout.addWidget(file_save_widget)
+    layout.addWidget(dir_selector)
+    layout.addStretch()
+
+    w.resize(640, 200)
+    w.show()
 

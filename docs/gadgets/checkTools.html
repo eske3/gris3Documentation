@@ -123,6 +123,7 @@
 <li class="toctree-l3"><a class="reference internal" href="#scenedatachecker">sceneDataChecker</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#skininfluencechecker">skinInfluenceChecker</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#vtxcolorchecker">vtxColorChecker</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#transformchecker">transformChecker</a></li>
 </ul>
 </li>
 </ul>
@@ -148,6 +149,7 @@
 <li class="toctree-l1"><a class="reference internal" href="../dev/namingRuleSystem.html">命名規則管理システム</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../dev/operateByScript.html">スクリプトによって操作する</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../dev/settings.html">設定にまつわる機能</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../dev/checkTools.html">checkToolsの拡張</a></li>
 </ul>
 <p class="caption"><span class="caption-text">GUI開発向け</span></p>
 <ul>
@@ -651,6 +653,53 @@
 <td><p>int</p></td>
 <td><p>0</p></td>
 <td><p>警告止まりの場合１，エラーとして認識する場合は０を設定します。</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="transformchecker">
+<h3>transformChecker<a class="headerlink" href="#transformchecker" title="このヘッドラインへのパーマリンク">¶</a></h3>
+<p>Transformノードがフリーズされているかどうかをチェックします。</p>
+<a class="reference internal image-reference" href="../_images/checkToolsimg006.png"><img alt="../_images/checkToolsimg006.png" src="../_images/checkToolsimg006.png" style="width: 300px;" /></a>
+<p>チェック項目は以下の2点です。</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>行列的に単位行列になっているかどうか（フリーズされているかどうか）</p></li>
+<li><p>各種ピボットが０になっているかどうか</p></li>
+</ul>
+</div></blockquote>
+<p><strong>オプション</strong></p>
+<table class="docutils align-default">
+<colgroup>
+<col style="width: 25%" />
+<col style="width: 25%" />
+<col style="width: 25%" />
+<col style="width: 25%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p><strong>オプション名</strong></p></td>
+<td><p><strong>型</strong></p></td>
+<td><p><strong>デフォルト値</strong></p></td>
+<td><p><strong>説明</strong></p></td>
+</tr>
+<tr class="row-even"><td><p>target</p></td>
+<td><p>list</p></td>
+<td><p>['all_grp']</p></td>
+<td><p>チェックする対象となるTransformを格納したグループ名（文字列）のリストを指定します。</p></td>
+</tr>
+<tr class="row-odd"><td><p>matrixErrorLevel</p></td>
+<td><p>int</p></td>
+<td><p>0</p></td>
+<td><p>フリーズされているかどうかのチェックに対する警告レベルを設定します。</p>
+<p>警告止まりの場合１，エラーとして認識する場合は０を設定します。</p>
+</td>
+</tr>
+<tr class="row-even"><td><p>pivotErrorLevel</p></td>
+<td><p>int</p></td>
+<td><p>0</p></td>
+<td><p>各種ピボットが０になっているかのチェックに対する警告レベルを設定します。</p>
+<p>警告止まりの場合１，エラーとして認識する場合は０を設定します。</p>
+</td>
 </tr>
 </tbody>
 </table>

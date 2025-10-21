@@ -38,7 +38,7 @@
     <link rel="author" title="このドキュメントについて" href="../about.html" />
     <link rel="index" title="索引" href="../genindex.html" />
     <link rel="search" title="検索" href="../search.html" />
-    <link rel="prev" title="設定にまつわる機能" href="../dev/settings.html" /> 
+    <link rel="prev" title="checkToolsの拡張" href="../dev/checkTools.html" /> 
 </head>
 
 <body class="wy-body-for-nav">
@@ -123,6 +123,7 @@
 <li class="toctree-l1"><a class="reference internal" href="../dev/namingRuleSystem.html">命名規則管理システム</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../dev/operateByScript.html">スクリプトによって操作する</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../dev/settings.html">設定にまつわる機能</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../dev/checkTools.html">checkToolsの拡張</a></li>
 </ul>
 <p class="caption"><span class="caption-text">GUI開発向け</span></p>
 <ul class="current">
@@ -130,6 +131,11 @@
 <li class="toctree-l2"><a class="reference internal" href="#filteredview">FilteredView</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="#id1">メソッド</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#id2">使用例</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#fileselectorsavepathselectordirectoryselector">FileSelector、SavePathSelector、DirectorySelector</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#id3">メソッド（共通）</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id4">使用例</a></li>
 </ul>
 </li>
 </ul>
@@ -342,6 +348,100 @@
 </td></tr></table></div>
 </div>
 </div>
+<div class="section" id="fileselectorsavepathselectordirectoryselector">
+<span id="devui-etui-fileselector"></span><h2>FileSelector、SavePathSelector、DirectorySelector<a class="headerlink" href="#fileselectorsavepathselectordirectoryselector" title="このヘッドラインへのパーマリンク">¶</a></h2>
+<p>このクラスはファイルまたはディレクトリを選択するためのダイアログと、選択されたファイルを表示するLineEditがセットになったクラスです。</p>
+<a class="reference internal image-reference" href="../_images/extenededUI_img003.png"><img alt="../_images/extenededUI_img003.png" src="../_images/extenededUI_img003.png" style="width: 400px;" /></a>
+<div class="section" id="id3">
+<h3>メソッド（共通）<a class="headerlink" href="#id3" title="このヘッドラインへのパーマリンク">¶</a></h3>
+<p>以下に重要なメソッドを何点かリストアップします。</p>
+<table class="docutils align-default">
+<colgroup>
+<col style="width: 25%" />
+<col style="width: 25%" />
+<col style="width: 25%" />
+<col style="width: 25%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p><strong>メソッド名</strong></p></td>
+<td><p><strong>引数</strong></p></td>
+<td><p><strong>戻り値</strong></p></td>
+<td><p><strong>説明</strong></p></td>
+</tr>
+<tr class="row-even"><td><p>setLabel</p></td>
+<td><p>label:str</p></td>
+<td></td>
+<td><p>フィールド横の表示ラベルのテキストを設定します。</p></td>
+</tr>
+<tr class="row-odd"><td><p>setTitle</p></td>
+<td><p>label : str</p></td>
+<td></td>
+<td><p>ファイルダイアログのウィンドウタイトルを設定します。</p></td>
+</tr>
+<tr class="row-even"><td><p>setPath</p></td>
+<td><p>path:str</p>
+<p>normalize:bool</p>
+</td>
+<td></td>
+<td><p>パス入力フィールドにパスを設定します。</p></td>
+</tr>
+<tr class="row-odd"><td><p>path</p></td>
+<td><p>checkExisting:bool</p></td>
+<td><p>str</p></td>
+<td><p>フィールドに入力されているファイルパスを返します。</p>
+<p>checkExistingがTrueの場合は、フィールド内の文字列のファイルが存在しない時に空文字を返します。</p>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="id4">
+<h3>使用例<a class="headerlink" href="#id4" title="このヘッドラインへのパーマリンク">¶</a></h3>
+<div class="highlight-python notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">gris3</span> <span class="kn">import</span> <span class="n">uilib</span>
+<span class="kn">from</span> <span class="nn">gris3.uilib</span> <span class="kn">import</span> <span class="n">QtWidgets</span><span class="p">,</span> <span class="n">QtGui</span><span class="p">,</span> <span class="n">QtCore</span>
+<span class="n">QtWidgets</span><span class="p">,</span> <span class="n">QtGui</span><span class="p">,</span> <span class="n">QtCore</span> <span class="o">=</span> <span class="n">uilib</span><span class="o">.</span><span class="n">QtWidgets</span><span class="p">,</span> <span class="n">uilib</span><span class="o">.</span><span class="n">QtGui</span><span class="p">,</span> <span class="n">uilib</span><span class="o">.</span><span class="n">QtCore</span>
+
+
+<span class="n">w</span> <span class="o">=</span> <span class="n">QtWidgets</span><span class="o">.</span><span class="n">QWidget</span><span class="p">(</span><span class="n">mayaUIlib</span><span class="o">.</span><span class="n">MainWindow</span><span class="p">)</span>
+<span class="n">w</span><span class="o">.</span><span class="n">setWindowTitle</span><span class="p">(</span><span class="s1">&#39;File Selector example&#39;</span><span class="p">)</span>
+<span class="n">w</span><span class="o">.</span><span class="n">setWindowFlags</span><span class="p">(</span><span class="n">QtCore</span><span class="o">.</span><span class="n">Qt</span><span class="o">.</span><span class="n">Window</span><span class="p">)</span>
+
+<span class="n">file_selector</span> <span class="o">=</span> <span class="n">extendedUI</span><span class="o">.</span><span class="n">FileSelector</span><span class="p">(</span><span class="s1">&#39;File Path&#39;</span><span class="p">)</span>
+<span class="n">file_save_widget</span> <span class="o">=</span> <span class="n">extendedUI</span><span class="o">.</span><span class="n">SavePathSelector</span><span class="p">(</span><span class="s1">&#39;Saved path&#39;</span><span class="p">)</span>
+<span class="n">dir_selector</span> <span class="o">=</span> <span class="n">extendedUI</span><span class="o">.</span><span class="n">DirectorySelector</span><span class="p">(</span><span class="s1">&#39;Directory Path&#39;</span><span class="p">)</span>
+
+<span class="n">layout</span> <span class="o">=</span> <span class="n">QtWidgets</span><span class="o">.</span><span class="n">QVBoxLayout</span><span class="p">(</span><span class="n">w</span><span class="p">)</span>
+<span class="n">layout</span><span class="o">.</span><span class="n">addWidget</span><span class="p">(</span><span class="n">file_selector</span><span class="p">)</span>
+<span class="n">layout</span><span class="o">.</span><span class="n">addWidget</span><span class="p">(</span><span class="n">file_save_widget</span><span class="p">)</span>
+<span class="n">layout</span><span class="o">.</span><span class="n">addWidget</span><span class="p">(</span><span class="n">dir_selector</span><span class="p">)</span>
+<span class="n">layout</span><span class="o">.</span><span class="n">addStretch</span><span class="p">()</span>
+
+<span class="n">w</span><span class="o">.</span><span class="n">resize</span><span class="p">(</span><span class="mi">640</span><span class="p">,</span> <span class="mi">200</span><span class="p">)</span>
+<span class="n">w</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</td></tr></table></div>
+</div>
+</div>
 </div>
 
 
@@ -353,7 +453,7 @@
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
       
-        <a href="../dev/settings.html" class="btn btn-neutral float-left" title="設定にまつわる機能" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+        <a href="../dev/checkTools.html" class="btn btn-neutral float-left" title="checkToolsの拡張" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
       
     </div>
   

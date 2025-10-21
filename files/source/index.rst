@@ -68,6 +68,7 @@ gris3 Documentation
     /dev/namingRuleSystem
     /dev/operateByScript
     /dev/settings
+    /dev/checkTools
 
 .. toctree::
     :maxdepth: 3
