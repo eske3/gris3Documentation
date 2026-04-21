@@ -1,0 +1,555 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="ja" >
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>modelingSupporter &mdash; gris3 1.0.0 ドキュメント</title>
+  
+
+  
+  <link rel="stylesheet" href="../_static/css/customTheme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+
+  
+  
+  
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/doctools.js"></script>
+        <script src="../_static/language_data.js"></script>
+        <script src="../_static/translations.js"></script>
+    
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+    
+    <link rel="author" title="このドキュメントについて" href="../about.html" />
+    <link rel="index" title="索引" href="../genindex.html" />
+    <link rel="search" title="検索" href="../search.html" />
+    <link rel="next" title="facialMemoryManager" href="facialMemoryManager.html" />
+    <link rel="prev" title="extraJoint" href="extraJoint.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../index.html" class="icon icon-home" alt="Documentation Home"> gris3
+          
+
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">スタートアップ</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../contents/install.html">インストールと起動</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../contents/updateLog.html">更新履歴</a></li>
+</ul>
+<p class="caption"><span class="caption-text">マニュアル</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../contents/scriptBasedRigging.html">ScriptBasedRigging-概要</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../contents/scriptingForFactory.html">ファクトリーのスクリプティングガイド</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../contents/namingRule.html">命名規則</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../contents/rigUnits.html">Rig Units</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../contents/includedExtraConstructors.html">組み込み済みExtraConstructor</a></li>
+</ul>
+<p class="caption"><span class="caption-text">ガジェット</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../gadgets/jointEditor.html">Joint Editor</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../gadgets/modelSetup.html">Model Setup</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../gadgets/renamer.html">Renamer</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../gadgets/checkTools.html">Check Tools</a></li>
+</ul>
+<p class="caption"><span class="caption-text">スクリプトツール</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="jointEditor.html">jointEditor</a></li>
+<li class="toctree-l1"><a class="reference internal" href="extraJoint.html">extraJoint</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">modelingSupporter</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#id1">関数</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#reassignmaterial">reassignMaterial</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#extractpolyface">extractPolyFace</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#mirrorobject">mirrorObject</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#unitepolygons">unitePolygons</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#creasetohardedges">creaseToHardEdges</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#clearcreaseedges">clearCreaseEdges</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#unlockandsetnormal">unlockAndSetNormal</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#duplicateconnectedclone">duplicateConnectedClone</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#createsmoothedmesh">createSmoothedMesh</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#idmtxgroup">idMtxGroup</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="facialMemoryManager.html">facialMemoryManager</a></li>
+</ul>
+<p class="caption"><span class="caption-text">エクスポーター</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../exporters/skinWeightExporter.html">skinWeightExporter</a></li>
+</ul>
+<p class="caption"><span class="caption-text">開発者向けドキュメント</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../dev/factorySettings.html">ファクトリーセッティング</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../dev/factoryModules.html">ファクトリーモジュール</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../dev/makingRigUnits.html">リグユニットの開発</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../dev/constructor.html">コンストラクタ</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../dev/extraConstructor.html">エクストラコンストラクタ</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../dev/basicFacialSystem.html">標準付属のフェイシャルシステム</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../dev/namingRuleSystem.html">命名規則管理システム</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../dev/operateByScript.html">スクリプトによって操作する</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../dev/operateByScript2.html">スクリプトによって操作する（便利機能）</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../dev/settings.html">設定にまつわる機能</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../dev/checkTools.html">checkToolsの拡張</a></li>
+</ul>
+<p class="caption"><span class="caption-text">GUI開発向け</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../dev_ui/extendedUI.html">uilib.extendedUIモジュール</a></li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">gris3</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
+        
+      <li>modelingSupporter</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../_sources/tools/modelingSupporter.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="modelingsupporter">
+<h1>modelingSupporter<a class="headerlink" href="#modelingsupporter" title="このヘッドラインへのパーマリンク">¶</a></h1>
+<p>このモジュールはモデル編集のための補助機能を提供するモジュールです。</p>
+<div class="section" id="id1">
+<h2>関数<a class="headerlink" href="#id1" title="このヘッドラインへのパーマリンク">¶</a></h2>
+<div class="section" id="reassignmaterial">
+<h3>reassignMaterial<a class="headerlink" href="#reassignmaterial" title="このヘッドラインへのパーマリンク">¶</a></h3>
+<p>オブジェクトにアサインされているマテリアルが一つの場合そのマテリアルを再アサインしてファセットアサイン状態を解消します。</p>
+<table class="docutils align-default">
+<colgroup>
+<col style="width: 25%" />
+<col style="width: 25%" />
+<col style="width: 25%" />
+<col style="width: 25%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p><strong>引数</strong></p></td>
+<td><p><strong>型</strong></p></td>
+<td><p><strong>デフォルト</strong></p></td>
+<td><p><strong>説明</strong></p></td>
+</tr>
+<tr class="row-even"><td><p>nodelist</p></td>
+<td><p>list</p></td>
+<td><p>None</p></td>
+<td><p>操作対象ノード名のリスト</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="extractpolyface">
+<h3>extractPolyFace<a class="headerlink" href="#extractpolyface" title="このヘッドラインへのパーマリンク">¶</a></h3>
+<p>現在選択されている面を剥離またはコピーします。</p>
+<p>引数isDuplicatedがTrueの場合は操作はコピーとなります。</p>
+<p>標準機能のExtractと違い、選択した面が属するメッシュをコピーし、その中から選択以外を削除するという単純なアルゴリズムになっています。そのため既存のノードから新規にヒストリ付きで結果ノードが作成されるようなことはありません。</p>
+<p>（Extractの場合、面の削除履歴は残る場合がある）</p>
+<table class="docutils align-default">
+<colgroup>
+<col style="width: 25%" />
+<col style="width: 25%" />
+<col style="width: 25%" />
+<col style="width: 25%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p><strong>引数</strong></p></td>
+<td><p><strong>型</strong></p></td>
+<td><p><strong>デフォルト</strong></p></td>
+<td><p><strong>説明</strong></p></td>
+</tr>
+<tr class="row-even"><td><p>isDuplicated</p></td>
+<td><p>bool</p></td>
+<td><p>False</p></td>
+<td><p>操作が剥離ではなくコピーかどうか</p></td>
+</tr>
+<tr class="row-odd"><td><p>faces</p></td>
+<td><p>list</p></td>
+<td><p>None</p></td>
+<td><p>操作対象フェースのリスト</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="mirrorobject">
+<h3>mirrorObject<a class="headerlink" href="#mirrorobject" title="このヘッドラインへのパーマリンク">¶</a></h3>
+<p>targetNodesで指定した任意のTransformノードをミラーします。</p>
+<p>ミラー軸はmirrorPivotMatrixによって16個のfloatリストで指定します。</p>
+<table class="docutils align-default">
+<colgroup>
+<col style="width: 25%" />
+<col style="width: 25%" />
+<col style="width: 25%" />
+<col style="width: 25%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p><strong>引数</strong></p></td>
+<td><p><strong>型</strong></p></td>
+<td><p><strong>デフォルト</strong></p></td>
+<td><p><strong>説明</strong></p></td>
+</tr>
+<tr class="row-even"><td><p>targetNodes</p></td>
+<td><p>list</p></td>
+<td><p>None</p></td>
+<td><p>操作対象ノード名のリスト</p></td>
+</tr>
+<tr class="row-odd"><td><p>axis</p></td>
+<td><p>str</p></td>
+<td><p>'x'</p></td>
+<td><p>ミラー軸。'x','y'または'z'</p></td>
+</tr>
+<tr class="row-even"><td><p>mirrorPivotMatrix</p></td>
+<td><p>list</p></td>
+<td><p>None</p></td>
+<td><p>ミラー軸を表す行列</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="unitepolygons">
+<h3>unitePolygons<a class="headerlink" href="#unitepolygons" title="このヘッドラインへのパーマリンク">¶</a></h3>
+<p>複数のポリゴンをひとつのポリゴンオブジェクトにまとめます。</p>
+<p>この時、元のポリゴンは消えずにそのまま残ります。</p>
+<table class="docutils align-default">
+<colgroup>
+<col style="width: 25%" />
+<col style="width: 25%" />
+<col style="width: 25%" />
+<col style="width: 25%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p><strong>引数</strong></p></td>
+<td><p><strong>型</strong></p></td>
+<td><p><strong>デフォルト</strong></p></td>
+<td><p><strong>説明</strong></p></td>
+</tr>
+<tr class="row-even"><td><p>meshes</p></td>
+<td><p>list</p></td>
+<td><p>None</p></td>
+<td><p>操作対象となるポリゴンオブジェクト名のリスト</p></td>
+</tr>
+<tr class="row-odd"><td><p>name</p></td>
+<td><p>str</p></td>
+<td><p>'polyUnited#'</p></td>
+<td><p>生成されるポリゴンオブジェクトの名前</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="creasetohardedges">
+<h3>creaseToHardEdges<a class="headerlink" href="#creasetohardedges" title="このヘッドラインへのパーマリンク">¶</a></h3>
+<p>任意のポリゴンのハードエッジに対してCreaseを適応します。</p>
+<table class="docutils align-default">
+<colgroup>
+<col style="width: 25%" />
+<col style="width: 25%" />
+<col style="width: 25%" />
+<col style="width: 25%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p><strong>引数</strong></p></td>
+<td><p><strong>型</strong></p></td>
+<td><p><strong>デフォルト</strong></p></td>
+<td><p><strong>説明</strong></p></td>
+</tr>
+<tr class="row-even"><td><p>meshlist</p></td>
+<td><p>list</p></td>
+<td><p>None</p></td>
+<td><p>操作対象となるポリゴンオブジェクト名のリスト</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="clearcreaseedges">
+<h3>clearCreaseEdges<a class="headerlink" href="#clearcreaseedges" title="このヘッドラインへのパーマリンク">¶</a></h3>
+<p>任意のメッシュのすべてのエッジのクリース情報を削除します。</p>
+<table class="docutils align-default">
+<colgroup>
+<col style="width: 25%" />
+<col style="width: 25%" />
+<col style="width: 25%" />
+<col style="width: 25%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p><strong>引数</strong></p></td>
+<td><p><strong>型</strong></p></td>
+<td><p><strong>デフォルト</strong></p></td>
+<td><p><strong>説明</strong></p></td>
+</tr>
+<tr class="row-even"><td><p>meshlist</p></td>
+<td><p>list</p></td>
+<td><p>None</p></td>
+<td><p>操作対象となるポリゴンオブジェクト名のリスト</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="unlockandsetnormal">
+<h3>unlockAndSetNormal<a class="headerlink" href="#unlockandsetnormal" title="このヘッドラインへのパーマリンク">¶</a></h3>
+<p>メッシュのエッジが法線的にハードエッジになっているものを、Mayaが認識できるハードエッジに変換します。</p>
+<p>主にFBX等で読み込んだ、ハードエッジ情報がないオブジェクトに有効です。</p>
+<table class="docutils align-default">
+<colgroup>
+<col style="width: 25%" />
+<col style="width: 25%" />
+<col style="width: 25%" />
+<col style="width: 25%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p><strong>引数</strong></p></td>
+<td><p><strong>型</strong></p></td>
+<td><p><strong>デフォルト</strong></p></td>
+<td><p><strong>説明</strong></p></td>
+</tr>
+<tr class="row-even"><td><p>nodelist</p></td>
+<td><p>list</p></td>
+<td><p>None</p></td>
+<td><p>操作対象となるポリゴンオブジェクト名のリスト</p></td>
+</tr>
+<tr class="row-odd"><td><p>threshold</p></td>
+<td><p>float</p></td>
+<td><p>0.995</p></td>
+<td><p>エッジ判定のしきい値</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="duplicateconnectedclone">
+<h3>duplicateConnectedClone<a class="headerlink" href="#duplicateconnectedclone" title="このヘッドラインへのパーマリンク">¶</a></h3>
+<p>任意のメッシュのをコピーし、元メッシュのoutMeshをコピー後のinMeshに接続します。</p>
+<p>コピーの際、コピーされたメッシュは一度クリーンナップされます。</p>
+<p>戻り値はコピーされたメッシュ名のリストです。</p>
+<table class="docutils align-default">
+<colgroup>
+<col style="width: 25%" />
+<col style="width: 25%" />
+<col style="width: 25%" />
+<col style="width: 25%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p><strong>引数</strong></p></td>
+<td><p><strong>型</strong></p></td>
+<td><p><strong>デフォルト</strong></p></td>
+<td><p><strong>説明</strong></p></td>
+</tr>
+<tr class="row-even"><td><p>targets</p></td>
+<td><p>list</p></td>
+<td><p>None</p></td>
+<td><p>操作対象となるポリゴンオブジェクト名のリスト</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="createsmoothedmesh">
+<h3>createSmoothedMesh<a class="headerlink" href="#createsmoothedmesh" title="このヘッドラインへのパーマリンク">¶</a></h3>
+<p>任意のメッシュのSmoothMeshPreview状態を実体化したメッシュとしてコピーします。コピーされたメッシュはハイポリゴンになっており、また元メッシュのヒストリを持っているため、元メッシュを編集するとコピーされたメッシュにも反映されます。</p>
+<p>この機能は内部的には複製したメッシュのinMeshに対し、元のメッシュのoutSmoothMeshを指しているだけですので、ファセットアサインされたメッシュなどの場合シェーダーの表示がおかしくなる点にご注意下さい。</p>
+<table class="docutils align-default">
+<colgroup>
+<col style="width: 25%" />
+<col style="width: 25%" />
+<col style="width: 25%" />
+<col style="width: 25%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p><strong>引数</strong></p></td>
+<td><p><strong>型</strong></p></td>
+<td><p><strong>デフォルト</strong></p></td>
+<td><p><strong>説明</strong></p></td>
+</tr>
+<tr class="row-even"><td><p>targets</p></td>
+<td><p>list</p></td>
+<td><p>None</p></td>
+<td><p>操作対象となるポリゴンオブジェクト名のリスト</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="idmtxgroup">
+<h3>idMtxGroup<a class="headerlink" href="#idmtxgroup" title="このヘッドラインへのパーマリンク">¶</a></h3>
+<p>targetsで指定した任意のTransformをグループ化します。</p>
+<p>作成されたグループはワールド空間で初期座標（単位行列）になります。</p>
+<p>戻り値は作成されたグループオブジェクト(node.Transform）になります。</p>
+<table class="docutils align-default">
+<colgroup>
+<col style="width: 25%" />
+<col style="width: 25%" />
+<col style="width: 25%" />
+<col style="width: 25%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p><strong>引数</strong></p></td>
+<td><p><strong>型</strong></p></td>
+<td><p><strong>デフォルト</strong></p></td>
+<td><p><strong>説明</strong></p></td>
+</tr>
+<tr class="row-even"><td><p>targets</p></td>
+<td><p>list</p></td>
+<td><p>None</p></td>
+<td><p>操作対象となるTransformノード名のリスト</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="facialMemoryManager.html" class="btn btn-neutral float-right" title="facialMemoryManager" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="extraJoint.html" class="btn btn-neutral float-left" title="extraJoint" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        
+        &copy; 著作権 2020, EskeYoshinob
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

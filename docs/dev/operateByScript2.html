@@ -7,7 +7,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>スクリプトによって操作する &mdash; gris3 1.0.0 ドキュメント</title>
+  <title>スクリプトによって操作する（便利機能） &mdash; gris3 1.0.0 ドキュメント</title>
   
 
   
@@ -38,8 +38,8 @@
     <link rel="author" title="このドキュメントについて" href="../about.html" />
     <link rel="index" title="索引" href="../genindex.html" />
     <link rel="search" title="検索" href="../search.html" />
-    <link rel="next" title="スクリプトによって操作する（便利機能）" href="operateByScript2.html" />
-    <link rel="prev" title="命名規則管理システム" href="namingRuleSystem.html" /> 
+    <link rel="next" title="設定にまつわる機能" href="settings.html" />
+    <link rel="prev" title="スクリプトによって操作する" href="operateByScript.html" /> 
 </head>
 
 <body class="wy-body-for-nav">
@@ -124,15 +124,15 @@
 <li class="toctree-l1"><a class="reference internal" href="extraConstructor.html">エクストラコンストラクタ</a></li>
 <li class="toctree-l1"><a class="reference internal" href="basicFacialSystem.html">標準付属のフェイシャルシステム</a></li>
 <li class="toctree-l1"><a class="reference internal" href="namingRuleSystem.html">命名規則管理システム</a></li>
-<li class="toctree-l1 current"><a class="current reference internal" href="#">スクリプトによって操作する</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="#id3">プロジェクトを設定する</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#id4">ルートノードを作成する</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#id5">ユニットとベースジョイントを作成する</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#id6">プリセットからジョイントを作成</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#id7">ビルドする</a></li>
+<li class="toctree-l1"><a class="reference internal" href="operateByScript.html">スクリプトによって操作する</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">スクリプトによって操作する（便利機能）</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#id3">モデル関連</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#id4">モデル用のルートノードを作成する</a></li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="operateByScript2.html">スクリプトによって操作する（便利機能）</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#id5">ルートノードを作成する</a></li>
+</ul>
+</li>
 <li class="toctree-l1"><a class="reference internal" href="settings.html">設定にまつわる機能</a></li>
 <li class="toctree-l1"><a class="reference internal" href="checkTools.html">checkToolsの拡張</a></li>
 </ul>
@@ -185,13 +185,13 @@
     
       <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
         
-      <li>スクリプトによって操作する</li>
+      <li>スクリプトによって操作する（便利機能）</li>
     
     
       <li class="wy-breadcrumbs-aside">
         
             
-            <a href="../_sources/dev/operateByScript.rst.txt" rel="nofollow"> View page source</a>
+            <a href="../_sources/dev/operateByScript2.rst.txt" rel="nofollow"> View page source</a>
           
         
       </li>
@@ -205,30 +205,34 @@
            <div itemprop="articleBody">
             
   <div class="section" id="id1">
-<h1>スクリプトによって操作する<a class="headerlink" href="#id1" title="このヘッドラインへのパーマリンク">¶</a></h1>
+<h1>スクリプトによって操作する（便利機能）<a class="headerlink" href="#id1" title="このヘッドラインへのパーマリンク">¶</a></h1>
 <p>grisではMaya本体同様、スクリプトによって制御するための機構を備えています。</p>
-<p>この章ではコマンドによる制御を行う方法を、プロジェクトディレクトリの制作から順を追って紹介します。</p>
-<p>別の章で説明されている制御コードのリンクもついています。</p>
+<p>この章ではコマンドによる制御を行う方法の中で、リグのビルドにまつわる機能以外全般の便利機能などを中心に紹介します。</p>
 <div class="contents local topic" id="id2">
 <p class="topic-title">目次</p>
 <ul class="simple">
-<li><p><a class="reference internal" href="#id3" id="id8">プロジェクトを設定する</a></p></li>
-<li><p><a class="reference internal" href="#id4" id="id9">ルートノードを作成する</a></p></li>
-<li><p><a class="reference internal" href="#id5" id="id10">ユニットとベースジョイントを作成する</a></p></li>
-<li><p><a class="reference internal" href="#id6" id="id11">プリセットからジョイントを作成</a></p></li>
-<li><p><a class="reference internal" href="#id7" id="id12">ビルドする</a></p></li>
+<li><p><a class="reference internal" href="#id3" id="id6">モデル関連</a></p>
+<ul>
+<li><p><a class="reference internal" href="#id4" id="id7">モデル用のルートノードを作成する</a></p></li>
+</ul>
+</li>
+<li><p><a class="reference internal" href="#id5" id="id8">ルートノードを作成する</a></p></li>
 </ul>
 </div>
 <div class="section" id="id3">
-<h2><a class="toc-backref" href="#id8">プロジェクトを設定する</a><a class="headerlink" href="#id3" title="このヘッドラインへのパーマリンク">¶</a></h2>
-<p>grisで作業する場合、最初にアセットごとにプロジェクトディレクトリをする必要があります。プロジェクトディレクトリの作成には以下のドキュメントを参照して下さい。</p>
-<ul class="simple">
-<li><p><a class="reference internal" href="factorySettings.html#fs-createprojdir"><span class="std std-ref">プロジェクトディレクトリをコマンドで作成する</span></a></p></li>
-</ul>
-<p>上記リンクのコマンドを実行するとプロジェクトの新規作成が行われ、FactorySettingsは作成されたプロジェクトが適用されます。すでにプロジェクトが存在する場合は、その内容がFactorySettingsのカレント状態として適用されます。</p>
-</div>
+<h2><a class="toc-backref" href="#id6">モデル関連</a><a class="headerlink" href="#id3" title="このヘッドラインへのパーマリンク">¶</a></h2>
 <div class="section" id="id4">
-<h2><a class="toc-backref" href="#id9">ルートノードを作成する</a><a class="headerlink" href="#id4" title="このヘッドラインへのパーマリンク">¶</a></h2>
+<h3><a class="toc-backref" href="#id7">モデル用のルートノードを作成する</a><a class="headerlink" href="#id4" title="このヘッドラインへのパーマリンク">¶</a></h3>
+<p>StandardConstructorなど、gris標準サポートのビルドシステムに対応するモデル用のルートノード、ならびに関連ノードを作成するためのコマンドです。</p>
+<div class="highlight-python notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">gris3</span> <span class="kn">import</span> <span class="n">core</span>
+<span class="n">core</span><span class="o">.</span><span class="n">createModelRoot</span><span class="p">()</span>
+</pre></div>
+</td></tr></table></div>
+</div>
+</div>
+<div class="section" id="id5">
+<h2><a class="toc-backref" href="#id8">ルートノードを作成する</a><a class="headerlink" href="#id5" title="このヘッドラインへのパーマリンク">¶</a></h2>
 <p>プロジェクトを設定したらルートノードを作成します。ルートノードを作成するには、プロジェクトが設定されたディレクトリがすでに存在する必要があります。</p>
 <p>プロジェクト設定済みのディレクトリが存在する場合、以下のコマンドを実行するとアセットのルートを作成する事ができます。</p>
 <div class="highlight-python notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
@@ -240,30 +244,6 @@
 <p><strong>createRoot</strong>は設定されているFactorySettingsで指定されているConstructorのルート作成コマンドを呼び出します。</p>
 <p>デフォルトのStandardConstructorでは戻り値として<strong>grisNode.GrisRoot</strong>オブジェクトが返されます。</p>
 </div>
-<div class="section" id="id5">
-<h2><a class="toc-backref" href="#id10">ユニットとベースジョイントを作成する</a><a class="headerlink" href="#id5" title="このヘッドラインへのパーマリンク">¶</a></h2>
-<p>JointCreatorのprocessメソッドを実行することにより、ユニットとベースジョイントを作成することができます。詳細は以下をご覧下さい。</p>
-<ul class="simple">
-<li><p><a class="reference internal" href="makingRigUnits.html#mru-jcprocess"><span class="std std-ref">process</span></a></p></li>
-</ul>
-</div>
-<div class="section" id="id6">
-<h2><a class="toc-backref" href="#id11">プリセットからジョイントを作成</a><a class="headerlink" href="#id6" title="このヘッドラインへのパーマリンク">¶</a></h2>
-<p>ルートを作成すると、リグユニット作成やユニットを使用したジョイントの作成が行えるようになります。</p>
-<p>今回は簡単に作成できるプリセットを使用してみます。プリセットを使用するにはcoreモジュールのexecPreset関数を使用します。</p>
-<div class="highlight-python notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
-2</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">gris3</span> <span class="kn">import</span> <span class="n">core</span>
-<span class="n">core</span><span class="o">.</span><span class="n">execPreset</span><span class="p">(</span><span class="s1">&#39;basicHumanPreset&#39;</span><span class="p">)</span>
-</pre></div>
-</td></tr></table></div>
-<p>これで人型のプリセットを使用して人体のジョイントが作成されました。</p>
-</div>
-<div class="section" id="id7">
-<h2><a class="toc-backref" href="#id12">ビルドする</a><a class="headerlink" href="#id7" title="このヘッドラインへのパーマリンク">¶</a></h2>
-<ul class="simple">
-<li><p><a class="reference internal" href="factorySettings.html#fs-executebuildscript"><span class="std std-ref">プロジェクトディレクトリのビルドスクリプトを実行する</span></a></p></li>
-</ul>
-</div>
 </div>
 
 
@@ -274,10 +254,10 @@
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
-        <a href="operateByScript2.html" class="btn btn-neutral float-right" title="スクリプトによって操作する（便利機能）" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+        <a href="settings.html" class="btn btn-neutral float-right" title="設定にまつわる機能" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
       
       
-        <a href="namingRuleSystem.html" class="btn btn-neutral float-left" title="命名規則管理システム" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+        <a href="operateByScript.html" class="btn btn-neutral float-left" title="スクリプトによって操作する" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
       
     </div>
   

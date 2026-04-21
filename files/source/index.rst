@@ -46,6 +46,7 @@ gris3 Documentation
 
     /tools/jointEditor
     /tools/extraJoint
+    /tools/modelingSupporter
     /tools/facialMemoryManager
 
 .. toctree::
@@ -68,6 +69,7 @@ gris3 Documentation
     /dev/basicFacialSystem
     /dev/namingRuleSystem
     /dev/operateByScript
+    /dev/operateByScript2
     /dev/settings
     /dev/checkTools
 

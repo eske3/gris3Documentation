@@ -39,7 +39,7 @@
     <link rel="index" title="索引" href="../genindex.html" />
     <link rel="search" title="検索" href="../search.html" />
     <link rel="next" title="skinWeightExporter" href="../exporters/skinWeightExporter.html" />
-    <link rel="prev" title="extraJoint" href="extraJoint.html" /> 
+    <link rel="prev" title="modelingSupporter" href="modelingSupporter.html" /> 
 </head>
 
 <body class="wy-body-for-nav">
@@ -108,6 +108,7 @@
 <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="jointEditor.html">jointEditor</a></li>
 <li class="toctree-l1"><a class="reference internal" href="extraJoint.html">extraJoint</a></li>
+<li class="toctree-l1"><a class="reference internal" href="modelingSupporter.html">modelingSupporter</a></li>
 <li class="toctree-l1 current"><a class="current reference internal" href="#">facialMemoryManager</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="#id1">関数</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="#listmanagernode">listManagerNode</a></li>
@@ -135,6 +136,7 @@
 <li class="toctree-l1"><a class="reference internal" href="../dev/basicFacialSystem.html">標準付属のフェイシャルシステム</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../dev/namingRuleSystem.html">命名規則管理システム</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../dev/operateByScript.html">スクリプトによって操作する</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../dev/operateByScript2.html">スクリプトによって操作する（便利機能）</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../dev/settings.html">設定にまつわる機能</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../dev/checkTools.html">checkToolsの拡張</a></li>
 </ul>
@@ -213,11 +215,11 @@
 <h2>関数<a class="headerlink" href="#id1" title="このヘッドラインへのパーマリンク">¶</a></h2>
 <div class="section" id="listmanagernode">
 <h3>listManagerNode<a class="headerlink" href="#listmanagernode" title="このヘッドラインへのパーマリンク">¶</a></h3>
-<p>シーン内の表情マネージャノードをリストします。戻り値は<a class="reference internal" href="#tfmm-facialmemorymanagerroot"><span class="std std-ref">FacialMemoryManagerRoot</span></a>を持つリストです。</p>
+<p>シーン内の表情マネージャノードをリストします。戻り値は<a class="reference internal" href="modelingSupporter.html#tfmm-facialmemorymanagerroot"><span class="std std-ref">FacialMemoryManagerRoot</span></a>を持つリストです。</p>
 </div>
 <div class="section" id="createmanagernode">
 <h3>createManagerNode<a class="headerlink" href="#createmanagernode" title="このヘッドラインへのパーマリンク">¶</a></h3>
-<p>フェイシャル情報を保持するノードを作成します。戻り値は<a class="reference internal" href="#tfmm-facialmemorymanagerroot"><span class="std std-ref">FacialMemoryManagerRoot</span></a>を持つリストです。</p>
+<p>フェイシャル情報を保持するノードを作成します。戻り値は<a class="reference internal" href="modelingSupporter.html#tfmm-facialmemorymanagerroot"><span class="std std-ref">FacialMemoryManagerRoot</span></a>を持つリストです。</p>
 <table class="docutils align-default">
 <colgroup>
 <col style="width: 33%" />
@@ -326,13 +328,25 @@
 <tr class="row-odd"><td><p>renameExpressionFromDataList</p></td>
 <td><p>expressionlist : list</p></td>
 <td><p>int</p></td>
-<td><p>引数expressionlistで指定された表情名のリストで更新を行う。</p>
-<p>expressionlist内に既存の表情があった場合、その値は保持する。</p>
-<p>既存の表情リストとexpressionlistが順番も含めて全く同じだった場合は何もせずに0を返す。</p>
-<p>それ以外の場合は1を返す。</p>
+<td><p>既存の表情データリストの表情名を、引数expressionlistで指定した表情名にリネームする。</p>
+<p>引数expressionlistは既存の表情データリストと同数である必要がある。</p>
+<p>処理を実行すると、既存の表情データリストの表情名は、上から引数expressionの名前に置き換わっていく。</p>
 </td>
 </tr>
-<tr class="row-even"><td><p>applyExpression</p></td>
+<tr class="row-even"><td><p>overrideExpressions</p></td>
+<td><p>expressions : listdatalist : dictstatus : int</p></td>
+<td></td>
+<td><p>引数expressionsで指定した表情に対し、datalistの内容を追加上書きする。</p>
+<p>expressionsで指定した表情データに対し、</p>
+<blockquote>
+<div><p>datalistの内容が含まれていない場合は追記する。</p>
+<p>datalistの内容が含まれている場合は上書きする。</p>
+</div></blockquote>
+<p>といった処理を行う。</p>
+<p>引数datalistはDataTransform.setValuesへ渡す内容と同じ形式の辞書オブジェクト。</p>
+</td>
+</tr>
+<tr class="row-odd"><td><p>applyExpression</p></td>
 <td><p>expression : str</p></td>
 <td></td>
 <td><p>引数expressionで指定した表情パラメータをblendShapeに適用する。</p></td>
@@ -354,7 +368,7 @@
         <a href="../exporters/skinWeightExporter.html" class="btn btn-neutral float-right" title="skinWeightExporter" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
       
       
-        <a href="extraJoint.html" class="btn btn-neutral float-left" title="extraJoint" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+        <a href="modelingSupporter.html" class="btn btn-neutral float-left" title="modelingSupporter" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
       
     </div>
   

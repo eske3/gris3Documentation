@@ -108,6 +108,7 @@
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../tools/jointEditor.html">jointEditor</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../tools/extraJoint.html">extraJoint</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../tools/modelingSupporter.html">modelingSupporter</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../tools/facialMemoryManager.html">facialMemoryManager</a></li>
 </ul>
 <p class="caption"><span class="caption-text">エクスポーター</span></p>
@@ -124,6 +125,7 @@
 <li class="toctree-l1"><a class="reference internal" href="basicFacialSystem.html">標準付属のフェイシャルシステム</a></li>
 <li class="toctree-l1"><a class="reference internal" href="namingRuleSystem.html">命名規則管理システム</a></li>
 <li class="toctree-l1"><a class="reference internal" href="operateByScript.html">スクリプトによって操作する</a></li>
+<li class="toctree-l1"><a class="reference internal" href="operateByScript2.html">スクリプトによって操作する（便利機能）</a></li>
 <li class="toctree-l1"><a class="reference internal" href="settings.html">設定にまつわる機能</a></li>
 <li class="toctree-l1 current"><a class="current reference internal" href="#">checkToolsの拡張</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="#abstractcheckerabstractcategoryoption">AbstractCheckerとAbstractCategoryOption</a></li>
@@ -135,11 +137,27 @@
 </li>
 </ul>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="#rebasednamechecker">REBasedNameChecker</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#abstractdagchecker">AbstractDagChecker</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#rebaseddagnamechecker">REBasedDagNameChecker</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#groupmemberchecker">GroupMemberChecker</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#databasedhierarchychecker">DataBasedHierarchyChecker</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#abstractassetchecker-abstractchecker">AbstractAssetChecker(AbstractChecker)</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#id3">概要</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#id4">メソッド</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#rebasednamechecker-abstractassetchecker">REBasedNameChecker(AbstractAssetChecker)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#abstractdagchecker-abstractassetchecker">AbstractDagChecker(AbstractAssetChecker)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#rebaseddagnamechecker-abstractdagchecker">REBasedDagNameChecker(AbstractDagChecker)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#groupmemberchecker-rebaseddagnamechecker">GroupMemberChecker(REBasedDagNameChecker)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#databasedhierarchychecker-abstractassetchecker">DataBasedHierarchyChecker(AbstractAssetChecker)</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#id5">概要</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id6">階層定義辞書オブジェクト</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id9">メソッドと辞書オブジェクト</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#id10">メソッド</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#gethir-static">getHir(static)</a></li>
+</ul>
+</li>
+</ul>
+</li>
 <li class="toctree-l2"><a class="reference internal" href="#abstractcategoryoption">AbstractCategoryOption</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#checkedresult">CheckedResult</a></li>
 </ul>
@@ -229,14 +247,6 @@
 <div class="section" id="abstractchecker">
 <span id="devct-abstractchecker"></span><h2>AbstractChecker<a class="headerlink" href="#abstractchecker" title="このヘッドラインへのパーマリンク">¶</a></h2>
 <p>このクラスはシーン中の特定のオブジェクトをチェックし、その結果をGUIへ渡すための機構を備えた基底クラスです。</p>
-<p>AbstractCheckerにはさらにサブクラスとして以下のものがあります。</p>
-<ul class="simple">
-<li><p><a class="reference internal" href="#devct-rebasednamechecker"><span class="std std-ref">REBasedNameChecker</span></a></p></li>
-<li><p><a class="reference internal" href="#devct-abstractdagchecker"><span class="std std-ref">AbstractDagChecker</span></a></p></li>
-<li><p><a class="reference internal" href="#devct-rebaseddagnamechecker"><span class="std std-ref">REBasedDagNameChecker</span></a></p></li>
-<li><p><a class="reference internal" href="#devct-groupmemberchecker"><span class="std std-ref">GroupMemberChecker</span></a></p></li>
-<li><p><a class="reference internal" href="#devct-databasedhierarchychecker"><span class="std std-ref">DataBasedHierarchyChecker</span></a></p></li>
-</ul>
 <div class="section" id="id1">
 <h3>仕組み<a class="headerlink" href="#id1" title="このヘッドラインへのパーマリンク">¶</a></h3>
 <p>checkToolsのカテゴリモジュールでは<a class="reference internal" href="#devct-abstractcategoryoption"><span class="std std-ref">AbstractCategoryOption</span></a>で定義した設定に基づいて、AbstractCheckerのcheckメソッドを呼び出し、その結果エラーや警告があった場合は、AbstractCategoryOptionに紐づけられている結果表示ビューワにその結果内容を表示します。</p>
@@ -316,31 +326,223 @@
 <h4>checkメソッド<a class="headerlink" href="#check" title="このヘッドラインへのパーマリンク">¶</a></h4>
 <p>checkToolsのカテゴリモジュールを新たに開発する場合、基本的にはこのメソッドを上書きし、チェック結果に応じた戻り値を返します。</p>
 <p>ただし</p>
-<p><a class="reference internal" href="#devct-abstractchecker"><span class="std std-ref">AbstractChecker</span></a></p>
+<p><a class="reference internal" href="#devct-abstractassetchecker"><span class="std std-ref">AbstractAssetChecker(AbstractChecker)</span></a></p>
 <p>内で紹介したサブクラスを用いる場合は、checkメソッド自体はそれぞれのサブクラスが専用の機構がすでに記述されているため、別のメソッドを上書きして運用することになります。</p>
 <p>それぞれのサブクラスでどのメソッドを上書きするかは各種リンクからご確認下さい。</p>
 </div>
 </div>
 </div>
-<div class="section" id="rebasednamechecker">
-<span id="devct-rebasednamechecker"></span><h2>REBasedNameChecker<a class="headerlink" href="#rebasednamechecker" title="このヘッドラインへのパーマリンク">¶</a></h2>
-<p>名前ベースのチェッカーの基底クラスです。メンバー変数NamePatternに適合するかどうかで判断を行います。NamePatternには任意のコンパイル済み正規表現オブジェクトを格納する必要があります。</p>
+<div class="section" id="abstractassetchecker-abstractchecker">
+<span id="devct-abstractassetchecker"></span><h2>AbstractAssetChecker(AbstractChecker)<a class="headerlink" href="#abstractassetchecker-abstractchecker" title="このヘッドラインへのパーマリンク">¶</a></h2>
+<p>各種チェッカーの基底クラスです。</p>
+<p><a class="reference internal" href="#devct-abstractchecker"><span class="std std-ref">AbstractChecker</span></a>よりも各種ノードのチェックを行うための拡張が行われています。</p>
+<p>AbstractAssetCheckerにはサブクラスとして以下のものがあります。</p>
+<ul class="simple">
+<li><p><a class="reference internal" href="#devct-rebasednamechecker"><span class="std std-ref">REBasedNameChecker(AbstractAssetChecker)</span></a></p></li>
+<li><p><a class="reference internal" href="#devct-abstractdagchecker"><span class="std std-ref">AbstractDagChecker(AbstractAssetChecker)</span></a></p></li>
+<li><p><a class="reference internal" href="#devct-rebaseddagnamechecker"><span class="std std-ref">REBasedDagNameChecker(AbstractDagChecker)</span></a></p></li>
+<li><p><a class="reference internal" href="#devct-groupmemberchecker"><span class="std std-ref">GroupMemberChecker(REBasedDagNameChecker)</span></a></p></li>
+<li><p><a class="reference internal" href="#devct-databasedhierarchychecker"><span class="std std-ref">DataBasedHierarchyChecker(AbstractAssetChecker)</span></a></p></li>
+</ul>
+<div class="section" id="id3">
+<h3>概要<a class="headerlink" href="#id3" title="このヘッドラインへのパーマリンク">¶</a></h3>
+<p>具体的にはcheckメソッド内で<strong>setTrargets</strong>した各対象に対し<strong>checkObject</strong>メソッドでエラーがないかのチェックを行い、その結果を返す仕組みとなっています。</p>
+<p><a class="reference internal" href="#devct-abstractchecker"><span class="std std-ref">AbstractChecker</span></a></p>
+<p>はチェック機構すべてを記述する必要があるのに対し、本クラスでは各対象オブジェクトに対するチェックを記述するだけのシンプルな構造になっているため、開発者はチェックルーチンのみの実装に専念することができるようになっています。</p>
+<div class="section" id="id4">
+<h4>メソッド<a class="headerlink" href="#id4" title="このヘッドラインへのパーマリンク">¶</a></h4>
+<table class="docutils align-default">
+<colgroup>
+<col style="width: 25%" />
+<col style="width: 25%" />
+<col style="width: 25%" />
+<col style="width: 25%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p><strong>メソッド名</strong></p></td>
+<td><p><strong>引数</strong></p></td>
+<td><p><strong>戻り値</strong></p></td>
+<td><p><strong>説明</strong></p></td>
+</tr>
+<tr class="row-even"><td><p>checkObject</p></td>
+<td><p>targetObject : node.AbstractNode</p></td>
+<td><p>list(CheckResult)</p></td>
+<td><p>引数targetObjectに対し、チェックを行います。</p>
+<p>問題がなければ空のリストを返しますが、問題がある場合はその内容をCheckResultオブジェクトに記述し（複数可）リストとして返します。</p>
+</td>
+</tr>
+</tbody>
+</table>
 </div>
-<div class="section" id="abstractdagchecker">
-<span id="devct-abstractdagchecker"></span><h2>AbstractDagChecker<a class="headerlink" href="#abstractdagchecker" title="このヘッドラインへのパーマリンク">¶</a></h2>
+</div>
+</div>
+<div class="section" id="rebasednamechecker-abstractassetchecker">
+<span id="devct-rebasednamechecker"></span><h2>REBasedNameChecker(AbstractAssetChecker)<a class="headerlink" href="#rebasednamechecker-abstractassetchecker" title="このヘッドラインへのパーマリンク">¶</a></h2>
+<p>名前ベースのチェッカーの基底クラスです。</p>
+<p>メンバー変数NamePatternに適合するかどうかで判断を行います。NamePatternには任意のコンパイル済み正規表現オブジェクトを格納する必要があります。</p>
+<p>デフォルトではNamePatternには</p>
+<p><strong>.*</strong></p>
+<p>が入っています。</p>
+</div>
+<div class="section" id="abstractdagchecker-abstractassetchecker">
+<span id="devct-abstractdagchecker"></span><h2>AbstractDagChecker(AbstractAssetChecker)<a class="headerlink" href="#abstractdagchecker-abstractassetchecker" title="このヘッドラインへのパーマリンク">¶</a></h2>
 <p>dagを対象とするチェッカーの基底クラスです。設定されたターゲットに対して、一番下の階層まで再帰的にチェックを行います。</p>
 </div>
-<div class="section" id="rebaseddagnamechecker">
-<span id="devct-rebaseddagnamechecker"></span><h2>REBasedDagNameChecker<a class="headerlink" href="#rebaseddagnamechecker" title="このヘッドラインへのパーマリンク">¶</a></h2>
+<div class="section" id="rebaseddagnamechecker-abstractdagchecker">
+<span id="devct-rebaseddagnamechecker"></span><h2>REBasedDagNameChecker(AbstractDagChecker)<a class="headerlink" href="#rebaseddagnamechecker-abstractdagchecker" title="このヘッドラインへのパーマリンク">¶</a></h2>
 <p>名前ベースのdagを対象とするチェッカーの基底クラスでAbstractDagCheckerのサブクラスです。メンバー変数NamePatternに適合するかどうかで判断を行います。NamePatternには任意のコンパイル済み正規表現オブジェクトを格納します。また、名前がシーン中に重複しているかどうかもチェックします。</p>
 </div>
-<div class="section" id="groupmemberchecker">
-<span id="devct-groupmemberchecker"></span><h2>GroupMemberChecker<a class="headerlink" href="#groupmemberchecker" title="このヘッドラインへのパーマリンク">¶</a></h2>
+<div class="section" id="groupmemberchecker-rebaseddagnamechecker">
+<span id="devct-groupmemberchecker"></span><h2>GroupMemberChecker(REBasedDagNameChecker)<a class="headerlink" href="#groupmemberchecker-rebaseddagnamechecker" title="このヘッドラインへのパーマリンク">¶</a></h2>
 <p>階層ベースで一番下階層までチェックを行います。setTargetで指定したグループの下階層のオブジェクトが対象となります。（setTargetしたオブジェクトは走査対象にはならない点に注意して下さい。）</p>
 </div>
-<div class="section" id="databasedhierarchychecker">
-<span id="devct-databasedhierarchychecker"></span><h2>DataBasedHierarchyChecker<a class="headerlink" href="#databasedhierarchychecker" title="このヘッドラインへのパーマリンク">¶</a></h2>
-<p>データ（dict型など）に基づいてチェックを行う機能を提供するクラスです。</p>
+<div class="section" id="databasedhierarchychecker-abstractassetchecker">
+<span id="devct-databasedhierarchychecker"></span><h2>DataBasedHierarchyChecker(AbstractAssetChecker)<a class="headerlink" href="#databasedhierarchychecker-abstractassetchecker" title="このヘッドラインへのパーマリンク">¶</a></h2>
+<p>データ（dict型など）に基づいて階層チェックを行う機能を提供するクラスです。</p>
+<div class="section" id="id5">
+<h3>概要<a class="headerlink" href="#id5" title="このヘッドラインへのパーマリンク">¶</a></h3>
+<p>AbstractAssetCheckerクラスでは任意のノードに対して操作するのに対し、このクラスでは<strong>setTargets</strong>メソッドに辞書オブジェクトを渡し、辞書の内容と照らし合わせてシーン内のノードのチェックを行います。</p>
+</div>
+<div class="section" id="id6">
+<h3>階層定義辞書オブジェクト<a class="headerlink" href="#id6" title="このヘッドラインへのパーマリンク">¶</a></h3>
+<p><a href="#id7"><span class="problematic" id="id8">**</span></a>setTargets**に渡す辞書オブジェクトは以下の仕様に基づいて階層を定義する必要があります。</p>
+<table class="docutils align-default">
+<colgroup>
+<col style="width: 33%" />
+<col style="width: 33%" />
+<col style="width: 33%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p><strong>キー</strong></p></td>
+<td><p><strong>値</strong></p></td>
+<td><p><strong>説明</strong></p></td>
+</tr>
+<tr class="row-even"><td><p>ノード名</p></td>
+<td><p>オプション(dict)</p></td>
+<td><p>値に渡す辞書は以下の内容になります。</p>
+<table class="docutils align-default">
+<colgroup>
+<col style="width: 33%" />
+<col style="width: 33%" />
+<col style="width: 33%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p><strong>キー</strong></p></td>
+<td><p><strong>値</strong></p></td>
+<td><p><strong>説明</strong></p></td>
+</tr>
+<tr class="row-even"><td><p>priority</p></td>
+<td><p>int</p></td>
+<td><p>ノードの優先度を指定します。チェックする際に優先度が設定された場合、指定優先度よりもこの数値が大きい場合はチェック対象外となります。</p></td>
+</tr>
+<tr class="row-odd"><td><p>children</p></td>
+<td><p>dict</p></td>
+<td><p>子となるノードを指定します。キーは本dictオブジェクトと同じになります。</p></td>
+</tr>
+</tbody>
+</table>
+</td>
+</tr>
+</tbody>
+</table>
+<p>オプション辞書のキー<strong>children</strong>には上記の辞書と同じ構造のものを渡します。（入れ子構造）</p>
+<p>詳細については下記のサンプルを参照して下さい。</p>
+<div class="highlight-python notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14
+15
+16
+17
+18</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="s1">&#39;root&#39;</span> <span class="p">:</span> <span class="p">{</span>
+    <span class="s1">&#39;children&#39;</span> <span class="p">:</span> <span class="p">{</span>
+        <span class="s1">&#39;childA1&#39;</span> <span class="p">:</span> <span class="p">{</span>
+            <span class="s1">&#39;priority&#39;</span> <span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
+            <span class="s1">&#39;children&#39;</span> <span class="p">:</span> <span class="p">{</span>
+                <span class="s1">&#39;childA2&#39;</span><span class="p">:{</span>
+                    <span class="s1">&#39;priority&#39;</span> <span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
+                    <span class="s1">&#39;children&#39;</span> <span class="p">:</span> <span class="p">{</span>
+                        <span class="s1">&#39;childA3&#39;</span> <span class="p">:</span> <span class="p">{}</span>
+                    <span class="p">}</span>
+                <span class="p">}</span>
+            <span class="p">}</span>
+        <span class="p">},</span>
+        <span class="s1">&#39;childB&#39;</span> <span class="p">:</span> <span class="p">{</span>
+            <span class="s1">&#39;priority&#39;</span> <span class="p">:</span> <span class="mi">5</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</td></tr></table></div>
+</div>
+<div class="section" id="id9">
+<h3>メソッドと辞書オブジェクト<a class="headerlink" href="#id9" title="このヘッドラインへのパーマリンク">¶</a></h3>
+<div class="section" id="id10">
+<h4>メソッド<a class="headerlink" href="#id10" title="このヘッドラインへのパーマリンク">¶</a></h4>
+<table class="docutils align-default">
+<colgroup>
+<col style="width: 25%" />
+<col style="width: 25%" />
+<col style="width: 25%" />
+<col style="width: 25%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p><strong>メソッド名</strong></p></td>
+<td><p><strong>引数</strong></p></td>
+<td><p><strong>戻り値</strong></p></td>
+<td><p><strong>説明</strong></p></td>
+</tr>
+<tr class="row-even"><td><p>setPriorityLevel</p></td>
+<td><p>level : int</p></td>
+<td></td>
+<td><p>ノードを検出する際にフィルタとなるpriorityを設定します。</p>
+<p>このpriorityよりも上回る数値を設定されたノードは走査しなくなります。</p>
+</td>
+</tr>
+<tr class="row-odd"><td><p>getHir（static)</p></td>
+<td><p>targets : list</p>
+<p>priorityFilter(None) : function</p>
+</td>
+<td><p>dict</p></td>
+<td><p>階層データを書き出すための便利関数です。</p>
+<p>引数targetsにはgris3.node.TransformかJointを渡す必要があります。</p>
+<p>引数priorityFilterには、走査中のオブジェクトのpriorityをいくつに設定するかのフィルタ用関数を設定します。</p>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="gethir-static">
+<h4>getHir(static)<a class="headerlink" href="#gethir-static" title="このヘッドラインへのパーマリンク">¶</a></h4>
+<p>このメソッドはsetTargetsに渡すための辞書オブジェクトを生成するための便利メソッドになります。</p>
+<p>任意の階層定義辞書オブジェクトを作成する場合、シーン内にあらかじめ必要な階層構造を作成しておき、その階層のトップ階層をこのメソッドに渡せば必要な階層定義辞書オブジェクトを生成して返します。</p>
+<div class="highlight-python notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3
+4
+5
+6
+7</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">gris3.tools</span> <span class="kn">import</span> <span class="n">checkUtil</span>
+<span class="kn">from</span> <span class="nn">gris3</span> <span class="kn">import</span> <span class="n">node</span>
+
+<span class="c1"># root以下の階層構造を調べ、辞書オブジェクト化する。</span>
+<span class="n">checkUtil</span><span class="o">.</span><span class="n">DataBasedHierarchyChecker</span><span class="o">.</span><span class="n">getHir</span><span class="p">(</span>
+    <span class="p">[</span><span class="n">node</span><span class="o">.</span><span class="n">asObject</span><span class="p">(</span><span class="s1">&#39;root&#39;</span><span class="p">)]</span>
+<span class="p">)</span>
+</pre></div>
+</td></tr></table></div>
+</div>
+</div>
 </div>
 <div class="section" id="abstractcategoryoption">
 <span id="devct-abstractcategoryoption"></span><h2>AbstractCategoryOption<a class="headerlink" href="#abstractcategoryoption" title="このヘッドラインへのパーマリンク">¶</a></h2>

@@ -33,16 +33,6 @@ AbstractChecker
 このクラスはシーン中の特定のオブジェクトをチェックし、
 その結果をGUIへ渡すための機構を備えた基底クラスです。
 
-AbstractCheckerにはさらにサブクラスとして以下のものがあります。
-
-* :ref:`DEVCT-REBasedNameChecker`
-* :ref:`DEVCT-AbstractDagChecker`
-* :ref:`DEVCT-REBasedDagNameChecker`
-* :ref:`DEVCT-GroupMemberChecker`
-* :ref:`DEVCT-DataBasedHierarchyChecker`
-
-
-
 仕組み
 ------------------------
 checkToolsのカテゴリモジュールでは
@@ -104,7 +94,7 @@ checkToolsのカテゴリモジュールを新たに開発する場合、
 
 ただし
 
-:ref:`DEVCT-AbstractChecker`
+:ref:`DEVCT-AbstractAssetChecker`
 
 内で紹介したサブクラスを用いる場合は、checkメソッド自体はそれぞれのサブクラス
 が専用の機構がすでに記述されているため、別のメソッドを上書きして
@@ -113,19 +103,83 @@ checkToolsのカテゴリモジュールを新たに開発する場合、
 それぞれのサブクラスでどのメソッドを上書きするかは各種リンクからご確認下さい。
 
 
+
+
+.. _DEVCT-AbstractAssetChecker:
+
+AbstractAssetChecker(AbstractChecker)
+================================================
+
+各種チェッカーの基底クラスです。
+
+:ref:`DEVCT-AbstractChecker`
+よりも各種ノードのチェックを行うための拡張が行われています。
+
+AbstractAssetCheckerにはサブクラスとして以下のものがあります。
+
+* :ref:`DEVCT-REBasedNameChecker`
+* :ref:`DEVCT-AbstractDagChecker`
+* :ref:`DEVCT-REBasedDagNameChecker`
+* :ref:`DEVCT-GroupMemberChecker`
+* :ref:`DEVCT-DataBasedHierarchyChecker`
+
+
+
+概要
+------------------------
+
+具体的にはcheckメソッド内で
+**setTrargets**
+した各対象に対し
+**checkObject**
+メソッドでエラーがないかのチェックを行い、その結果を返す仕組みとなっています。
+
+:ref:`DEVCT-AbstractChecker`
+
+はチェック機構すべてを記述する必要があるのに対し、本クラスでは各対象オブジェクトに対するチェックを
+記述するだけのシンプルな構造になっているため、開発者はチェックルーチンのみの実装に専念することができるようになっています。
+
+
+メソッド
++++++++++++++++++++++++++++++++++++++
+
+.. list-table::
+
+    +   -   **メソッド名**
+        -   **引数**
+        -   **戻り値**
+        -   **説明**
+    +   -   checkObject
+        -   targetObject : node.AbstractNode
+        -   list(CheckResult)
+        -   引数targetObjectに対し、チェックを行います。
+        
+            問題がなければ空のリストを返しますが、問題がある場合はその内容をCheckResultオブジェクトに
+            記述し（複数可）リストとして返します。
+
+
+
+
 .. _DEVCT-REBasedNameChecker:
 
-REBasedNameChecker
+REBasedNameChecker(AbstractAssetChecker)
 ================================================
 名前ベースのチェッカーの基底クラスです。
+
 メンバー変数NamePatternに適合するかどうかで判断を行います。
 NamePatternには任意のコンパイル済み正規表現オブジェクトを格納する必要があります。
+
+デフォルトではNamePatternには
+
+**.***
+
+が入っています。
 
 
 
 .. _DEVCT-AbstractDagChecker:
 
-AbstractDagChecker
+AbstractDagChecker(AbstractAssetChecker)
 ================================================
 dagを対象とするチェッカーの基底クラスです。
 設定されたターゲットに対して、一番下の階層まで再帰的にチェックを行います。
@@ -134,7 +188,7 @@ dagを対象とするチェッカーの基底クラスです。
 
 .. _DEVCT-REBasedDagNameChecker:
 
-REBasedDagNameChecker
+REBasedDagNameChecker(AbstractDagChecker)
 ================================================
 名前ベースのdagを対象とするチェッカーの基底クラスでAbstractDagCheckerのサブクラスです。
 メンバー変数NamePatternに適合するかどうかで判断を行います。
@@ -143,20 +197,140 @@ NamePatternには任意のコンパイル済み正規表現オブジェクトを
 
 
 
+
 .. _DEVCT-GroupMemberChecker:
 
-GroupMemberChecker
+GroupMemberChecker(REBasedDagNameChecker)
 ================================================
 階層ベースで一番下階層までチェックを行います。
 setTargetで指定したグループの下階層のオブジェクトが対象となります。
 （setTargetしたオブジェクトは走査対象にはならない点に注意して下さい。）
 
 
+
+
 .. _DEVCT-DataBasedHierarchyChecker:
 
-DataBasedHierarchyChecker
+DataBasedHierarchyChecker(AbstractAssetChecker)
 ================================================
-データ（dict型など）に基づいてチェックを行う機能を提供するクラスです。
+データ（dict型など）に基づいて階層チェックを行う機能を提供するクラスです。
+
+
+概要
+------------------------
+
+AbstractAssetCheckerクラスでは任意のノードに対して操作するのに対し、このクラスでは
+**setTargets**
+メソッドに辞書オブジェクトを渡し、辞書の内容と照らし合わせてシーン内のノードのチェックを行います。
+
+
+階層定義辞書オブジェクト
+------------------------
+**setTargets**に渡す辞書オブジェクトは以下の仕様に基づいて階層を定義する必要があります。
+
+.. list-table::
+
+    +   -   **キー**
+        -   **値**
+        -   **説明**
+    +   -   ノード名
+        -   オプション(dict)
+        -   値に渡す辞書は以下の内容になります。
+
+            .. list-table::
+
+                +   -   **キー**
+                    -   **値**
+                    -   **説明**
+                +   -   priority
+                    -   int
+                    -   ノードの優先度を指定します。チェックする際に優先度が設定された場合、
+                        指定優先度よりもこの数値が大きい場合はチェック対象外となります。
+                +   -   children
+                    -   dict
+                    -   子となるノードを指定します。キーは本dictオブジェクトと同じになります。
+
+
+オプション辞書のキー
+**children**
+には上記の辞書と同じ構造のものを渡します。（入れ子構造）
+
+詳細については下記のサンプルを参照して下さい。
+
+
+.. code-block:: python
+    :linenos:
+
+    'root' : {
+        'children' : {
+            'childA1' : {
+                'priority' : 1,
+                'children' : {
+                    'childA2':{
+                        'priority' : 1,
+                        'children' : {
+                            'childA3' : {}
+                        }
+                    }
+                }
+            },
+            'childB' : {
+                'priority' : 5
+            }
+        }
+    }
+
+
+
+メソッドと辞書オブジェクト
+------------------------
+
+メソッド
++++++++++++++++++++++++++++++++++++++
+
+.. list-table::
+
+    +   -   **メソッド名**
+        -   **引数**
+        -   **戻り値**
+        -   **説明**
+    +   -   setPriorityLevel
+        -   level : int
+        -   
+        -   ノードを検出する際にフィルタとなるpriorityを設定します。
+            
+            このpriorityよりも上回る数値を設定されたノードは走査しなくなります。
+
+    +   -   getHir（static)
+        -   targets : list
+            
+            priorityFilter(None) : function
+        -   dict
+        -   階層データを書き出すための便利関数です。
+        
+            引数targetsにはgris3.node.TransformかJointを渡す必要があります。
+            
+            引数priorityFilterには、走査中のオブジェクトのpriorityをいくつに
+            設定するかのフィルタ用関数を設定します。
+
+
+getHir(static)
+++++++++++++++++++++++++++++++++
+このメソッドはsetTargetsに渡すための辞書オブジェクトを生成するための便利メソッドになります。
+
+任意の階層定義辞書オブジェクトを作成する場合、シーン内にあらかじめ必要な階層構造を作成しておき、
+その階層のトップ階層をこのメソッドに渡せば必要な階層定義辞書オブジェクトを生成して返します。
+
+.. code-block:: python
+    :linenos:
+
+    from gris3.tools import checkUtil
+    from gris3 import node
+    
+    # root以下の階層構造を調べ、辞書オブジェクト化する。
+    checkUtil.DataBasedHierarchyChecker.getHir(
+        [node.asObject('root')]
+    )
 
 
 

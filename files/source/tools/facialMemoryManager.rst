@@ -119,14 +119,27 @@ FacialMemoryManagerRoot
     +   -   renameExpressionFromDataList
         -   expressionlist : list
         -   int
-        -   引数expressionlistで指定された表情名のリストで更新を行う。
-
-            expressionlist内に既存の表情があった場合、その値は保持する。
-
-            既存の表情リストとexpressionlistが順番も含めて全く同じだった場合は
-            何もせずに0を返す。
-
-            それ以外の場合は1を返す。
+        -   既存の表情データリストの表情名を、引数expressionlistで指定した表情名にリネームする。
+        
+            引数expressionlistは既存の表情データリストと同数である必要がある。
+            
+            処理を実行すると、既存の表情データリストの表情名は、上から引数expressionの名前に置き換わっていく。
+    +   -   overrideExpressions
+        -   expressions : list
+            datalist : dict
+            status : int
+        -   
+        -   引数expressionsで指定した表情に対し、datalistの内容を追加上書きする。
+        
+            expressionsで指定した表情データに対し、
+            
+                datalistの内容が含まれていない場合は追記する。
+                
+                datalistの内容が含まれている場合は上書きする。
+            
+            といった処理を行う。
+            
+            引数datalistはDataTransform.setValuesへ渡す内容と同じ形式の辞書オブジェクト。
     +   -   applyExpression
         -   expression : str
         -   
